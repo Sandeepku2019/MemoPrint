@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main" class="container-fluid bg-light" style="min-height:400px" ng-controller="LoginController">
+    <div class="row justify-content-center row">
+        <div class="col-md-4 m-3 border-dark border text-center text-black p-4 input-group-sm">
+            <i class="fa fa-lock text-dark text-center" style="font-size: 40pt; text-decoration: none;"></i>
+
+
+            <h3 class="mb-3">Login</h3>
+
+            
+            <div class="panel panel-default col-md-12" ID="Log">
+
+                <div class="col-md-12 row" style="margin-left:1px">
+                    <div class="input-group input-group-sm row">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">User Name :</span>
+                        </div>
+                        <input type="text" class="form-control form-control-sm validate[required]" ID="txtUsername" ng-model="UserName" placeholder="User Name" />
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12 row">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Passwrod :&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <input type="password" class="form-control form-control-sm validate[required]" ID="txtPasswrod" ng-model="Password" placeholder="Password" />
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-12 row text-center">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend" style="width:100px">
+
+                        </div>
+                        <button CssClass="btn btn-dark btn-send" ID="btnbutton" ng-click="CheckLogin()"> Log In</button>
+                    </div>
+                </div>
+
+           
+            </div>
+            <Label ID="lblsmg" runat="server" ng-mode="ErrorMessage" CssClass="failMsg" Visible="true"></Label>
+        </div>
+    </div>
+</div>
+
+

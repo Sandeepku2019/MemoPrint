@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="../../Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../Content/Style.css" rel="stylesheet" />
+
+    <link href="../../images/favicon.ico" rel="icon" />
+    @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <script src="~/Scripts/AppScripts/ngapp.js"></script>
+    <script src="~/Scripts/AppScripts/LoginController.js"></script>
+    <script src="~/Scripts/AppScripts/LoginService.js"></script>
+    <script src="~/Scripts/AppScripts/TabularController.js"></script>
+    <script src="~/Scripts/AppScripts/TabularService.js"></script>
+
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+   
+    <div class="container body-content" ng-app="KuApp">
+        <div class="container-fluid pt-2 navy" id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-1 p-1 pull-left">
+                        <img src="../../images/logo.png" style="width: 100px" />
+                    </div>
+                    <div class="col-sm-11 pull-right">
+                        <div class="pull-left p-4">
+                            <h2 class="display-4">Kakatiya University</h2>
+                        </div>
+                        <div class="pull-right text-right pt-4">
+                            <h2>EXAMINATION BRANCH</h2>
+                            <p>Retained 'A' Grade with Higher CGPA of 3.36</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spinner" ng-show="loading"></div>
+      
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Printing Report</p>
+        </footer>
+    </div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

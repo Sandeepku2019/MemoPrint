@@ -1,0 +1,132 @@
+﻿body {
+    font-size:14px;
+}
+
+.navy{
+    background-color:#00293C;
+    color:#F1F3CE;
+}
+
+.peablue{
+    background-color:#1E656D;
+    color:#F1F3CE;
+}
+
+.ivory{
+    background-color:#F1F3CE;
+    color:#00293C;
+}
+
+.candy{
+    background-color:#F62A00;
+    color:#F1F3CE;
+}
+
+.Candy_Text{
+    color:#F62A00;
+}
+
+.main{
+    min-height:300px;
+}
+.dropbtn {
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 6px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {}
+.mGrid {
+    width: 100%;
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+}
+
+    .mGrid td {
+        padding-left: 2px;
+        border: solid 1px #c1c1c1;
+        color: #717171;
+        padding: 8px;
+    }
+
+
+
+    .mGrid th {
+          padding: 10px 14px;
+        color: #fff;
+        background: #1E656D;
+        border-left: solid 1px #525252;
+        font-size: 0.9em;
+        height: 25px;
+        font-size: 12px;
+    }
+
+    .mGrid .alt {
+        color: #333;
+        height: 25px;
+        background-color: #f0efef;
+    }
+
+    .mGrid .pgr {
+        background: #3F516B;
+    }
+
+        .mGrid .pgr table {
+            margin: 5px 0;
+        }
+
+        .mGrid .pgr td {
+            border-width: 0;
+            padding: 0 6px;
+            border-left: solid 1px #666;
+            font-weight: bold;
+            color: #fff;
+            line-height: 12px;
+        }
+
+        .mGrid .pgr a {
+            color: #333;
+            line-height: 20px;
+            padding-left: 5px;
+            text-decoration: none;
+        }
+
+            .mGrid .pgr a:hover {
+                color: #000;
+                background-color: #000;
+                height: 25px;
+                text-decoration: none;
+            }
+
+    .mGrid tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+
+    .mGrid tr:nth-child(odd) {
+        background-color: #f0efef;
+    }
+

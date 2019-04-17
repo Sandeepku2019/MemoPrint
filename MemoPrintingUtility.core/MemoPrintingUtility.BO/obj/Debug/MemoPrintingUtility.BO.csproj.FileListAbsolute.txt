@@ -7,3 +7,12 @@ D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug
 D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.Entity.pdb
 D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.DA.dll
 D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.DA.pdb
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\obj\Debug\MemoPrintingUtility.BO.csprojResolveAssemblyReference.cache
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\obj\Debug\MemoPrintingUtility.BO.dll
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\obj\Debug\MemoPrintingUtility.BO.pdb
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.BO.dll
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.BO.pdb
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.DA.dll
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.Entity.dll
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.DA.pdb
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.BO\bin\Debug\MemoPrintingUtility.Entity.pdb

@@ -3,3 +3,8 @@ D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.Entity\bin\D
 D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.Entity\obj\Debug\MemoPrintingUtility.Entity.csprojResolveAssemblyReference.cache
 D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.Entity\obj\Debug\MemoPrintingUtility.Entity.dll
 D:\MemoPrintingUtility\MemoPrintingUtility.core\MemoPrintingUtility.Entity\obj\Debug\MemoPrintingUtility.Entity.pdb
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.Entity\bin\Debug\MemoPrintingUtility.Entity.dll
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.Entity\bin\Debug\MemoPrintingUtility.Entity.pdb
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.Entity\obj\Debug\MemoPrintingUtility.Entity.csprojResolveAssemblyReference.cache
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.Entity\obj\Debug\MemoPrintingUtility.Entity.dll
+D:\MemoPrint\MemoPrintingUtility.core\MemoPrintingUtility.Entity\obj\Debug\MemoPrintingUtility.Entity.pdb

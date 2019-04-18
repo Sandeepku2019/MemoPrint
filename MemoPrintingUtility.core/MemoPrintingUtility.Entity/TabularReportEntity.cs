@@ -28,6 +28,10 @@ namespace MemoPrintingUtility.Entity
 
         public string SubjectCode { get; set; }
 
+        public string Credits { get; set; }
+
+        public string SubjectName { get; set; }
+
         public string InternalMarks { get; set; }
 
         public string ExernalMarks { get; set; }

@@ -27,9 +27,9 @@ namespace MemoPrintingUtility.Controllers
             {
 
                 ///// Creting Notepad 
-                string fileNamedirectory = Server.MapPath("/TabularReport/");
-                //string fileNamedirectory = @"D:\TabularReport\";
-                string filename = "BA" + DateTime.Now.ToString("ddMMyyyy") + "_" + Psem + ".txt";
+                //string fileNamedirectory = Server.MapPath("/TabularReport/");
+                string fileNamedirectory = @"D:\TabularReport\";
+                string filename = course + DateTime.Now.ToString("ddMMyyyy") + "_" + Psem + ".txt";
 
                 // check for Directory
                 if (!Directory.Exists(fileNamedirectory))  // if it doesn't exist, create
@@ -221,23 +221,29 @@ namespace MemoPrintingUtility.Controllers
                             foreach (StudentInformation studentM in lstStuns.OrderBy(X => X.Order))
                             {
                                 string spaces = "";
+                                string umakspace = "";
+                                string intmarkspae = "" ;
                                 int ordr = studentM.Order;
                                 spaces = GetSpaces((ordr- subord)*10);
-                                
+                                umakspace = GetSpaces((ordr - subord) * 10);
+                                intmarkspae = GetSpaces((ordr - subord) * 10);
+                                string intmark = Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks) + GetSpaces(3 - Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks).Length) + " " + studentM.Status;
                                 if (count > 0)
                                 {
                                     spaces = "";
                                     
                                     spaces = GetSpaces(7);
+                                    umakspace = GetSpaces(10- studentM.ExernalMarks.ToString().Length);
+                                    intmarkspae = GetSpaces(9 - intmark.Length);
                                 }
 
                                 subjectformt = spaces + studentM.SubjectCode;
                                 subjectstringPRE = subjectstringPRE + subjectformt ;
 
-                                SubjectMarks_U = spaces + studentM.ExernalMarks.ToString()  ;
+                                SubjectMarks_U = umakspace + studentM.ExernalMarks.ToString()  ;
                                 subjectsMarksPRE_U = subjectsMarksPRE_U + SubjectMarks_U;
 
-                                string intmark = Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks) + GetSpaces(3 - Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks).Length) + " " + studentM.Status;
+                                
                                 intmark = spaces + intmark;// + GetSpaces(7 - intmark.Length); ;
                                 SubjectMarks_S = intmark;
                                 subjectsMarksPRE_S = subjectsMarksPRE_S + SubjectMarks_S;
@@ -359,9 +365,8 @@ namespace MemoPrintingUtility.Controllers
         {
             if (rowcount == 0)
             {
-
-
-
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
@@ -369,7 +374,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
-                rowcount = rowcount + 7;
+                rowcount = rowcount + 3;
 
 
             }
@@ -384,10 +389,12 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
                 sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
-                rowcount = rowcount + 7;
+                rowcount = rowcount + 3;
                 //addHeaderFooter(sw, rowcount, course, year, sem);
 
 

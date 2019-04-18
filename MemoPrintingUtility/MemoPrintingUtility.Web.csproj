@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ShortmemoController.cs" />
     <Compile Include="Controllers\TabularReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -244,6 +245,8 @@
     <Content Include="Scripts\AppScripts\LoginController.js" />
     <Content Include="Scripts\AppScripts\LoginService.js" />
     <Content Include="Scripts\AppScripts\ngapp.js" />
+    <Content Include="Scripts\AppScripts\ShortMemoController.js" />
+    <Content Include="Scripts\AppScripts\ShortMemoService.js" />
     <Content Include="Scripts\AppScripts\TabularController.js" />
     <Content Include="Scripts\AppScripts\TabularService.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1038,6 +1041,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\TabularReport\Index.cshtml" />
+    <Content Include="Views\Shortmemo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

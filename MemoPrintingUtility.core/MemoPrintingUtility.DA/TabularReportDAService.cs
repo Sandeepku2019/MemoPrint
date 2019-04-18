@@ -13,7 +13,7 @@ namespace MemoPrintingUtility.DA
         {
             MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
 
-            var studentdetails = (from stu in StudentContext.SP_GetStudentDetails(Course, Semister,year,sem).AsQueryable()
+            var studentdetails = (from stu in StudentContext.SP_GetStudentDetails(Course, Semister, year, sem).AsQueryable()
                                   select new StudentInformation
                                   {
                                       collegecode = stu.FK_CLGCODE,
@@ -24,7 +24,8 @@ namespace MemoPrintingUtility.DA
                                       Order = Convert.ToInt16(stu.ORD.Replace("P", "").Replace("PR", "")),
                                       ExernalMarks = stu.FINAL_VAL_MARKS,
                                       InternalMarks = stu.INT_MARKS,
-
+                                      SubjectName = stu.SUBJECTNAME,
+                                      Credits = stu.CREDITS,
                                       SubjectCode = stu.CONVERT_SUBCODE,
                                       Status = stu.RESULT,
                                       FinalResult = stu.FINALRESULT

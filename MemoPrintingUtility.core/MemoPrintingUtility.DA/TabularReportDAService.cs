@@ -26,9 +26,11 @@ namespace MemoPrintingUtility.DA
                                       InternalMarks = stu.INT_MARKS,
                                       SubjectName = stu.SUBJECTNAME,
                                       Credits = stu.CREDITS,
+                                      LeterGrade = stu.LETERGRADE,
                                       SubjectCode = stu.CONVERT_SUBCODE,
                                       Status = stu.RESULT,
-                                      FinalResult = stu.FINALRESULT
+                                      FinalResult = stu.FINALRESULT,
+                                      SGPA=stu.SGPA
                                   }).ToList<StudentInformation>();
 
             return studentdetails;
@@ -104,5 +106,10 @@ namespace MemoPrintingUtility.DA
             return studentConsdetails;
             throw new NotImplementedException();
         }
-    }
+
+        public List<string> GetMallPractHtno(string Course, int Semister, int sem, int year)
+        {
+            return null;
+        }
+    } 
 }

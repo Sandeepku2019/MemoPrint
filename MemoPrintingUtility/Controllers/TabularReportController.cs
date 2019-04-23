@@ -18,7 +18,7 @@ namespace MemoPrintingUtility.Controllers
         {
             return View();
         }
-
+        int PageBraker = 0;
 
         [HttpPost]
         public JsonResult GenerateTabularSemReport(int Psem, string course)
@@ -80,195 +80,291 @@ namespace MemoPrintingUtility.Controllers
 
                     int TotalSubjectAttemt = 0;
                     int TotalSubjectpass = 0;
-                    int rowcount = 0;
+                    string PrevColcode = "";
+                    bool ColPagebrk = false;
+
+                    List<string> lstColCodes = lstStudents.OrderBy(x => x.collegecode).Select(y => y.collegecode).Distinct().Take(10).ToList<string>();
 
 
-                    List<string> HallticketNumbers = lstStudents.OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
-
-                    for (int i = 0; i < HallticketNumbers.Count; i++)
+                    foreach (var colcode in lstColCodes)
                     {
+                        List<string> HallticketNumbers = lstStudents.Where(y=>y.collegecode == colcode).OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().Take(30).ToList<string>();
 
-                        var lstStuns = lstStudents.Where(x => x.HallTicketNumber == HallticketNumbers[i]).ToList<StudentInformation>();
-                        var StudentConsInformatio = LstConStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<ConsDataEntity>();
-
-
-
-
-                        string HallTicket = lstStuns[0].HallTicketNumber;
-                        string FN = lstStuns[0].FatherName == null ? "" : lstStuns[0].FatherName;
-                        string SN = lstStuns[0].StudentName == null ? "" : lstStuns[0].StudentName;
-                        string CC = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
-                        string EI = lstStuns[0].Ei == null ? "" : lstStuns[0].Ei;
-                        string nameformat = i + 1 + GetSpaces(7) + HallTicket + GetSpaces(15 - HallTicket.Length) + SN + GetSpaces(45 - SN.Length) + FN + GetSpaces(45 - FN.Length);
-
-
-                        if (i == 0)
+                        ColPagebrk = true;
+                        #region Htnonumbers
+                        for (int i = 0; i < HallticketNumbers.Count; i++)
                         {
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                            sw.WriteLine(nameformat.Truncate(113) + EI + GetSpaces(7 - EI.Length) + HallTicket + GetSpaces(10 - HallTicket.Length));
 
-                        }
-                        else
-                        {
-                            sw.WriteLine(nameformat.Truncate(113) + EI + GetSpaces(7 - EI.Length) + HallTicket + GetSpaces(10 - HallTicket.Length));
-
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                        }
-
-                        #region Cons
-                        if (StudentConsInformatio != null & StudentConsInformatio.Count > 0)
-                        {
-                            var ConsDetails = StudentConsInformatio.FirstOrDefault();
-                            //string Attemps = CalucateTotalAttemps(ConsDetails);
-
-                            string subjectstringCONS = string.Empty;
-                            string SubjectCONSMarks_U = string.Empty;
-                            string subjectsMarksCONS_U = string.Empty;
-                            string MarkformatCONS = GetSpaces(10);
-
-                            string SubjectCONSMarks_S = string.Empty;
-                            string subjectsMarksCONS_S = string.Empty;
-
-                            string subjectCONSformt = "";
-
-                            subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length);
-                            SubjectCONSMarks_U = "    U" + GetSpaces(5 - "CONS.".Length);
-                            SubjectCONSMarks_S = "    S" + GetSpaces(5 - "CONS.".Length) + GetSpaces(7);
-
-                            #region Subject title 
+                            int totalSUbjects = 0;
+                            int passedSubject = 0;
+                            int rowcount = 0;
+                            var lstStuns = lstStudents.Where(x => x.HallTicketNumber == HallticketNumbers[i]).ToList<StudentInformation>();
+                            var StudentConsInformatio = LstConStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<ConsDataEntity>();
 
 
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P1, ConsDetails.A1);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P2, ConsDetails.A2);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P3, ConsDetails.A3);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P4, ConsDetails.A4);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P5, ConsDetails.A5);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P6, ConsDetails.A6);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P7, ConsDetails.A7);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P8, ConsDetails.A8);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P9, ConsDetails.A9);
-                            subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P10, ConsDetails.A10);
-
-                            subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length) + GetSpaces(7) + subjectCONSformt;
-                            sw.WriteLine(subjectstringCONS + GetSpaces(113 - subjectstringCONS.Length) + ConsDetails.RES + "   " + ConsDetails.SGPA);
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                            #endregion
-
-
-                            #region Subject External Mark 
-                            string SubjectExtCons = string.Empty;
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M1, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M2, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M3, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M4, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M5, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M6, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M7, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M8, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M9, string.Empty);
-                            SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M10, string.Empty);
-                            SubjectCONSMarks_U = SubjectCONSMarks_U + GetSpaces(7) + SubjectExtCons;
-                            sw.WriteLine(SubjectCONSMarks_U);
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                            #endregion
-
-
-                            #region Subject Internal Mark 
-                            string SubjectintCons = string.Empty;
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S1, ConsDetails.R1);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S2, ConsDetails.R2);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S3, ConsDetails.R3);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S4, ConsDetails.R4);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S5, ConsDetails.R5);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S6, ConsDetails.R6);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S7, ConsDetails.R7);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S8, ConsDetails.R8);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S9, ConsDetails.R9);
-                            SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S10, ConsDetails.R10);
-                            SubjectCONSMarks_S = SubjectCONSMarks_S + SubjectintCons;
-
-                            sw.WriteLine(SubjectCONSMarks_S);
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                            #endregion
-
-                        }
-                        #endregion
-
-
-                        #region  Pre
-                        string subjectstringPRE = string.Empty;
-                        string SubjectMarks_U = string.Empty;
-                        string subjectsMarksPRE_U = string.Empty;
-                        string MarkformatPRE = GetSpaces(10);
-                        string Aademicstatus = string.Empty;
-
-
-
-                        string SubjectMarks_S = string.Empty;
-                        string subjectsMarksPRE_S = string.Empty;
-
-
-                        if (lstStuns.Count > 0)
-                        {
-                            string subjectformt = "";
-                            subjectstringPRE = "PRES." + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
-                            subjectsMarksPRE_U = "    U" + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
-                            subjectsMarksPRE_S = "    S" + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
-                            int subord = 1;
-                            
-                            int count = 0;
-                           
-                            foreach (StudentInformation studentM in lstStuns.OrderBy(X => X.Order))
+                            if (lstStudents != null && lstStudents.Count > 0)
                             {
-                                string spaces = "";
-                                string umakspace = "";
-                                string intmarkspae = "" ;
-                                int ordr = studentM.Order;
-                                spaces = GetSpaces((ordr- subord)*10);
-                                umakspace = GetSpaces((ordr - subord) * 10);
-                                intmarkspae = GetSpaces((ordr - subord) * 10);
-                                string intmark = Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks) + GetSpaces(3 - Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks).Length) + " " + studentM.Status;
-                                if (count > 0)
+                                rowcount = rowcount + 5;
+                                if (StudentConsInformatio != null && StudentConsInformatio.Count > 0)
                                 {
-                                    spaces = "";
-                                    
-                                    spaces = GetSpaces(7);
-                                    umakspace = GetSpaces(10- studentM.ExernalMarks.ToString().Length);
-                                    intmarkspae = GetSpaces(9 - intmark.Length);
+                                    rowcount = rowcount + 3;
                                 }
 
-                                subjectformt = spaces + studentM.SubjectCode;
-                                subjectstringPRE = subjectstringPRE + subjectformt ;
+                            }                            
+                            if ((PageBraker + rowcount) > 62)
+                            {
+                                int differ = 63 - PageBraker;
 
-                                SubjectMarks_U = umakspace + studentM.ExernalMarks.ToString()  ;
-                                subjectsMarksPRE_U = subjectsMarksPRE_U + SubjectMarks_U;
+                                for (int h = 0; h < differ; h++)
+                                {
+                                    sw.WriteLine(" ");
+                                }
 
-                                
-                                intmark = spaces + intmark;// + GetSpaces(7 - intmark.Length); ;
-                                SubjectMarks_S = intmark;
-                                subjectsMarksPRE_S = subjectsMarksPRE_S + SubjectMarks_S;
-                                count++;
+                                PageBraker = addHeaderFooter(sw, 62, course, year.ToString(), sem.ToString());
                             }
 
-                            int TotalMark = lstStuns.Sum(x => x.ExernalMarks.ChangeINT());
-                            TotalMark = TotalMark + lstStuns.Sum(x => x.InternalMarks.ChangeINT());
-                            sw.WriteLine(subjectstringPRE);
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
+                            if (PrevColcode!="" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
+                            {
+                                ColPagebrk = false;
+                                int differ = 63 - PageBraker;
+
+                                for (int h = 0; h < differ; h++)
+                                {
+                                    sw.WriteLine(" ");
+                                }
+
+                                PageBraker = addHeaderFooter(sw, 62, course, year.ToString(), sem.ToString());
+
+                            }
 
 
-                            sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + lstStuns[0].FinalResult + "    " + TotalMark);
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
+                            if (PrevColcode == "")
+                            {
+                                PrevColcode = colcode;
+                            }
+                            string HallTicket = lstStuns[0].HallTicketNumber;
+                            string FN = lstStuns[0].FatherName == null ? "" : lstStuns[0].FatherName;
+                            string SN = lstStuns[0].StudentName == null ? "" : lstStuns[0].StudentName;
+                            string CC = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
+                            string EI = lstStuns[0].Ei == null ? "" : lstStuns[0].Ei;
+                            string CollegeCode = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
+                            string nameformat = i + 1 + GetSpaces(2) + CollegeCode + GetSpaces(5 - CollegeCode.Length) + HallTicket + GetSpaces(15 - HallTicket.Length) + SN + GetSpaces(45 - SN.Length) + FN + GetSpaces(45 - FN.Length);
 
-                            sw.WriteLine(subjectsMarksPRE_S);
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                            sw.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                            rowcount = addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
-                           
+
+                            if (i == 0)
+                            {
+                                PageBraker = addHeaderFooter(sw, PageBraker, course, year.ToString(), sem.ToString());
+                                sw.WriteLine(nameformat.Truncate(113) + EI + GetSpaces(7 - EI.Length) + HallTicket + GetSpaces(10 - HallTicket.Length));
+
+                            }
+                            else
+                            {
+                                sw.WriteLine(nameformat.Truncate(113) + EI + GetSpaces(7 - EI.Length) + HallTicket + GetSpaces(10 - HallTicket.Length));
+
+                            }
+
+                            #region Cons
+                            if (StudentConsInformatio != null & StudentConsInformatio.Count > 0)
+                            {
+                                var ConsDetails = StudentConsInformatio.FirstOrDefault();
+                                //string Attemps = CalucateTotalAttemps(ConsDetails);
+
+                                string subjectstringCONS = string.Empty;
+                                string SubjectCONSMarks_U = string.Empty;
+                                string subjectsMarksCONS_U = string.Empty;
+                                string MarkformatCONS = GetSpaces(10);
+
+                                string SubjectCONSMarks_S = string.Empty;
+                                string subjectsMarksCONS_S = string.Empty;
+
+                                string subjectCONSformt = "";
+
+                                subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length);
+                                SubjectCONSMarks_U = "    U" + GetSpaces(5 - "CONS.".Length);
+                                SubjectCONSMarks_S = "    S" + GetSpaces(5 - "CONS.".Length) + GetSpaces(7);
+
+                                #region Subject title 
+
+
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P1, ConsDetails.A1);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P2, ConsDetails.A2);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P3, ConsDetails.A3);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P4, ConsDetails.A4);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P5, ConsDetails.A5);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P6, ConsDetails.A6);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P7, ConsDetails.A7);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P8, ConsDetails.A8);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P9, ConsDetails.A9);
+                                subjectCONSformt = ConcatenateSubject(subjectCONSformt, ConsDetails.P10, ConsDetails.A10);
+
+                                subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length) + GetSpaces(7) + subjectCONSformt;
+                                sw.WriteLine(subjectstringCONS + GetSpaces(113 - subjectstringCONS.Length) + ConsDetails.RES + "   " + ConsDetails.SGPA);
+
+
+                                #endregion
+
+
+                                #region Subject External Mark 
+                                string SubjectExtCons = string.Empty;
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M1, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M2, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M3, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M4, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M5, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M6, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M7, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M8, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M9, string.Empty);
+                                SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M10, string.Empty);
+                                SubjectCONSMarks_U = SubjectCONSMarks_U + GetSpaces(7) + SubjectExtCons;
+                                sw.WriteLine(SubjectCONSMarks_U);
+
+                                #endregion
+
+
+                                #region Subject Internal Mark 
+                                string SubjectintCons = string.Empty;
+                                
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S1, ConsDetails.R1);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R1 == "P" ?passedSubject + 1: passedSubject + 0;
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S2, ConsDetails.R2);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R2 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S3, ConsDetails.R3);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R3 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S4, ConsDetails.R4);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R4 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S5, ConsDetails.R5);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R5 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S6, ConsDetails.R6);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R6 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S7, ConsDetails.R7);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R7 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S8, ConsDetails.R8);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R8 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S9, ConsDetails.R9);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R9 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S10, ConsDetails.R10);
+                                totalSUbjects = totalSUbjects + 1;
+                                passedSubject = ConsDetails.R10 == "P" ? passedSubject + 1 : passedSubject + 0;
+
+                                SubjectCONSMarks_S = SubjectCONSMarks_S + SubjectintCons;
+
+                                sw.WriteLine(SubjectCONSMarks_S);
+
+                                #endregion
+
+                            }
+                            #endregion
+
+
+                            #region  Pre
+                            string subjectstringPRE = string.Empty;
+                            string SubjectMarks_U = string.Empty;
+                            string subjectsMarksPRE_U = string.Empty;
+                            string MarkformatPRE = GetSpaces(10);
+                            string Aademicstatus = string.Empty;
+
+
+
+                            string SubjectMarks_S = string.Empty;
+                            string subjectsMarksPRE_S = string.Empty;
+
+
+                            if (lstStuns.Count > 0)
+                            {
+                                string subjectformt = "";
+                                subjectstringPRE = "PRES." + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
+                                subjectsMarksPRE_U = "    U" + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
+                                subjectsMarksPRE_S = "    S" + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
+                                int subord = 1;
+
+                                int count = 0;
+
+                                totalSUbjects = totalSUbjects + lstStuns.Count;
+                                passedSubject = passedSubject + lstStuns.Where(x => x.Status == "P").ToList<StudentInformation>().Count();
+
+                                foreach (StudentInformation studentM in lstStuns.OrderBy(X => X.Order))
+                                {
+                                    string spaces = "";
+                                    string umakspace = "";
+                                    string intmarkspae = "";
+                                    int ordr = studentM.Order;
+                                    spaces = GetSpaces((ordr - subord) * 10);
+                                    umakspace = GetSpaces((ordr - subord) * 10);
+                                    intmarkspae = GetSpaces((ordr - subord) * 10);
+                                    string intmark = Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks) + GetSpaces(3 - Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks).Length) + " " + studentM.LeterGrade;
+                                    if (count > 0)
+                                    {
+                                        spaces = "";
+
+                                        spaces = GetSpaces(7);
+                                        umakspace = GetSpaces(10 - studentM.ExernalMarks.ToString().Length);
+                                        intmarkspae = GetSpaces(10 - intmark.Length);
+                                    }
+
+                                    subjectformt = spaces + studentM.SubjectCode;
+                                    subjectstringPRE = subjectstringPRE + subjectformt;
+
+                                    SubjectMarks_U = umakspace + studentM.ExernalMarks.ToString();
+                                    subjectsMarksPRE_U = subjectsMarksPRE_U + SubjectMarks_U ;
+
+
+                                    intmark = intmarkspae + intmark;// + GetSpaces(7 - intmark.Length); ;
+                                    SubjectMarks_S = intmark;
+                                    subjectsMarksPRE_S = subjectsMarksPRE_S + SubjectMarks_S;
+                                    count++;
+                                }
+
+                                int TotalMark = lstStuns.Sum(x => x.ExernalMarks.ChangeINT());
+                                TotalMark = TotalMark + lstStuns.Sum(x => x.InternalMarks.ChangeINT());
+                                sw.WriteLine(subjectstringPRE + GetSpaces(113 - subjectsMarksPRE_U.Length) + "<"+ totalSUbjects +"/"+passedSubject +">");
+                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + lstStuns[0].FinalResult + "    " + lstStuns[0].SGPA);
+                                sw.WriteLine(subjectsMarksPRE_S + GetSpaces(111 - subjectsMarksPRE_U.Length) + TotalMark );
+                                sw.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                                //addHeaderFooter(sw, rowcount, course, year.ToString(), sem.ToString());
+
+                            }
+
+
+
+
+                            #endregion
+
+                            PageBraker = PageBraker + rowcount;
+
                         }
 
                         #endregion
-
                     }
+
                 }
 
                 // Write file contents on console.     
@@ -374,8 +470,8 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
-                rowcount = rowcount + 3;
 
+                PageBraker = PageBraker + 3;
 
             }
             else if (rowcount == 62)
@@ -391,16 +487,17 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
-                sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
+                sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
-                rowcount = rowcount + 3;
+
+                PageBraker = 3;
                 //addHeaderFooter(sw, rowcount, course, year, sem);
 
 
             }
-            else { rowcount++; }
-            return rowcount;
+            else { PageBraker++; }
+            return PageBraker;
         }
 
 

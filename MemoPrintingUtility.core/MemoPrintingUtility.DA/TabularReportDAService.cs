@@ -30,7 +30,7 @@ namespace MemoPrintingUtility.DA
                                       SubjectCode = stu.CONVERT_SUBCODE,
                                       Status = stu.RESULT,
                                       FinalResult = stu.FINALRESULT,
-                                      SGPA=stu.SGPA
+                                      SGPA = stu.SGPA
                                   }).ToList<StudentInformation>();
 
             return studentdetails;
@@ -107,9 +107,17 @@ namespace MemoPrintingUtility.DA
             throw new NotImplementedException();
         }
 
-        public List<string> GetMallPractHtno(string Course, int Semister, int sem, int year)
+        public List<StudentInformation> GetMallPractHtno(string Course, int Semister, int sem, int year)
         {
-            return null;
+            MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
+
+
+            var studentConsdetails = (from stu in StudentContext.SP_MallPracDetails(Course,Semister,year,sem).AsQueryable()
+                                      select new StudentInformation
+                                      {                                                                                  
+                                          HallTicketNumber = stu.HTNO,
+                                      }).ToList<StudentInformation>();
+            return studentConsdetails;
         }
-    } 
+    }
 }

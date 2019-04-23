@@ -22,6 +22,15 @@ namespace MemoPrintingUtility.BO
             return DAFactory.GetTabularDAService().GetStudentsConsDetails(Course, Semister);
 
         }
+
+
+        public List<StudentInformation> GetMallPractHtno(string Course, int Semister, int sem, int year)
+        {
+
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetMallPractHtno(Course, Semister,sem,year);
+
+        }
     }
 
     public static class StringExtensions

@@ -90,7 +90,17 @@ namespace MemoPrintingUtility.Controllers
                     int rowcount = 0;
 
 
-                    List<string> HallticketNumbers = lstStudents.OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
+                     List<string> HallticketNumbers = lstStudents.OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
+
+                     List<string> MallPactMember =BoMemoService.getTabularReportInstance().GetMallPractHtno(course, Psem, sm, yr).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
+
+                    foreach (var malstuden in MallPactMember)
+                    {
+                        HallticketNumbers.Remove(malstuden);
+                    }
+
+
+                    // Making even number for  side by side print 
                     if (HallticketNumbers.Count % 2 == 0)
                     {
 
@@ -103,10 +113,7 @@ namespace MemoPrintingUtility.Controllers
                     for (int i = 0; i < HallticketNumbers.Count; i++)
                     {
 
-                        if (HallticketNumbers[i] == "005171205")//"636171025")
-                        {
-                            string test = string.Empty;
-                        }
+                       
                         hn = HallticketNumbers[i];
                         if (i == 0)
                         {
@@ -201,23 +208,45 @@ namespace MemoPrintingUtility.Controllers
                         }
 
                         string SGPARow = string.Empty;
-
-                        if (lstStunsfirst[0].FinalResult == "PASSED" || lstStunsfirst[0].FinalResult == "COMPLETED" || lstStunsfirst[0].FinalResult == "PROMOTED")
+                        //first record
+                        string FirstFinalResult = string.Empty;
+                        if (lstStunsfirst[0].Ei == "E" && lstStunsfirst[0].FinalResult== "PROMOTED")
                         {
+                            FirstFinalResult = "FAILED";
+                        }
+                        else
+                        {
+                            FirstFinalResult = lstStunsfirst[0].FinalResult;
+                        }
+
+
+                        if (FirstFinalResult == "PASSED" || FirstFinalResult == "COMPLETED" || FirstFinalResult == "PROMOTED")
+                        { 
                             string sg = lstStunsfirst[0].SGPA == null ? "***" : lstStunsfirst[0].SGPA;
-                            SGPARow = GetSpaces(10) + sg + GetSpaces(65 - sg.Length);
+                            SGPARow = GetSpaces(10) + sg + GetSpaces(55 - sg.Length);
                         }
                         else
                         {
                             SGPARow = GetSpaces(10) + "***" + GetSpaces(65 - "***".Length);
                         }
-
                         SGPARow = SGPARow + gap;
 
-                        if (lstStubScon[0].FinalResult == "PASSED" || lstStubScon[0].FinalResult == "COMPLETED" || lstStubScon[0].FinalResult == "PROMOTED")
+
+                        //Second recod
+                        string SecondFinalResult = string.Empty;
+                        if (lstStubScon[0].Ei == "E" && lstStubScon[0].FinalResult == "PROMOTED")
+                        {
+                            SecondFinalResult = "FAILED";
+                        }
+                        else
+                        {
+                            SecondFinalResult = lstStubScon[0].FinalResult;
+                        }
+
+                        if (SecondFinalResult == "PASSED" || SecondFinalResult == "COMPLETED" || SecondFinalResult == "PROMOTED")
                         {
                             string sg1 = lstStubScon[0].SGPA == null ? "***" : lstStubScon[0].SGPA;
-                            SGPARow = SGPARow + sg1 + GetSpaces(65 - sg1.Length);
+                            SGPARow = SGPARow+ GetSpaces(10) + sg1 + GetSpaces(55 - sg1.Length);
                         }
                         else
                         {
@@ -225,22 +254,11 @@ namespace MemoPrintingUtility.Controllers
                         }
 
                         sw.WriteLine(SGPARow);
-                        //int TotalMark1 = lstStunsfirst.Sum(x => x.ExernalMarks.ChangeINT());
-                        //TotalMark1 = TotalMark1 + lstStunsfirst.Sum(x => x.InternalMarks.ChangeINT());
-                        //string matrk1 = GetSpaces(10)+ TotalMark1.ToString()+ "  (" + TotalMark1.NumberToWords().ToUpper() + ")";
-
-                        //int TotalMark2 = lstStubScon.Sum(x => x.ExernalMarks.ChangeINT());
-                        //TotalMark2 = TotalMark2 + lstStubScon.Sum(x => x.InternalMarks.ChangeINT());
-                        //string matrk2 = GetSpaces(10) + TotalMark2.ToString() + "  (" + TotalMark2.NumberToWords().ToUpper() + ")";
+                     
 
 
-                        //string MarksRow = matrk1 +  GetSpaces(65 - matrk1.Length) + gap + matrk2 + GetSpaces(65 - matrk2.Length);
-
-                        //sw.WriteLine(MarksRow);
-
-
-                        string statusrow = GetSpaces(10) + lstStunsfirst[0].FinalResult + GetSpaces(55 - lstStunsfirst[0].FinalResult.Length) + gap;
-                        statusrow = statusrow + GetSpaces(10) + lstStubScon[0].FinalResult + GetSpaces(55 - lstStubScon[0].FinalResult.Length);
+                        string statusrow = GetSpaces(10) + FirstFinalResult + GetSpaces(55 - FirstFinalResult.Length) + gap;
+                        statusrow = statusrow + GetSpaces(10) + SecondFinalResult + GetSpaces(55 - SecondFinalResult.Length);
 
                         sw.WriteLine(statusrow);
                         sw.WriteLine("");

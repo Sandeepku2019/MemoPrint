@@ -10,7 +10,7 @@ namespace MemoPrintingUtility.DA
     public class TabularReportDAService : ITabularReportDAService
     {
         public List<StudentInformation> GetStudentDetail(string Course, int Semister, int sem, int year)
-        {
+        { 
             MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
 
             var studentdetails = (from stu in StudentContext.SP_GetStudentDetails(Course, Semister, year, sem).AsQueryable()

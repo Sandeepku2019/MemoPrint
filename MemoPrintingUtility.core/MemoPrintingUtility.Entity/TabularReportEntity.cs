@@ -17,7 +17,7 @@ namespace MemoPrintingUtility.Entity
     public class TotalsubjectRecord
     {
         public string subname { get; set; }
-        public string status { get; set; }
+        public string status { get; set; } 
 
     }
 

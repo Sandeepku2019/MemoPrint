@@ -88,8 +88,6 @@ namespace MemoPrintingUtility.Controllers
                     int TotalSubjectAttemt = 0;
                     int TotalSubjectpass = 0;
                     int rowcount = 0;
-
-
                      List<string> HallticketNumbers = lstStudents.OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
 
                      List<string> MallPactMember =BoMemoService.getTabularReportInstance().GetMallPractHtno(course, Psem, sm, yr).Select(x => x.HallTicketNumber).Distinct().ToList<string>();

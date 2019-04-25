@@ -421,8 +421,7 @@ namespace MemoPrintingUtility.Controllers
                                     subjectsMarksPRE_S = subjectsMarksPRE_S + SubjectMarks_S;
 
                                     count++;
-                                    subord = ordr;
-                                }
+                                    subord = ordr;                                }
 
                                 int external = lstStuns.Sum(x => x.ExernalMarks.ChangeINT());
                                 int TotalMark = external + lstStuns.Sum(x => x.InternalMarks.ChangeINT());

@@ -21,6 +21,7 @@ namespace MemoPrintingUtility.Entity
 
     }
 
+
     public class StudentInformation
     {
         public string LeterGrade { get; set; }

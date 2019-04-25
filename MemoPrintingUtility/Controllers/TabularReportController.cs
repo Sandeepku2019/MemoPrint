@@ -423,6 +423,7 @@ namespace MemoPrintingUtility.Controllers
                                     count++;
                                     subord = ordr;                                }
 
+
                                 int external = lstStuns.Sum(x => x.ExernalMarks.ChangeINT());
                                 int TotalMark = external + lstStuns.Sum(x => x.InternalMarks.ChangeINT());
                                 sw.WriteLine(subjectstringPRE + GetSpaces(113 - subjectsMarksPRE_U.Length) + "<" + lstts.Where(x => x.status != "F").ToList().Count + "/" + lstts.Count + ">");

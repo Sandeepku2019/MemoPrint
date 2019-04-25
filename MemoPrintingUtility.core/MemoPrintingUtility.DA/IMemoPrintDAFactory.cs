@@ -9,7 +9,6 @@ namespace MemoPrintingUtility.DA
     public interface IMemoPrintDAFactory
     {
         ICourseDAService GetCourseInstance();
-
-        ITabularReportDAService GetTabularDAService();
+                ITabularReportDAService GetTabularDAService();
     }
 }

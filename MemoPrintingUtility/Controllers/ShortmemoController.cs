@@ -83,8 +83,7 @@ namespace MemoPrintingUtility.Controllers
                     //
                     var lstStudents = BoMemoService.getTabularReportInstance().GetStudentDetail(course, Psem, sm, yr);
                     //var LstConStudents = BoMemoService.getTabularReportInstance().GetStudentsConsDetails(course, Psem);
-
-
+                    
                     int TotalSubjectAttemt = 0;
                     int TotalSubjectpass = 0;
                     int rowcount = 0;

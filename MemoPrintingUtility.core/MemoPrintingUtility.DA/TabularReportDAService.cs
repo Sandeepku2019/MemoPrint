@@ -26,6 +26,7 @@ namespace MemoPrintingUtility.DA
                                       InternalMarks = stu.INT_MARKS,
                                       SubjectName = stu.SUBJECTNAME,
                                       Credits = stu.CREDITS,
+                                      Flotation = stu.FINAL_VAL_MARKS.Length == 2 ? "FL" : "",
                                       LeterGrade = stu.LETERGRADE,
                                       SubjectCode = stu.CONVERT_SUBCODE,
                                       Status = stu.RESULT,

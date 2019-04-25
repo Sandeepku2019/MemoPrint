@@ -13,9 +13,20 @@ namespace MemoPrintingUtility.Entity
         public List<StudentInformation> lstStudentInformaion { get; set; }
     }
 
+
+    public class TotalsubjectRecord
+    {
+        public string subname { get; set; }
+        public string status { get; set; }
+
+    }
+
     public class StudentInformation
     {
         public string LeterGrade { get; set; }
+
+
+        public string Flotation { get; set;}
 
         public string SGPA { get; set; }
 

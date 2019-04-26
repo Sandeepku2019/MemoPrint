@@ -18,12 +18,13 @@ namespace MemoPrintingUtility.DA
                                   select new StudentInformation
                                   {
                                       collegecode = stu.FK_CLGCODE,
+
                                       HallTicketNumber = stu.HTNO,
                                       StudentName = stu.FULLNAME,
                                       FatherName = stu.FNAME,
                                       Ei = stu.EI,
                                       Order = Convert.ToInt16(stu.ORD.Replace("P", "").Replace("PR", "")),
-                                      ExernalMarks = stu.FINAL_VAL_MARKS,
+                                      ExernalMarks = stu.FINAL_VAL_MARKS ,
                                       InternalMarks = stu.INT_MARKS,
                                       SubjectName = stu.SUBJECTNAME,
                                       Credits = stu.CREDITS,
@@ -120,6 +121,21 @@ namespace MemoPrintingUtility.DA
                                           HallTicketNumber = stu.HTNO,
                                       }).ToList<StudentInformation>();
             return studentConsdetails;
+        }
+
+        public List<TotalsubjectRecord> getTotalandPassed(string Course)
+        {
+            MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
+
+            var studentdetails = (from stu in StudentContext.GetTotalsubsandpassedsubs(Course).AsQueryable()
+                                  select new TotalsubjectRecord
+                                  {
+                                      Htno = stu.htno,
+                                      TotalSubs = stu.Totalsubject == null ? 0 : Convert.ToInt32(stu.Totalsubject),
+                                      PassedSubs = stu.passedsubject == null ? 0 : Convert.ToInt32(stu.passedsubject)
+
+                                  }).ToList<TotalsubjectRecord>();
+            return studentdetails;
         }
     }
 }

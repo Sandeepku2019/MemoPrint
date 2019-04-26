@@ -44,37 +44,6 @@
       <Column Name="updatedby" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.SP_GetStudentDetails" Method="SP_GetStudentDetails">
-    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Semister" Parameter="semister" Type="System.Int32" DbType="Int" />
-    <Parameter Name="year" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Sem" Parameter="sem" Type="System.Int32" DbType="Int" />
-    <ElementType Name="SP_GetStudentDetailsResult">
-      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FK_SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ORD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CONVERT_SUBCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CREDITS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="VAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="INT_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MOD1_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MOD2_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="GRACE_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="GRACE_MARKS2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FINAL_VAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="GRADEPOINT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LETERGRADE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FINALRESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SGPA" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.get_ConsDataforTR" Method="get_ConsDataforTR">
     <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="Semister" Parameter="semister" Type="System.Int32" DbType="Int" />
@@ -166,6 +135,45 @@
       <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FINALRESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="SGPA" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_GetStudentDetails" Method="SP_GetStudentDetails">
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Semister" Parameter="semister" Type="System.Int32" DbType="Int" />
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Sem" Parameter="sem" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SP_GetStudentDetailsResult">
+      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ORD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CONVERT_SUBCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CREDITS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="VAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="INT_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MOD1_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MOD2_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRACE_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRACE_MARKS2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FINAL_VAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRADEPOINT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LETERGRADE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FINALRESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SGPA" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetTotalsubsandpassedsubs" Method="GetTotalsubsandpassedsubs">
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="GetTotalsubsandpassedsubsResult">
+      <Column Name="htno" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="passedsubject" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Totalsubject" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

@@ -14,5 +14,6 @@ namespace MemoPrintingUtility.BO
         List<ConsDataEntity> GetStudentsConsDetails(string Course, int Semister);
 
         List<StudentInformation> GetMallPractHtno(string Course, int Semister, int sem, int year);
+        List<TotalsubjectRecord> getTotalandPassed(string Course);
     }
 }

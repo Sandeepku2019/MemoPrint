@@ -16,8 +16,15 @@ namespace MemoPrintingUtility.Entity
 
     public class TotalsubjectRecord
     {
+        public string Htno { get; set; }
+
+        public int TotalSubs { get; set; }
+
+        public int PassedSubs { get; set; }
+
         public string subname { get; set; }
-        public string status { get; set; } 
+
+        public string status { get; set; }
 
     }
 
@@ -26,6 +33,10 @@ namespace MemoPrintingUtility.Entity
     {
         public string LeterGrade { get; set; }
 
+
+        public int Psc { get; set; }
+
+        public int Tsc { get; set; }
 
         public string Flotation { get; set;}
 

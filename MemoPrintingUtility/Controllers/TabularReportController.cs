@@ -135,9 +135,9 @@ namespace MemoPrintingUtility.Controllers
                                 rowcount = rowcount + 6;
                              
                             }
-                            if ((PageBraker + rowcount) > 63)
+                            if ((PageBraker + rowcount) > 72)
                             {
-                                int differ = 62 - PageBraker;
+                                int differ = 72- PageBraker;
 
                                 for (int h = 0; h < differ; h++)
                                 {
@@ -145,13 +145,13 @@ namespace MemoPrintingUtility.Controllers
                                 }
                                
 
-                                    PageBraker = addHeaderFooter(sw, 62, course, year.ToString(), sem.ToString());
+                                    PageBraker = addHeaderFooter(sw, 72, course, year.ToString(), sem.ToString());
                             }
 
                             if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
                             {
                                 ColPagebrk = false;
-                                int differ = 62- PageBraker;
+                                int differ = 73- PageBraker;
 
                                 for (int h = 0; h < differ; h++)
                                 {
@@ -159,7 +159,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
                                
 
-                                PageBraker = addHeaderFooter(sw, 62, course, year.ToString(), sem.ToString());
+                                PageBraker = addHeaderFooter(sw, 72, course, year.ToString(), sem.ToString());
 
                             }
 
@@ -610,16 +610,12 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
                
-                PageBraker = PageBraker + 3;
+                PageBraker = PageBraker + 9;
 
             }
-            else if (rowcount == 62)
+            else if (rowcount == 72)
             {
-                sw.WriteLine(" ");
-                sw.WriteLine(" ");
-                sw.WriteLine(" ");
-             
-               
+              
                 rowcount = 0;
                 PageNumber++;
                 sw.WriteLine(" ");
@@ -634,7 +630,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
               
-                PageBraker = 3;
+                PageBraker = 9;
                 //addHeaderFooter(sw, rowcount, course, year, sem);
 
 

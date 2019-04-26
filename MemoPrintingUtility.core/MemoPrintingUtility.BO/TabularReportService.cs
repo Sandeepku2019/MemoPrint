@@ -32,10 +32,10 @@ namespace MemoPrintingUtility.BO
 
         }
 
-        public List<TotalsubjectRecord> getTotalandPassed(string Course)
+        public List<TotalsubjectRecord> getTotalandPassed(string Course, int year)
         {
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
-            return DAFactory.GetTabularDAService().getTotalandPassed(Course);
+            return DAFactory.GetTabularDAService().getTotalandPassed(Course,  year);
 
         }
     }

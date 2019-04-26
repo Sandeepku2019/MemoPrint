@@ -91,9 +91,9 @@ namespace MemoPrintingUtility.DA
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalsubsandpassedsubs")]
-		public ISingleResult<GetTotalsubsandpassedsubsResult> GetTotalsubsandpassedsubs([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Course", DbType="VarChar(50)")] string course)
+		public ISingleResult<GetTotalsubsandpassedsubsResult> GetTotalsubsandpassedsubs([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Course", DbType="VarChar(50)")] string course, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> year)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course, year);
 			return ((ISingleResult<GetTotalsubsandpassedsubsResult>)(result.ReturnValue));
 		}
 	}
@@ -2540,7 +2540,6 @@ namespace MemoPrintingUtility.DA
 		{
 			get
 			{
-
                 if (this._FINAL_VAL_MARKS == "AB")
                 {
                     this._FINAL_VAL_MARKS = this._FINAL_VAL_MARKS + ".";
@@ -2551,14 +2550,7 @@ namespace MemoPrintingUtility.DA
 			{
 				if ((this._FINAL_VAL_MARKS != value))
 				{
-                    if (value == "AB")
-                    {
-                        this._FINAL_VAL_MARKS = value + ".";
-                    }
-                    else
-                    {
-                        this._FINAL_VAL_MARKS = value;
-                    }
+					this._FINAL_VAL_MARKS = value;
 				}
 			}
 		}
@@ -2649,6 +2641,10 @@ namespace MemoPrintingUtility.DA
 		
 		private string _htno;
 		
+		private string _fk_year;
+		
+		private string _fk_sem;
+		
 		private System.Nullable<int> _passedsubject;
 		
 		private System.Nullable<int> _Totalsubject;
@@ -2669,6 +2665,38 @@ namespace MemoPrintingUtility.DA
 				if ((this._htno != value))
 				{
 					this._htno = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fk_year", DbType="NVarChar(1)")]
+		public string fk_year
+		{
+			get
+			{
+				return this._fk_year;
+			}
+			set
+			{
+				if ((this._fk_year != value))
+				{
+					this._fk_year = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fk_sem", DbType="NVarChar(1)")]
+		public string fk_sem
+		{
+			get
+			{
+				return this._fk_sem;
+			}
+			set
+			{
+				if ((this._fk_sem != value))
+				{
+					this._fk_sem = value;
 				}
 			}
 		}

@@ -26,6 +26,10 @@ namespace MemoPrintingUtility.Entity
 
         public string status { get; set; }
 
+        public int fk_yr { get; set; }
+
+        public int fk_sm { get; set; }
+
     }
 
 
@@ -38,7 +42,7 @@ namespace MemoPrintingUtility.Entity
 
         public int Tsc { get; set; }
 
-        public string Flotation { get; set;}
+      
 
         public string SGPA { get; set; }
 
@@ -60,7 +64,50 @@ namespace MemoPrintingUtility.Entity
 
         public string InternalMarks { get; set; }
 
-        public string ExernalMarks { get; set; }
+        private string _flotation;
+        public string Flotation {
+            get
+            {
+
+                return this._flotation;
+            }
+            set
+            {
+                if ((this._flotation != value))
+                {
+                    this._flotation = value;
+                }
+            }
+        }
+
+
+        private string _exernalMarks;
+        public string ExernalMarks
+        {
+            get
+            {
+               
+                return this._exernalMarks;
+            }
+            set
+            {
+                if ((this._exernalMarks != value))
+                {
+                    if (value == "AB")
+                    {
+                        value = "AB.";
+                    }
+
+                    if (value.Length == 2)
+                    {
+                        this._flotation = "FL";
+
+                    }
+                    this._exernalMarks = value;
+                }
+            }
+
+        }
 
         public string FinalResult { get; set; }
 

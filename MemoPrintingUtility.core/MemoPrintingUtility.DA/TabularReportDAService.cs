@@ -123,16 +123,18 @@ namespace MemoPrintingUtility.DA
             return studentConsdetails;
         }
 
-        public List<TotalsubjectRecord> getTotalandPassed(string Course)
+        public List<TotalsubjectRecord> getTotalandPassed(string Course,int year)
         {
             MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
 
-            var studentdetails = (from stu in StudentContext.GetTotalsubsandpassedsubs(Course).AsQueryable()
+            var studentdetails = (from stu in StudentContext.GetTotalsubsandpassedsubs(Course, year).AsQueryable()
                                   select new TotalsubjectRecord
                                   {
                                       Htno = stu.htno,
                                       TotalSubs = stu.Totalsubject == null ? 0 : Convert.ToInt32(stu.Totalsubject),
-                                      PassedSubs = stu.passedsubject == null ? 0 : Convert.ToInt32(stu.passedsubject)
+                                      PassedSubs = stu.passedsubject == null ? 0 : Convert.ToInt32(stu.passedsubject),
+                                      fk_sm = stu.fk_sem ==  null ? 0: Convert.ToInt32(stu.fk_sem),
+                                      fk_yr = stu.fk_year == null ? 0 : Convert.ToInt32(stu.fk_year),
 
                                   }).ToList<TotalsubjectRecord>();
             return studentdetails;

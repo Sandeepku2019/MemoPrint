@@ -170,8 +170,11 @@
   </Function>
   <Function Name="dbo.GetTotalsubsandpassedsubs" Method="GetTotalsubsandpassedsubs">
     <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
     <ElementType Name="GetTotalsubsandpassedsubsResult">
       <Column Name="htno" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="fk_year" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="fk_sem" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
       <Column Name="passedsubject" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Totalsubject" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>

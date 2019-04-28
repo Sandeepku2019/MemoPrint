@@ -97,6 +97,7 @@ namespace MemoPrintingUtility.Controllers
                         for (int i = 0; i < HallticketNumbers.Count; i++)
                         {
                            
+
                                 series++;
                             int totalSUbjects = 0;
                             int passedSubject = 0;
@@ -108,7 +109,7 @@ namespace MemoPrintingUtility.Controllers
                             string HallTicket = lstStuns[0].HallTicketNumber;
                             var objtotalaspassed = lsttotalpassed.Where(x => x.Htno.Trim() == HallTicket.Trim()).ToList();
 
-                            if (HallTicket == "005171004")
+                            if (HallTicket == "131191022")
                             {
 
                             }
@@ -490,6 +491,8 @@ namespace MemoPrintingUtility.Controllers
                                 string Flotation = string.Empty;
 
                                 //lstStuns.Where(x => x.Flotation.ToString() == "FL").ToList().Count > 0 ? "FL" : "";
+
+                                
 
                                 if (lstStuns.Where(x => x.GRACE_MARKS != null).ToList().Count > 0 && lstStuns.Where(x => x.GRACE_MARKS2 != null).ToList().Count > 0)
                                 {

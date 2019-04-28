@@ -14,6 +14,13 @@ namespace MemoPrintingUtility.Entity
     }
 
 
+    public class subjectEXMPWM
+    {
+        public string subname { get; set; }
+        public string ExMarks { get; set; }
+
+        public string PMarks { get; set; }
+    }
     public class TotalsubjectRecord
     {
         public string Htno { get; set; }
@@ -42,7 +49,7 @@ namespace MemoPrintingUtility.Entity
 
         public int Tsc { get; set; }
 
-      
+
 
         public string SGPA { get; set; }
 
@@ -65,7 +72,8 @@ namespace MemoPrintingUtility.Entity
         public string InternalMarks { get; set; }
 
         private string _flotation;
-        public string Flotation {
+        public string Flotation
+        {
             get
             {
 
@@ -86,7 +94,7 @@ namespace MemoPrintingUtility.Entity
         {
             get
             {
-               
+
                 return this._exernalMarks;
             }
             set
@@ -664,7 +672,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string R5
         {
             get
@@ -680,7 +688,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string A5
         {
             get
@@ -696,7 +704,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string P6
         {
             get
@@ -712,7 +720,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string M6
         {
             get
@@ -728,7 +736,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string S6
         {
             get
@@ -744,7 +752,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string R6
         {
             get
@@ -760,7 +768,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string A6
         {
             get
@@ -776,7 +784,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string P7
         {
             get
@@ -792,7 +800,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string M7
         {
             get
@@ -808,7 +816,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string S7
         {
             get
@@ -824,7 +832,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string R7
         {
             get
@@ -840,7 +848,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string A7
         {
             get
@@ -856,7 +864,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string P8
         {
             get
@@ -872,7 +880,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string M8
         {
             get
@@ -888,7 +896,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string S8
         {
             get
@@ -904,7 +912,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string R8
         {
             get
@@ -920,7 +928,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string A8
         {
             get
@@ -936,7 +944,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string P9
         {
             get
@@ -952,7 +960,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string M9
         {
             get
@@ -968,7 +976,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string S9
         {
             get
@@ -984,7 +992,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string R9
         {
             get
@@ -1000,7 +1008,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-       
+
         public string A9
         {
             get
@@ -1016,7 +1024,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string P10
         {
             get
@@ -1032,7 +1040,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string M10
         {
             get
@@ -1048,7 +1056,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string S10
         {
             get
@@ -1064,7 +1072,7 @@ namespace MemoPrintingUtility.Entity
             }
         }
 
-        
+
         public string R10
         {
             get
@@ -1079,7 +1087,7 @@ namespace MemoPrintingUtility.Entity
                 }
             }
         }
-               
+
         public string A10
         {
             get
@@ -1109,7 +1117,7 @@ namespace MemoPrintingUtility.Entity
                 }
             }
         }
-       
+
         public string SGPA
         {
             get
@@ -1124,7 +1132,7 @@ namespace MemoPrintingUtility.Entity
                 }
             }
         }
-               
+
         public string EXAMMONT
         {
             get

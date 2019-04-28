@@ -83,37 +83,42 @@ namespace MemoPrintingUtility.Controllers
                     string PrevColcode = "";
                     bool ColPagebrk = false;
 
-                    List<string> lstColCodes = lstStudents.OrderBy(x => x.collegecode).Select(y => y.collegecode).Distinct().ToList<string>();
+                    List<string> lstColCodes = lstStudents.OrderBy(x => x.collegecode.Trim()).Select(y => y.collegecode.Trim()).Distinct().ToList<string>();
 
 
-
+                    int series = 0;
                     foreach (var colcode in lstColCodes)
                     {
-                        List<string> HallticketNumbers = lstStudents.Where(y => y.collegecode == colcode).OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
+                        List<string> HallticketNumbers = lstStudents.Where(y => y.collegecode.Trim() == colcode.Trim()).OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
                         bool isExstudent = false;
-
+                       
                         ColPagebrk = true;
                         #region Htnonumbers
                         for (int i = 0; i < HallticketNumbers.Count; i++)
                         {
-
+                           
+                                series++;
                             int totalSUbjects = 0;
                             int passedSubject = 0;
                             bool detained = false;
                             int rowcount = 0;
                             var lstStuns = lstStudents.Where(x => x.HallTicketNumber == HallticketNumbers[i]).ToList<StudentInformation>();
                             var StudentConsInformatio = LstConStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<ConsDataEntity>();
-
+                            
                             string HallTicket = lstStuns[0].HallTicketNumber;
                             var objtotalaspassed = lsttotalpassed.Where(x => x.Htno.Trim() == HallTicket.Trim()).ToList();
 
+                            if (HallTicket == "005171004")
+                            {
+
+                            }
 
                             string FN = lstStuns[0].FatherName == null ? "" : lstStuns[0].FatherName;
                             string SN = lstStuns[0].StudentName == null ? "" : lstStuns[0].StudentName;
                             string CC = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
                             string EI = lstStuns[0].Ei == null ? "" : lstStuns[0].Ei;
                             string CollegeCode = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
-                            string nameformat = i + 1 + GetSpaces(2) + CollegeCode + GetSpaces(5 - CollegeCode.Length) + HallTicket + GetSpaces(15 - HallTicket.Length) + SN + GetSpaces(45 - SN.Length) + FN + GetSpaces(45 - FN.Length);
+                            string nameformat = series+ GetSpaces(5-series.ToString().Length) + GetSpaces(1) + CollegeCode + GetSpaces(5 - CollegeCode.Length) + HallTicket + GetSpaces(12 - HallTicket.Length) + SN + GetSpaces(43 - SN.Length) + FN + GetSpaces(45 - FN.Length);
                             if (EI == "E")
                             {
                                 isExstudent = true;
@@ -202,8 +207,8 @@ namespace MemoPrintingUtility.Controllers
                                 string subjectCONSformt = "";
 
                                 subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length);
-                                SubjectCONSMarks_U = "    U" + GetSpaces(5 - "CONS.".Length);
-                                SubjectCONSMarks_S = "    S" + GetSpaces(5 - "CONS.".Length) + GetSpaces(7);
+                                SubjectCONSMarks_U = "   U" + GetSpaces(5 - "CONS.".Length);
+                                SubjectCONSMarks_S = "   S" + GetSpaces(5 - "CONS.".Length) + GetSpaces(2);
 
                                 #region Subject title 
 
@@ -232,7 +237,7 @@ namespace MemoPrintingUtility.Controllers
                                 if (ConsDetails.P10 != null) lstts.Add(new TotalsubjectRecord() { subname = ConsDetails.P10, status = ConsDetails.R10 });
 
 
-                                subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length) + GetSpaces(7) + subjectCONSformt;
+                                subjectstringCONS = "CONS." + GetSpaces(5 - "CONS.".Length) + GetSpaces(1) + subjectCONSformt;
                                 sw.WriteLine(subjectstringCONS + GetSpaces(113 - subjectstringCONS.Length) + ConsDetails.RES + "   " + ConsDetails.SGPA);
 
                                 if (ConsDetails.RES == "L")
@@ -254,7 +259,7 @@ namespace MemoPrintingUtility.Controllers
                                 SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M8, string.Empty);
                                 SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M9, string.Empty);
                                 SubjectExtCons = ConcatenateSubjectMarks(SubjectExtCons, ConsDetails.M10, string.Empty);
-                                SubjectCONSMarks_U = SubjectCONSMarks_U + GetSpaces(7) + SubjectExtCons;
+                                SubjectCONSMarks_U = SubjectCONSMarks_U + GetSpaces(2) + SubjectExtCons;
                                 sw.WriteLine(SubjectCONSMarks_U);
 
                                 #endregion
@@ -312,15 +317,15 @@ namespace MemoPrintingUtility.Controllers
                             if (lstStuns.Count > 0)
                             {
                                 string subjectformt = "";
-                                subjectstringPRE = "PRES." + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
-                                subjectsMarksPRE_U = "    U" + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
+                                subjectstringPRE = "PRES." + GetSpaces(5 - "PRES.".Length) + GetSpaces(1);
+                                subjectsMarksPRE_U = "   U" + GetSpaces(5 - "PRES.".Length) + GetSpaces(2);
                                 if (!isExstudent)
                                 {
-                                    subjectsMarksPRE_S = "    S" + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
+                                    subjectsMarksPRE_S = "   S" + GetSpaces(5 - "PRES.".Length) + GetSpaces(2);
                                 }
                                 else
                                 {
-                                    subjectsMarksPRE_S = GetSpaces(5) + GetSpaces(5 - "PRES.".Length) + GetSpaces(7);
+                                    subjectsMarksPRE_S = GetSpaces(5) + GetSpaces(5 - "PRES.".Length) + GetSpaces(2);
                                 }
                                 int subord = 1;
 
@@ -364,9 +369,9 @@ namespace MemoPrintingUtility.Controllers
                                     string umakspace = "";
                                     string intmarkspae = "";
                                     int ordr = studentM.Order;
-                                    spaces = GetSpaces((ordr - subord) * 10);
-                                    umakspace = GetSpaces((ordr - subord) * 10);
-                                    intmarkspae = GetSpaces((ordr - subord) * 10);
+                                    spaces = GetSpaces((ordr - subord) * 8);
+                                    umakspace = GetSpaces((ordr - subord) *8);
+                                    intmarkspae = GetSpaces((ordr - subord) * 8);
                                     string subPReF = studentM.LeterGrade;
                                     if (studentM.LeterGrade == "AB")
                                     {
@@ -377,11 +382,7 @@ namespace MemoPrintingUtility.Controllers
                                     {
                                         intmark = Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks) + GetSpaces(3 - Convert.ToString(studentM.InternalMarks == null ? "" : studentM.InternalMarks).Length) + " " + subPReF;
                                     }
-                                    else
-                                    {
-                                        intmark = GetSpaces(1);
-
-                                    }
+                                   
                                     if (count > 0)
                                     {
 
@@ -456,30 +457,38 @@ namespace MemoPrintingUtility.Controllers
 
                                 if (isExstudent == false)
                                 {
-                                    subjectsPF = "<" + Paa + "/" + Pbb + ">" + " <" + (aa).ToString().Truncate(2) + "/" + (bb + lstts.Count).ToString().Truncate(2) + ">";
+                                    subjectsPF = "<" + Paa + "/" + Pbb + ">" + "<" + (aa).ToString().Truncate(2) + "/" + (bb + lstts.Count).ToString().Truncate(2) + ">";
                                 }
                                 else
                                 {
-                                    subjectsPF = "<" + Paa + "/" + Pbb + ">" + " <"+ (expaa + objtotalaspassed.Sum(x => x.PassedSubs)) + "/" + bb + ">";
+                                    subjectsPF = "<" + Paa + "/" + Pbb + ">" + "<"+ (expaa + objtotalaspassed.Sum(x => x.PassedSubs)) + "/" + bb + ">";
                                 }
 
                                 int external = lstStuns.Sum(x => x.ExernalMarks.ChangeINT());
                                 int TotalMark = external + lstStuns.Sum(x => x.InternalMarks.ChangeINT());
-                                sw.WriteLine(subjectstringPRE + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  " + subjectsPF + "  " + TotalMark);
+                                sw.WriteLine(subjectstringPRE + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  " + subjectsPF + " " + TotalMark);
                                 string finalR = lstStuns[0].FinalResult;
-                                if (detained == true && TotalMark > 0)
+                                if (finalR != "MALL.PRACT")
                                 {
-                                    finalR = "PROMOTED";
+                                    if (detained == true && TotalMark > 0)
+                                    {
+                                        finalR = "PROMOTED";
 
+                                    }
+                                    else
+                                    {
+                                        finalR = lstStuns[0].FinalResult;
+
+                                    }
                                 }
                                 else
                                 {
-                                    finalR = lstStuns[0].FinalResult;
+                                    finalR = "MP";
 
                                 }
 
 
-                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + finalR + "    " + lstStuns[0].SGPA + "  " + lstStuns[0].Flotation);
+                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  "+finalR + "    " + lstStuns[0].SGPA + "  " + lstStuns[0].Flotation);
                                 if (isExstudent == false)
                                 {
                                     sw.WriteLine(subjectsMarksPRE_S + GetSpaces(113 - subjectsMarksPRE_U.Length));
@@ -570,7 +579,7 @@ namespace MemoPrintingUtility.Controllers
             if (subject != null && subject.Length > 0)
             {
                 string sub = subject + " " + yearPass;//.CheckNumeric(2);
-                appenedstring = appenedstring + sub + GetSpaces(10 - sub.Length);
+                appenedstring = appenedstring + sub + GetSpaces(8 - sub.Length);
                 return appenedstring;
             }
             else
@@ -584,7 +593,7 @@ namespace MemoPrintingUtility.Controllers
             if (subjectMarks != null && subjectMarks.Length > 0)
             {
                 string sub = subjectMarks + " " + Result;
-                appenedstring = appenedstring + sub + GetSpaces(10 - sub.Length);
+                appenedstring = appenedstring + sub + GetSpaces(8 - sub.Length);
                 return appenedstring;
             }
             else
@@ -594,31 +603,34 @@ namespace MemoPrintingUtility.Controllers
 
         }
 
-        private int addHeaderFooter(StreamWriter sw, int rowcount, string course, string year, string sem, bool cchange= false)
+
+
+
+        private int addHeaderFooter(StreamWriter sw, int rowcount, string course, string year, string sem, bool cchange = false)
         {
             if (rowcount == 0)
             {
-               
-                sw.WriteLine(" ");
+
+                //sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
 
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
-                sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+                sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
-               
-                PageBraker = PageBraker + 9;
+
+                PageBraker = PageBraker + 8;
 
             }
             else if (rowcount == 72)
             {
-              
+
                 rowcount = 0;
                 PageNumber++;
-                sw.WriteLine(" ");
+                //sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
 
@@ -626,11 +638,11 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 // sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
-                sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+                sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
-              
-                PageBraker = 9;
+
+                PageBraker = 8;
                 //addHeaderFooter(sw, rowcount, course, year, sem);
 
 
@@ -638,6 +650,52 @@ namespace MemoPrintingUtility.Controllers
             else { PageBraker++; }
             return PageBraker;
         }
+
+
+        //private int addHeaderFooter(StreamWriter sw, int rowcount, string course, string year, string sem, bool cchange= false)
+        //{
+        //    if (rowcount == 0)
+        //    {
+
+
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(" ");
+
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+        //        sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
+        //        sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
+
+        //        PageBraker = PageBraker + 9;
+
+        //    }
+        //    else if (rowcount == 72)
+        //    {
+
+        //        rowcount = 0;
+        //        PageNumber++;
+
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(" ");
+
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(" ");
+        //        sw.WriteLine(" ");
+        //        // sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
+        //        sw.WriteLine(("                                  TABULATION lIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+        //        sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
+        //        sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
+
+        //        PageBraker = 9;
+        //        //addHeaderFooter(sw, rowcount, course, year, sem);
+
+
+        //    }
+        //    else { PageBraker++; }
+        //    return PageBraker;
+        //}
 
 
     }

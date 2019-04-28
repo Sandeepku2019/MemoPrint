@@ -118,7 +118,7 @@ namespace MemoPrintingUtility.Controllers
                             string CC = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
                             string EI = lstStuns[0].Ei == null ? "" : lstStuns[0].Ei;
                             string CollegeCode = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
-                            string nameformat = series+ GetSpaces(5-series.ToString().Length) + GetSpaces(1) + CollegeCode + GetSpaces(5 - CollegeCode.Length) + HallTicket + GetSpaces(12 - HallTicket.Length) + SN + GetSpaces(43 - SN.Length) + FN + GetSpaces(45 - FN.Length);
+                            string nameformat = series+ GetSpaces(5-series.ToString().Length) + GetSpaces(1) + CollegeCode + GetSpaces(5 - CollegeCode.Length) + HallTicket + GetSpaces(12 - HallTicket.Length) + SN + GetSpaces(4 - SN.Length) + FN + GetSpaces(45 - FN.Length);
                             if (EI == "E")
                             {
                                 isExstudent = true;
@@ -487,8 +487,8 @@ namespace MemoPrintingUtility.Controllers
 
                                 }
 
-
-                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  "+finalR + "    " + lstStuns[0].SGPA + "  " + lstStuns[0].Flotation);
+                                string Flotation = lstStuns.Where(x => x.Flotation.ToString() == "FL").ToList().Count > 0 ? "FL" : "";
+                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  "+finalR + "    " + lstStuns[0].SGPA + "  " + Flotation);
                                 if (isExstudent == false)
                                 {
                                     sw.WriteLine(subjectsMarksPRE_S + GetSpaces(113 - subjectsMarksPRE_U.Length));

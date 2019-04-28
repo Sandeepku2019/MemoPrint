@@ -22,6 +22,8 @@ namespace MemoPrintingUtility.DA
                                       HallTicketNumber = stu.HTNO,
                                       StudentName = stu.FULLNAME,
                                       FatherName = stu.FNAME,
+                                      GRACE_MARKS=stu.GRACE_MARKS ,
+                                      GRACE_MARKS2 = stu.GRACE_MARKS,
                                       Ei = stu.EI,
                                       Order = Convert.ToInt16(stu.ORD.Replace("P", "").Replace("PR", "")),
                                       ExernalMarks = stu.FINAL_VAL_MARKS ,

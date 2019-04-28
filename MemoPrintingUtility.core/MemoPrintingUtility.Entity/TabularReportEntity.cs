@@ -49,7 +49,9 @@ namespace MemoPrintingUtility.Entity
 
         public int Tsc { get; set; }
 
+        public string GRACE_MARKS { get; set; }
 
+        public string GRACE_MARKS2 { get; set; }
 
         public string SGPA { get; set; }
 

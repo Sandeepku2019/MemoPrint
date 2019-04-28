@@ -487,7 +487,26 @@ namespace MemoPrintingUtility.Controllers
 
                                 }
 
-                                string Flotation = lstStuns.Where(x => x.Flotation.ToString() == "FL").ToList().Count > 0 ? "FL" : "";
+                                string Flotation = string.Empty;
+
+                                //lstStuns.Where(x => x.Flotation.ToString() == "FL").ToList().Count > 0 ? "FL" : "";
+
+                                if (lstStuns.Where(x => x.GRACE_MARKS != null).ToList().Count > 0 && lstStuns.Where(x => x.GRACE_MARKS2 != null).ToList().Count > 0)
+                                {
+                                    Flotation = "FL AC";
+                                }else
+                                if (lstStuns.Where(x => x.GRACE_MARKS != null).ToList().Count > 0 && lstStuns.Where(x => x.GRACE_MARKS2 != null).ToList().Count == 0)
+                                {
+                                    Flotation = "FL";
+
+                                }
+                                else
+                                if (lstStuns.Where(x => x.GRACE_MARKS2 != null).ToList().Count > 0 && lstStuns.Where(x => x.GRACE_MARKS != null).ToList().Count > 0)
+                                {
+                                    Flotation = "AC";
+
+                                }
+
                                 sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  "+finalR + "    " + lstStuns[0].SGPA + "  " + Flotation);
                                 if (isExstudent == false)
                                 {

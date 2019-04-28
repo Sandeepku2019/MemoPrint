@@ -507,7 +507,7 @@ namespace MemoPrintingUtility.Controllers
 
                                 }
 
-                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  "+finalR + "    " + lstStuns[0].SGPA + "  " + Flotation);
+                                sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length) + "  "+finalR + "  " + lstStuns[0].SGPA + " " + Flotation);
                                 if (isExstudent == false)
                                 {
                                     sw.WriteLine(subjectsMarksPRE_S + GetSpaces(113 - subjectsMarksPRE_U.Length));

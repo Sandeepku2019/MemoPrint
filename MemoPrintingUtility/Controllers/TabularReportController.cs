@@ -504,7 +504,7 @@ namespace MemoPrintingUtility.Controllers
 
                                 }
                                 else
-                                if (lstStuns.Where(x => x.GRACE_MARKS2 != null).ToList().Count > 0 && lstStuns.Where(x => x.GRACE_MARKS != null).ToList().Count > 0)
+                                if (lstStuns.Where(x => x.GRACE_MARKS2 != null).ToList().Count > 0 && lstStuns.Where(x => x.GRACE_MARKS != null).ToList().Count == 0)
                                 {
                                     Flotation = "AC";
 

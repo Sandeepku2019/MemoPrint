@@ -473,6 +473,11 @@ namespace MemoPrintingUtility.Controllers
                 s1sp1 = subject1.Substring(0, 48);
                 s1sp2 = subject1.Substring(48);
             }
+            else
+            {
+                s1sp1 = subject1.Substring(0, 50);
+                s1sp2 = "";
+            }
 
 
             string subject2 = "";
@@ -484,9 +489,41 @@ namespace MemoPrintingUtility.Controllers
                 s2sp1 = subject2.Substring(0, 48);
                 s2sp2 = subject2.Substring(48);
             }
+            else
+            {
+                s2sp1 = subject2.Substring(0, 48);
+                s2sp2 = "";
+
+            }
 
             ///scenario 1
             if (subject1.Length > 55 && subject2.Length > 55)
+            {
+                string s1 = s1sp1 + GetSpaces(55 - s1sp1.Length) + lstStunsfirst[i].Credits + GetSpaces(6 - lstStunsfirst[i].Credits.Length) + lstStunsfirst[i].LeterGrade + GetSpaces(4 - lstStunsfirst[i].LeterGrade.Length) + GetSpaces(5);
+                s1 = s1 + s2sp1 + GetSpaces(55 - s2sp1.Length) + lstStubScon[i].Credits + GetSpaces(6 - lstStubScon[i].Credits.Length) + lstStubScon[i].LeterGrade + GetSpaces(4 - lstStubScon[i].LeterGrade.Length);
+                sw.WriteLine(s1);
+
+                string sbuid = s1sp2 + GetSpaces(65 - s1sp2.Length) + GetSpaces(5) + s2sp2 + GetSpaces(65 - s2sp2.Length);
+
+
+                sw.WriteLine(sbuid);
+            }
+
+            //Scenario 2
+            ///scenario 1
+            if (subject1.Length > 55 && subject2.Length < 55)
+            {
+                string s1 = s1sp1 + GetSpaces(55 - s1sp1.Length) + lstStunsfirst[i].Credits + GetSpaces(6 - lstStunsfirst[i].Credits.Length) + lstStunsfirst[i].LeterGrade + GetSpaces(4 - lstStunsfirst[i].LeterGrade.Length) + GetSpaces(5);
+                s1 = s1 + s2sp1 + GetSpaces(55 - s2sp1.Length) + lstStubScon[i].Credits + GetSpaces(6 - lstStubScon[i].Credits.Length) + lstStubScon[i].LeterGrade + GetSpaces(4 - lstStubScon[i].LeterGrade.Length);
+                sw.WriteLine(s1);
+
+                string sbuid = s1sp2 + GetSpaces(65 - s1sp2.Length) + GetSpaces(5) + s2sp2 + GetSpaces(65 - s2sp2.Length);
+
+
+                sw.WriteLine(sbuid);
+            }
+            //scenario 3
+            if (subject1.Length < 55 && subject2.Length > 55)
             {
                 string s1 = s1sp1 + GetSpaces(55 - s1sp1.Length) + lstStunsfirst[i].Credits + GetSpaces(6 - lstStunsfirst[i].Credits.Length) + lstStunsfirst[i].LeterGrade + GetSpaces(4 - lstStunsfirst[i].LeterGrade.Length) + GetSpaces(5);
                 s1 = s1 + s2sp1 + GetSpaces(55 - s2sp1.Length) + lstStubScon[i].Credits + GetSpaces(6 - lstStubScon[i].Credits.Length) + lstStubScon[i].LeterGrade + GetSpaces(4 - lstStubScon[i].LeterGrade.Length);

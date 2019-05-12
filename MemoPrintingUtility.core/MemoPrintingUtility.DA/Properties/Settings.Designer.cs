@@ -27,10 +27,42 @@ namespace MemoPrintingUtility.DA.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tcp:kudevelopment.database.windows.net;Initial Catalog=kudevdb;Persis" +
-            "t Security Info=True;User ID=kudev2019;Password=Kudev@2019;Connection Timeout=240")]
+            "t Security Info=True;User ID=kudev2019;Password=Kudev@2019")]
         public string kudevdbConnectionString {
             get {
                 return ((string)(this["kudevdbConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=14.139.85.68,3339;Initial Catalog=kudevdb;Persist Security Info=True;" +
+            "User ID=sa;Password=Sqlku123")]
+        public string kudevdbConnectionString1 {
+            get {
+                return ((string)(this["kudevdbConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa;Password=Sqlku123" +
+            "")]
+        public string kupostConnectionString {
+            get {
+                return ((string)(this["kupostConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa")]
+        public string kupostConnectionString1 {
+            get {
+                return ((string)(this["kupostConnectionString1"]));
             }
         }
     }

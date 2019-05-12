@@ -33,7 +33,7 @@ namespace MemoPrintingUtility.DA
     #endregion
 		
 		public MemoPrintDBDataContext() : 
-				base(global::MemoPrintingUtility.DA.Properties.Settings.Default.kudevdbConnectionString, mappingSource)
+				base(global::MemoPrintingUtility.DA.Properties.Settings.Default.kudevdbConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -95,6 +95,13 @@ namespace MemoPrintingUtility.DA
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course, year);
 			return ((ISingleResult<GetTotalsubsandpassedsubsResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Get_subjectRangeDetails")]
+		public ISingleResult<Get_subjectRangeDetailsResult> Get_subjectRangeDetails()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Get_subjectRangeDetailsResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2540,10 +2547,6 @@ namespace MemoPrintingUtility.DA
 		{
 			get
 			{
-                if (this._FINAL_VAL_MARKS == "AB")
-                {
-                    this._FINAL_VAL_MARKS = this._FINAL_VAL_MARKS + ".";
-                }
 				return this._FINAL_VAL_MARKS;
 			}
 			set
@@ -2729,6 +2732,50 @@ namespace MemoPrintingUtility.DA
 				if ((this._Totalsubject != value))
 				{
 					this._Totalsubject = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Get_subjectRangeDetailsResult
+	{
+		
+		private string _SubjectCode;
+		
+		private System.Nullable<int> _StudentCount;
+		
+		public Get_subjectRangeDetailsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubjectCode", DbType="VarChar(50)")]
+		public string SubjectCode
+		{
+			get
+			{
+				return this._SubjectCode;
+			}
+			set
+			{
+				if ((this._SubjectCode != value))
+				{
+					this._SubjectCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentCount", DbType="Int")]
+		public System.Nullable<int> StudentCount
+		{
+			get
+			{
+				return this._StudentCount;
+			}
+			set
+			{
+				if ((this._StudentCount != value))
+				{
+					this._StudentCount = value;
 				}
 			}
 		}

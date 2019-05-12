@@ -10,35 +10,45 @@ namespace MemoPrintingUtility.DA
     public class TabularReportDAService : ITabularReportDAService
     {
         public List<StudentInformation> GetStudentDetail(string Course, int Semister, int sem, int year)
-        { 
+        {
+            try
+            {
 
-            MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
+                MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
+                StudentContext.CommandTimeout = 260;
 
-            var studentdetails = (from stu in StudentContext.SP_GetStudentDetails(Course, Semister, year, sem).AsQueryable()
-                                  select new StudentInformation
-                                  {
-                                      collegecode = stu.FK_CLGCODE,
+                var result = StudentContext.SP_GetStudentDetails(Course, Semister, year, sem).AsQueryable();
+                var studentdetails = (from stu in result
+                                      select new StudentInformation
+                                      {
+                                          collegecode = stu.FK_CLGCODE,
 
-                                      HallTicketNumber = stu.HTNO,
-                                      StudentName = stu.FULLNAME,
-                                      FatherName = stu.FNAME,
-                                      GRACE_MARKS=stu.GRACE_MARKS ,
-                                      GRACE_MARKS2 = stu.GRACE_MARKS2,
-                                      Ei = stu.EI,
-                                      Order = Convert.ToInt16(stu.ORD.Replace("P", "").Replace("PR", "")),
-                                      ExernalMarks = stu.FINAL_VAL_MARKS ,
-                                      InternalMarks = stu.INT_MARKS,
-                                      SubjectName = stu.SUBJECTNAME,
-                                      Credits = stu.CREDITS,
-                                      Flotation = stu.FINAL_VAL_MARKS.Length == 2 ? "FL" : "",
-                                      LeterGrade = stu.LETERGRADE,
-                                      SubjectCode = stu.CONVERT_SUBCODE,
-                                      Status = stu.RESULT,
-                                      FinalResult = stu.FINALRESULT,
-                                      SGPA = stu.SGPA
-                                  }).ToList<StudentInformation>();
+                                          HallTicketNumber = stu.HTNO,
+                                          StudentName = stu.FULLNAME,
+                                          FatherName = stu.FNAME,
+                                          GRACE_MARKS = Convert.ToString(stu.GRACE_MARKS),
+                                          GRACE_MARKS2 = Convert.ToString(stu.GRACE_MARKS2),
+                                          Ei = stu.EI,
+                                           Order = Convert.ToInt16(stu.ORD.Replace("P", "").Replace("PR", "")),
+                                          ExernalMarks = stu.FINAL_VAL_MARKS,
+                                          InternalMarks = stu.INT_MARKS,
+                                          SubjectName = stu.SUBJECTNAME,
+                                          Credits = stu.CREDITS,
+                                          //Flotation = stu.FINAL_VAL_MARKS).Length == 2 ? "FL" : "",
+                                          LeterGrade = stu.LETERGRADE,
+                                          SubjectCode = stu.CONVERT_SUBCODE,
+                                          Status =stu.RESULT,
+                                          FinalResult = stu.FINALRESULT,
+                                          SGPA = stu.SGPA
+                                      }).ToList<StudentInformation>();
 
-            return studentdetails;
+                return studentdetails;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public List<ConsDataEntity> GetStudentsConsDetails(string Course, int Semister)
@@ -117,29 +127,38 @@ namespace MemoPrintingUtility.DA
             MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
 
 
-            var studentConsdetails = (from stu in StudentContext.SP_MallPracDetails(Course,Semister,year,sem).AsQueryable()
+            var studentConsdetails = (from stu in StudentContext.SP_MallPracDetails(Course, Semister, year, sem).AsQueryable()
                                       select new StudentInformation
-                                      {                                                                                  
+                                      {
                                           HallTicketNumber = stu.HTNO,
                                       }).ToList<StudentInformation>();
             return studentConsdetails;
         }
 
-        public List<TotalsubjectRecord> getTotalandPassed(string Course,int year)
+        public List<TotalsubjectRecord> getTotalandPassed(string Course, int year)
         {
-            MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
+            try
+            {
+                MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
 
-            var studentdetails = (from stu in StudentContext.GetTotalsubsandpassedsubs(Course, year).AsQueryable()
-                                  select new TotalsubjectRecord
-                                  {
-                                      Htno = stu.htno,
-                                      TotalSubs = stu.Totalsubject == null ? 0 : Convert.ToInt32(stu.Totalsubject),
-                                      PassedSubs = stu.passedsubject == null ? 0 : Convert.ToInt32(stu.passedsubject),
-                                      fk_sm = stu.fk_sem ==  null ? 0: Convert.ToInt32(stu.fk_sem),
-                                      fk_yr = stu.fk_year == null ? 0 : Convert.ToInt32(stu.fk_year),
+                var studentdetails = (from stu in StudentContext.GetTotalsubsandpassedsubs(Course, year).AsQueryable()
+                                      select new TotalsubjectRecord
+                                      {
+                                          Htno = stu.htno,
+                                          TotalSubs = stu.Totalsubject == null ? 0 : Convert.ToInt32(stu.Totalsubject),
+                                          PassedSubs = stu.passedsubject == null ? 0 : Convert.ToInt32(stu.passedsubject),
+                                          fk_sm = stu.fk_sem == null ? 0 : Convert.ToInt32(stu.fk_sem),
+                                          fk_yr = stu.fk_year == null ? 0 : Convert.ToInt32(stu.fk_year),
 
-                                  }).ToList<TotalsubjectRecord>();
-            return studentdetails;
+                                      }).ToList<TotalsubjectRecord>();
+                return studentdetails;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

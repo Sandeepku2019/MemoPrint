@@ -18,6 +18,11 @@
     @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.1/xlsx.full.min.js"></script>
+    <script src="http://oss.sheetjs.com/js-xlsx/jszip.js"></script>
+ 
+
+
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
 
@@ -26,9 +31,37 @@
     <script src="~/Scripts/AppScripts/LoginService.js"></script>
     <script src="~/Scripts/AppScripts/TabularController.js"></script>
     <script src="~/Scripts/AppScripts/TabularService.js"></script>
-
+    <script src="~/Scripts/AppScripts/SubjectRangeCodeController.js"></script>
+    <script src="~/Scripts/AppScripts/SubjectRangeCodeService.js"></script>
+    <script src="~/Scripts/AppScripts/SDLCController.js"></script>
+    <script src="~/Scripts/AppScripts/SDLCService.js"></script>
     <script src="~/Scripts/AppScripts/ShortMemoController.js"></script>
     <script src="~/Scripts/AppScripts/ShortMemoService.js"></script>
+
+    @*<script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                "ajax": {
+                    "url": "/Home/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "RollNumber" },
+                    { "data": "Student_Name" },
+                    { "data": "Hindi" },
+                    { "data": "English" },
+                    { "data": "Physics" },
+                    { "data": "Chemistry" },
+                    { "data": "Biology" },
+                    { "data": "Mathematics" }
+
+                ]
+            });
+        });
+    </script>*@
+
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")

@@ -13,6 +13,16 @@ namespace MemoPrintingUtility.BO
             return new CourseService();
         }
 
+        public ISDLCTablarBO GetSDLCInstance()
+        {
+            return  new SDLCTablarBO();
+        }
+
+        public ISubjectRangeGenerateBO getSubjectRangeInstance()
+        {
+            return new SubjectRangeGenerateBO();
+        }
+
         public ITabularReportService getTabularReportInstance()
         {
             return new TabularReportService();

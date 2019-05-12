@@ -196,7 +196,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SDLCController.cs" />
     <Compile Include="Controllers\ShortmemoController.cs" />
+    <Compile Include="Controllers\SubjectRangeCodeController.cs" />
     <Compile Include="Controllers\TabularReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -245,8 +247,11 @@
     <Content Include="Scripts\AppScripts\LoginController.js" />
     <Content Include="Scripts\AppScripts\LoginService.js" />
     <Content Include="Scripts\AppScripts\ngapp.js" />
+    <Content Include="Scripts\AppScripts\SDLCService.js" />
     <Content Include="Scripts\AppScripts\ShortMemoController.js" />
     <Content Include="Scripts\AppScripts\ShortMemoService.js" />
+    <Content Include="Scripts\AppScripts\SubjectRangeCodeController.js" />
+    <Content Include="Scripts\AppScripts\SubjectRangeCodeService.js" />
     <Content Include="Scripts\AppScripts\TabularController.js" />
     <Content Include="Scripts\AppScripts\TabularService.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -267,6 +272,8 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\AppScripts\SDLCController.js" />
+    <Content Include="Views\SubjectRangeCode\Index.cshtml" />
     <Content Include="xml\UserInformation.xml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -1042,6 +1049,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\TabularReport\Index.cshtml" />
     <Content Include="Views\Shortmemo\Index.cshtml" />
+    <Content Include="Views\SDLC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

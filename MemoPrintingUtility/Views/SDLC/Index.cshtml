@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="main" class="container-fluid bg-light" style="min-height:400px">
+    <div class="row justify-content-center row" ng-controller="SDLCController">
+
+
+        <div class="row justify-content-center " style="padding: 5px ;padding-top:20px">
+
+            <div class="col-md-12 row text-left">
+                <h2> SDLC Report </h2>
+                <br />
+                <br />
+            </div>
+
+
+            <div class="col-md-12 row">
+
+                <span class="col-md-4 text-left  text-right">Select Course :</span>
+                <p class="col-md-6">
+                    <select ng-model="Course" class="form-control">
+                        <option value="">-- Select Course---</option>
+                        <option ng-repeat="x in lstCourses" value="{{x.CourseName}}">{{x.CourseName}}</option>
+                    </select>
+                </p>
+            </div>
+
+            <div class="col-md-12 row">
+
+                <span class="col-md-4 text-left  text-right">Select Report Type :</span>
+                <p class="col-md-6">
+                    <select ng-model="ReportType" class="form-control">
+                        <option value="">-- Select Report Type---</option>
+                        <option value="Tab">Tabular Report</option>
+                        <option value="Short">Short Memo</option>
+                       
+                    </select>
+                </p>
+            </div>
+
+
+            <div class="col-md-6 row ">
+                <input type="button" ID="btnGnerate" runat="server" Text="Generate Report" CssClass="btn btn-dark btn-send" ng-click="GenerateTabularReport()" Style="float: right" value="Generate Report" />
+                <p class="col-md-9">
+                    <Label Class="alert-danger" ID="lblerror" runat="server" ng-model="WarningMessage" Text="Generate Report" />
+                </p>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+

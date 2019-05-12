@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main" class="container-fluid bg-light" style="min-height:400px">
+    <div class="container py-4" ng-controller="MyController">
+        <div class="row justify-content-center " style="padding: 5px ;padding-top:20px">
+
+            <div class="col-md-12 row text-left">
+                <h2> Subject List </h2>
+                <br />
+                <br />
+            </div>
+
+            <div class="card-body">
+                <div class="row justify-content-center " style="padding: 5px ;padding-top:20px">
+
+
+
+
+                    <div class="col-md-4 row">
+
+                        <span class="col-md-6 text-left  text-right"> Range From:</span>
+                        <p class="col-md-6">
+                            <input type="text" ng-model="RangesStart" />
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-md-4 row">
+                        <span class="col-md-6 text-right">Range Gap:</span>
+                        <p class="col-md-6  ">
+                            <input type="text" ng-model="RangesGap" />
+                        </p>
+                    </div>
+
+
+
+                    <div class="col-md-4 row dropright ">
+                        &nbsp;  <input type="button" ID="btnGnerate" runat="server" Text="Generate Report" CssClass="btn btn-dark btn-send" ng-click="GenerateRange()" Style="float: right" value="Generate Range" />
+                        <p class="col-md-9">
+                            <Label Class="alert-danger" ID="lblerror" runat="server" ng-model="WarningMessage" Text="Generate Report" />
+                        </p>
+                    </div>
+
+
+
+                    <div class="col-md-4 row dropright ">
+                        <input type="button" ID="btnGnerate" runat="server" Text=Save" CssClass="btn btn-dark btn-send" ng-click="Save()" Style="float: right" value="Save" />
+                       
+                    </div>
+
+
+                </div>
+
+                <div>
+
+                    <table border="1" width="80%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.no
+                                </th>
+                                <th>
+                                    Subject Code
+                                </th>
+
+                                <th>
+                                    Count
+                                </th>
+
+                                <th>
+                                    Range From
+                                </th>
+
+                                <th>
+                                    Range End
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in lstSubjectDetails">
+                                <td>{{$index + 1}}</td>
+                                <td>{{x.SubjectCode}}</td>
+                                <td>{{x.Count}}</td>
+                                <td>{{x.RangeStart}}</td>
+                                <td>{{x.RangeEnd}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

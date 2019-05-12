@@ -10,5 +10,29 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=tcp:kudevelopment.database.windows.net;Initial Catalog=kudevdb;Persist Security Info=True;User ID=kudev2019;Password=Kudev@2019</Value>
     </Setting>
+    <Setting Name="kudevdbConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=14.139.85.68,3339;Initial Catalog=kudevdb;Persist Security Info=True;User ID=sa;Password=Sqlku123&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=14.139.85.68,3339;Initial Catalog=kudevdb;Persist Security Info=True;User ID=sa;Password=Sqlku123</Value>
+    </Setting>
+    <Setting Name="kupostConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa;Password=Sqlku123&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa;Password=Sqlku123</Value>
+    </Setting>
+    <Setting Name="kupostConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

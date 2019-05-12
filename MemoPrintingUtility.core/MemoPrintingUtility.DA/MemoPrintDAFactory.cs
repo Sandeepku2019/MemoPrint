@@ -13,6 +13,16 @@ namespace MemoPrintingUtility.DA
             return new CourseDAService();
         }
 
+        public ISDLTablarDA GetSDLCInstance()
+        {
+            return new SDLTablarDA();
+        }
+
+        public ISubjectRangeGenerateDA GetSubjectRangeService()
+        {
+            return new SubjectRangeGenerateDA();
+        }
+
         public ITabularReportDAService GetTabularDAService()
         {
            return new TabularReportDAService();

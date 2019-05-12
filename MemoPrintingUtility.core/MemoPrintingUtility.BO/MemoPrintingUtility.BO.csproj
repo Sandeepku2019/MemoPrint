@@ -43,9 +43,13 @@
     <Compile Include="CourseService.cs" />
     <Compile Include="ICourseService.cs" />
     <Compile Include="IMemoPrintService.cs" />
+    <Compile Include="ISDLCTablarBO.cs" />
+    <Compile Include="ISubjectRangeGenerateBO.cs" />
     <Compile Include="ITabularReportService.cs" />
     <Compile Include="MemoPrintService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SDLCTablarBO.cs" />
+    <Compile Include="SubjectRangeGenerateBO.cs" />
     <Compile Include="TabularReportService.cs" />
   </ItemGroup>
   <ItemGroup>

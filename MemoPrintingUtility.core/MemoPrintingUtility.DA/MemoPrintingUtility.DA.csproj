@@ -45,7 +45,14 @@
     <Compile Include="CourseDAService.cs" />
     <Compile Include="ICourseDAService.cs" />
     <Compile Include="IMemoPrintDAFactory.cs" />
+    <Compile Include="ISDLTablarDA.cs" />
+    <Compile Include="ISubjectRangeGenerateDA.cs" />
     <Compile Include="ITabularReportDAService.cs" />
+    <Compile Include="KUPostDB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KUPostDB.dbml</DependentUpon>
+    </Compile>
     <Compile Include="MemoPrintDAFactory.cs" />
     <Compile Include="MemoPrintDB.designer.cs">
       <AutoGen>True</AutoGen>
@@ -58,6 +65,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SDLTablarDA.cs" />
+    <Compile Include="SubjectRangeGenerateDA.cs" />
     <Compile Include="TabularReportDAService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="KUPostDB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>KUPostDB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MemoPrintDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MemoPrintDB.designer.cs</LastGenOutput>
@@ -84,6 +98,11 @@
   <ItemGroup>
     <None Include="MemoPrintDB.dbml.layout">
       <DependentUpon>MemoPrintDB.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KUPostDB.dbml.layout">
+      <DependentUpon>KUPostDB.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

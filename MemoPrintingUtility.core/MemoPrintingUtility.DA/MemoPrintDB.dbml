@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="kudevdb" Class="MemoPrintDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:kudevelopment.database.windows.net;Initial Catalog=kudevdb;Persist Security Info=True;User ID=kudev2019" SettingsObjectName="MemoPrintingUtility.DA.Properties.Settings" SettingsPropertyName="kudevdbConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=14.139.85.68,3339;Initial Catalog=kudevdb;Persist Security Info=True;User ID=sa" SettingsObjectName="MemoPrintingUtility.DA.Properties.Settings" SettingsPropertyName="kudevdbConnectionString1" Provider="System.Data.SqlClient" />
   <Function Name="dbo.PR_COURSE_SELECT" Method="PR_COURSE_SELECT">
     <Parameter Name="STATUS" Parameter="sTATUS" Type="System.Int32" DbType="Int" />
     <Parameter Name="SEARCHVALUE" Parameter="sEARCHVALUE" Type="System.String" DbType="VarChar(50)" />
@@ -177,6 +177,12 @@
       <Column Name="fk_sem" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
       <Column Name="passedsubject" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Totalsubject" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Get_subjectRangeDetails" Method="Get_subjectRangeDetails">
+    <ElementType Name="Get_subjectRangeDetailsResult">
+      <Column Name="SubjectCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StudentCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

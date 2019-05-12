@@ -11,5 +11,12 @@ namespace MemoPrintingUtility.BO
         ICourseService GetCourseInstance();
 
         ITabularReportService getTabularReportInstance();
+
+
+        ISubjectRangeGenerateBO getSubjectRangeInstance();
+
+
+        ISDLCTablarBO GetSDLCInstance();
     }
+
 }

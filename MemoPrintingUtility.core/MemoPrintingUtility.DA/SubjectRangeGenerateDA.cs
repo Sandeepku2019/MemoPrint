@@ -69,7 +69,7 @@ namespace MemoPrintingUtility.DA
 
 
                 }
-                return SubjectRangedetails;
+                return SubjectRangedetails.Where(x=>x.SubjectName !=null).ToList();
 
             }
             catch (Exception ex)

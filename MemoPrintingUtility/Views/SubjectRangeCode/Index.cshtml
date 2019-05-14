@@ -58,7 +58,7 @@
 
                 <div>
 
-                    <table border="1" width="80%">
+                    <table border="1" width="100%">
                         <thead>
                             <tr>
                                 <th>
@@ -67,6 +67,23 @@
                                 <th>
                                     Subject Code
                                 </th>
+                                <th>
+                                    Subject Name
+                                </th>
+                                <th>
+                                    Year
+                                </th>
+                                <th>
+                                     Sem
+                                </th>
+                                <th>
+                                    Course ID
+                                </th>
+                                <th>
+                                    Course Name
+                                </th>
+
+                              
 
                                 <th>
                                     Count
@@ -86,6 +103,14 @@
                             <tr ng-repeat="x in lstSubjectDetails">
                                 <td>{{$index + 1}}</td>
                                 <td>{{x.SubjectCode}}</td>
+
+                                <td>{{x.SubjectName}}</td>
+                                <td>{{x.Year}}</td>
+                                <td>{{x.Sem}}</td>
+                                <td>{{x.CourseID}}</td>
+                                <td>{{x.CourseName}}</td>
+                                
+
                                 <td>{{x.Count}}</td>
                                 <td>{{x.RangeStart}}</td>
                                 <td>{{x.RangeEnd}}</td>

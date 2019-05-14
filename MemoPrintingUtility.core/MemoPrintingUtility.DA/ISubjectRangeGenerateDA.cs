@@ -12,5 +12,10 @@ namespace MemoPrintingUtility.DA
          List<SubjectRangeEntity> GetSubjectDetailsForRange();
 
         void InsertSubjectCode(SubjectRangeEntity LstsubjectCode);
+
+
+        List<SubJectInformation> GetAllSubjects();
+
+        List<Courses> GetAllCourse();
     }
 }

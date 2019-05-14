@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="kupost" Class="KUPostDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa" SettingsObjectName="MemoPrintingUtility.DA.Properties.Settings" SettingsPropertyName="kupostConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=14.139.85.68,3339;Initial Catalog=kupost;User ID=sa" SettingsObjectName="MemoPrintingUtility.DA.Properties.Settings" SettingsPropertyName="kupostConnectionString" Provider="System.Data.SqlClient" />
   <Function Name="dbo.sp_GetSDLCConData_TRReport" Method="sp_GetSDLCConData_TRReport">
     <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="sp_GetSDLCConData_TRReportResult">
@@ -99,9 +99,84 @@
       <Column Name="sts" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.GetAllSubjectDeails" Method="GetAllSubjectDeails">
+    <ElementType Name="GetAllSubjectDeailsResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FK_YEAR" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FK_SEM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FK_COURSEID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FK_BRANCHID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FK_SUBJECTID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SHORTCODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SUBJECTNAME" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ALIASNAME" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ISINTERNAL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ISPRACTICAL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PRAC_SUBCODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ISCBCS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[ORDER]" Member="ORDER" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MAXINTMARKS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MAXPRACTICALMARKS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MAXINTSESSMARKS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WEF" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PAGE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PATTERN" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CREATED_BY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UPDATED_BY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetAllCourses" Method="GetAllCourses">
+    <ElementType Name="GetAllCoursesResult">
+      <Column Name="Pk_CourseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="subbranch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="enexam" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="years" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="months" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="total_papers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="theory" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="practical" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="category" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="course_pattern" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="university" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="college" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="shortname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="max_years" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="max_months" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="course_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cycle_exists" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cycle1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cycle2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="markssheet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="attempts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cutof_attendance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="grace_attendance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="leet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartRollNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EndRollNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ur_mid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PAGE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="createddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="createdby" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="updatedby" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.SP_insertSubjectRangeCode" Method="SP_insertSubjectRangeCode">
     <Parameter Name="SubJectCode" Parameter="subJectCode" Type="System.String" DbType="VarChar(20)" />
     <Parameter Name="count" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Year" Parameter="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Sem" Parameter="sem" Type="System.Int32" DbType="Int" />
+    <Parameter Name="course" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CourseName" Parameter="courseName" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="SubjectName" Parameter="subjectName" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="RangeForm" Parameter="rangeForm" Type="System.Int32" DbType="Int" />
     <Parameter Name="RangeEnd" Parameter="rangeEnd" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />

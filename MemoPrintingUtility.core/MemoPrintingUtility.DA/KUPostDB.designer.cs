@@ -76,10 +76,24 @@ namespace MemoPrintingUtility.DA
 			return ((ISingleResult<sp_GetSDLCResultData_TRReportResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_insertSubjectRangeCode")]
-		public int SP_insertSubjectRangeCode([global::System.Data.Linq.Mapping.ParameterAttribute(Name="SubJectCode", DbType="VarChar(20)")] string subJectCode, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> count, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RangeForm", DbType="Int")] System.Nullable<int> rangeForm, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RangeEnd", DbType="Int")] System.Nullable<int> rangeEnd)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllSubjectDeails")]
+		public ISingleResult<GetAllSubjectDeailsResult> GetAllSubjectDeails()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), subJectCode, count, rangeForm, rangeEnd);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<GetAllSubjectDeailsResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetAllCourses")]
+		public ISingleResult<GetAllCoursesResult> GetAllCourses()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<GetAllCoursesResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_insertSubjectRangeCode")]
+		public int SP_insertSubjectRangeCode([global::System.Data.Linq.Mapping.ParameterAttribute(Name="SubJectCode", DbType="VarChar(20)")] string subJectCode, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> count, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Year", DbType="Int")] System.Nullable<int> year, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sem", DbType="Int")] System.Nullable<int> sem, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> course, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CourseName", DbType="VarChar(100)")] string courseName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SubjectName", DbType="VarChar(100)")] string subjectName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RangeForm", DbType="Int")] System.Nullable<int> rangeForm, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RangeEnd", DbType="Int")] System.Nullable<int> rangeEnd)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), subJectCode, count, year, sem, course, courseName, subjectName, rangeForm, rangeEnd);
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -1697,6 +1711,1138 @@ namespace MemoPrintingUtility.DA
 				if ((this._sts != value))
 				{
 					this._sts = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetAllSubjectDeailsResult
+	{
+		
+		private int _ID;
+		
+		private string _FK_YEAR;
+		
+		private string _FK_SEM;
+		
+		private string _FK_COURSEID;
+		
+		private string _FK_BRANCHID;
+		
+		private string _FK_SUBJECTID;
+		
+		private string _SHORTCODE;
+		
+		private string _SUBJECTNAME;
+		
+		private string _ALIASNAME;
+		
+		private string _ISINTERNAL;
+		
+		private string _ISPRACTICAL;
+		
+		private string _PRAC_SUBCODE;
+		
+		private System.Nullable<int> _ISCBCS;
+		
+		private string _ORDER;
+		
+		private System.Nullable<int> _STATUS;
+		
+		private string _MAXINTMARKS;
+		
+		private string _MAXPRACTICALMARKS;
+		
+		private System.Nullable<int> _MAXINTSESSMARKS;
+		
+		private System.Nullable<int> _WEF;
+		
+		private System.Nullable<int> _PAGE_ID;
+		
+		private string _PATTERN;
+		
+		private System.Nullable<System.DateTime> _CREATED_DATE;
+		
+		private System.Nullable<System.DateTime> _UPDATED_DATE;
+		
+		private System.Nullable<int> _CREATED_BY;
+		
+		private System.Nullable<int> _UPDATED_BY;
+		
+		public GetAllSubjectDeailsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_YEAR", DbType="VarChar(50)")]
+		public string FK_YEAR
+		{
+			get
+			{
+				return this._FK_YEAR;
+			}
+			set
+			{
+				if ((this._FK_YEAR != value))
+				{
+					this._FK_YEAR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_SEM", DbType="VarChar(50)")]
+		public string FK_SEM
+		{
+			get
+			{
+				return this._FK_SEM;
+			}
+			set
+			{
+				if ((this._FK_SEM != value))
+				{
+					this._FK_SEM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_COURSEID", DbType="VarChar(50)")]
+		public string FK_COURSEID
+		{
+			get
+			{
+				return this._FK_COURSEID;
+			}
+			set
+			{
+				if ((this._FK_COURSEID != value))
+				{
+					this._FK_COURSEID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_BRANCHID", DbType="VarChar(50)")]
+		public string FK_BRANCHID
+		{
+			get
+			{
+				return this._FK_BRANCHID;
+			}
+			set
+			{
+				if ((this._FK_BRANCHID != value))
+				{
+					this._FK_BRANCHID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_SUBJECTID", DbType="VarChar(50)")]
+		public string FK_SUBJECTID
+		{
+			get
+			{
+				return this._FK_SUBJECTID;
+			}
+			set
+			{
+				if ((this._FK_SUBJECTID != value))
+				{
+					this._FK_SUBJECTID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SHORTCODE", DbType="VarChar(50)")]
+		public string SHORTCODE
+		{
+			get
+			{
+				return this._SHORTCODE;
+			}
+			set
+			{
+				if ((this._SHORTCODE != value))
+				{
+					this._SHORTCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUBJECTNAME", DbType="VarChar(255)")]
+		public string SUBJECTNAME
+		{
+			get
+			{
+				return this._SUBJECTNAME;
+			}
+			set
+			{
+				if ((this._SUBJECTNAME != value))
+				{
+					this._SUBJECTNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ALIASNAME", DbType="VarChar(255)")]
+		public string ALIASNAME
+		{
+			get
+			{
+				return this._ALIASNAME;
+			}
+			set
+			{
+				if ((this._ALIASNAME != value))
+				{
+					this._ALIASNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ISINTERNAL", DbType="VarChar(50)")]
+		public string ISINTERNAL
+		{
+			get
+			{
+				return this._ISINTERNAL;
+			}
+			set
+			{
+				if ((this._ISINTERNAL != value))
+				{
+					this._ISINTERNAL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ISPRACTICAL", DbType="VarChar(50)")]
+		public string ISPRACTICAL
+		{
+			get
+			{
+				return this._ISPRACTICAL;
+			}
+			set
+			{
+				if ((this._ISPRACTICAL != value))
+				{
+					this._ISPRACTICAL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRAC_SUBCODE", DbType="VarChar(50)")]
+		public string PRAC_SUBCODE
+		{
+			get
+			{
+				return this._PRAC_SUBCODE;
+			}
+			set
+			{
+				if ((this._PRAC_SUBCODE != value))
+				{
+					this._PRAC_SUBCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ISCBCS", DbType="Int")]
+		public System.Nullable<int> ISCBCS
+		{
+			get
+			{
+				return this._ISCBCS;
+			}
+			set
+			{
+				if ((this._ISCBCS != value))
+				{
+					this._ISCBCS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[ORDER]", Storage="_ORDER", DbType="NVarChar(50)")]
+		public string ORDER
+		{
+			get
+			{
+				return this._ORDER;
+			}
+			set
+			{
+				if ((this._ORDER != value))
+				{
+					this._ORDER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
+		public System.Nullable<int> STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this._STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAXINTMARKS", DbType="VarChar(50)")]
+		public string MAXINTMARKS
+		{
+			get
+			{
+				return this._MAXINTMARKS;
+			}
+			set
+			{
+				if ((this._MAXINTMARKS != value))
+				{
+					this._MAXINTMARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAXPRACTICALMARKS", DbType="VarChar(50)")]
+		public string MAXPRACTICALMARKS
+		{
+			get
+			{
+				return this._MAXPRACTICALMARKS;
+			}
+			set
+			{
+				if ((this._MAXPRACTICALMARKS != value))
+				{
+					this._MAXPRACTICALMARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAXINTSESSMARKS", DbType="Int")]
+		public System.Nullable<int> MAXINTSESSMARKS
+		{
+			get
+			{
+				return this._MAXINTSESSMARKS;
+			}
+			set
+			{
+				if ((this._MAXINTSESSMARKS != value))
+				{
+					this._MAXINTSESSMARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WEF", DbType="Int")]
+		public System.Nullable<int> WEF
+		{
+			get
+			{
+				return this._WEF;
+			}
+			set
+			{
+				if ((this._WEF != value))
+				{
+					this._WEF = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAGE_ID", DbType="Int")]
+		public System.Nullable<int> PAGE_ID
+		{
+			get
+			{
+				return this._PAGE_ID;
+			}
+			set
+			{
+				if ((this._PAGE_ID != value))
+				{
+					this._PAGE_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATTERN", DbType="VarChar(50)")]
+		public string PATTERN
+		{
+			get
+			{
+				return this._PATTERN;
+			}
+			set
+			{
+				if ((this._PATTERN != value))
+				{
+					this._PATTERN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATED_DATE
+		{
+			get
+			{
+				return this._CREATED_DATE;
+			}
+			set
+			{
+				if ((this._CREATED_DATE != value))
+				{
+					this._CREATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UPDATED_DATE
+		{
+			get
+			{
+				return this._UPDATED_DATE;
+			}
+			set
+			{
+				if ((this._UPDATED_DATE != value))
+				{
+					this._UPDATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="Int")]
+		public System.Nullable<int> CREATED_BY
+		{
+			get
+			{
+				return this._CREATED_BY;
+			}
+			set
+			{
+				if ((this._CREATED_BY != value))
+				{
+					this._CREATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="Int")]
+		public System.Nullable<int> UPDATED_BY
+		{
+			get
+			{
+				return this._UPDATED_BY;
+			}
+			set
+			{
+				if ((this._UPDATED_BY != value))
+				{
+					this._UPDATED_BY = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetAllCoursesResult
+	{
+		
+		private int _Pk_CourseID;
+		
+		private string _CourseName;
+		
+		private System.Nullable<int> _subbranch;
+		
+		private System.Nullable<int> _enexam;
+		
+		private System.Nullable<int> _sem;
+		
+		private System.Nullable<int> _years;
+		
+		private System.Nullable<int> _months;
+		
+		private System.Nullable<int> _total_papers;
+		
+		private System.Nullable<int> _theory;
+		
+		private System.Nullable<int> _practical;
+		
+		private System.Nullable<int> _category;
+		
+		private System.Nullable<int> _course_pattern;
+		
+		private System.Nullable<int> _credit;
+		
+		private System.Nullable<int> _university;
+		
+		private System.Nullable<int> _college;
+		
+		private string _description;
+		
+		private string _shortname;
+		
+		private System.Nullable<int> _max_years;
+		
+		private System.Nullable<int> _max_months;
+		
+		private System.Nullable<int> _course_type;
+		
+		private System.Nullable<int> _cycle_exists;
+		
+		private string _cycle1;
+		
+		private string _cycle2;
+		
+		private System.Nullable<int> _markssheet;
+		
+		private System.Nullable<int> _attempts;
+		
+		private System.Nullable<int> _cutof_attendance;
+		
+		private System.Nullable<int> _grace_attendance;
+		
+		private System.Nullable<int> _leet;
+		
+		private System.Nullable<int> _StartRollNo;
+		
+		private System.Nullable<int> _EndRollNo;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _ur_mid;
+		
+		private System.Nullable<int> _PAGE_ID;
+		
+		private System.Nullable<System.DateTime> _createddate;
+		
+		private System.Nullable<System.DateTime> _updateddate;
+		
+		private System.Nullable<int> _createdby;
+		
+		private System.Nullable<int> _updatedby;
+		
+		public GetAllCoursesResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pk_CourseID", DbType="Int NOT NULL")]
+		public int Pk_CourseID
+		{
+			get
+			{
+				return this._Pk_CourseID;
+			}
+			set
+			{
+				if ((this._Pk_CourseID != value))
+				{
+					this._Pk_CourseID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(50)")]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subbranch", DbType="Int")]
+		public System.Nullable<int> subbranch
+		{
+			get
+			{
+				return this._subbranch;
+			}
+			set
+			{
+				if ((this._subbranch != value))
+				{
+					this._subbranch = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_enexam", DbType="Int")]
+		public System.Nullable<int> enexam
+		{
+			get
+			{
+				return this._enexam;
+			}
+			set
+			{
+				if ((this._enexam != value))
+				{
+					this._enexam = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sem", DbType="Int")]
+		public System.Nullable<int> sem
+		{
+			get
+			{
+				return this._sem;
+			}
+			set
+			{
+				if ((this._sem != value))
+				{
+					this._sem = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_years", DbType="Int")]
+		public System.Nullable<int> years
+		{
+			get
+			{
+				return this._years;
+			}
+			set
+			{
+				if ((this._years != value))
+				{
+					this._years = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_months", DbType="Int")]
+		public System.Nullable<int> months
+		{
+			get
+			{
+				return this._months;
+			}
+			set
+			{
+				if ((this._months != value))
+				{
+					this._months = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_total_papers", DbType="Int")]
+		public System.Nullable<int> total_papers
+		{
+			get
+			{
+				return this._total_papers;
+			}
+			set
+			{
+				if ((this._total_papers != value))
+				{
+					this._total_papers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_theory", DbType="Int")]
+		public System.Nullable<int> theory
+		{
+			get
+			{
+				return this._theory;
+			}
+			set
+			{
+				if ((this._theory != value))
+				{
+					this._theory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_practical", DbType="Int")]
+		public System.Nullable<int> practical
+		{
+			get
+			{
+				return this._practical;
+			}
+			set
+			{
+				if ((this._practical != value))
+				{
+					this._practical = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_category", DbType="Int")]
+		public System.Nullable<int> category
+		{
+			get
+			{
+				return this._category;
+			}
+			set
+			{
+				if ((this._category != value))
+				{
+					this._category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_course_pattern", DbType="Int")]
+		public System.Nullable<int> course_pattern
+		{
+			get
+			{
+				return this._course_pattern;
+			}
+			set
+			{
+				if ((this._course_pattern != value))
+				{
+					this._course_pattern = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_credit", DbType="Int")]
+		public System.Nullable<int> credit
+		{
+			get
+			{
+				return this._credit;
+			}
+			set
+			{
+				if ((this._credit != value))
+				{
+					this._credit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_university", DbType="Int")]
+		public System.Nullable<int> university
+		{
+			get
+			{
+				return this._university;
+			}
+			set
+			{
+				if ((this._university != value))
+				{
+					this._university = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_college", DbType="Int")]
+		public System.Nullable<int> college
+		{
+			get
+			{
+				return this._college;
+			}
+			set
+			{
+				if ((this._college != value))
+				{
+					this._college = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(200)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_shortname", DbType="VarChar(50)")]
+		public string shortname
+		{
+			get
+			{
+				return this._shortname;
+			}
+			set
+			{
+				if ((this._shortname != value))
+				{
+					this._shortname = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_max_years", DbType="Int")]
+		public System.Nullable<int> max_years
+		{
+			get
+			{
+				return this._max_years;
+			}
+			set
+			{
+				if ((this._max_years != value))
+				{
+					this._max_years = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_max_months", DbType="Int")]
+		public System.Nullable<int> max_months
+		{
+			get
+			{
+				return this._max_months;
+			}
+			set
+			{
+				if ((this._max_months != value))
+				{
+					this._max_months = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_course_type", DbType="Int")]
+		public System.Nullable<int> course_type
+		{
+			get
+			{
+				return this._course_type;
+			}
+			set
+			{
+				if ((this._course_type != value))
+				{
+					this._course_type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cycle_exists", DbType="Int")]
+		public System.Nullable<int> cycle_exists
+		{
+			get
+			{
+				return this._cycle_exists;
+			}
+			set
+			{
+				if ((this._cycle_exists != value))
+				{
+					this._cycle_exists = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cycle1", DbType="VarChar(50)")]
+		public string cycle1
+		{
+			get
+			{
+				return this._cycle1;
+			}
+			set
+			{
+				if ((this._cycle1 != value))
+				{
+					this._cycle1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cycle2", DbType="VarChar(50)")]
+		public string cycle2
+		{
+			get
+			{
+				return this._cycle2;
+			}
+			set
+			{
+				if ((this._cycle2 != value))
+				{
+					this._cycle2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_markssheet", DbType="Int")]
+		public System.Nullable<int> markssheet
+		{
+			get
+			{
+				return this._markssheet;
+			}
+			set
+			{
+				if ((this._markssheet != value))
+				{
+					this._markssheet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attempts", DbType="Int")]
+		public System.Nullable<int> attempts
+		{
+			get
+			{
+				return this._attempts;
+			}
+			set
+			{
+				if ((this._attempts != value))
+				{
+					this._attempts = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cutof_attendance", DbType="Int")]
+		public System.Nullable<int> cutof_attendance
+		{
+			get
+			{
+				return this._cutof_attendance;
+			}
+			set
+			{
+				if ((this._cutof_attendance != value))
+				{
+					this._cutof_attendance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_grace_attendance", DbType="Int")]
+		public System.Nullable<int> grace_attendance
+		{
+			get
+			{
+				return this._grace_attendance;
+			}
+			set
+			{
+				if ((this._grace_attendance != value))
+				{
+					this._grace_attendance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_leet", DbType="Int")]
+		public System.Nullable<int> leet
+		{
+			get
+			{
+				return this._leet;
+			}
+			set
+			{
+				if ((this._leet != value))
+				{
+					this._leet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartRollNo", DbType="Int")]
+		public System.Nullable<int> StartRollNo
+		{
+			get
+			{
+				return this._StartRollNo;
+			}
+			set
+			{
+				if ((this._StartRollNo != value))
+				{
+					this._StartRollNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndRollNo", DbType="Int")]
+		public System.Nullable<int> EndRollNo
+		{
+			get
+			{
+				return this._EndRollNo;
+			}
+			set
+			{
+				if ((this._EndRollNo != value))
+				{
+					this._EndRollNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ur_mid", DbType="Int")]
+		public System.Nullable<int> ur_mid
+		{
+			get
+			{
+				return this._ur_mid;
+			}
+			set
+			{
+				if ((this._ur_mid != value))
+				{
+					this._ur_mid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAGE_ID", DbType="Int")]
+		public System.Nullable<int> PAGE_ID
+		{
+			get
+			{
+				return this._PAGE_ID;
+			}
+			set
+			{
+				if ((this._PAGE_ID != value))
+				{
+					this._PAGE_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createddate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> createddate
+		{
+			get
+			{
+				return this._createddate;
+			}
+			set
+			{
+				if ((this._createddate != value))
+				{
+					this._createddate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_updateddate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> updateddate
+		{
+			get
+			{
+				return this._updateddate;
+			}
+			set
+			{
+				if ((this._updateddate != value))
+				{
+					this._updateddate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdby", DbType="Int")]
+		public System.Nullable<int> createdby
+		{
+			get
+			{
+				return this._createdby;
+			}
+			set
+			{
+				if ((this._createdby != value))
+				{
+					this._createdby = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_updatedby", DbType="Int")]
+		public System.Nullable<int> updatedby
+		{
+			get
+			{
+				return this._updatedby;
+			}
+			set
+			{
+				if ((this._updatedby != value))
+				{
+					this._updatedby = value;
 				}
 			}
 		}

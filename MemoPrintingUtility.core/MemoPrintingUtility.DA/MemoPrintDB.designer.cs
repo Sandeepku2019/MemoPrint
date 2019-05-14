@@ -2740,12 +2740,66 @@ namespace MemoPrintingUtility.DA
 	public partial class Get_subjectRangeDetailsResult
 	{
 		
+		private System.Nullable<decimal> _FK_YEAR;
+		
+		private System.Nullable<decimal> _FK_SEM;
+		
+		private System.Nullable<decimal> _FK_COURSEID;
+		
 		private string _SubjectCode;
 		
 		private System.Nullable<int> _StudentCount;
 		
 		public Get_subjectRangeDetailsResult()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_YEAR", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> FK_YEAR
+		{
+			get
+			{
+				return this._FK_YEAR;
+			}
+			set
+			{
+				if ((this._FK_YEAR != value))
+				{
+					this._FK_YEAR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_SEM", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> FK_SEM
+		{
+			get
+			{
+				return this._FK_SEM;
+			}
+			set
+			{
+				if ((this._FK_SEM != value))
+				{
+					this._FK_SEM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_COURSEID", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> FK_COURSEID
+		{
+			get
+			{
+				return this._FK_COURSEID;
+			}
+			set
+			{
+				if ((this._FK_COURSEID != value))
+				{
+					this._FK_COURSEID = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubjectCode", DbType="VarChar(50)")]

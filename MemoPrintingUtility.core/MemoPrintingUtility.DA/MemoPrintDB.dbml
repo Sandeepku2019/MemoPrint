@@ -181,6 +181,9 @@
   </Function>
   <Function Name="dbo.Get_subjectRangeDetails" Method="Get_subjectRangeDetails">
     <ElementType Name="Get_subjectRangeDetailsResult">
+      <Column Name="FK_YEAR" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="FK_SEM" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="FK_COURSEID" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="SubjectCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="StudentCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>

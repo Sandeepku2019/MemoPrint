@@ -12,11 +12,43 @@ namespace MemoPrintingUtility.Entity
 
         public string SubjectName { get; set; }
 
+        public int Year { get; set; }
+
+        public int Sem { get; set; }
+
+        public string CourseName { get; set; }
+
+        public Int32 CourseID { get; set; }
+
+        public Int32 BranchID { get; set; }
 
         public int Count { get; set; }
 
         public Int32 RangeStart { get; set; }
 
         public Int32 RangeEnd { get; set; }
+
+        public string IPractical { get; set; }
     }
+
+
+
+    public class SubJectInformation
+    {
+        public string Sem { get; set; }
+        public string Year { get; set; }
+        
+        public string CourseID { get; set; }
+        
+        public string ShortCode { get; set; }        
+        public string SubjectName { get; set; }
+
+        public string IsPractical { get; set; }
+
+        public int BranchID { get; set; }
+
+    }
+
+
+   
 }

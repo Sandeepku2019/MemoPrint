@@ -24,7 +24,7 @@ namespace MemoPrintingUtility.Controllers
             {
 
                 MemoPrintService BoMemoService = new MemoPrintService();
-                var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRange().Where(x => x.IPractical != "1");
+                var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRange();
                 lstSubjectDetails = lstSubjectDetails.OrderBy(x => x.Year).ThenBy(x => x.Sem).ThenBy(x => x.CourseName).ToList();
 
                 TempData["SubjectList"] = lstSubjectDetails;
@@ -50,7 +50,7 @@ namespace MemoPrintingUtility.Controllers
                 int RF = RangeFrom;
 
                 MemoPrintService BoMemoService = new MemoPrintService();
-                var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRange().Where(x => x.IPractical != "1").ToList();
+                var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRange();
 
                 lstSubjectDetails = lstSubjectDetails.OrderBy(x => x.Year).ThenBy(x => x.Sem).ThenBy(x => x.CourseName).ToList();
 
@@ -133,7 +133,7 @@ namespace MemoPrintingUtility.Controllers
             int RF = RangeFrom;
             MemoPrintService BoMemoService = new MemoPrintService();
 
-            var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRange().Where(x => x.IPractical != "1").ToList(); ;
+            var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRange() ;
             lstSubjectDetails = lstSubjectDetails.OrderBy(x => x.Year).ThenBy(x => x.Sem).ThenBy(x => x.CourseName).ToList();
             TempData["SubjectList"] = lstSubjectDetails;
             TempData.Keep();

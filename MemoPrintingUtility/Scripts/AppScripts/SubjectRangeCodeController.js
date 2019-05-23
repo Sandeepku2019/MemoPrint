@@ -1,10 +1,11 @@
 ﻿
-    
+
 
 KuApp.controller('MyController', function ($window, $scope, SubjctRangeService) {
 
-    BindSubjects();
-
+   
+    $("#dvYearWise").hide();
+    $("#dvSemWise").hide();
     function BindSubjects() {
 
         var getAllSubjeects = SubjctRangeService.getSubjectdetail();
@@ -13,7 +14,43 @@ KuApp.controller('MyController', function ($window, $scope, SubjctRangeService) 
         function successCallback(response) {
             $scope.lstSubjectDetails = response.data;
 
-            
+
+        }
+
+        function errorCallback(response) {
+            alert('Data not found');
+        };
+
+    }
+    $scope.GetaData = function () {
+
+        if ($scope.SubjectRangeType == "Sem") {
+            BindSubjects();
+
+            $("#dvYearWise").hide();
+            $("#dvSemWise").show();
+
+        } else {
+
+            BindSubjectsYrWise();
+
+            $("#dvYearWise").show();
+            $("#dvSemWise").hide();
+        }
+        
+    }
+
+
+
+    function BindSubjectsYrWise()
+    {
+        var getSubjectdetailYr = SubjctRangeService.getSubjectdetailYr();
+        getSubjectdetailYr.then(successCallback, errorCallback);
+
+        function successCallback(response) {
+            $scope.lstSubjectDetails = response.data;
+
+
         }
 
         function errorCallback(response) {
@@ -22,10 +59,6 @@ KuApp.controller('MyController', function ($window, $scope, SubjctRangeService) 
 
     }
 
-
-    
-    
-    
 
     //// Save excel data to our database  
     $scope.GenerateRange = function () {

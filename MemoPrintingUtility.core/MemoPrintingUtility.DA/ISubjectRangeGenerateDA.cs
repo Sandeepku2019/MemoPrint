@@ -17,5 +17,9 @@ namespace MemoPrintingUtility.DA
         List<SubJectInformation> GetAllSubjects();
 
         List<Courses> GetAllCourse();
+
+        List<SubJectInformation> GetAllSubjectByYr();
+
+        List<SubjectRangeEntity> GetSubjectDetailsForRangeYr();
     }
 }

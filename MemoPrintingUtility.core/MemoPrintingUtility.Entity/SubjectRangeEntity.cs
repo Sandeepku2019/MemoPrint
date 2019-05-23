@@ -35,6 +35,11 @@ namespace MemoPrintingUtility.Entity
 
     public class SubJectInformation
     {
+        public int YCourseID { get; set; }
+
+
+        public int Yyr { get; set; }
+
         public string Sem { get; set; }
         public string Year { get; set; }
         
@@ -46,6 +51,8 @@ namespace MemoPrintingUtility.Entity
         public string IsPractical { get; set; }
 
         public int BranchID { get; set; }
+
+        public string CourseName { get; set; }
 
     }
 

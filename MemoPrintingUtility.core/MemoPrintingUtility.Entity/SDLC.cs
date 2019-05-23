@@ -25,4 +25,33 @@ namespace MemoPrintingUtility.Entity
         public int Order { get; set; }
 
     }
+
+
+    public class BALEntity
+    {
+        public string HTNO { get; set; }
+        public string Type { get; set; }
+        public string Year { get; set; }
+
+        public string subjectCode { get; set; }
+
+        public string Marks { get; set; }
+
+        public string Result { get; set; }
+
+        public string Academic { get; set; }
+
+        public string EI { get; set; }
+
+        public int Order { get; set; }
+
+        public string PTotal { get; set; }
+
+        public bool Practical { get; set; }
+
+        public string PMarks { get; set; }
+        public string PYear { get; set; }
+
+
+    }
 }

@@ -12,5 +12,9 @@ namespace MemoPrintingUtility.BO
         List<SubjectRangeEntity> GetSubjectDetailsForRange();
 
         void InsertSubjectCode(SubjectRangeEntity LstsubjectCode);
+
+
+        List<SubjectRangeEntity> GetSubjectDetailsForRangeYr();
+
     }
 }

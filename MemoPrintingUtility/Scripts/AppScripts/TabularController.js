@@ -3,7 +3,7 @@
     $scope.lstSems = [{ Sem: "11", Semister: "1" }, { Sem: "21", Semister: "3" }, { Sem: "31", Semister: "5" }]
     //BindCourses();
 
-    $scope.lstCourses = [{ Id: "B.A", CourseName: "B.A" }, { Id: "B.Com", CourseName: "B.Com" }, { Id: "B.Sc(BZC)", CourseName: "B.Sc(BZC)" }, { Id: "B.Sc(MAT)", CourseName    : "B.Sc(MAT)" }]
+    $scope.lstCourses = [{ Id: "B.A", CourseName: "B.A" }, { Id: "B.Com", CourseName: "B.Com" }, { Id: "B.Sc(BZC)", CourseName: "B.Sc(BZC)" }, { Id: "BAL", CourseName: "BA (L)" }, { Id: "B.Sc(MAT)", CourseName: "B.Sc(MAT)" }]
     $scope.Course = ""; 
    
     function BindCourses()
@@ -45,6 +45,21 @@
             angular.element(document.getElementById('btnGnerate'))[0].disabled = false;
             $scope.loading = false;
         };
+
+    }
+
+
+    $scope.CourseChange = function ()
+    {
+        if ($scope.Course ==  "BA (L)") {
+
+            $scope.Semister = 0;
+            $("#ddlSem").prop('disabled', 'disabled');
+           // $("#ddlSem")[0].Disable = true;
+
+        } else {
+            $("#ddlSem").prop('disabled', '');
+        }
 
     }
 });

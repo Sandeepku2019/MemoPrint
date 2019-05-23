@@ -28,15 +28,27 @@ namespace MemoPrintingUtility.BO
         {
 
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
-            return DAFactory.GetTabularDAService().GetMallPractHtno(Course, Semister,sem,year);
+            return DAFactory.GetTabularDAService().GetMallPractHtno(Course, Semister, sem, year);
 
         }
 
         public List<TotalsubjectRecord> getTotalandPassed(string Course, int year)
         {
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
-            return DAFactory.GetTabularDAService().getTotalandPassed(Course,  year);
+            return DAFactory.GetTabularDAService().getTotalandPassed(Course, year);
 
+        }
+
+        public List<BALPresEntity> GetBalPresInformation(string course)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetBalPresInformation(course);
+        }
+
+        public List<BALConEntity> GetBALConInformaion()
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetBALConInformaion();
         }
     }
 

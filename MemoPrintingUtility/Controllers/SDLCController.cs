@@ -161,32 +161,10 @@ namespace MemoPrintingUtility.Controllers
                             }
                             int Part1Marks = 0;
 
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode == "ENG").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode == "TEL").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode == "HIN").Sum(z => z.Marks.ChangeINT());
-
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode == "A10").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode == "A11").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode == "SAN").Sum(z => z.Marks.ChangeINT());
-
-
-
-
-
-
-
 
 
                             int Part2Marks = 0;
-                            //Part2Marks = Part2Marks + lstEntity.Where(x => x.subjectCode != "ENG").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode != "TEL").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode != "HIN").Sum(z => z.Marks.ChangeINT());
-
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode != "A10").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode != "A11").Sum(z => z.Marks.ChangeINT());
-                            //Part1Marks = Part1Marks + lstEntity.Where(x => x.subjectCode != "SAN").Sum(z => z.Marks.ChangeINT());
-
-
+                          
                             string FN = lstPREStuns[0].FName == null ? "" : lstPREStuns[0].FName;
                             string SN = lstPREStuns[0].FullName == null ? "" : lstPREStuns[0].FullName;
                             string CC = lstPREStuns[0].ColCode == null ? "" : lstPREStuns[0].ColCode;

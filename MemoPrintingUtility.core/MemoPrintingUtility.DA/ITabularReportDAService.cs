@@ -16,6 +16,10 @@ namespace MemoPrintingUtility.DA
         List<StudentInformation> GetMallPractHtno(string Course, int Semister, int sem, int year);
         List<TotalsubjectRecord> getTotalandPassed(string Course, int year);
 
+
+        List<BALPresEntity> GetBalPresInformation(string course);
+        List<BALConEntity> GetBALConInformaion();
+
     }
 }
 

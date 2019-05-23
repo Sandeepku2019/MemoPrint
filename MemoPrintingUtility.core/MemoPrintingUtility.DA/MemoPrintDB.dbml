@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="kudevdb" Class="MemoPrintDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=14.139.85.68,3339;Initial Catalog=kudevdb;Persist Security Info=True;User ID=sa" SettingsObjectName="MemoPrintingUtility.DA.Properties.Settings" SettingsPropertyName="kudevdbConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:kudevelopment.database.windows.net;Initial Catalog=kudevdb;Persist Security Info=True;User ID=kudev2019" SettingsObjectName="MemoPrintingUtility.DA.Properties.Settings" SettingsPropertyName="kudevdbConnectionString" Provider="System.Data.SqlClient" />
   <Function Name="dbo.PR_COURSE_SELECT" Method="PR_COURSE_SELECT">
     <Parameter Name="STATUS" Parameter="sTATUS" Type="System.Int32" DbType="Int" />
     <Parameter Name="SEARCHVALUE" Parameter="sEARCHVALUE" Type="System.String" DbType="VarChar(50)" />
@@ -186,6 +186,115 @@
       <Column Name="FK_COURSEID" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="SubjectCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="StudentCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Get_SubjectRangeCodeByYear" Method="Get_SubjectRangeCodeByYear">
+    <ElementType Name="Get_SubjectRangeCodeByYearResult">
+      <Column Name="FK_YEAR" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="FK_COURSEID" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SubjectCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StudentCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetConDataBAL" Method="GetConDataBAL">
+    <ElementType Name="GetConDataBALResult">
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P12" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P13" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P14" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P15" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P16" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P22" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P23" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P24" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P25" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P26" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P31" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P32" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P33" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P34" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P35" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P36" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P37" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PM11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PA11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M12" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y12" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M13" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y13" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M14" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y14" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M15" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y15" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M16" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PM16" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y16" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PA16" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PM21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PA21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M22" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y22" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M23" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y23" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M24" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y24" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M25" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y25" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M26" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PM26" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y26" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PA26" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P27" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M27" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y27" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M31" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y31" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M32" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y32" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M33" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y33" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M34" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y34" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M35" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y35" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M36" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y36" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PM36" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PA36" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M37" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y37" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="YR1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="YR2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="YR3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PRTA2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DCNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PRT21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FinResult" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GET_BALPRESDATA" Method="GET_BALPRESDATA">
+    <Parameter Name="COURSE" Parameter="cOURSE" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="GET_BALPRESDATAResult">
+      <Column Name="TP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_COURSEID" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TOTAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

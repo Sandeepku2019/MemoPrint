@@ -16,6 +16,12 @@ namespace MemoPrintingUtility.BO
             return DAFactory.GetSubjectRangeService().GetSubjectDetailsForRange();
         }
 
+        public List<SubjectRangeEntity> GetSubjectDetailsForRangeYr()
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetSubjectRangeService().GetSubjectDetailsForRangeYr();
+        }
+
         public void InsertSubjectCode(SubjectRangeEntity LstsubjectCode)
         {
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();

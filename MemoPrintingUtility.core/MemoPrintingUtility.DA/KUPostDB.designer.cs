@@ -96,6 +96,13 @@ namespace MemoPrintingUtility.DA
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), subJectCode, count, year, sem, course, courseName, subjectName, rangeForm, rangeEnd);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_GetAllYrSubjectDetails")]
+		public ISingleResult<SP_GetAllYrSubjectDetailsResult> SP_GetAllYrSubjectDetails()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<SP_GetAllYrSubjectDetailsResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class sp_GetSDLCConData_TRReportResult
@@ -2843,6 +2850,104 @@ namespace MemoPrintingUtility.DA
 				if ((this._updatedby != value))
 				{
 					this._updatedby = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_GetAllYrSubjectDetailsResult
+	{
+		
+		private int _Pk_CourseID;
+		
+		private string _CourseName;
+		
+		private System.Nullable<decimal> _fk_sem;
+		
+		private string _ShortName;
+		
+		private string _SubjectName;
+		
+		public SP_GetAllYrSubjectDetailsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pk_CourseID", DbType="Int NOT NULL")]
+		public int Pk_CourseID
+		{
+			get
+			{
+				return this._Pk_CourseID;
+			}
+			set
+			{
+				if ((this._Pk_CourseID != value))
+				{
+					this._Pk_CourseID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourseName", DbType="VarChar(50)")]
+		public string CourseName
+		{
+			get
+			{
+				return this._CourseName;
+			}
+			set
+			{
+				if ((this._CourseName != value))
+				{
+					this._CourseName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fk_sem", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> fk_sem
+		{
+			get
+			{
+				return this._fk_sem;
+			}
+			set
+			{
+				if ((this._fk_sem != value))
+				{
+					this._fk_sem = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="VarChar(50)")]
+		public string ShortName
+		{
+			get
+			{
+				return this._ShortName;
+			}
+			set
+			{
+				if ((this._ShortName != value))
+				{
+					this._ShortName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubjectName", DbType="NVarChar(200)")]
+		public string SubjectName
+		{
+			get
+			{
+				return this._SubjectName;
+			}
+			set
+			{
+				if ((this._SubjectName != value))
+				{
+					this._SubjectName = value;
 				}
 			}
 		}

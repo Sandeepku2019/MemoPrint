@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BALConEntity.cs" />
+    <Compile Include="BALPresEntity.cs" />
     <Compile Include="Courses.cs" />
     <Compile Include="SDLC.cs" />
     <Compile Include="SDLCEntityCON.cs" />

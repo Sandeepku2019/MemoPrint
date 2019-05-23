@@ -28,7 +28,7 @@ namespace MemoPrintingUtility.DA
                                                Sem = Convert.ToInt32(stu.FK_SEM),
                                                Year = Convert.ToInt32(stu.FK_YEAR),
                                                CourseID = Convert.ToInt32(stu.FK_COURSEID),
-                                              
+
                                            }).ToList();
 
 
@@ -46,9 +46,9 @@ namespace MemoPrintingUtility.DA
                     }
 
 
-                    var subject = lstSubJectList.Where(x => x.Year == Convert.ToString(Sub.Year) 
-                                                        && Convert.ToInt32(x.Sem) == Sub.Sem 
-                                                        && x.ShortCode == Sub.SubjectCode 
+                    var subject = lstSubJectList.Where(x => x.Year == Convert.ToString(Sub.Year)
+                                                        && Convert.ToInt32(x.Sem) == Sub.Sem
+                                                        && x.ShortCode == Sub.SubjectCode
                                                         && x.CourseID == Sub.CourseID.ToString()
                                                         ).ToList();
                     if (subject.Count > 0)
@@ -69,7 +69,7 @@ namespace MemoPrintingUtility.DA
 
 
                 }
-                return SubjectRangedetails.Where(x=>x.SubjectName !=null).ToList();
+                return SubjectRangedetails.Where(x => x.SubjectName != null).ToList();
 
             }
             catch (Exception ex)
@@ -88,9 +88,9 @@ namespace MemoPrintingUtility.DA
                 LstsubjectCode.SubjectCode,
                 LstsubjectCode.Count, LstsubjectCode.Year, LstsubjectCode.Sem,
                 LstsubjectCode.CourseID, LstsubjectCode.CourseName,
-                LstsubjectCode.SubjectName == null ?"": LstsubjectCode.SubjectName, LstsubjectCode.RangeStart, LstsubjectCode.RangeEnd);
+                LstsubjectCode.SubjectName == null ? "" : LstsubjectCode.SubjectName, LstsubjectCode.RangeStart, LstsubjectCode.RangeEnd);
 
-              
+
 
         }
 
@@ -111,7 +111,7 @@ namespace MemoPrintingUtility.DA
                                       Sem = stu.FK_SEM,
                                       SubjectName = stu.SUBJECTNAME,
                                       IsPractical = stu.ISPRACTICAL,
-                                     
+
 
                                   }).ToList();
 
@@ -138,5 +138,68 @@ namespace MemoPrintingUtility.DA
             return CourseDetails;
 
         }
+
+        public List<SubJectInformation> GetAllSubjectByYr()
+        {
+
+            KUPostDBDataContext KPOContext = new KUPostDBDataContext();
+            KPOContext.CommandTimeout = 260;
+            var result = KPOContext.SP_GetAllYrSubjectDetails().AsQueryable();
+            var Subjectdetails = (from stu in result
+                                  select new SubJectInformation
+                                  {
+                                      YCourseID = stu.Pk_CourseID,
+                                      ShortCode = stu.ShortName,
+                                      Yyr = Convert.ToInt32(stu.fk_sem),
+                                      CourseName = stu.CourseName,
+                                      SubjectName = stu.SubjectName,
+                                  }).ToList();
+
+            return Subjectdetails;
+        }
+
+
+
+        public List<SubjectRangeEntity> GetSubjectDetailsForRangeYr()
+        {
+
+            List<SubJectInformation> lstSujectInformation = new List<SubJectInformation>();
+            lstSujectInformation = GetAllSubjectByYr();
+
+            MemoPrintDBDataContext SubjectContext = new MemoPrintDBDataContext();
+            SubjectContext.CommandTimeout = 260;
+            var result = SubjectContext.Get_SubjectRangeCodeByYear().AsQueryable();
+            var SubjectRangedetails = (from stu in result
+                                       select new SubjectRangeEntity
+                                       {
+                                           SubjectCode = stu.SubjectCode,
+                                           Count = Convert.ToInt32(stu.StudentCount),                                          
+                                           Year = Convert.ToInt32(stu.FK_YEAR),
+                                           CourseID = Convert.ToInt32(stu.FK_COURSEID),
+
+                                       }).ToList();
+
+
+            foreach (var Sub in SubjectRangedetails)
+            {
+
+                var Subjects = lstSujectInformation.Where(x => x.YCourseID == Sub.CourseID && x.Yyr ==  Sub.Year && x.ShortCode  ==  Sub.SubjectCode).ToList();
+
+                if (Subjects !=null &&  Subjects.Count() > 1)
+                {
+                    Sub.CourseName = Subjects[0].CourseName;
+                    Sub.SubjectName = Subjects[0].SubjectName;
+
+                }
+            }
+            return SubjectRangedetails.Where(x => x.SubjectName != null).ToList();
+
+
+
+
+        }
+
+
+
     }
 }

@@ -181,4 +181,13 @@
     <Parameter Name="RangeEnd" Parameter="rangeEnd" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.SP_GetAllYrSubjectDetails" Method="SP_GetAllYrSubjectDetails">
+    <ElementType Name="SP_GetAllYrSubjectDetailsResult">
+      <Column Name="Pk_CourseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="fk_sem" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ShortName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SubjectName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

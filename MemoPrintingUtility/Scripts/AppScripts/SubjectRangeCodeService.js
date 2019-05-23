@@ -39,4 +39,21 @@
         });
     };
 
+
+
+    // Year Subject range code
+
+    var getSubjectdetailYrssurl = "/SubjectRangeCode/GetCodeDataYrs"
+    this.getSubjectdetailYr = function () {
+
+        return result = $http({
+            method: "Post",
+            url: getSubjectdetailYrssurl,
+
+
+        });
+    };
+
+
+
 });

@@ -50,6 +50,30 @@ namespace MemoPrintingUtility.BO
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
             return DAFactory.GetTabularDAService().GetBALConInformaion();
         }
+
+        public List<StudentInformation> GetBCA_P_StudentDetailPRES(string sem, string year)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetBCA_P_StudentDetailPRES(sem, year);
+        }
+
+        public List<ConsDataEntity> GetBCA_P_StudentsConsDetails(string Semister)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetBCA_P_StudentsConsDetails(Semister);
+        }
+
+        public List<BALSubjectInformation> GetBALSubjectInformation(string CourseName)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetBALSubjectInformation(CourseName);
+        }
+
+        public List<BCAPSubjectINformation> GetBCAPSubjectInformation(string CourseName)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetBCAPSubjectInformation(CourseName);
+        }
     }
 
     public static class StringExtensions

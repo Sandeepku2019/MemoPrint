@@ -1,9 +1,9 @@
 ﻿KuApp.controller('TabularController', function ($window, $scope, TabularService) {
 
-    $scope.lstSems = [{ Sem: "11", Semister: "1" }, { Sem: "21", Semister: "3" }, { Sem: "31", Semister: "5" }]
+    $scope.lstSems = [{ Sem: "11", Semister: "1" }, { Sem: "12", Semister: "2" }, { Sem: "21", Semister: "3" }, { Sem: "22", Semister: "4" }, { Sem: "31", Semister: "5" }, { Sem: "32", Semister: "6" }]
     //BindCourses();
 
-    $scope.lstCourses = [{ Id: "B.A", CourseName: "B.A" }, { Id: "B.Com", CourseName: "B.Com" }, { Id: "B.Sc(BZC)", CourseName: "B.Sc(BZC)" }, { Id: "BAL", CourseName: "BA (L)" }, { Id: "B.Sc(MAT)", CourseName: "B.Sc(MAT)" }]
+    $scope.lstCourses = [{ Id: "BCA(P)", CourseName: "BCA(P)" }, { Id: "B.A", CourseName: "B.A" }, { Id: "B.Com", CourseName: "B.Com" }, { Id: "B.Sc(BZC)", CourseName: "B.Sc(BZC)" }, { Id: "BAL", CourseName: "BA (L)" }, { Id: "B.Sc(MAT)", CourseName: "B.Sc(MAT)" }]
     $scope.Course = ""; 
    
     function BindCourses()

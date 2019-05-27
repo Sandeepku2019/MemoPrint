@@ -16,7 +16,7 @@ namespace MemoPrintingUtility.Entity
 
     public class subjectEXMPWM
     {
-        public string subname { get; set; }
+        public string subname { get; set; } 
         public string ExMarks { get; set; }
 
         public string PMarks { get; set; }
@@ -70,6 +70,10 @@ namespace MemoPrintingUtility.Entity
         public string Credits { get; set; }
 
         public string SubjectName { get; set; }
+
+        public string SubjectExternalMarks { get; set; }
+
+        public string SubjectInternalMarks { get; set; }
 
         public string InternalMarks { get; set; }
 
@@ -142,7 +146,10 @@ namespace MemoPrintingUtility.Entity
 
         public int Order { get; set; }
 
+        public string TotalMarks { get; set; }
+        public string Year { get; set; }
 
+        public string Sem { get; set; }
 
     }
 
@@ -1149,6 +1156,9 @@ namespace MemoPrintingUtility.Entity
                 }
             }
         }
+
+
+        public string ORES { get; set; }
     }
 
 

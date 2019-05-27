@@ -19,44 +19,56 @@
 
 
 
+                    <div class="col-md-12 row">
 
-                    <div class="col-md-4 row">
+                        <div class="col-md-4 row  ">
 
-                        <span class="col-md-6 text-left  text-right"> Range From:</span>
-                        <p class="col-md-6">
-                            <input type="text" ng-model="RangesStart" />
-                        </p>
+                            <span class="col-md-6 ">Report Type:</span>
+                            <p class="col-md-6  ">
+                                <select ng-model="SubjectRangeType" class="form-control">
+                                    <option value="">--Select report--</option>
+                                    <option value="Sem">Sem</option>
+                                    <option value="Year">Year</option>
+                                </select>
+                            </p>
 
+                        </div>
+
+                        <div class="col-md-4 row">
+
+                            <span class="col-md-6 text-left  text-right"> Range From:</span>
+                            <p class="col-md-6">
+                                <input type="text" ng-model="RangesStart" />
+                            </p>
+
+
+                        </div>
+
+                        <div class="col-md-4 row">
+                            <span class="col-md-6 text-right">Range Gap:</span>
+                            <p class="col-md-6  ">
+                                <input type="text" ng-model="RangesGap" />
+                            </p>
+                        </div>
+
+
+
+                        
 
                     </div>
 
-                    <div class="col-md-4 row">
-                        <span class="col-md-6 text-right">Range Gap:</span>
-                        <p class="col-md-6  ">
-                            <input type="text" ng-model="RangesGap" />
-                        </p>
-                    </div>
+                    <div class="col-md-12  row   ">
 
+                        <input type="button" ID="btnGnerate" runat="server" Text="Get Data" CssClass="col-md-4 btn btn-dark btn-send" ng-click="GetaData()" Style="float: right" value="Get data" />
+                        <input type="button" ID="btnGnerate" runat="server" Text="Generate Report" CssClass="col-md-4 btn btn-dark btn-send" ng-click="GenerateRange()" Style="float: right" value="Generate Range" />
+                        <input type="button" ID="btnGnerate" runat="server" Text=Save" CssClass="col-md-4 btn btn-dark btn-send" ng-click="Save()" Style="float: right" value="Save" />
 
-
-                    <div class="col-md-4 row dropright ">
-                        &nbsp;  <input type="button" ID="btnGnerate" runat="server" Text="Generate Report" CssClass="btn btn-dark btn-send" ng-click="GenerateRange()" Style="float: right" value="Generate Range" />
-                        <p class="col-md-9">
-                            <Label Class="alert-danger" ID="lblerror" runat="server" ng-model="WarningMessage" Text="Generate Report" />
-                        </p>
-                    </div>
-
-
-
-                    <div class="col-md-4 row dropright ">
-                        <input type="button" ID="btnGnerate" runat="server" Text=Save" CssClass="btn btn-dark btn-send" ng-click="Save()" Style="float: right" value="Save" />
-                       
                     </div>
 
 
                 </div>
 
-                <div>
+                <div id="dvSemWise"  >
 
                     <table border="1" width="100%">
                         <thead>
@@ -73,8 +85,8 @@
                                 <th>
                                     Year
                                 </th>
-                                <th>
-                                     Sem
+                                <th >
+                                    Sem
                                 </th>
                                 <th>
                                     Course ID
@@ -82,8 +94,6 @@
                                 <th>
                                     Course Name
                                 </th>
-
-                              
 
                                 <th>
                                     Count
@@ -109,7 +119,69 @@
                                 <td>{{x.Sem}}</td>
                                 <td>{{x.CourseID}}</td>
                                 <td>{{x.CourseName}}</td>
-                                
+
+
+                                <td>{{x.Count}}</td>
+                                <td>{{x.RangeStart}}</td>
+                                <td>{{x.RangeEnd}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+
+                <div id="dvYearWise"  class="hide">
+
+                    <table border="1" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.no
+                                </th>
+                                <th>
+                                    Subject Code
+                                </th>
+                                <th>
+                                    Subject Name
+                                </th>
+                                <th>
+                                    Year
+                                </th>
+                              
+                                <th>
+                                    Course ID
+                                </th>
+                                <th>
+                                    Course Name
+                                </th>
+
+                                <th>
+                                    Count
+                                </th>
+
+                                <th>
+                                    Range From
+                                </th>
+
+                                <th>
+                                    Range End
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in lstSubjectDetails">
+                                <td>{{$index + 1}}</td>
+                                <td>{{x.SubjectCode}}</td>
+
+                                <td>{{x.SubjectName}}</td>
+                                <td>{{x.Year}}</td>
+                               
+                                <td>{{x.CourseID}}</td>
+                                <td>{{x.CourseName}}</td>
+
 
                                 <td>{{x.Count}}</td>
                                 <td>{{x.RangeStart}}</td>

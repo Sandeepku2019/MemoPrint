@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MemoPrintingUtility.DA
 {
-   public interface ITabularReportDAService
+    public interface ITabularReportDAService
     {
         List<StudentInformation> GetStudentDetail(string Course, int Semister, int sem, int year);
 
@@ -19,6 +19,16 @@ namespace MemoPrintingUtility.DA
 
         List<BALPresEntity> GetBalPresInformation(string course);
         List<BALConEntity> GetBALConInformaion();
+
+
+        List<StudentInformation> GetBCA_P_StudentDetailPRES(string sem, string year);
+
+        List<ConsDataEntity> GetBCA_P_StudentsConsDetails(string Semister);
+
+        List<BALSubjectInformation> GetBALSubjectInformation(string CourseName);
+
+        List<BCAPSubjectINformation> GetBCAPSubjectInformation(string CourseName);
+
 
     }
 }

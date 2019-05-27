@@ -1,9 +1,9 @@
 ﻿KuApp.controller('ShortMemoController', function ($window, $scope, ShortMemoService) {
 
-    $scope.lstSems = [{ Sem: "11", Semister: "1" }, { Sem: "21", Semister: "3" }, { Sem: "31", Semister: "5" }]
+    $scope.lstSems = [{ Sem: "11", Semister: "1" }, { Sem: "12", Semister: "2" }, { Sem: "21", Semister: "3" }, { Sem: "22", Semister: "4" }, { Sem: "31", Semister: "5" }, { Sem: "32", Semister: "6" }]
     //BindCourses();
 
-    $scope.lstCourses = [{ Id: "B.A", CourseName: "B.A" }, { Id: "B.Com", CourseName: "B.Com" }, { Id: "B.Sc(BZC)", CourseName: "B.Sc(BZC)" }, { Id: "B.Sc(MAT)", CourseName: "B.Sc(MAT)" }]
+    $scope.lstCourses = [{ Id: "BAL", CourseName: "BA (L)" }, { Id: "BCA(P)", CourseName: "BCA(P)" }, { Id: "B.A", CourseName: "B.A" }, { Id: "B.Com", CourseName: "B.Com" }, { Id: "B.Sc(BZC)", CourseName: "B.Sc(BZC)" }, { Id: "B.Sc(MAT)", CourseName: "B.Sc(MAT)" }]
     $scope.Course = "";
 
     function BindCourses() {
@@ -43,6 +43,20 @@
             angular.element(document.getElementById('btnGnerate'))[0].disabled = false;
             $scope.loading = false;
         };
+
+    }
+
+
+    $scope.CourseChange = function () {
+        if ($scope.Course == "BA (L)") {
+
+            $scope.Semister = 0;
+            $("#ddlSem").prop('disabled', 'disabled');
+            // $("#ddlSem")[0].Disable = true;
+
+        } else {
+            $("#ddlSem").prop('disabled', '');
+        }
 
     }
 });

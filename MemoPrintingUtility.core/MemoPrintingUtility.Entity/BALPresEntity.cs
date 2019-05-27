@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MemoPrintingUtility.Entity
 {
-    public class BALPresEntity
+    public class BALPresEntity : BALSubjectInformation
     {
         public string TP { get; set; }
         public string FK_CLGCODE { get; set; }
@@ -23,7 +23,52 @@ namespace MemoPrintingUtility.Entity
 
         public string FullName { get; set; }
 
+
+        public string SubjectName { get; set; }
+
         public string FName { get; set; }
+
+    }
+
+    public class BALSubjectInformation
+    {
+
+        public string SubjectName { get; set; }
+
+        public string SubjectCode { get; set; }
+
+        public string Year { get; set; }
+
+
+        public string MaxMark { get; set; }
+
+        public string MinMark { get; set; }
+
+        public string CourseName { get; set; }
+
+    }
+
+
+
+
+    public class BCAPSubjectINformation
+    {
+
+        public string SubjectName { get; set; }
+
+        public string SubjectCode { get; set; }
+
+        public string Year { get; set; }
+
+        public string Sem { get; set; }
+
+        public string MaxMark { get; set; }
+
+        public string MinMark { get; set; }
+
+        public string InternalMark { get; set; }
+
+        public string CourseName { get; set; }
 
     }
 }

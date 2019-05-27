@@ -18,5 +18,13 @@ namespace MemoPrintingUtility.BO
 
         List<BALPresEntity> GetBalPresInformation(string course);
         List<BALConEntity> GetBALConInformaion();
+
+        List<StudentInformation> GetBCA_P_StudentDetailPRES(string sem, string year);
+
+        List<ConsDataEntity> GetBCA_P_StudentsConsDetails(string Semister);
+
+        List<BALSubjectInformation> GetBALSubjectInformation(string CourseName);
+
+        List<BCAPSubjectINformation> GetBCAPSubjectInformation(string CourseName);
     }
 }

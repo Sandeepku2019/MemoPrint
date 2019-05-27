@@ -195,6 +195,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BALangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SDLCController.cs" />
     <Compile Include="Controllers\ShortmemoController.cs" />
@@ -1050,6 +1051,7 @@
     <Content Include="Views\TabularReport\Index.cshtml" />
     <Content Include="Views\Shortmemo\Index.cshtml" />
     <Content Include="Views\SDLC\Index.cshtml" />
+    <Content Include="Views\BALang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

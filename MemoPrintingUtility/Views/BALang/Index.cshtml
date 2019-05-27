@@ -1,43 +1,35 @@
 ﻿
 @{
-    ViewBag.Title = "Short Memo";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="main" class="container-fluid bg-light" style="min-height:400px">
-    <div class="row justify-content-center row" ng-controller="ShortMemoController">
+    <div class="row justify-content-center row" ng-controller="SDLCController">
 
 
         <div class="row justify-content-center " style="padding: 5px ;padding-top:20px">
 
             <div class="col-md-12 row text-left">
-                <h2> Short Memo </h2>
+                <h2> BA(L) Report </h2>
                 <br />
                 <br />
             </div>
 
 
+
             <div class="col-md-12 row">
 
-                <span class="col-md-4 text-left  text-right">Select Course :</span>
+                <span class="col-md-4 text-left  text-right">Select Report Type :</span>
                 <p class="col-md-6">
-                    <select ng-model="Course" class="form-control" ng-change="CourseChange()">
-                        <option value="">-- Select Course---</option>
-                        <option ng-repeat="x in lstCourses" value="{{x.CourseName}}">{{x.CourseName}}</option>
+                    <select ng-model="ReportType" class="form-control">
+                        <option value="">-- Select Report Type---</option>
+                        <option value="Tab">Tabular Report</option>
+                        <option value="Short">Short Memo</option>
+
                     </select>
                 </p>
             </div>
-
-            <div class="col-md-12 row">
-                <span class="col-md-4 text-right">Select Semister :</span>
-                <p class="col-md-6  ">
-                    <select ng-model="Semister" class="form-control">
-                        <option value="">-- Select Semister---</option>
-                        <option ng-repeat="x in lstSems" value="{{x.Sem}}">{{x.Semister}}</option>
-                    </select>
-                </p>
-            </div>
-
 
 
             <div class="col-md-6 row ">
@@ -53,5 +45,6 @@
 
     </div>
 </div>
+
 
 

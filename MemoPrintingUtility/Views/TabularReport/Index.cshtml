@@ -22,7 +22,7 @@
 
                 <span class="col-md-4 text-left  text-right">Select Course :</span>
                 <p class="col-md-6">
-                    <select ng-model="Course" class="form-control">
+                    <select ng-model="Course"  class="form-control" ng-change="CourseChange()">
                         <option value="">-- Select Course---</option>
                         <option ng-repeat="x in lstCourses" value="{{x.CourseName}}">{{x.CourseName}}</option>
                     </select>
@@ -32,7 +32,7 @@
             <div class="col-md-12 row">
                 <span class="col-md-4 text-right">Select Semister :</span>
                 <p class="col-md-6  ">
-                    <select ng-model="Semister" class="form-control">
+                    <select ng-model="Semister" id="ddlSem" class="form-control">
                         <option value="">-- Select Semister---</option>
                         <option ng-repeat="x in lstSems" value="{{x.Sem}}">{{x.Semister}}</option>
                     </select>

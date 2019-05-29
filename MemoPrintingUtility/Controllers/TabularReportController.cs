@@ -1199,7 +1199,7 @@ namespace MemoPrintingUtility.Controllers
                             //    PreRsult = "PASSED";
                             //}
 
-
+                            string HallTIcket = HallticketNumbers[i];
                             List<BALEntity> lstEntity = new List<BALEntity>();
                             FinalResult = lstcon[0].FinalResult;
                             TotalMark = lstcon[0].Total;
@@ -1214,7 +1214,7 @@ namespace MemoPrintingUtility.Controllers
                                 lstEntity = CnrEntityVertical(lstEntity, con.M14, con.Y14, con.HTNO, con.P14, "", "I", 4);
                                 lstEntity = CnrEntityVertical(lstEntity, con.M15, con.Y15, con.HTNO, con.P15, "", "I", 5);
                                 lstEntity = CnrEntityVertical(lstEntity, con.M16, con.Y16, con.HTNO, con.P16, "", "I", 6);
-                                lstEntity = CnrEntityVertical(lstEntity, con.PM16, con.PA16, con.HTNO, con.P11, "", "I", 1, true);
+                                lstEntity = CnrEntityVertical(lstEntity, con.PM16, con.PA16, con.HTNO, con.P16, "", "I", 6, true);
 
                                 //2year
                                 lstEntity = CnrEntityVertical(lstEntity, con.M21, con.Y21, con.HTNO, con.P21, "", "II", 1);
@@ -1240,7 +1240,7 @@ namespace MemoPrintingUtility.Controllers
                             #endregion
                             lstEntity = CnrEntityVertical(lstEntity, lstPREStuns);
 
-                            string HallTIcket = HallticketNumbers[i];
+                          
                             series++;
                             int totalSUbjects = 0;
                             int passedSubject = 0;

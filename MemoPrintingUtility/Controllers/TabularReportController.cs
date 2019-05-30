@@ -1280,7 +1280,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
 
 
-                                addHeaderFooter(sw, 72, "BA (L)", "I,II,III", "");
+                                yraddHeaderFooter(sw, 72, "BA (L)", "I,II,III", "");
                             }
 
                             if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
@@ -1294,7 +1294,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
 
 
-                                PageBraker = addHeaderFooter(sw, 72, "BA (L)", "I,II,III", "");
+                                PageBraker = yraddHeaderFooter(sw, 72, "BA (L)", "I,II,III", "");
 
                             }
 
@@ -1307,7 +1307,7 @@ namespace MemoPrintingUtility.Controllers
 
                             if (series == 1)
                             {
-                                PageBraker = addHeaderFooter(sw, 0, "BA (L)", "I,II,III", "");
+                                PageBraker = yraddHeaderFooter(sw, 0, "BA (L)", "I,II,III", "");
                                 sw.WriteLine(nameformat.Truncate(113) + GetSpaces(7 - EI.Length) + HallTIcket + GetSpaces(10 - HallTIcket.Length));
                             }
                             else
@@ -1671,6 +1671,52 @@ namespace MemoPrintingUtility.Controllers
                 // sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
                 sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM.  EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "RES/TOT. SGPA/CGPA");
+                sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
+
+                PageBraker = 8;
+                //addHeaderFooter(sw, rowcount, course, year, sem);
+
+
+            }
+            else { PageBraker++; }
+            return PageBraker;
+        }
+
+
+        private int yraddHeaderFooter(StreamWriter sw, int rowcount, string course, string year, string sem, bool cchange = false)
+        {
+            if (rowcount == 0)
+            {
+
+                //sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
+
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR SUPPL. EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+                sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "TOTAL    RESULT   ");
+                sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
+
+                PageBraker = PageBraker + 8;
+
+            }
+            else if (rowcount == 72)
+            {
+
+                rowcount = 0;
+                PageNumber++;
+                //sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
+
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                sw.WriteLine(" ");
+                // sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
+                sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR SUPPL. EXAMINATIONS HELD IN Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+                sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "TOTAL    RESULT   ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 
                 PageBraker = 8;

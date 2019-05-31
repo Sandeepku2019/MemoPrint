@@ -381,23 +381,6 @@
       <Column Name="FK_CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.GetBCASubjectInformation" Method="GetBCASubjectInformation">
-    <ElementType Name="GetBCASubjectInformationResult">
-      <Column Name="YR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FLD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CR" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="SCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="OCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MXMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MNMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PASSM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LB" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PATTERN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Get_CONSData_BCA_Previuos_LM" Method="Get_CONSData_BCA_Previuos_LM">
     <ElementType Name="Get_CONSData_BCA_Previuos_LMResult">
       <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -462,6 +445,23 @@
       <Column Name="TOTALMARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetBCASubjectInformation" Method="GetBCASubjectInformation">
+    <ElementType Name="GetBCASubjectInformationResult">
+      <Column Name="YR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FLD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MXMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MNMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PASSM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PATTERN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRS" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

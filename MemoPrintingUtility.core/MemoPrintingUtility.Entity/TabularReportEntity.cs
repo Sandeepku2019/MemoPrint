@@ -44,6 +44,7 @@ namespace MemoPrintingUtility.Entity
     {
         public string LeterGrade { get; set; }
 
+        public string AcadmicYear { get; set; }
 
         public int Psc { get; set; }
 
@@ -150,6 +151,8 @@ namespace MemoPrintingUtility.Entity
         public string Year { get; set; }
 
         public string Sem { get; set; }
+
+        public string MinMarks { get; set; }
 
     }
 

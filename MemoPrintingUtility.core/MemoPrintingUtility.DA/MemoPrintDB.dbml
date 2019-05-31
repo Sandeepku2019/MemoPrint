@@ -398,4 +398,70 @@
       <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Get_CONSData_BCA_Previuos_LM" Method="Get_CONSData_BCA_Previuos_LM">
+    <ElementType Name="Get_CONSData_BCA_Previuos_LMResult">
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P4" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M4" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S4" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y4" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P5" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M5" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S5" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y5" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P6" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M6" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S6" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y6" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="P7" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="M7" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="S7" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Y7" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RES" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GTTL" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ORES" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="COMP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="D" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DCNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Get_PREData_BCA_Previuos_LM" Method="Get_PREData_BCA_Previuos_LM">
+    <ElementType Name="Get_PREData_BCA_Previuos_LMResult">
+      <Column Name="fk_clgcode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_COURSEID" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUB_TYPE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CONVERT_SUBCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CONVERT_SUB_MAXMARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="convert_iNT_MAXMARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ORD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CONVERT_SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FINAL_VAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="INT_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRACE_MARKS1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRACE_MARKS2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FINAL_RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DIVISION" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TOTALMARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

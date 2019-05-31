@@ -13,6 +13,11 @@ namespace MemoPrintingUtility.BO
             return new CourseService();
         }
 
+        public ILongMemoService GetLongMemoInstance()
+        {
+            return new LongMemoService();
+        }
+
         public ISDLCTablarBO GetSDLCInstance()
         {
             return  new SDLCTablarBO();

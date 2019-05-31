@@ -17,6 +17,8 @@ namespace MemoPrintingUtility.BO
 
 
         ISDLCTablarBO GetSDLCInstance();
+
+        ILongMemoService GetLongMemoInstance();
     }
 
 }

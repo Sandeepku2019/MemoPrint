@@ -396,7 +396,7 @@ namespace MemoPrintingUtility.DA
                                       }).ToList<ConsDataEntity>();
 
             return studentConsdetails;
-            throw new NotImplementedException();
+            
         }
 
         public List<BALSubjectInformation> GetBALSubjectInformation(string CourseName)

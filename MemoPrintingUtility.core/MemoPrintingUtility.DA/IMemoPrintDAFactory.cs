@@ -13,5 +13,7 @@ namespace MemoPrintingUtility.DA
         ISubjectRangeGenerateDA GetSubjectRangeService();
 
         ISDLTablarDA GetSDLCInstance();
+
+        ILongMemoDAService GetLongMemoService();
     }
 }

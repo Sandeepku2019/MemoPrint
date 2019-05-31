@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BALangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LongMemoController.cs" />
     <Compile Include="Controllers\SDLCController.cs" />
     <Compile Include="Controllers\ShortmemoController.cs" />
     <Compile Include="Controllers\SubjectRangeCodeController.cs" />
@@ -247,6 +248,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\AppScripts\LoginController.js" />
     <Content Include="Scripts\AppScripts\LoginService.js" />
+    <Content Include="Scripts\AppScripts\LongmemoController.js" />
+    <Content Include="Scripts\AppScripts\LongmemoService.js" />
     <Content Include="Scripts\AppScripts\ngapp.js" />
     <Content Include="Scripts\AppScripts\SDLCService.js" />
     <Content Include="Scripts\AppScripts\ShortMemoController.js" />
@@ -1052,9 +1055,10 @@
     <Content Include="Views\Shortmemo\Index.cshtml" />
     <Content Include="Views\SDLC\Index.cshtml" />
     <Content Include="Views\BALang\Index.cshtml" />
+    <Content Include="Views\LongMemo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Content\App_Data\" />
     <Folder Include="TabularReport\" />
   </ItemGroup>
   <ItemGroup>

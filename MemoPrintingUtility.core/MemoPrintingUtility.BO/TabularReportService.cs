@@ -187,6 +187,69 @@ namespace MemoPrintingUtility.BO
             return words;
         }
 
+        public static string ChangeToMonthandYear(this string academic)
+        {
+            string Month = academic[0].ToString();
+            string Yeatr = "'20"+academic.Substring(1, 2);
+            switch (Month.ToLower())
+            {
+
+                case "1":
+                    Month = "Jan";
+                    break;
+
+                case "2":
+                    Month = "Feb";
+                    break;
+
+                case "3":
+                    Month = "Mar";
+                    break;
+
+                case "4":
+                    Month = "Apr";
+                    break;
+                case "5":
+                    Month = "May";
+                    break;
+
+                case "6":
+                    Month = "June";
+                    break;
+                case "7":
+                    Month = "July";
+                    break;
+
+                case "8":
+                    Month = "Aug";
+                    break;
+
+                case "9":
+                    Month = "Sep";
+                    break;
+
+                case "o":
+                    Month = "Oct";
+                    break;
+               
+                case "n":
+                    Month = "Nov";
+                    break;
+
+                case "d":
+                    Month = "Dec";
+                    break;
+
+                   
+                default:
+                    Month = "";
+                    break;
+            }
+
+            return Month + Yeatr;
+
+        }
+
 
     }
 }

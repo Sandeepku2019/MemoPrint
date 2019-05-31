@@ -53,6 +53,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KUPostDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="ILongMemoDAService.cs" />
+    <Compile Include="LongMemoDAService.cs" />
     <Compile Include="MemoPrintDAFactory.cs" />
     <Compile Include="MemoPrintDB.designer.cs">
       <AutoGen>True</AutoGen>

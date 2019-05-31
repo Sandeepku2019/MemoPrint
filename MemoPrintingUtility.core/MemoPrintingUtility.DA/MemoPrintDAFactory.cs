@@ -13,6 +13,11 @@ namespace MemoPrintingUtility.DA
             return new CourseDAService();
         }
 
+        public ILongMemoDAService GetLongMemoService()
+        {
+            return new LongMemoDAService();
+        }
+
         public ISDLTablarDA GetSDLCInstance()
         {
             return new SDLTablarDA();

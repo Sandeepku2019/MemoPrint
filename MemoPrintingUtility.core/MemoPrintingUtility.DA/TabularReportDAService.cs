@@ -166,7 +166,7 @@ namespace MemoPrintingUtility.DA
         {
             MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
             StudentContext.CommandTimeout = 260;
-
+              
             var result = StudentContext.GetConDataBAL().AsQueryable();
             var studentdetails = (from stu in result
                                   select new BALConEntity
@@ -411,6 +411,8 @@ namespace MemoPrintingUtility.DA
                                       SubjectCode = stu.SCODE,
                                       MaxMark = stu.MXMR,
                                       MinMark = stu.MNMR,
+                                      PMaxMark = stu.PMXMR,
+                                      PMinMark = stu.PMNMR,
                                       CourseName = stu.CRS,
                                       Year = stu.YR
 

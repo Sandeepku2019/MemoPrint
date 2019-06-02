@@ -10,6 +10,12 @@ namespace MemoPrintingUtility.BO
 {
     public class LongMemoService : ILongMemoService
     {
+        public List<BALConEntity> GetBALConInformaionUpdated()
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetLongMemoService().GetBALConInformaionUpdated();
+        }
+
         public List<StudentInformation> GetBCA_P_StudentDetailPRESBO()
         {
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();

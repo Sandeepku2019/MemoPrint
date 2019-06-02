@@ -12,5 +12,9 @@ namespace MemoPrintingUtility.BO
         List<ConsDataEntity> GetBCA_P_StudentsConsDetailsBO();
 
         List<StudentInformation> GetBCA_P_StudentDetailPRESBO();
+
+
+        //  BAL Update
+        List<BALConEntity> GetBALConInformaionUpdated();
     }
 }

@@ -13,6 +13,8 @@ namespace MemoPrintingUtility.DA
 
         List<StudentInformation> GetBCA_P_StudentDetailPRES();
 
+        //  BAL Update
+        List<BALConEntity> GetBALConInformaionUpdated();
 
     }
 }

@@ -240,7 +240,14 @@ namespace MemoPrintingUtility.BO
                     Month = "Dec";
                     break;
 
-                   
+                case "a":
+                    Month = "A";
+                    break;
+                case "s":
+                    Month = "S";
+                    break;
+
+
                 default:
                     Month = "";
                     break;

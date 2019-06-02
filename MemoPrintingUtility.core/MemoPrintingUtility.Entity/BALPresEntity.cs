@@ -44,6 +44,11 @@ namespace MemoPrintingUtility.Entity
 
         public string MinMark { get; set; }
 
+
+        public string PMaxMark { get; set; }
+
+        public string PMinMark { get; set; }
+
         public string CourseName { get; set; }
 
     }

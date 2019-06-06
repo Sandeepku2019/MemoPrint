@@ -102,10 +102,30 @@ namespace MemoPrintingUtility.Controllers
                             int passedSubject = 0;
                             bool detained = false;
                             int rowcount = 0;
+                           
+                            
 
 
                             var lstPREStuns = lstPREdata.Where(x => x.HTNO == HallticketNumbers[i]).ToList<SDLCEntityPRES>();
                             var lstCONStuns = lstConData.Where(x => x.HTNO == HallticketNumbers[i]).ToList<SDLCEntityCON>();
+
+                            string Part1Marks = lstPREStuns[0].Part1;
+                            string Part2Marks = lstPREStuns[0].Part2;
+                            string FResult = string.Empty;
+                            string yr1R = Convert.ToString(lstConData[0].YR1);
+                            string yr2R = Convert.ToString(lstConData[0].YR2);
+                            string yr3R = Convert.ToString(lstConData[0].YR3);
+
+                            if (yr1R == "F" || yr2R == "F" || yr3R == "F")
+                            {
+                                FResult = "FAILED";
+                            }
+
+
+                            if (yr1R == "C" && yr2R == "C" && yr3R == "C")
+                            {
+                                FResult = "COMPLETED";
+                            }
 
                             #region Formatting CON Data
                             foreach (var con in lstCONStuns)
@@ -159,30 +179,32 @@ namespace MemoPrintingUtility.Controllers
                                     FinalResult = "FAILED";
                                 }
                             }
-                            int Part1Marks = 0;
+                            
 
-
-
-                            int Part2Marks = 0;
-                          
                             string FN = lstPREStuns[0].FName == null ? "" : lstPREStuns[0].FName;
                             string SN = lstPREStuns[0].FullName == null ? "" : lstPREStuns[0].FullName;
                             string CC = lstPREStuns[0].ColCode == null ? "" : lstPREStuns[0].ColCode;
                             string EI = lstPREStuns[0].EI == null ? "" : lstPREStuns[0].EI;
-                            string nameformat = series + GetSpaces(5 - series.ToString().Length) + GetSpaces(1) + CC + GetSpaces(5 - CC.Length) + HallTIcket + GetSpaces(12 - HallTIcket.Length) + SN + GetSpaces(45 - SN.Length) + FN + GetSpaces(45 - FN.Length);
+                            string nameformat = series + GetSpaces(5 - series.ToString().Length) + GetSpaces(1) + CC + GetSpaces(5 - CC.Length) + HallTIcket + GetSpaces(12 - HallTIcket.Length) + SN + GetSpaces(45 - SN.Length) + FN + GetSpaces(45 - FN.Length) + EI + GetSpaces(7 - EI.Length) + HallTIcket + GetSpaces(10 - HallTIcket.Length);
 
 
 
                             string[] yrs = new string[] { "I", "II", "III" };
-
+                            string[] Types = new string[] { "CONS.", "PRES." };
 
                             #region Page break and Col break set up
                             foreach (string y in yrs)
                             {
-                                if (lstEntity.Where(x => x.Year == y).ToList().Count > 0)
+                               
+                                foreach (string ty in Types)
                                 {
-                                    rowcount = rowcount + 2;
+                                    if (lstEntity.Where(x => x.Year == y && x.Type == ty).ToList().Count > 0)
+                                    {
+                                        rowcount = rowcount + 2;
+                                    }
                                 }
+
+
                                 rowcount = rowcount + 1;
                             }
                             rowcount = rowcount + 3;
@@ -204,7 +226,7 @@ namespace MemoPrintingUtility.Controllers
                             if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
                             {
                                 ColPagebrk = false;
-                                int differ = 73 - PageBraker;
+                                int differ = 72 - PageBraker;
 
                                 for (int h = 0; h < differ; h++)
                                 {
@@ -226,17 +248,35 @@ namespace MemoPrintingUtility.Controllers
                             if (i == 0)
                             {
                                 PageBraker = addHeaderFooter(sw, PageBraker, course);
-                                sw.WriteLine(nameformat.Truncate(113) + GetSpaces(7 - EI.Length) + HallTIcket + GetSpaces(10 - HallTIcket.Length));
+                                sw.WriteLine(nameformat);
                             }
                             else
                             {
-                                sw.WriteLine(nameformat.Truncate(113) + GetSpaces(7 - EI.Length) + HallTIcket + GetSpaces(10 - HallTIcket.Length));
+                                sw.WriteLine(nameformat);
                             }
 
 
-                            string[] Types = new string[] { "CONS.", "PRES." };
+                           
                             foreach (string yr in yrs)
                             {
+
+                                string result = string.Empty;
+
+                                //if (yr == "I")
+                                //{
+                                //    result = yr1R;
+                                //}
+
+                                //if (yr == "II")
+                                //{
+                                //    result = yr2R;
+                                //}
+
+
+                                //if (yr == "III")
+                                //{
+                                //    result = yr3R;
+                                //}
                                 foreach (string ty in Types)
                                 {
                                     int subord = 1;
@@ -256,7 +296,7 @@ namespace MemoPrintingUtility.Controllers
 
                                     if (lstpopulaateData.Count() > 0)
                                     {
-                                        subjectstring = ty + GetSpaces(5 - ty.Length) + (yr + " " + EI) + GetSpaces(5 - (yr + " " + EI).Length);
+                                        subjectstring = ty + GetSpaces(5 - ty.Length) + yr + GetSpaces(5 - yr.Length);
                                     }
 
                                     bool flag = false;
@@ -275,12 +315,12 @@ namespace MemoPrintingUtility.Controllers
                                             }
                                         }
                                     }
-
+                                    bool isprac = false;
                                     foreach (var sd in lstpopulaateData.OrderBy(z => z.Order))
                                     {
 
 
-
+                                       
                                         string spaces = "";
                                         string umakspace = "";
                                         string intmarkspae = "";
@@ -306,13 +346,33 @@ namespace MemoPrintingUtility.Controllers
                                         string re = string.Empty;
                                         if (sd.Result != null)
                                         {
-                                            re = sd.Result;
+                                            re = sd.Result + " ";
                                         }
 
                                         string SDC = string.Empty;
+                                        string SubCode = string.Empty;
+
+                                        string Academic = string.Empty;
+                                        if (sd.Academic != null)
+                                        {
+                                            Academic = sd.Academic;
+                                        }
+
                                         if (sd.subjectCode != null)
                                         {
-                                            SDC = sd.subjectCode;
+                                            if (subjectstring.Contains(sd.subjectCode) == false)
+                                            {
+                                                SDC = sd.subjectCode;
+                                                SubCode = SDC + " " + Academic;
+                                                //isprac = false;
+                                            }
+                                            else
+                                            {
+                                                SDC = string.Empty;
+                                                SubCode = "";
+                                                isprac = true;
+                                            }
+
                                         }
 
 
@@ -322,47 +382,56 @@ namespace MemoPrintingUtility.Controllers
                                             Marks = sd.Marks;
                                         }
 
-                                        string Academic = string.Empty;
-                                        if (sd.Academic != null)
-                                        {
-                                            Academic = sd.Academic;
-                                        }
+                                      
 
-                                        string SubCode = SDC + " " + Academic;
+                                        
 
                                         subjectformt = GetSpaces(spaces.Length - SubCode.Length);
                                         subjectstring = subjectstring + subjectformt + SubCode;
 
                                         umakspace = GetSpaces(umakspace.Length - (Marks.Length + Convert.ToString(re).Length + 1));
-                                        SubjectMarks_U = umakspace + Marks.ToString() + " " + re;
+                                        if (isprac == false)
+                                        {
+                                            SubjectMarks_U = umakspace + Marks.ToString() + " " + re;
+                                        }
+                                        else
+                                        {
+                                            if (subord != ordr)
+                                            {
+                                                SubjectMarks_U = Marks.ToString() + " " + re;
+                                                isprac = false;
+                                            }
+                                          
+                                        }
 
                                         subjectsMarksPRE_U = subjectsMarksPRE_U + SubjectMarks_U;
                                         subord = ordr;
+                                        
 
                                     }
                                     if (lstpopulaateData.Count() > 0)
                                     {
 
-                                        sw.WriteLine(subjectstring + GetSpaces(113 - subjectstring.Length));
+                                        sw.WriteLine(subjectstring + GetSpaces(100 - subjectstring.Length)+ result + GetSpaces(13- result.Length));
                                         sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length));
                                         if (ty == "PRES." && yr == "III")
                                         {
-                                            sw.WriteLine("          ..........................................................................................." + FinalResult);
+                                            //sw.WriteLine("          ..........................................................................................." + FinalResult);
                                         }
                                         else
                                         {
-                                            if (ty == "PRES.")
-                                            {
-                                                sw.WriteLine("                                                                                                     " + FinalResult);
-                                            }
-                                            sw.WriteLine("          ..........................................................................................................................");
+                                            //if (ty == "PRES.")
+                                            //{
+                                            //    sw.WriteLine("                                                                                                     " + FinalResult);
+                                            //}
+                                            //sw.WriteLine("          ..........................................................................................................................");
                                         }
                                     }
                                 }
 
-
+                                sw.WriteLine("          ..........................................................................................................................");
                             }
-                            sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(15) + "********* Part 2: " + Part2Marks);
+                            sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(15) + "********* Part 2: " + Part2Marks +GetSpaces(20) );
                             sw.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
 
 

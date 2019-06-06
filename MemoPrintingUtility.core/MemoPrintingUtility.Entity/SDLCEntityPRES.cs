@@ -38,6 +38,10 @@ namespace MemoPrintingUtility.Entity
         public string TotalMarks { get; set; }
 
 
+        public string Part1 { get; set; }
+
+
+        public string  Part2 { get; set; }
 
 
 

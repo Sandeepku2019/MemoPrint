@@ -92,7 +92,11 @@ namespace MemoPrintingUtility.DA
                                           Y34 = stu.Y34,
                                           Y35 = stu.Y35,
                                           Y36 = stu.Y36,
-                                          Y37 = stu.Y37
+                                          Y37 = stu.Y37,
+
+                                          YR1 =stu.YR1,
+                                          YR2 =stu.YR2,
+                                          YR3 =stu.YR3
                                       }).ToList();
 
 
@@ -112,33 +116,34 @@ namespace MemoPrintingUtility.DA
                 MemoPrintDBDataContext KUPOContext = new MemoPrintDBDataContext();
                 KUPOContext.CommandTimeout = 260;
 
-                var result = KUPOContext.sp_GetSDLCResultData_TRReport(Course).AsQueryable();
+                var result = KUPOContext.sp_GetSDLCResultData_TRReport(Course);
 
-                //var studentdetails = (from stu in result
-                //                      select new SDLCEntityPRES
-                //                      {
-                //                          HTNO = stu.HTNO,
-                //                          FullName = stu.NAME,
-                //                          FName = stu.FNAME,
-                //                          EI = stu.EI,
-                //                          Year = stu.FK_YEAR,
-                //                          ColCode = stu.FK_CLGCODE,
+                var studentdetails = (from stu in result
+                                      select new SDLCEntityPRES
+                                      {
+                                          HTNO = stu.HTNO,
+                                          FullName = stu.FULLNAME,
+                                          FName = stu.FNAME,
+                                          EI = stu.EI,
+                                          Year = stu.FK_YEAR,
+                                          ColCode = stu.FK_CLGCODE,
 
-                //                          CLM = stu.CLM,
-                //                          SubjectCode = stu.CONS_SUB,
-                //                          order = Convert.ToInt32(stu.CLM.Substring(stu.CLM.Length - 1)),
-                //                          Course = stu.CRS,
+                                          CLM = stu.CLM,
+                                          SubjectCode = stu.SUB,
+                                          order = Convert.ToInt32(stu.CLM.Substring(stu.CLM.Length - 1)),
+                                          Course = stu.CRS,
 
 
-                //                          Marks = stu.CC_FINAL_VALMARKS,
-                //                          TotalMarks = stu.TOTAL_MARKS,
+                                          Marks = stu.MARKS,
+                                          TotalMarks = stu.TOTAL_MARKS,
 
-                //                          Result = stu.RESULT,
-                //                          FResult = stu.FINALRES,
+                                          Result = stu.RESULT,
+                                          Part1 = stu.C_PRT1,
+                                          Part2 = stu.C_PRT2
 
-                //                      }).ToList();
+                                      }).ToList();
 
-                return null;
+                return studentdetails;
 
             }
             catch (Exception ex)

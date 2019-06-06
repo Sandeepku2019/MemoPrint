@@ -93,5 +93,11 @@ namespace MemoPrintingUtility.Entity
         public string Y37 { get; set; }
 
 
+
+        public string YR1 { get; set; }
+        public string YR2 { get; set; }
+        public string YR3 { get; set; }
+
+
     }
 }

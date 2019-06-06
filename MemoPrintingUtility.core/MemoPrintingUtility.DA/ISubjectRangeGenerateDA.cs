@@ -21,5 +21,7 @@ namespace MemoPrintingUtility.DA
         List<SubJectInformation> GetAllSubjectByYr();
 
         List<SubjectRangeEntity> GetSubjectDetailsForRangeYr();
+
+        void InsertSubjectCodeYear(SubjectRangeEntity LstsubjectCode);
     }
 }

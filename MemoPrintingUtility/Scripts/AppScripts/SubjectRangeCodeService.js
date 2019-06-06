@@ -55,5 +55,28 @@
     };
 
 
+    var getAllGeneratedSubjeectsYearUrl = "/SubjectRangeCode/GenerateRangesCodeYrs"
+    this.GenerateYRWise = function  (From, gap) {
+        return result = $http({
+            method: "POST",
+            url: getAllGeneratedSubjeectsYearUrl,
+            data: JSON.stringify({ RangeFrom: From, Gap: gap }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    };
+
+    var SaveYrsCodesurl = "/SubjectRangeCode/SaveYrsCodes"
+    this.SaveYrsCodes = function (From, gap) {
+        return result = $http({
+            method: "POST",
+            url: SaveYrsCodesurl,
+            data: JSON.stringify({RangeFrom: From, Gap: gap }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    };
 
 });

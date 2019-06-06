@@ -43,6 +43,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="CourseDAService.cs" />
+    <Compile Include="ExPost.designer.cs">
+      <DependentUpon>ExPost.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="ICourseDAService.cs" />
     <Compile Include="IMemoPrintDAFactory.cs" />
     <Compile Include="ISDLTablarDA.cs" />
@@ -79,6 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ExPost.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ExPost.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="KUPostDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>KUPostDB.designer.cs</LastGenOutput>
@@ -105,6 +115,11 @@
   <ItemGroup>
     <None Include="KUPostDB.dbml.layout">
       <DependentUpon>KUPostDB.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ExPost.dbml.layout">
+      <DependentUpon>ExPost.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

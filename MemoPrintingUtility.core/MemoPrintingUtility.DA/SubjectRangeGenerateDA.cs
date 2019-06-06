@@ -144,20 +144,20 @@ namespace MemoPrintingUtility.DA
 
             KUPostDBDataContext KPOContext = new KUPostDBDataContext();
             KPOContext.CommandTimeout = 260;
-            var result = KPOContext.SP_GetAllYrSubjectDetails().AsQueryable();
+            var result = KPOContext.sp_getallyrsubjectdetails().AsQueryable();
             var Subjectdetails = (from stu in result
                                   select new SubJectInformation
                                   {
-                                      YCourseID = stu.Pk_CourseID,
+                                      YCourseID = Convert.ToInt32(stu.Fk_CourseID),
                                       ShortCode = stu.ShortName,
-                                      Yyr = Convert.ToInt32(stu.fk_sem),
+                                      Yyr = Convert.ToInt32(stu.Fk_Sem),
                                       CourseName = stu.CourseName,
                                       SubjectName = stu.SubjectName,
                                   }).ToList();
 
             return Subjectdetails;
         }
-
+    
 
 
         public List<SubjectRangeEntity> GetSubjectDetailsForRangeYr()
@@ -166,7 +166,7 @@ namespace MemoPrintingUtility.DA
             List<SubJectInformation> lstSujectInformation = new List<SubJectInformation>();
             lstSujectInformation = GetAllSubjectByYr();
 
-            MemoPrintDBDataContext SubjectContext = new MemoPrintDBDataContext();
+            KUPostDBDataContext SubjectContext = new KUPostDBDataContext();
             SubjectContext.CommandTimeout = 260;
             var result = SubjectContext.Get_SubjectRangeCodeByYear().AsQueryable();
             var SubjectRangedetails = (from stu in result
@@ -185,7 +185,7 @@ namespace MemoPrintingUtility.DA
 
                 var Subjects = lstSujectInformation.Where(x => x.YCourseID == Sub.CourseID && x.Yyr ==  Sub.Year && x.ShortCode  ==  Sub.SubjectCode).ToList();
 
-                if (Subjects !=null &&  Subjects.Count() > 1)
+                if (Subjects !=null &&  Subjects.Count() > 0)
                 {
                     Sub.CourseName = Subjects[0].CourseName;
                     Sub.SubjectName = Subjects[0].SubjectName;
@@ -193,6 +193,20 @@ namespace MemoPrintingUtility.DA
                 }
             }
             return SubjectRangedetails.Where(x => x.SubjectName != null).ToList();
+
+
+
+
+        }
+
+
+        public void InsertSubjectCodeYear(SubjectRangeEntity LstsubjectCode)
+        {
+
+            ExPostDataContext KPOContext = new ExPostDataContext();
+            KPOContext.CommandTimeout = 260;
+            var result = KPOContext.InsertSubjectRangeCodeYear(LstsubjectCode.SubjectCode, LstsubjectCode.SubjectName, LstsubjectCode.CourseName,
+                                                               LstsubjectCode.Year, LstsubjectCode.CourseID, LstsubjectCode.Count, LstsubjectCode.RangeStart, LstsubjectCode.RangeEnd);
 
 
 

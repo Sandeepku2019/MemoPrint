@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -26,10 +27,14 @@ namespace MemoPrintingUtility.Controllers
             {
                 return GenerateBA_L("BAL");
             }
-            else
+            else if (course == "BCA(P)")
             {
 
                 return GenerateReport(course);
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -75,7 +80,7 @@ namespace MemoPrintingUtility.Controllers
 
                     var lstBCASubject = BoMemoService.getTabularReportInstance().GetBCAPSubjectInformation("BCA");
 
-                    List<string> HallticketNumbers = lstStudents.OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().ToList<string>();
+                    List<string> HallticketNumbers = LstConStudents.OrderBy(x => x.HTNO).Select(x => x.HTNO).Distinct().ToList<string>();
                     string Syear = string.Empty;
                     string Ssem = string.Empty;
                     int yr = 0;
@@ -84,7 +89,7 @@ namespace MemoPrintingUtility.Controllers
                     {
                         hn = HallticketNumbers[i];
 
-                        if (hn == "084125009")
+                        if (hn == "086155038")
                         {
 
                         }
@@ -93,76 +98,20 @@ namespace MemoPrintingUtility.Controllers
                         var lstStunsCons = LstConStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<ConsDataEntity>();
 
 
-                        #region Sem declaration
-
-                        if (Psem == 11)
-                        {
-                            Syear = "I";
-                            yr = 1;
-                            sm = 1;
-                            Ssem = "I";
-
-                        }
-                        if (Psem == 21)
-                        {
-                            Syear = "II";
-                            yr = 2;
-                            sm = 1;
-                            Ssem = "I";
-
-                        }
-
-                        if (Psem == 31)
-                        {
-                            Syear = "III";
-                            yr = 3;
-                            Ssem = "I";
-                            sm = 1;
-                        }
-                        #endregion
-
-                        string HallTicket_1 = lstStunsfirst[0].HallTicketNumber == null ? "" : lstStunsfirst[0].HallTicketNumber;
-                        string FN_1 = lstStunsfirst[0].FatherName == null ? "" : lstStunsfirst[0].FatherName;
-                        string SN_1 = lstStunsfirst[0].StudentName == null ? "" : lstStunsfirst[0].StudentName;
-                        string CC_1 = lstStunsfirst[0].collegecode == null ? "" : lstStunsfirst[0].collegecode;
-
-                        string CourseDetails = GetSpaces(13) + course + " " + Syear + " YR " + Ssem + " SEM   NOV/DEC ." + (DateTime.Now.Year - 1).ToString();
-                        CourseDetails = CourseDetails + GetSpaces(72 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-");
 
 
 
-
-
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-
-                        sw.WriteLine(GetSpaces(66) + CC_1);
-                        string Examination = "B.C.A. ,  NOV., 2018";
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-
-                        sw.WriteLine(GetSpaces(13) + Examination + GetSpaces(44 - Examination.Length) + DateTime.Now.ToString("dd-MM-yyyy"));
-                        sw.WriteLine(GetSpaces(13) + SN_1 + GetSpaces(44 - SN_1.Length));
-                        sw.WriteLine(GetSpaces(13) + FN_1 + GetSpaces(44 - FN_1.Length) + HallTicket_1);
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-                        sw.WriteLine("");
-                        sw.WriteLine("");
                         int[] yrs = new int[] { 1, 2, 3 };
                         int[] sems = new int[] { 1, 2 };
-                        int SubjectRowCount = 0;
 
-                        int TotalMark = 0;
-                        List<StudentInformation> lstMemoDetils = new List<StudentInformation>();
-                        sw.WriteLine(""); SubjectRowCount++;
+                        List<StudentInformation> lstMemo = new List<StudentInformation>();
+
+                        #region Clubing
                         for (int j = 0; j < yrs.Length; j++)
                         {
                             for (int z = 0; z < sems.Length; z++)
                             {
-                                List<StudentInformation> lstMemo = new List<StudentInformation>();
+
                                 string consem = yrs[j].ToString() + sems[z].ToString();
                                 var lstConData = lstStunsCons.Where(x => x.SEM == consem).ToList();
 
@@ -192,104 +141,241 @@ namespace MemoPrintingUtility.Controllers
 
 
                                 }
+                            }
+                        }
 
-                                SubjectRowCount++;
 
-                                if (j == 0 & z == 0)
+                        foreach (var merge in lstMemo)
+                        {
+                            int OCMark = merge.ExernalMarks.ChangeINT() + merge.InternalMarks.ChangeINT();
+                            if (merge.MinMarks.ChangeINT() > OCMark)
+                            {
+                                merge.Status = "FAILED";
+                            }
+                            else if (OCMark > merge.MinMarks.ChangeINT())
+                            {
+                                merge.Status = "COMPLETED";
+                            }
+
+                        }
+                        #endregion endclub
+
+                        string Status = string.Empty;
+
+                        if (lstMemo.Where(x => x.Status == "FAILED").ToList().Count() > 0)
+                        {
+                            Status = "FAILED";
+                        }
+                        else
+                        {
+                            Status = "COMPLETED";
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        if (Status != "FAILED")
+                        {
+
+                            #region Sem declaration
+
+                            if (Psem == 11)
+                            {
+                                Syear = "I";
+                                yr = 1;
+                                sm = 1;
+                                Ssem = "I";
+
+                            }
+                            if (Psem == 21)
+                            {
+                                Syear = "II";
+                                yr = 2;
+                                sm = 1;
+                                Ssem = "I";
+
+                            }
+
+                            if (Psem == 31)
+                            {
+                                Syear = "III";
+                                yr = 3;
+                                Ssem = "I";
+                                sm = 1;
+                            }
+                            #endregion
+
+                            string HallTicket_1 = lstStunsfirst[0].HallTicketNumber == null ? "" : lstStunsfirst[0].HallTicketNumber;
+                            string FN_1 = lstStunsfirst[0].FatherName == null ? "" : lstStunsfirst[0].FatherName;
+                            string SN_1 = lstStunsfirst[0].StudentName == null ? "" : lstStunsfirst[0].StudentName;
+                            string CC_1 = lstStunsfirst[0].collegecode == null ? "" : lstStunsfirst[0].collegecode;
+
+                            string CourseDetails = GetSpaces(13) + course + " " + Syear + " YR " + Ssem + " SEM   NOV/DEC ." + (DateTime.Now.Year - 1).ToString();
+                            CourseDetails = CourseDetails + GetSpaces(72 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-");
+
+
+
+
+
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+
+                            sw.WriteLine(GetSpaces(66) + CC_1);
+                            string Examination = "B.C.A. ,  NOV., 2018";
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+
+                            sw.WriteLine(GetSpaces(13) + Examination + GetSpaces(44 - Examination.Length) + DateTime.Now.ToString("dd-MM-yyyy"));
+                            sw.WriteLine(GetSpaces(13) + SN_1 + GetSpaces(44 - SN_1.Length));
+                            sw.WriteLine(GetSpaces(13) + FN_1 + GetSpaces(44 - FN_1.Length) + HallTicket_1);
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+                            sw.WriteLine("");
+                            
+
+                            int SubjectRowCount = 0;
+
+                            int TotalMark = 0;
+                            List<StudentInformation> lstMemoDetils = new List<StudentInformation>();
+                            sw.WriteLine(""); SubjectRowCount++;
+
+                            #region PRINTING
+
+
+                            for (int j = 0; j < yrs.Length; j++)
+                            {
+                                for (int z = 0; z < sems.Length; z++)
                                 {
-                                    sw.WriteLine("I YEAR:");
-                                }
 
-                                if (j == 1 & z == 0)
-                                {
-                                    sw.WriteLine("II YEAR I SEMESTER:");
-                                }
+                                    var LstMemoSubjects = lstMemo.Where(x => x.Year == yrs[j].ToString() && x.Sem == sems[z].ToString()).ToList();
+                                  
 
-                                if (j == 1 & z == 1)
-                                {
-                                    sw.WriteLine("II YEAR II SEMESTER:");
-                                }
-
-
-                                if (j == 2 & z == 0)
-                                {
-                                    sw.WriteLine("III YEAR I SEMESTER:");
-                                }
-
-
-                                if (j == 2 & z == 1)
-                                {
-                                    sw.WriteLine("III YEAR II SEMESTER:");
-                                }
-
-
-
-                                foreach (var merge in lstMemo)
-                                {
-                                    if (merge.SubjectName != null)
+                                    if (j == 0 & z == 0)
                                     {
-
-                                        string Subject = merge.SubjectName.Length == 0 ? Convert.ToString(merge.SubjectCode) : merge.SubjectName;
-
-                                        if (Subject == null)
-                                        {
-                                            Subject = "";
-                                        }
-                                        int totalMark = merge.SubjectExternalMarks.ChangeINT() + merge.SubjectInternalMarks.ChangeINT();
-                                        string MinMark = merge.MinMarks;
-
-                                        int OCMark = merge.ExernalMarks.ChangeINT() + merge.InternalMarks.ChangeINT();
-                                        TotalMark = TotalMark + OCMark;
-                                        sw.WriteLine(Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + merge.AcadmicYear);
-                                        SubjectRowCount++;
+                                        StringBuilder builder = new StringBuilder();
+                                        builder.Append("I YEAR:");
+                                        sw.WriteLine(builder.ToString());
                                     }
 
+                                    if (j == 1 & z == 0)
+                                    {
+                                        sw.WriteLine("II YEAR I SEMESTER:");
+                                    }
+
+                                    if (j == 1 & z == 1)
+                                    {
+                                        sw.WriteLine("II YEAR II SEMESTER:");
+                                    }
+
+
+                                    if (j == 2 & z == 0)
+                                    {
+                                        sw.WriteLine("III YEAR I SEMESTER:");
+                                    }
+
+
+                                    if (j == 2 & z == 1)
+                                    {
+                                        sw.WriteLine("III YEAR II SEMESTER:");
+                                    }
+
+
+
+                                    foreach (var merge in LstMemoSubjects)
+                                    {
+                                        if (merge.SubjectName != null)
+                                        {
+
+                                            string Subject = merge.SubjectName.Length == 0 ? Convert.ToString(merge.SubjectCode) : merge.SubjectName;
+
+                                            if (Subject == null)
+                                            {
+                                                Subject = "";
+                                            }
+                                            int totalMark = merge.SubjectExternalMarks.ChangeINT() + merge.SubjectInternalMarks.ChangeINT();
+                                            string MinMark = merge.MinMarks;
+
+                                            int OCMark = merge.ExernalMarks.ChangeINT() + merge.InternalMarks.ChangeINT();
+                                            TotalMark = TotalMark + OCMark;
+                                            if (totalMark > 0)
+                                            {
+                                                sw.WriteLine(Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + merge.AcadmicYear);
+                                                SubjectRowCount++;
+                                            }
+                                        }
+
+                                    }
+
+                                    if (LstMemoSubjects.Count() > 0)
+                                    {
+                                        sw.WriteLine(""); SubjectRowCount++;
+                                    }
+                                   // sw.WriteLine(""); SubjectRowCount++;
+                                }
+                            }
+                            #endregion
+
+
+                            if (SubjectRowCount < 43)
+                            {
+                                int rCoun = 43 - SubjectRowCount;
+
+                                for (int b = 0; b < rCoun; b++)
+                                {
+                                    sw.WriteLine("");
                                 }
 
-                                sw.WriteLine(""); SubjectRowCount++;
-                                sw.WriteLine(""); SubjectRowCount++;
-
-
                             }
 
-                        }
-                        if (SubjectRowCount < 62)
-                        {
-                            int rCoun = 62 - SubjectRowCount;
+                            sw.WriteLine(GetSpaces(13) + TotalMark.ToString() + GetSpaces(5) + "(" + TotalMark.NumberToWords().ToUpper() + ")");
 
-                            for (int b = 0; b < 63; b++)
+                            string Division = string.Empty;
+                            if (TotalMark < 1500 && Status == "COMPLETED")
                             {
-                                sw.WriteLine("");
+                                Division = "";
                             }
 
+                            if ((TotalMark < 1799 && TotalMark > 1500) && Status == "COMPLETED")
+                            {
+                                Division = "SECOND DIVISION";
+                            }
+
+                            if ((TotalMark < 2099 && TotalMark > 1800) && Status == "COMPLETED")
+                            {
+                                Division = "FIRST DIVISION";
+                            }
+
+
+                            if ((TotalMark > 2100 && TotalMark < 3000) && Status == "COMPLETED")
+                            {
+                                Division = "FIRST DIVISION";
+                            }
+
+                            sw.WriteLine(GetSpaces(13) + Status + "/" + Division);
                         }
-
-                        sw.WriteLine(GetSpaces(13) + TotalMark.ToString() + GetSpaces(5) + "(" + TotalMark.NumberToWords().ToUpper() + ")");
-
-                        string Division = string.Empty;
-                        if (TotalMark < 1500 && lstStunsfirst[0].FinalResult == "COMPLETED")
-                        {
-                            Division = "";
-                        }
-
-                        if ((TotalMark < 1799 && TotalMark > 1500) && lstStunsfirst[0].FinalResult == "COMPLETED")
-                        {
-                            Division = "SECOND DIVISION";
-                        }
-
-                        if ((TotalMark < 2099 && TotalMark > 1800) && lstStunsfirst[0].FinalResult == "COMPLETED")
-                        {
-                            Division = "FIRST DIVISION";
-                        }
-
-
-                        if ((TotalMark > 2100 && TotalMark < 3000) && lstStunsfirst[0].FinalResult == "COMPLETED")
-                        {
-                            Division = "FIRST DIVISION";
-                        }
-
-                        sw.WriteLine(GetSpaces(13) + lstStunsfirst[0].FinalResult + "/" + Division);
-
                     }
 
 
@@ -448,14 +534,14 @@ namespace MemoPrintingUtility.Controllers
 
                         SubjectRowCount++;
 
-                        string[] BALyrs = lstMemo.OrderBy(y=>y.Year).Select(x => x.Year).Distinct().ToArray();
+                        string[] BALyrs = lstMemo.OrderBy(y => y.Year).Select(x => x.Year).Distinct().ToArray();
 
 
                         foreach (string baly in BALyrs)
                         {
                             var memoEntity = lstMemo.Where(x => x.Year == baly).ToList();
 
-                            sw.WriteLine(baly+ " Year:");
+                            sw.WriteLine(baly + " Year:");
                             foreach (var merge in memoEntity)
                             {
                                 var subjectinfo = lstBALPDCSubject.Where(x => x.SubjectCode == merge.subjectCode && x.Year == merge.Year).ToList().FirstOrDefault();
@@ -479,7 +565,7 @@ namespace MemoPrintingUtility.Controllers
 
                                     string Academic = merge.Academic != null ? merge.Academic.ChangeToMonthandYear() : "";
                                     string subline = Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + Academic;
-                                        sw.WriteLine(subline);
+                                    sw.WriteLine(subline);
                                     SubjectRowCount++;
                                 }
 
@@ -490,7 +576,7 @@ namespace MemoPrintingUtility.Controllers
                             {
 
                                 var subjectinfo = lstBALPDCSubject.Where(x => x.SubjectCode == merge.subjectCode && x.Year == merge.Year).ToList().FirstOrDefault();
-                                if (subjectinfo != null )
+                                if (subjectinfo != null)
                                 {
 
                                     string Subject = subjectinfo.SubjectName.Length == 0 ? Convert.ToString(subjectinfo.SubjectCode) : subjectinfo.SubjectName;
@@ -510,7 +596,7 @@ namespace MemoPrintingUtility.Controllers
                                     int OCMark = merge.PMarks.ChangeINT();
                                     TotalMark = TotalMark + OCMark;
 
-                                   
+
 
 
                                     if (totalMark > 0)
@@ -519,7 +605,7 @@ namespace MemoPrintingUtility.Controllers
                                         string subline = Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + Academic;
                                         sw.WriteLine(subline);
 
-                                        
+
                                     }
                                     SubjectRowCount++;
                                 }
@@ -527,11 +613,11 @@ namespace MemoPrintingUtility.Controllers
                             }
 
 
-                                sw.WriteLine(""); SubjectRowCount++;
+                            sw.WriteLine(""); SubjectRowCount++;
                         }
-                                                                     
+
                         sw.WriteLine(""); SubjectRowCount++;
-                                           
+
                         if (SubjectRowCount < 47)
                         {
                             int rCoun = 47 - SubjectRowCount;
@@ -548,7 +634,8 @@ namespace MemoPrintingUtility.Controllers
                         string Division = string.Empty;
 
 
-                        if (TotalMark > 560 && TotalMark <= 767) {
+                        if (TotalMark > 560 && TotalMark <= 767)
+                        {
 
                             Division = "PASS";
                         }
@@ -565,7 +652,7 @@ namespace MemoPrintingUtility.Controllers
                             Division = "FIRST  DIVISION";
                         }
 
-                        if (TotalMark > 1120 && TotalMark <=1160)
+                        if (TotalMark > 1120 && TotalMark <= 1160)
                         {
 
                             Division = "DSTIN. DIVISION";
@@ -621,19 +708,23 @@ namespace MemoPrintingUtility.Controllers
             string MaxMarks = string.Empty;
             string MinMarks = string.Empty;
             string Occupined = string.Empty;
+            string internalMarks = string.Empty;
             if (sub != null && sub.Count() > 0)
             {
                 SbName = sub[0].SubjectName;
                 MaxMarks = sub[0].MaxMark;
                 MinMarks = sub[0].MinMark;
+                internalMarks = sub[0].InternalMark;
 
             }
+
             lst.Add(new StudentInformation()
             {
                 SubjectCode = SubCode,
                 SubjectName = SbName,
                 MinMarks = MinMarks,
                 SubjectExternalMarks = MaxMarks,
+                SubjectInternalMarks = internalMarks,
                 ExernalMarks = MarksScored,
                 InternalMarks = internals,
                 AcadmicYear = Academic.ChangeToMonthandYear(),

@@ -228,7 +228,8 @@ namespace MemoPrintingUtility.Controllers
                 var lstSubjectDetails = BoMemoService.getSubjectRangeInstance().GetSubjectDetailsForRangeYr();
                 lstSubjectDetails = lstSubjectDetails.OrderBy(x => x.CourseName).ThenBy(x => x.Year).ToList();
 
-                return Json(lstSubjectDetails, JsonRequestBehavior.AllowGet);
+                var data = new { lstSubjectDetails= lstSubjectDetails, count = lstSubjectDetails.Sum(x=>x.Count) };
+                return Json(data,  JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -297,11 +298,12 @@ namespace MemoPrintingUtility.Controllers
                   
 
 
-                    s.RangeStart = Convert.ToInt32(yrCode.ToString("D" + 1) + s.RangeStart.ToString("D" + 5));
-                    s.RangeEnd = Convert.ToInt32(yrCode.ToString("D" + 1) + (s.RangeEnd - 1).ToString("D" + 5));
+                    s.RangeStart = Convert.ToInt32(yrCode.ToString("D" + 1) + s.RangeStart.ToString("D" + 7));
+                    s.RangeEnd = Convert.ToInt32(yrCode.ToString("D" + 1) + (s.RangeEnd - 1).ToString("D" + 7));
                 }
 
-                return Json(lstSubjectDetails, JsonRequestBehavior.AllowGet);
+                var data = new { lstSubjectDetails = lstSubjectDetails, count = lstSubjectDetails.Sum(x => x.Count) };
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -311,7 +313,7 @@ namespace MemoPrintingUtility.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveYrsCodes(List<SubjectRangeEntity> lstSubjects, Int32 RangeFrom, Int32 Gap)
+        public ActionResult SaveYrsCodes( Int32 RangeFrom, Int32 Gap)
         {
             bool status = false;
             int RF = RangeFrom;
@@ -349,33 +351,32 @@ namespace MemoPrintingUtility.Controllers
 
             foreach (var s in lstSubjectDetails)
             {
-                if (s.Year == 1 && s.Sem == 1)
+                if (s.Year == 1)
                 {
                     yrCode = 1;
                 }
-               
 
-                if (s.Year == 2 && s.Sem == 1)
+
+                if (s.Year == 2)
+                {
+                    yrCode = 2;
+                }
+
+
+
+
+                if (s.Year == 3)
                 {
                     yrCode = 3;
                 }
 
-                
 
 
-                if (s.Year == 3 && s.Sem == 1)
-                {
-                    yrCode = 5;
-                }
 
+                s.RangeStart = Convert.ToInt32(yrCode.ToString("D" + 1) + s.RangeStart.ToString("D" + 7));
+                s.RangeEnd = Convert.ToInt32(yrCode.ToString("D" + 1) + (s.RangeEnd - 1).ToString("D" + 7));
 
-               
-
-
-                s.RangeStart = Convert.ToInt32(yrCode.ToString("D" + 1) + s.RangeStart.ToString("D" + 5));
-                s.RangeEnd = Convert.ToInt32(yrCode.ToString("D" + 1) + (s.RangeEnd - 1).ToString("D" + 5));
-
-                //sdBoMemoService.getSubjectRangeInstance().InsertSubjectYRCode(s);
+                BoMemoService.getSubjectRangeInstance().InsertSubjectCodeYear(s);
             }
 
 

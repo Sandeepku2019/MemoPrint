@@ -65,5 +65,27 @@ namespace MemoPrintingUtility.DA.Properties {
                 return ((string)(this["kupostConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=14.139.85.68,3339;Initial Catalog=ExPost;User ID=sa;Password=Sqlku123" +
+            "")]
+        public string ExPostConnectionString {
+            get {
+                return ((string)(this["ExPostConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=14.139.85.68,3339;Initial Catalog=kudevdb;User ID=sa;Password=Sqlku12" +
+            "3")]
+        public string kudevdbConnectionString2 {
+            get {
+                return ((string)(this["kudevdbConnectionString2"]));
+            }
+        }
     }
 }

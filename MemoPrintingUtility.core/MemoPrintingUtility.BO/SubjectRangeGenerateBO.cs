@@ -27,5 +27,11 @@ namespace MemoPrintingUtility.BO
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
              DAFactory.GetSubjectRangeService().InsertSubjectCode(LstsubjectCode);
         }
+
+        public void InsertSubjectCodeYear(SubjectRangeEntity LstsubjectCode)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            DAFactory.GetSubjectRangeService().InsertSubjectCodeYear(LstsubjectCode);
+        }
     }
 }

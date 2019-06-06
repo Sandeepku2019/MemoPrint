@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ExPost" Class="ExPostDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=14.139.85.68,3339;Initial Catalog=ExPost;User ID=sa" SettingsObjectName="MemoPrintingUtility.BO.Properties.Settings" SettingsPropertyName="ExPostConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.InsertSubjectRangeCodeYear" Method="InsertSubjectRangeCodeYear">
+    <Parameter Name="subjectCode" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="subjectName" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CourseName" Parameter="courseName" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Course" Parameter="course" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Count" Parameter="count" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RangeFrom" Parameter="rangeFrom" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RangEnd" Parameter="rangEnd" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

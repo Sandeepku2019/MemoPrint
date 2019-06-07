@@ -81,15 +81,15 @@ namespace MemoPrintingUtility.Controllers
                 {
 
                     string PrevColcode = "";
-                    bool ColPagebrk = false;
+                    //bool ColPagebrk = false;
 
                     int series = 0;
-                    foreach (var colcode in lstColCodes)
-                    {
+                    //foreach (var colcode in lstColCodes)
+                    //{
 
-                        List<string> HallticketNumbers = lstPREdata.Where(y => y.ColCode.Trim() == colcode.Trim()).OrderBy(x => x.HTNO).Select(x => x.HTNO).Distinct().ToList<string>();
+                        List<string> HallticketNumbers = lstPREdata.OrderBy(x => x.HTNO).Select(x => x.HTNO).Distinct().ToList<string>();
                         bool isExstudent = false;
-                        ColPagebrk = true;
+                        //ColPagebrk = true;
 
                         #region 
                         for (int i = 0; i < HallticketNumbers.Count; i++)
@@ -137,6 +137,9 @@ namespace MemoPrintingUtility.Controllers
                                 lstEntity = CnrEntityVertical(lstEntity, con.M14, con.Y14, con.HTNO, con.P14, "", "I", 4);
                                 lstEntity = CnrEntityVertical(lstEntity, con.M15, con.Y15, con.HTNO, con.P15, "", "I", 5);
                                 lstEntity = CnrEntityVertical(lstEntity, con.M16, con.Y16, con.HTNO, con.P16, "", "I", 6);
+                                lstEntity = CnrEntityVertical(lstEntity, con.M17, con.Y17, con.HTNO, con.P17, "", "I", 7);
+                                lstEntity = CnrEntityVertical(lstEntity, con.M18, con.Y18, con.HTNO, con.P18, "", "I", 8);
+                                lstEntity = CnrEntityVertical(lstEntity, con.M19, con.Y19, con.HTNO, con.P19, "", "I", 9);
 
                                 //2year
                                 lstEntity = CnrEntityVertical(lstEntity, con.M21, con.Y21, con.HTNO, con.P21, "", "II", 1);
@@ -223,41 +226,41 @@ namespace MemoPrintingUtility.Controllers
                                 PageBraker = addHeaderFooter(sw, 72, course);
                             }
 
-                            if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
-                            {
-                                ColPagebrk = false;
-                                int differ = 72 - PageBraker;
+                        //if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
+                        //{
+                        //    ColPagebrk = false;
+                        //    int differ = 73 - PageBraker;
 
-                                for (int h = 0; h < differ; h++)
-                                {
-                                    sw.WriteLine(" ");
-                                }
-
-
-                                PageBraker = addHeaderFooter(sw, 72, course);
-
-                            }
+                        //    for (int h = 0; h < differ; h++)
+                        //    {
+                        //        sw.WriteLine(" ");
+                        //    }
 
 
-                            if (PrevColcode == "")
-                            {
-                                PrevColcode = colcode;
-                            }
-                            #endregion
+                        //    PageBraker = addHeaderFooter(sw, 72, course);
 
-                            if (i == 0)
-                            {
-                                PageBraker = addHeaderFooter(sw, PageBraker, course);
-                                sw.WriteLine(nameformat);
-                            }
-                            else
-                            {
-                                sw.WriteLine(nameformat);
-                            }
+                        //}
 
 
-                           
-                            foreach (string yr in yrs)
+                        //if (PrevColcode == "")
+                        //{
+                        //    PrevColcode = colcode;
+                    //}
+                    #endregion
+
+                    if (i == 0)
+                    {
+                        PageBraker = addHeaderFooter(sw, PageBraker, course);
+                        sw.WriteLine(nameformat);
+                    }
+                    else
+                    {
+                        sw.WriteLine(nameformat);
+                    }
+
+
+
+                    foreach (string yr in yrs)
                             {
 
                                 string result = string.Empty;
@@ -438,7 +441,7 @@ namespace MemoPrintingUtility.Controllers
                             PageBraker = PageBraker + rowcount;
                         }
                         #endregion
-                    }
+                    //}
                 }
                 return fileNamedirectory + filename;
             }

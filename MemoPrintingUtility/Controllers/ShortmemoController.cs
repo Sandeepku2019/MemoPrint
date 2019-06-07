@@ -468,7 +468,7 @@ namespace MemoPrintingUtility.Controllers
                         }
                         if (i == 0)
                         {
-                            sw.WriteLine("");
+                            //sw.WriteLine("");
                             sw.WriteLine("");
                             sw.WriteLine("");
                             sw.WriteLine("");
@@ -485,15 +485,15 @@ namespace MemoPrintingUtility.Controllers
                         string SN_1 = lstStunsfirst[0].StudentName == null ? "" : lstStunsfirst[0].StudentName;
                         string CC_1 = lstStunsfirst[0].collegecode == null ? "" : lstStunsfirst[0].collegecode;
 
-                        string CourseDetails = GetSpaces(13) + course + " " + Syear + " YR " + Ssem + " SEM   NOV/DEC ." + (DateTime.Now.Year - 1).ToString();
-                        CourseDetails = CourseDetails + GetSpaces(72 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy");
+                        string CourseDetails = GetSpaces(12) + course + " " + Syear + " YR " + Ssem + " SEM   NOV/DEC ." + (DateTime.Now.Year - 1).ToString();
+                        CourseDetails = CourseDetails + GetSpaces(73 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy");
 
 
 
 
-                        string CondidateRow = GetSpaces(13) + SN_1 + GetSpaces(61 - SN_1.Length);
-                        string FatherRow = GetSpaces(13) + FN_1;
-                        FatherRow = FatherRow + GetSpaces(72 - FatherRow.Length) + HallTicket_1 + GetSpaces(10 - HallTicket_1.Length);
+                        string CondidateRow = GetSpaces(12) + SN_1 + GetSpaces(61 - SN_1.Length);
+                        string FatherRow = GetSpaces(12) + FN_1;
+                        FatherRow = FatherRow + GetSpaces(73 - FatherRow.Length) + HallTicket_1 + GetSpaces(10 - HallTicket_1.Length);
 
 
                         //string ColCodeRow = CC_1 + GetSpaces(65 - CC_1.Length) + gap + CC_1 + GetSpaces(65 - CC_1.Length);
@@ -512,15 +512,15 @@ namespace MemoPrintingUtility.Controllers
                         sw.WriteLine("");
 
                         sw.WriteLine("");
-                        sw.WriteLine("");
+                        //sw.WriteLine("");
 
                         int rowCount = 0;
 
 
                         int memorows = 0;
-                        for (int j = 0; j < 39; j++)
+                        for (int j = 0; j < 28; j++)
                         {
-                            if (memorows < 39)
+                            if (memorows < 28)
                             {
                                 if (lstStunsfirst.Count - 1 < j)
                                 {
@@ -528,7 +528,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
 
 
-                                if (lstStunsfirst[j].SubjectName.Length < 51)
+                                if (lstStunsfirst[j].SubjectName.Length < 39)
                                 {
                                     SingleLingSubjectBCP(sw, j, lstStunsfirst, lstBCASubject);
                                 }
@@ -537,9 +537,10 @@ namespace MemoPrintingUtility.Controllers
 
                         }
 
-                        string totalMarks = GetSpaces(13) + ConvertToWords(lstStunsfirst[0].TotalMarks);
+                        int tM = Convert.ToInt32(lstStunsfirst[0].TotalMarks);
+                        string totalMarks = GetSpaces(12) + tM.ToString() + "(" + tM.NumberToWords().ToUpper() + ")";
                         sw.WriteLine(totalMarks);
-                        sw.WriteLine(GetSpaces(13) + lstStunsfirst[0].FinalResult);
+                        sw.WriteLine(GetSpaces(12) + lstStunsfirst[0].FinalResult);
 
 
 
@@ -549,13 +550,17 @@ namespace MemoPrintingUtility.Controllers
                         sw.WriteLine("");
                         sw.WriteLine("");
                         sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
 
 
                         sw.WriteLine("");
                         sw.WriteLine("");
                         sw.WriteLine("");
                         sw.WriteLine("");
-                        i++;
+                        sw.WriteLine("");
+                        //i++;
 
 
                     }
@@ -604,7 +609,7 @@ namespace MemoPrintingUtility.Controllers
                 string SubjectAndGrades = string.Empty;
                 if (i < lstStunsfirst.Count)
                 {
-                    SubjectAndGrades = SubjectAndGrades + lstStunsfirst[i].SubjectName + GetSpaces(51 - lstStunsfirst[i].SubjectName.Length);
+                    SubjectAndGrades = SubjectAndGrades + lstStunsfirst[i].SubjectName + GetSpaces(50 - lstStunsfirst[i].SubjectName.Length);
 
                     string SubExternal = string.Empty;
                     if (lstStunsfirst[i].SubjectExternalMarks != null)
@@ -627,7 +632,7 @@ namespace MemoPrintingUtility.Controllers
                         Subinternal = lstStunsfirst[i].SubjectInternalMarks.ChangeINT().ToString("D" + 3);
                     }
                     else
-                    { Subinternal = " -- "; }
+                    { Subinternal = "- -"; }
 
 
                     string inernal = string.Empty;
@@ -636,27 +641,32 @@ namespace MemoPrintingUtility.Controllers
                         inernal = lstStunsfirst[i].InternalMarks;
                     }
                     else
-                    { inernal = " -- "; }
+                    { inernal = "- -"; }
 
                     SubjectAndGrades = SubjectAndGrades + Subinternal + GetSpaces(4 - Subinternal.Length);
-                    SubjectAndGrades = SubjectAndGrades + inernal + GetSpaces(4 - inernal.Length);
+                    SubjectAndGrades = SubjectAndGrades + inernal + GetSpaces(5 - inernal.Length);
 
                     int totalMarks = Convert.ToInt32(SubExternal.ChangeINT()) + Convert.ToInt32(Subinternal.ChangeINT());
                     int OccupiedMarks = Convert.ToInt32(External.ChangeINT()) + Convert.ToInt32(inernal.ChangeINT());
 
                     string TM = "";
-                    if (totalMarks == 0)
-                    {
-                        TM = "";
-                    }
+                    //if (totalMarks == 0)
+                    //{
+                    //    TM = "";
+                    //}
+                    //else
+                    //{
+                    if (Subinternal == "- -")
+                    { TM = SubExternal; }
                     else
                     {
-                         totalMarks.ToString("D" + 3);
+                        totalMarks.ToString("D" + 3);
                     }
+                    //}
 
 
-                    SubjectAndGrades = SubjectAndGrades + TM + GetSpaces(4 - TM.Length);
-                    SubjectAndGrades = SubjectAndGrades + OccupiedMarks.ToString("D" + 3).Truncate(3) + GetSpaces(4 - OccupiedMarks.ToString("D" + 3).Truncate(3).Length);
+                    SubjectAndGrades = SubjectAndGrades + TM + GetSpaces(5 - TM.Length);
+                    SubjectAndGrades = SubjectAndGrades + OccupiedMarks.ToString("D" + 3).Truncate(3) + GetSpaces(6 - OccupiedMarks.ToString("D" + 3).Truncate(3).Length);
 
                     string SubjectResult = string.Empty;
 
@@ -685,7 +695,7 @@ namespace MemoPrintingUtility.Controllers
                 {
                     if (flag1 == false)
                     {
-                        SubjectAndGrades = SubjectAndGrades + dotedrow + GetSpaces(51 - dotedrow.Length);
+                        SubjectAndGrades = SubjectAndGrades + dotedrow + GetSpaces(50 - dotedrow.Length);
                         SubjectAndGrades = SubjectAndGrades + space + GetSpaces(4 - space.Length);
                         SubjectAndGrades = SubjectAndGrades + space + GetSpaces(4 - space.Length);
 
@@ -1381,7 +1391,7 @@ namespace MemoPrintingUtility.Controllers
         private static String ConvertToWords(String numb)
         {
             String val = "", wholeNo = numb, points = "", andStr = "", pointStr = "";
-            String endStr = "Only";
+            String endStr = "";
             try
             {
                 int decimalPlace = numb.IndexOf(".");

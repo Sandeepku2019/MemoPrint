@@ -707,7 +707,7 @@ namespace MemoPrintingUtility.Controllers
                             {
                                 if (StudentConsInformatio != null && StudentConsInformatio.Count > 0)
                                 {
-                                    rowcount = rowcount + 1;
+                                    rowcount = rowcount + 2;
                                 }
                                 rowcount = rowcount + 5;
 
@@ -837,37 +837,37 @@ namespace MemoPrintingUtility.Controllers
                                 #endregion
 
 
-                                //#region Subject Internal Mark 
-                                //string SubjectintCons = string.Empty;
+                                #region Subject Internal Mark 
+                                string SubjectintCons = string.Empty;
 
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S1, ConsDetails.R1);
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S1, ConsDetails.R1);
 
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S2, ConsDetails.R2);
-
-
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S3, ConsDetails.R3);
-
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S4, ConsDetails.R4);
-
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S5, ConsDetails.R5);
-
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S6, ConsDetails.R6);
-
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S7, ConsDetails.R7);
-
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S8, ConsDetails.R8);
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S2, ConsDetails.R2);
 
 
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S9, ConsDetails.R9);
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S3, ConsDetails.R3);
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S4, ConsDetails.R4);
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S5, ConsDetails.R5);
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S6, ConsDetails.R6);
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S7, ConsDetails.R7);
+
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S8, ConsDetails.R8);
 
 
-                                //SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S10, ConsDetails.R10);
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S9, ConsDetails.R9);
 
-                                //SubjectCONSMarks_S = SubjectCONSMarks_S + SubjectintCons;
 
-                                //sw.WriteLine(SubjectCONSMarks_S);
+                                SubjectintCons = ConcatenateSubjectMarks(SubjectintCons, ConsDetails.S10, ConsDetails.R10);
 
-                                //#endregion
+                                SubjectCONSMarks_S = SubjectCONSMarks_S + SubjectintCons;
+
+                                sw.WriteLine(SubjectCONSMarks_S);
+
+                                #endregion
 
                             }
                             #endregion

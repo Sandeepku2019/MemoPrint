@@ -782,7 +782,11 @@ namespace MemoPrintingUtility.DA
 
                                           Result = stu.RESULT,
                                           Part1 = stu.C_PRT1,
-                                          Part2 = stu.C_PRT2
+                                          Part2 = stu.C_PRT2,
+
+                                          Part1Div = stu.C_PRT1DIV,
+                                          Part2Div = stu.C_PRT2DIV
+
 
                                       }).ToList();
 

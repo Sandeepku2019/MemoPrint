@@ -618,36 +618,6 @@
       <Column Name="DEAFDUM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_GetSDLCResultData_TRReport" Method="sp_GetSDLCResultData_TRReport">
-    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(200)" />
-    <ElementType Name="sp_GetSDLCResultData_TRReportResult">
-      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="TP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SUB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CLM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PC" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="mod1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="mod2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="sts" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="GRACE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FLOTATION" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MALLPRACTICE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="TOTAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="manual" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.sp_GetSDLCConData_TRReport_ART" Method="sp_GetSDLCConData_TRReport_ART">
     <ElementType Name="sp_GetSDLCConData_TRReport_ARTResult">
       <Column Name="CODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -1032,6 +1002,38 @@
       <Column Name="YR11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="YR22" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="YR33" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetSDLCResultData_TRReport" Method="sp_GetSDLCResultData_TRReport">
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(200)" />
+    <ElementType Name="sp_GetSDLCResultData_TRReportResult">
+      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CLM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PC" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="mod1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="mod2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sts" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRACE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FLOTATION" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MALLPRACTICE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TOTAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="manual" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT1DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT2DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

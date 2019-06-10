@@ -55,6 +55,8 @@ namespace MemoPrintingUtility.Controllers
                 string fileNamedirectory = @"D:\TabularReport\";
                 string filename = course + DateTime.Now.ToString("ddMMyyyy") + "_SDLC.txt";
 
+                int rownum = 0;
+
                 // check for Directory
                 if (!Directory.Exists(fileNamedirectory))  // if it doesn't exist, create
                 {
@@ -90,7 +92,7 @@ namespace MemoPrintingUtility.Controllers
                     List<string> HallticketNumbers = lstPREdata.OrderBy(x => x.HTNO).Select(x => x.HTNO).Distinct().ToList<string>();
                     bool isExstudent = false;
                     //ColPagebrk = true;
-
+                    int rowcount = 0;
                     #region 
                     for (int i = 0; i < HallticketNumbers.Count; i++)
                     {
@@ -101,10 +103,10 @@ namespace MemoPrintingUtility.Controllers
                         int totalSUbjects = 0;
                         int passedSubject = 0;
                         bool detained = false;
-                        int rowcount = 0;
+                       
 
 
-                        if (HallTIcket == "6429144098")
+                        if (HallTIcket == "6421124014")
                         {
 
                         }
@@ -208,67 +210,100 @@ namespace MemoPrintingUtility.Controllers
                         string[] yrs = new string[] { "I", "II", "III" };
                         string[] Types = new string[] { "CONS.", "PRES." };
 
-                        #region Page break and Col break set up
-                        foreach (string y in yrs)
-                        {
-
-                            foreach (string ty in Types)
-                            {
-                                if (lstEntity.Where(x => x.Year == y && x.Type == ty).ToList().Count > 0)
-                                {
-                                    rowcount = rowcount + 2;
-                                }
-                            }
-
-
-                            rowcount = rowcount + 1;
-                        }
-                        rowcount = rowcount + 3;
-
-
-                        if ((PageBraker + rowcount) > 72)
-                        {
-                            int differ = 72 - PageBraker;
-
-                            for (int h = 0; h < differ; h++)
-                            {
-                                sw.WriteLine(" ");
-                            }
-
-
-                            PageBraker = addHeaderFooter(sw, 72, course);
-                        }
-
-                        //if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
+                        //#region Page break and Col break set up
+                        //int allpres = 0;
+                        //foreach (string y in yrs)
                         //{
-                        //    ColPagebrk = false;
-                        //    int differ = 73 - PageBraker;
+
+                        //    foreach (string ty in Types)
+                        //    {
+                        //        if (lstEntity.Where(x => x.Year == y && x.Type == ty && x.subjectCode != null).ToList().Count > 0)
+                        //        {
+                        //            rowcount = rowcount + 2;
+
+
+                        //        }
+                        //        if (ty == "PRES.")
+                        //        {
+                        //            if (lstEntity.Where(x => x.Year == y && x.Type == "PRES." && x.subjectCode != null).ToList().Count > 0)
+                        //            {
+                        //                allpres++;
+                        //            }
+                        //        }
+                        //    }
+
+                        //    if (lstEntity.Where(x => x.Year == y && x.Type == "CONS.").ToList().Count > 0 || lstEntity.Where(x => x.Year == y && x.Type == "PRES.").ToList().Count > 0)
+                        //    {
+                        //        rowcount = rowcount + 1;
+                        //    }
+                        //}
+                        //if (allpres == 3)
+                        //{
+                        //    rowcount = rowcount + 1;
+                        //}
+                        //if (lstEntity.Where(x => x.Type == "CONS." && x.subjectCode != null).ToList().Count == 0)
+                        //{
+                        //    rowcount = rowcount + 1;
+                        //}
+                        //rowcount = rowcount + 2;
+
+                        //if (allpres == 1 && lstEntity.Where(x => x.Type == "PRES." && x.Year == "III" && x.subjectCode != null).ToList().Count > 0)
+                        //{
+                           // rowcount = rowcount - 1;
+                        //}
+
+
+
+
+                        //if ((PageBraker + rowcount) > 72)
+                        //{
+                        //    int differ = 72 - PageBraker;
 
                         //    for (int h = 0; h < differ; h++)
                         //    {
                         //        sw.WriteLine(" ");
                         //    }
-
+                        //    //rowcount = 1;
 
                         //    PageBraker = addHeaderFooter(sw, 72, course);
-
                         //}
 
+                        ////if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
+                        ////{
+                        ////    ColPagebrk = false;
+                        ////    int differ = 73 - PageBraker;
 
-                        //if (PrevColcode == "")
-                        //{
-                        //    PrevColcode = colcode;
-                        //}
-                        #endregion
+                        ////    for (int h = 0; h < differ; h++)
+                        ////    {
+                        ////        sw.WriteLine(" ");
+                        ////    }
+
+
+                        ////    PageBraker = addHeaderFooter(sw, 72, course);
+
+                        ////}
+
+
+                        ////if (PrevColcode == "")
+                        ////{
+                        ////    PrevColcode = colcode;
+                        ////}
+                        //#endregion
 
                         if (i == 0)
                         {
-                            PageBraker = addHeaderFooter(sw, PageBraker, course);
+                            rowcount = addHeaderFooter(sw, 72, course, false, 72);
+                            //rowcount++;
                             sw.WriteLine(nameformat);
-                        }
+                            rowcount = (rowcount + 1) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount+2) : (rowcount + 1);
+                        } 
                         else
                         {
+
+
+                            
                             sw.WriteLine(nameformat);
+                            rowcount = (rowcount + 1) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 1);
                         }
 
 
@@ -436,19 +471,25 @@ namespace MemoPrintingUtility.Controllers
                                 if (lstpopulaateData.Count() > 0)
                                 {
 
-                                    sw.WriteLine(subjectstring + GetSpaces(100 - subjectstring.Length) + result + GetSpaces(13 - result.Length));
-                                    sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length));
+                                    
+                                   
                                     if (ty == "PRES.")
                                     {
+                                       
+                                        sw.WriteLine(subjectstring + GetSpaces(100 - subjectstring.Length) + result + GetSpaces(13 - result.Length));
+                                        ////rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
+                                        sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length));
+                                       // rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
                                         sw.WriteLine("          ..........................................................................................................................");
+                                        rowcount = (rowcount + 3) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 3);
                                     }
                                     else
                                     {
-                                        //if (ty == "PRES.")
-                                        //{
-                                        //    sw.WriteLine("                                                                                                     " + FinalResult);
-                                        //}
-                                        //sw.WriteLine("          ..........................................................................................................................");
+                                       
+                                        sw.WriteLine(subjectstring + GetSpaces(100 - subjectstring.Length) + result + GetSpaces(13 - result.Length));
+                                        //rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
+                                        sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length));
+                                        rowcount = (rowcount + 2) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 2);
                                     }
                                 }
                             }
@@ -456,10 +497,11 @@ namespace MemoPrintingUtility.Controllers
                             //.WriteLine("          ..........................................................................................................................");
                         }
                         sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(5) + Part1Div + GetSpaces(25) + "********* Part 2: " + Part2Marks + GetSpaces(5) + Part1Div + GetSpaces(15));
+                       // rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
                         sw.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        rowcount = (rowcount + 2) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount+2) : (rowcount + 2);
 
 
-                        PageBraker = PageBraker + rowcount;
                     }
                     #endregion
                     //}
@@ -501,14 +543,14 @@ namespace MemoPrintingUtility.Controllers
                 bool flag = false;
                 if (pre.CLM.Contains("PM"))
                 {
-                    YearS  = pre.CLM.Substring(2, 1);
+                    YearS = pre.CLM.Substring(2, 1);
                     flag = true;
                 }
                 else
                 {
                     YearS = pre.CLM.Substring(1, 1);
                 }
-                    
+
                 string YS = string.Empty;
 
                 if (YearS == "1")
@@ -535,7 +577,7 @@ namespace MemoPrintingUtility.Controllers
                 }
                 else
                 {
-                    int a =  pre.CLM.Length - pre.CLM.Substring(0, 2).Length;
+                    int a = pre.CLM.Length - pre.CLM.Substring(0, 2).Length;
                     orse = Convert.ToInt32(pre.CLM.Substring(2, a));
                 }
                 lstEntity.Add(new SDLC()
@@ -556,7 +598,7 @@ namespace MemoPrintingUtility.Controllers
         }
 
 
-        private int addHeaderFooter(StreamWriter sw, int rowcount, string course, bool cchange = false)
+        private int addHeaderFooter(StreamWriter sw, int rowcount, string course, bool cchange = false, int rows =  0)
         {
             if (rowcount == 0)
             {
@@ -577,8 +619,12 @@ namespace MemoPrintingUtility.Controllers
             }
             else if (rowcount == 72)
             {
+                for (int i = 0; i < (rowcount - rows); i++)
+                {
+                    sw.WriteLine(" ");
+                }
 
-                rowcount = 0;
+                rowcount = 1;
                 PageNumber++;
                 //sw.WriteLine(" ");
                 sw.WriteLine(" ");

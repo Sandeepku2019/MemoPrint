@@ -16675,6 +16675,8 @@ namespace MemoPrintingUtility.DA
 		
 		private string _RESULT;
 		
+		private string _FINAL_VALMARKS;
+		
 		private string _GRACE;
 		
 		private string _FLOTATION;
@@ -16939,6 +16941,22 @@ namespace MemoPrintingUtility.DA
 				if ((this._RESULT != value))
 				{
 					this._RESULT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FINAL_VALMARKS", DbType="NVarChar(255)")]
+		public string FINAL_VALMARKS
+		{
+			get
+			{
+				return this._FINAL_VALMARKS;
+			}
+			set
+			{
+				if ((this._FINAL_VALMARKS != value))
+				{
+					this._FINAL_VALMARKS = value;
 				}
 			}
 		}

@@ -777,7 +777,7 @@ namespace MemoPrintingUtility.DA
                                           Course = stu.CRS,
 
 
-                                          Marks = stu.MARKS,
+                                          Marks = stu.FINAL_VALMARKS,
                                           TotalMarks = stu.TOTAL_MARKS,
 
                                           Result = stu.RESULT,

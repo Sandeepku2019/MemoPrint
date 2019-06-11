@@ -106,7 +106,7 @@ namespace MemoPrintingUtility.Controllers
 
 
 
-                        if (HallTIcket == "6001135018")
+                        if (HallTIcket == "6001135008")
                         {
 
                         }
@@ -246,7 +246,7 @@ namespace MemoPrintingUtility.Controllers
                         string[] yrs = new string[] { "I", "II", "III" };
                         string[] Types = new string[] { "CONS.", "PRES." };
 
-                        //#region Page break and Col break set up
+                        #region Page break and Col break set up
                         //int allpres = 0;
                         //foreach (string y in yrs)
                         //{
@@ -324,7 +324,7 @@ namespace MemoPrintingUtility.Controllers
                         ////{
                         ////    PrevColcode = colcode;
                         ////}
-                        //#endregion
+                        #endregion
 
                         if (i == 0)
                         {
@@ -348,22 +348,6 @@ namespace MemoPrintingUtility.Controllers
                         {
 
                             string result = string.Empty;
-
-                            //if (yr == "I")
-                            //{
-                            //    result = yr1R;
-                            //}
-
-                            //if (yr == "II")
-                            //{
-                            //    result = yr2R;
-                            //}
-
-
-                            //if (yr == "III")
-                            //{
-                            //    result = yr3R;
-                            //}
                             foreach (string ty in Types)
                             {
                                 int subord = 1;
@@ -388,10 +372,10 @@ namespace MemoPrintingUtility.Controllers
 
                                 bool flag = false;
                                 bool abflag = false;
-
+                                bool subcount1 = false;
                                 if (lstpopulaateData.Count() > 0)
                                 {
-                                    if (lstpopulaateData.ToList()[0].Order > 1 && lstpopulaateData.ToList()[0].Type == "PRES.")
+                                    if (lstpopulaateData.OrderBy(z => z.Order).ToList()[0].Order > 1 && lstpopulaateData.ToList()[0].Type == "PRES.")
                                     {
 
                                         flag = true;
@@ -402,9 +386,13 @@ namespace MemoPrintingUtility.Controllers
                                         }
                                     }
                                 }
+                                if(lstpopulaateData.Where(x => x.Type == "PRES.").ToList().Count() == 1)
+                                {
+                                    subcount1 = true;
+                                }
                                 bool isprac = false;
                                 int PSOrder = 0;
-                                var pracStratOrder = lstpopulaateData.Where(x => x.Type == "PRES." && x.subjectCode.Contains("(P)")).OrderBy(z => z.Order).ToList();
+                                var pracStratOrder = lstpopulaateData.Where(x =>  x.subjectCode.Contains("(P)")).OrderBy(z => z.Order).ToList();
                                 if (pracStratOrder != null && pracStratOrder.Count > 0)
                                 {
                                     PSOrder = pracStratOrder[0].Order;
@@ -419,17 +407,37 @@ namespace MemoPrintingUtility.Controllers
                                     string umakspace = "";
                                     string intmarkspae = "";
                                     int ordr = sd.Order;
-                                    spaces = GetSpaces((ordr - subord) * 9);
-                                    umakspace = GetSpaces((ordr - subord) * 9);
+                                  
 
-                                    if (PSOrder == sd.Order)
+                                    if (PSOrder > sd.Order && PSOrder != 0)
                                     {
+                                        spaces = GetSpaces((ordr - subord) * 8);
+                                        umakspace = GetSpaces((ordr - subord) * 8);
+                                    }
+
+                                    if (PSOrder < sd.Order && PSOrder != 0)
+                                    {
+                                        spaces = GetSpaces((ordr - subord) * 11);
+                                        umakspace = GetSpaces((ordr - subord) *11);
+                                    }
+
+                                    if (PSOrder == 0)
+                                    {
+                                        spaces = GetSpaces((ordr - subord) * 8);
+                                        umakspace = GetSpaces((ordr - subord) * 8);
+                                    }
+
+                                    if (PSOrder == sd.Order && PSOrder != 0)
+                                    {
+                                        spaces = GetSpaces((ordr - subord) * 8);
+                                        umakspace = GetSpaces((ordr - subord) * 8);
                                         spaces = spaces + GetSpaces(3);
                                     }
 
-                                    if (flag == true)
+                                    if (flag == true  )
                                     {
                                         spaces = spaces + GetSpaces(4);
+                                        
                                         umakspace = umakspace + GetSpaces(4);
                                         umakspace = umakspace + GetSpaces(1);
                                         flag = false;
@@ -439,6 +447,11 @@ namespace MemoPrintingUtility.Controllers
 
                                             umakspace = umakspace + GetSpaces(1);
                                             abflag = false;
+                                        }
+                                        if (subcount1 == true)
+                                        {
+                                            umakspace = umakspace + GetSpaces(1);
+                                            subcount1 = false;
                                         }
                                     }
 

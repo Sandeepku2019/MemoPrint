@@ -149,11 +149,14 @@ namespace MemoPrintingUtility.Controllers
                             if (con.P18 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M18, con.Y18, con.HTNO, con.P18, "", "I", order1++); }
                             if (con.P19 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M19, con.Y19, con.HTNO, con.P19, "", "I", order1++); }
 
-                            if (con.PM11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM11, null, con.HTNO, con.P11 + "(P)", "", "I", order1++); }
-                            if (con.PM12 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM12, null, con.HTNO, con.P12 + "(P)", "", "I", order1++); }
-                            if (con.PM14 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM14, null, con.HTNO, con.P14 + "(P)", "", "I", order1++); }
-                            if (con.PM15 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM15, null, con.HTNO, con.P15 + "(P)", "", "I", order1++); }
-                            if (con.PM16 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM16, null, con.HTNO, con.P16 + "(P)", "", "I", order1++); }
+                            if (con.PM11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM11, con.PA11, con.HTNO, con.P11 + "(P)", "", "I", order1++); }
+                            if (con.PM12 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM12, con.PA12, con.HTNO, con.P12 + "(P)", "", "I", order1++); }
+                            if (con.PM14 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM14, con.PA14, con.HTNO, con.P14 + "(P)", "", "I", order1++); }
+                            if (con.PM15 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM15, con.PA15, con.HTNO, con.P15 + "(P)", "", "I", order1++); }
+                            if (con.PM16 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM16, con.PA16, con.HTNO, con.P16 + "(P)", "", "I", order1++); }
+                            if (con.PM17 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM17, con.PA17, con.HTNO, con.P17 + "(P)", "", "I", order1++); }
+                            if (con.PM18 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM18, con.PA18, con.HTNO, con.P18 + "(P)", "", "I", order1++); }
+                            if (con.PM19 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM19, con.PA19, con.HTNO, con.P19 + "(P)", "", "I", order1++); }
 
 
                             //2year
@@ -169,11 +172,15 @@ namespace MemoPrintingUtility.Controllers
                             if (con.P28 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M28, con.Y28, con.HTNO, con.P28, "", "II", order2++); }
                             if (con.P29 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M29, con.Y29, con.HTNO, con.P29, "", "II", order2++); }
 
-                            if (con.PM21 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM21, null, con.HTNO, con.P21 + "(P)", "", "II", order2++); }
-                            if (con.PM22 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM22, null, con.HTNO, con.P22 + "(P)", "", "II", order2++); }
-
-                            if (con.PM24 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM24, null, con.HTNO, con.P24 + "(P)", "", "II", order2++); }
-                            if (con.PM25 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM25, null, con.HTNO, con.P25 + "(P)", "", "II", order2++); }
+                            if (con.PM21 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM21, con.PA21, con.HTNO, con.P21 + "(P)", "", "II", order2++); }
+                            if (con.PM22 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM22, con.PA22, con.HTNO, con.P22 + "(P)", "", "II", order2++); }
+                            if (con.PM23 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM23, con.PA23, con.HTNO, con.P23 + "(P)", "", "II", order2++); }
+                            if (con.PM24 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM24, con.PA24, con.HTNO, con.P24 + "(P)", "", "II", order2++); }
+                            if (con.PM25 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM25, con.PA25, con.HTNO, con.P25 + "(P)", "", "II", order2++); }
+                            if (con.PM26 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM26, con.PA26, con.HTNO, con.P26 + "(P)", "", "II", order2++); }
+                            if (con.PM27 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM27, con.PA27, con.HTNO, con.P27 + "(P)", "", "II", order2++); }
+                            if (con.PM28 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM28, con.PA28, con.HTNO, con.P28 + "(P)", "", "II", order2++); }
+                            if (con.PM29 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM29, con.PA29, con.HTNO, con.P29 + "(P)", "", "II", order2++); }
                             //3year
                             int order3 = 1;
 
@@ -187,13 +194,19 @@ namespace MemoPrintingUtility.Controllers
                             if (con.P38 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M38, con.Y38, con.HTNO, con.P38, "", "III", order3++); }
                             if (con.P39 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M39, con.Y39, con.HTNO, con.P39, "", "III", order3++); }
                             if (con.P310 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M310, con.Y310, con.HTNO, con.P310, "", "III", order3++); }
+                            if (con.P311 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M311, con.Y311, con.HTNO, con.P311, "", "III", order3++); }
 
-                            if (con.PM31 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM31, null, con.HTNO, con.P31 + "(P)", "", "III", order3++); }
-                            if (con.PM32 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM32, null, con.HTNO, con.P32 + "(P)", "", "III", order3++); }
-                            if (con.PM33 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM33, null, con.HTNO, con.P33 + "(P)", "", "III", order3++); }
-                            if (con.PM34 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM34, null, con.HTNO, con.P34 + "(P)", "", "III", order3++); }
-                            if (con.PM35 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM35, null, con.HTNO, con.P35 + "(P)", "", "III", order3++); }
-                            if (con.PM36 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM36, null, con.HTNO, con.P36 + "(P)", "", "III", order3++); }
+                            if (con.PM31 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM31, con.PA31, con.HTNO, con.P31 + "(P)", "", "III", order3++); }
+                            if (con.PM32 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM32, con.PA32, con.HTNO, con.P32 + "(P)", "", "III", order3++); }
+                            if (con.PM33 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM33, con.PA33, con.HTNO, con.P33 + "(P)", "", "III", order3++); }
+                            if (con.PM34 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM34, con.PA34, con.HTNO, con.P34 + "(P)", "", "III", order3++); }
+                            if (con.PM35 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM35, con.PA35, con.HTNO, con.P35 + "(P)", "", "III", order3++); }
+                            if (con.PM36 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM36, con.PA36, con.HTNO, con.P36 + "(P)", "", "III", order3++); }
+                            if (con.PM37 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM37, con.PA37, con.HTNO, con.P37 + "(P)", "", "III", order3++); }
+                            if (con.PM38 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM38, con.PA38, con.HTNO, con.P38 + "(P)", "", "III", order3++); }
+                            if (con.PM39 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM39, con.PA39, con.HTNO, con.P39 + "(P)", "", "III", order3++); }
+                            if (con.PM310 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM310, con.PA310, con.HTNO, con.P310 + "(P)", "", "III", order3++); }
+                            if (con.PM311 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM311, con.PA311, con.HTNO, con.P311 + "(P)", "", "III", order3++); }
 
                         }
 

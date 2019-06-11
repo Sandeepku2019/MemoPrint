@@ -122,45 +122,68 @@ namespace MemoPrintingUtility.Entity
         public string M311 { get; set; }
         public string P310 { get; set; }
         public string P311 { get; set; }
-        public string PA11 { get; set; }
-        public string PA12 { get; set; }
-        public string PA14 { get; set; }
 
-        public string PA15 { get; set; }
-        public string PA16 { get; set; }
-        public string PA21 { get; set; }
-        public string PA22 { get; set; }
-        public string PA24 { get; set; }
-        public string PA25 { get; set; }
-        public string PA26 { get; set; }
-        public string PA27 { get; set; }
-        public string PA28 { get; set; }
-        public string PA31 { get; set; }
-        public string PA32 { get; set; }
-        public string PA33 { get; set; }
-        public string PA34 { get; set; }
-        public string PA35 { get; set; }
-        public string PA36 { get; set; }
         public string PM11 { get; set; }
         public string PM12 { get; set; }
+        public string PM13 { get; set; }
         public string PM14 { get; set; }
         public string PM15 { get; set; }
         public string PM16 { get; set; }
+        public string PM17 { get; set; }
+        public string PM18 { get; set; }
+        public string PM19 { get; set; }
         public string PM21 { get; set; }
         public string PM22 { get; set; }
+        public string PM23 { get; set; }
         public string PM24 { get; set; }
         public string PM25 { get; set; }
         public string PM26 { get; set; }
         public string PM27 { get; set; }
         public string PM28 { get; set; }
+        public string PM29 { get; set; }
         public string PM31 { get; set; }
         public string PM32 { get; set; }
         public string PM33 { get; set; }
         public string PM34 { get; set; }
         public string PM35 { get; set; }
         public string PM36 { get; set; }
+        public string PM37 { get; set; }
+        public string PM38 { get; set; }
+        public string PM39 { get; set; }
+        public string PM310 { get; set; }
+        public string PM311 { get; set; }
         public string Y310 { get; set; }
         public string Y311 { get; set; }
+
+        public string PA11 { get; set; }
+        public string PA12 { get; set; }
+        public string PA13 { get; set; }
+        public string PA14 { get; set; }
+        public string PA15 { get; set; }
+        public string PA16 { get; set; }
+        public string PA17 { get; set; }
+        public string PA18 { get; set; }
+        public string PA19 { get; set; }
+        public string PA21 { get; set; }
+        public string PA22 { get; set; }
+        public string PA23 { get; set; }
+        public string PA24 { get; set; }
+        public string PA25 { get; set; }
+        public string PA26 { get; set; }
+        public string PA27 { get; set; }
+        public string PA28 { get; set; }
+        public string PA29 { get; set; }
+        public string PA31 { get; set; }
+        public string PA32 { get; set; }
+        public string PA33 { get; set; }
+        public string PA34 { get; set; }
+        public string PA35 { get; set; }
+        public string PA36 { get; set; }
+        public string PA37 { get; set; }
+        public string PA38 { get; set; }
+        public string PA39 { get; set; }
+        public string PA310 { get; set; }
+        public string PA311 { get; set; }
 
 
 

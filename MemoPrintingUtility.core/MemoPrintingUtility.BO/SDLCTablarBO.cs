@@ -21,5 +21,11 @@ namespace MemoPrintingUtility.BO
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
             return DAFactory.GetSDLCInstance().GetPRESDataforSDLC(Course);
         }
+
+        public List<SDLCEntitySUB> GetSUBJECTforSDLC(string Course)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetSDLCInstance().GetSUBJECTforSDLC(Course);
+        }
     }
 }

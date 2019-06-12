@@ -9,6 +9,38 @@ namespace MemoPrintingUtility.DA
 {
     public class SDLTablarDA : ISDLTablarDA
     {
+        public List<SDLCEntitySUB> GetSUBJECTforSDLC(string Course)
+        {
+            try
+            {
+                MemoPrintDBDataContext KUPOContext = new MemoPrintDBDataContext();
+                KUPOContext.CommandTimeout = 260;
+
+                var subjects = KUPOContext.sp_GetSDLCSubData_TRReport();
+
+                var subdetails = (from sub in subjects
+                                  select new SDLCEntitySUB
+                                  {
+                                      SCODE = sub.SCODE,
+                                      CRS = sub.CRS,
+                                      YR = sub.YR,
+                                      MXMR = sub.MXMR,
+                                      MNMR = sub.MNMR,
+                                      PMXMR = sub.PMXMR,
+                                      PMNMR = sub.PMNMR
+
+
+                                  }).ToList();
+
+                return subdetails;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
         public List<SDLCEntityCON> GetConDataforSDLC(string Course)
         {
             try
@@ -785,7 +817,9 @@ namespace MemoPrintingUtility.DA
                                           Part2 = stu.C_PRT2,
 
                                           Part1Div = stu.C_PRT1DIV,
-                                          Part2Div = stu.C_PRT2DIV
+                                          Part2Div = stu.C_PRT2DIV,
+                                          NEW_C_PRT1 = stu.NEW_C_PRT1,
+                                          NEW_C_PRT2 = stu.NEW_C_PRT2
 
 
                                       }).ToList();
@@ -798,5 +832,6 @@ namespace MemoPrintingUtility.DA
                 throw ex;
             }
         }
+
     }
 }

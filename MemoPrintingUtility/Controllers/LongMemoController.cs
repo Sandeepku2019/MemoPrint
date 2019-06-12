@@ -263,7 +263,7 @@ namespace MemoPrintingUtility.Controllers
                             sw.WriteLine(""); SubjectRowCount++;
 
                             #region PRINTING
-
+                            
 
                             for (int j = 0; j < yrs.Length; j++)
                             {
@@ -276,30 +276,30 @@ namespace MemoPrintingUtility.Controllers
                                     if (j == 0 & z == 0)
                                     {
                                         StringBuilder builder = new StringBuilder();
-                                        builder.Append("I YEAR:");
+                                        builder.Append("" + ((char)27) + ((char)71) + "I YEAR:" + ((char)27) + ((char)72));
                                         sw.WriteLine(builder.ToString());
                                     }
 
                                     if (j == 1 & z == 0)
                                     {
-                                        sw.WriteLine("II YEAR I SEMESTER:");
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR I SEMESTER:" + ((char)27) + ((char)72));
                                     }
 
                                     if (j == 1 & z == 1)
                                     {
-                                        sw.WriteLine("II YEAR II SEMESTER:");
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR II SEMESTER:" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 0)
                                     {
-                                        sw.WriteLine("III YEAR I SEMESTER:");
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR I SEMESTER:" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 1)
                                     {
-                                        sw.WriteLine("III YEAR II SEMESTER:");
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR II SEMESTER:" + ((char)27) + ((char)72));
                                     }
 
 
@@ -322,7 +322,7 @@ namespace MemoPrintingUtility.Controllers
                                             TotalMark = TotalMark + OCMark;
                                             if (totalMark > 0)
                                             {
-                                                sw.WriteLine(Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + merge.AcadmicYear);
+                                                sw.WriteLine(Subject + GetSpaces(43 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(5 - OCMark.ToString().Length) + merge.AcadmicYear);
                                                 SubjectRowCount++;
                                             }
                                         }
@@ -374,7 +374,16 @@ namespace MemoPrintingUtility.Controllers
                                 Division = "FIRST DIVISION";
                             }
 
-                            sw.WriteLine(GetSpaces(13) + Status + "/" + Division);
+                            sw.WriteLine(GetSpaces(13) + Division);
+                            //sw.WriteLine(GetSpaces(13) + Status + "/" + Division);
+                            sw.WriteLine(" ");//65
+                            sw.WriteLine(" ");//66
+                            sw.WriteLine(" ");//67
+                            sw.WriteLine(" ");//68
+                            sw.WriteLine(GetSpaces(42) + "for");
+                            sw.WriteLine(" ");//70
+                            sw.WriteLine(" ");//71
+                            sw.WriteLine(" ");//72
                         }
                     }
 

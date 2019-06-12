@@ -12,5 +12,6 @@ namespace MemoPrintingUtility.BO
         List<SDLCEntityCON> GetConDataforSDLC(string Course);
 
         List<SDLCEntityPRES> GetPRESDataforSDLC(string Course);
+        List<SDLCEntitySUB> GetSUBJECTforSDLC(string Course);
     }
 }

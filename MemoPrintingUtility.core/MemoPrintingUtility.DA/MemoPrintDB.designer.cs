@@ -202,6 +202,13 @@ namespace MemoPrintingUtility.DA
 			return ((ISingleResult<sp_GetSDLCConData_TRReport_MPCResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetSDLCSubData_TRReport")]
+		public ISingleResult<sp_GetSDLCSubData_TRReportResult> sp_GetSDLCSubData_TRReport()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_GetSDLCSubData_TRReportResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetSDLCResultData_TRReport")]
 		public ISingleResult<sp_GetSDLCResultData_TRReportResult> sp_GetSDLCResultData_TRReport([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Course", DbType="VarChar(200)")] string course)
 		{
@@ -16642,6 +16649,230 @@ namespace MemoPrintingUtility.DA
 		}
 	}
 	
+	public partial class sp_GetSDLCSubData_TRReportResult
+	{
+		
+		private string _YR;
+		
+		private string _SCODE;
+		
+		private string _F;
+		
+		private string _OCODE;
+		
+		private string _MXMR;
+		
+		private string _MNMR;
+		
+		private string _PMXMR;
+		
+		private string _PMNMR;
+		
+		private string _DEPT;
+		
+		private System.Nullable<double> _ELEC;
+		
+		private string _INTM;
+		
+		private string _CRS;
+		
+		public sp_GetSDLCSubData_TRReportResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YR", DbType="NVarChar(255)")]
+		public string YR
+		{
+			get
+			{
+				return this._YR;
+			}
+			set
+			{
+				if ((this._YR != value))
+				{
+					this._YR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SCODE", DbType="NVarChar(255)")]
+		public string SCODE
+		{
+			get
+			{
+				return this._SCODE;
+			}
+			set
+			{
+				if ((this._SCODE != value))
+				{
+					this._SCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="NVarChar(255)")]
+		public string F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OCODE", DbType="NVarChar(255)")]
+		public string OCODE
+		{
+			get
+			{
+				return this._OCODE;
+			}
+			set
+			{
+				if ((this._OCODE != value))
+				{
+					this._OCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MXMR", DbType="NVarChar(255)")]
+		public string MXMR
+		{
+			get
+			{
+				return this._MXMR;
+			}
+			set
+			{
+				if ((this._MXMR != value))
+				{
+					this._MXMR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MNMR", DbType="NVarChar(255)")]
+		public string MNMR
+		{
+			get
+			{
+				return this._MNMR;
+			}
+			set
+			{
+				if ((this._MNMR != value))
+				{
+					this._MNMR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PMXMR", DbType="NVarChar(255)")]
+		public string PMXMR
+		{
+			get
+			{
+				return this._PMXMR;
+			}
+			set
+			{
+				if ((this._PMXMR != value))
+				{
+					this._PMXMR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PMNMR", DbType="NVarChar(255)")]
+		public string PMNMR
+		{
+			get
+			{
+				return this._PMNMR;
+			}
+			set
+			{
+				if ((this._PMNMR != value))
+				{
+					this._PMNMR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPT", DbType="NVarChar(255)")]
+		public string DEPT
+		{
+			get
+			{
+				return this._DEPT;
+			}
+			set
+			{
+				if ((this._DEPT != value))
+				{
+					this._DEPT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ELEC", DbType="Float")]
+		public System.Nullable<double> ELEC
+		{
+			get
+			{
+				return this._ELEC;
+			}
+			set
+			{
+				if ((this._ELEC != value))
+				{
+					this._ELEC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_INTM", DbType="NVarChar(255)")]
+		public string INTM
+		{
+			get
+			{
+				return this._INTM;
+			}
+			set
+			{
+				if ((this._INTM != value))
+				{
+					this._INTM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CRS", DbType="NVarChar(255)")]
+		public string CRS
+		{
+			get
+			{
+				return this._CRS;
+			}
+			set
+			{
+				if ((this._CRS != value))
+				{
+					this._CRS = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_GetSDLCResultData_TRReportResult
 	{
 		
@@ -16700,6 +16931,10 @@ namespace MemoPrintingUtility.DA
 		private string _C_PRT1DIV;
 		
 		private string _C_PRT2DIV;
+		
+		private string _NEW_C_PRT1;
+		
+		private string _NEW_C_PRT2;
 		
 		public sp_GetSDLCResultData_TRReportResult()
 		{
@@ -17149,6 +17384,38 @@ namespace MemoPrintingUtility.DA
 				if ((this._C_PRT2DIV != value))
 				{
 					this._C_PRT2DIV = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEW_C_PRT1", DbType="NVarChar(255)")]
+		public string NEW_C_PRT1
+		{
+			get
+			{
+				return this._NEW_C_PRT1;
+			}
+			set
+			{
+				if ((this._NEW_C_PRT1 != value))
+				{
+					this._NEW_C_PRT1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEW_C_PRT2", DbType="NVarChar(255)")]
+		public string NEW_C_PRT2
+		{
+			get
+			{
+				return this._NEW_C_PRT2;
+			}
+			set
+			{
+				if ((this._NEW_C_PRT2 != value))
+				{
+					this._NEW_C_PRT2 = value;
 				}
 			}
 		}

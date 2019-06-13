@@ -1161,7 +1161,7 @@ namespace MemoPrintingUtility.Controllers
                 List<BALConEntity> lstConInforamton = BoMemoService.getTabularReportInstance().GetBALConInformaion();
                 List<BALPresEntity> lsiPreInformation = BoMemoService.getTabularReportInstance().GetBalPresInformation(course);
 
-             
+
 
 
                 #region Formatting CON Data
@@ -1240,7 +1240,7 @@ namespace MemoPrintingUtility.Controllers
                             #endregion
                             lstEntity = CnrEntityVertical(lstEntity, lstPREStuns);
 
-                          
+
                             series++;
                             int totalSUbjects = 0;
                             int passedSubject = 0;
@@ -1534,7 +1534,7 @@ namespace MemoPrintingUtility.Controllers
                                         }
                                         else
                                         {
-                                            
+
                                             sw.WriteLine("        ...........................................................................................................................");
                                         }
                                     }
@@ -1841,6 +1841,20 @@ namespace MemoPrintingUtility.Controllers
                 });
             }
             return lstEntity;
+        }
+
+
+        /// <summary>
+        /// /Vertical TR report
+        /// </summary>
+        /// <param name="Psem"></param>
+        /// <param name="course"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GenerateTabularVerticalReport(string course)
+        {
+
+            return null;
         }
 
     }

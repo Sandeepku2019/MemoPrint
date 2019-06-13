@@ -24,4 +24,17 @@
         });
     };
 
+
+
+    var GenerateTabulationVRUrl = "/TabularReport/GenerateTabularVerticalReport"
+    this.GenerateTabulationVR = function (Course) {
+
+        return result = $http({
+            method: "Post",
+            url: GenerateTabulationVRUrl,
+            params: { course: Course }
+
+        });
+    };
+
 });

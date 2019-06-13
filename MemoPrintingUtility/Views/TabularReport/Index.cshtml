@@ -17,6 +17,17 @@
                 <br />
             </div>
 
+            <div class="col-md-12 row">
+
+                <span class="col-md-4 text-left  text-right">Select TR Type :</span>
+                <p class="col-md-6">
+                    <select ng-model="TrType" class="form-control" ng-change="TrChange()">
+                        <option value="">-- Select TR Type---</option>
+                        <option ng-repeat="x in lstTRTypes" value="{{x.Id}}">{{x.TrName}}</option>
+                    </select>
+                </p>
+            </div>
+
 
             <div class="col-md-12 row">
 

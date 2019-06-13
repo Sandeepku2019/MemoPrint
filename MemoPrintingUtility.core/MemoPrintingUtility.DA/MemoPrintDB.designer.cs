@@ -208,6 +208,20 @@ namespace MemoPrintingUtility.DA
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course);
 			return ((ISingleResult<sp_GetSDLCResultData_TRReportResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.get_ConsDataforTRVert")]
+		public ISingleResult<get_ConsDataforTRVertResult> get_ConsDataforTRVert([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Course", DbType="VarChar(50)")] string course)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course);
+			return ((ISingleResult<get_ConsDataforTRVertResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_GetPresDataforTRVert")]
+		public ISingleResult<SP_GetPresDataforTRVertResult> SP_GetPresDataforTRVert([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Course", DbType="VarChar(50)")] string course)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course);
+			return ((ISingleResult<SP_GetPresDataforTRVertResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class PR_COURSE_SELECTResult
@@ -17149,6 +17163,1462 @@ namespace MemoPrintingUtility.DA
 				if ((this._C_PRT2DIV != value))
 				{
 					this._C_PRT2DIV = value;
+				}
+			}
+		}
+	}
+	
+	public partial class get_ConsDataforTRVertResult
+	{
+		
+		private string _CODE;
+		
+		private string _HTNO;
+		
+		private string _SEM;
+		
+		private string _P1;
+		
+		private string _M1;
+		
+		private string _S1;
+		
+		private string _R1;
+		
+		private string _A1;
+		
+		private string _P2;
+		
+		private string _M2;
+		
+		private string _S2;
+		
+		private string _R2;
+		
+		private string _A2;
+		
+		private string _P3;
+		
+		private string _M3;
+		
+		private string _S3;
+		
+		private string _R3;
+		
+		private string _A3;
+		
+		private string _P4;
+		
+		private string _M4;
+		
+		private string _S4;
+		
+		private string _R4;
+		
+		private string _A4;
+		
+		private string _P5;
+		
+		private string _M5;
+		
+		private string _S5;
+		
+		private string _R5;
+		
+		private string _A5;
+		
+		private string _P6;
+		
+		private string _M6;
+		
+		private string _S6;
+		
+		private string _R6;
+		
+		private string _A6;
+		
+		private string _P7;
+		
+		private string _M7;
+		
+		private string _S7;
+		
+		private string _R7;
+		
+		private string _A7;
+		
+		private string _P8;
+		
+		private string _M8;
+		
+		private string _S8;
+		
+		private string _R8;
+		
+		private string _A8;
+		
+		private string _P9;
+		
+		private string _M9;
+		
+		private string _S9;
+		
+		private string _R9;
+		
+		private string _A9;
+		
+		private string _P10;
+		
+		private string _M10;
+		
+		private string _S10;
+		
+		private string _R10;
+		
+		private string _A10;
+		
+		private string _RES;
+		
+		private string _SGPA;
+		
+		private string _EXAMMONT;
+		
+		public get_ConsDataforTRVertResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE", DbType="NVarChar(255)")]
+		public string CODE
+		{
+			get
+			{
+				return this._CODE;
+			}
+			set
+			{
+				if ((this._CODE != value))
+				{
+					this._CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HTNO", DbType="NVarChar(255)")]
+		public string HTNO
+		{
+			get
+			{
+				return this._HTNO;
+			}
+			set
+			{
+				if ((this._HTNO != value))
+				{
+					this._HTNO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEM", DbType="NVarChar(255)")]
+		public string SEM
+		{
+			get
+			{
+				return this._SEM;
+			}
+			set
+			{
+				if ((this._SEM != value))
+				{
+					this._SEM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P1", DbType="NVarChar(255)")]
+		public string P1
+		{
+			get
+			{
+				return this._P1;
+			}
+			set
+			{
+				if ((this._P1 != value))
+				{
+					this._P1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M1", DbType="NVarChar(255)")]
+		public string M1
+		{
+			get
+			{
+				return this._M1;
+			}
+			set
+			{
+				if ((this._M1 != value))
+				{
+					this._M1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S1", DbType="NVarChar(255)")]
+		public string S1
+		{
+			get
+			{
+				return this._S1;
+			}
+			set
+			{
+				if ((this._S1 != value))
+				{
+					this._S1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R1", DbType="NVarChar(255)")]
+		public string R1
+		{
+			get
+			{
+				return this._R1;
+			}
+			set
+			{
+				if ((this._R1 != value))
+				{
+					this._R1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="NVarChar(255)")]
+		public string A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P2", DbType="NVarChar(255)")]
+		public string P2
+		{
+			get
+			{
+				return this._P2;
+			}
+			set
+			{
+				if ((this._P2 != value))
+				{
+					this._P2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M2", DbType="NVarChar(255)")]
+		public string M2
+		{
+			get
+			{
+				return this._M2;
+			}
+			set
+			{
+				if ((this._M2 != value))
+				{
+					this._M2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S2", DbType="NVarChar(255)")]
+		public string S2
+		{
+			get
+			{
+				return this._S2;
+			}
+			set
+			{
+				if ((this._S2 != value))
+				{
+					this._S2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R2", DbType="NVarChar(255)")]
+		public string R2
+		{
+			get
+			{
+				return this._R2;
+			}
+			set
+			{
+				if ((this._R2 != value))
+				{
+					this._R2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="NVarChar(255)")]
+		public string A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P3", DbType="NVarChar(255)")]
+		public string P3
+		{
+			get
+			{
+				return this._P3;
+			}
+			set
+			{
+				if ((this._P3 != value))
+				{
+					this._P3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M3", DbType="NVarChar(255)")]
+		public string M3
+		{
+			get
+			{
+				return this._M3;
+			}
+			set
+			{
+				if ((this._M3 != value))
+				{
+					this._M3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S3", DbType="NVarChar(255)")]
+		public string S3
+		{
+			get
+			{
+				return this._S3;
+			}
+			set
+			{
+				if ((this._S3 != value))
+				{
+					this._S3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R3", DbType="NVarChar(255)")]
+		public string R3
+		{
+			get
+			{
+				return this._R3;
+			}
+			set
+			{
+				if ((this._R3 != value))
+				{
+					this._R3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="NVarChar(255)")]
+		public string A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P4", DbType="NVarChar(255)")]
+		public string P4
+		{
+			get
+			{
+				return this._P4;
+			}
+			set
+			{
+				if ((this._P4 != value))
+				{
+					this._P4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M4", DbType="NVarChar(255)")]
+		public string M4
+		{
+			get
+			{
+				return this._M4;
+			}
+			set
+			{
+				if ((this._M4 != value))
+				{
+					this._M4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S4", DbType="NVarChar(255)")]
+		public string S4
+		{
+			get
+			{
+				return this._S4;
+			}
+			set
+			{
+				if ((this._S4 != value))
+				{
+					this._S4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R4", DbType="NVarChar(255)")]
+		public string R4
+		{
+			get
+			{
+				return this._R4;
+			}
+			set
+			{
+				if ((this._R4 != value))
+				{
+					this._R4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A4", DbType="NVarChar(255)")]
+		public string A4
+		{
+			get
+			{
+				return this._A4;
+			}
+			set
+			{
+				if ((this._A4 != value))
+				{
+					this._A4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P5", DbType="NVarChar(255)")]
+		public string P5
+		{
+			get
+			{
+				return this._P5;
+			}
+			set
+			{
+				if ((this._P5 != value))
+				{
+					this._P5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M5", DbType="NVarChar(255)")]
+		public string M5
+		{
+			get
+			{
+				return this._M5;
+			}
+			set
+			{
+				if ((this._M5 != value))
+				{
+					this._M5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S5", DbType="NVarChar(255)")]
+		public string S5
+		{
+			get
+			{
+				return this._S5;
+			}
+			set
+			{
+				if ((this._S5 != value))
+				{
+					this._S5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R5", DbType="NVarChar(255)")]
+		public string R5
+		{
+			get
+			{
+				return this._R5;
+			}
+			set
+			{
+				if ((this._R5 != value))
+				{
+					this._R5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A5", DbType="NVarChar(255)")]
+		public string A5
+		{
+			get
+			{
+				return this._A5;
+			}
+			set
+			{
+				if ((this._A5 != value))
+				{
+					this._A5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P6", DbType="NVarChar(255)")]
+		public string P6
+		{
+			get
+			{
+				return this._P6;
+			}
+			set
+			{
+				if ((this._P6 != value))
+				{
+					this._P6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M6", DbType="NVarChar(255)")]
+		public string M6
+		{
+			get
+			{
+				return this._M6;
+			}
+			set
+			{
+				if ((this._M6 != value))
+				{
+					this._M6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S6", DbType="NVarChar(255)")]
+		public string S6
+		{
+			get
+			{
+				return this._S6;
+			}
+			set
+			{
+				if ((this._S6 != value))
+				{
+					this._S6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R6", DbType="NVarChar(255)")]
+		public string R6
+		{
+			get
+			{
+				return this._R6;
+			}
+			set
+			{
+				if ((this._R6 != value))
+				{
+					this._R6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A6", DbType="NVarChar(255)")]
+		public string A6
+		{
+			get
+			{
+				return this._A6;
+			}
+			set
+			{
+				if ((this._A6 != value))
+				{
+					this._A6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P7", DbType="NVarChar(255)")]
+		public string P7
+		{
+			get
+			{
+				return this._P7;
+			}
+			set
+			{
+				if ((this._P7 != value))
+				{
+					this._P7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M7", DbType="NVarChar(255)")]
+		public string M7
+		{
+			get
+			{
+				return this._M7;
+			}
+			set
+			{
+				if ((this._M7 != value))
+				{
+					this._M7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S7", DbType="NVarChar(255)")]
+		public string S7
+		{
+			get
+			{
+				return this._S7;
+			}
+			set
+			{
+				if ((this._S7 != value))
+				{
+					this._S7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R7", DbType="NVarChar(255)")]
+		public string R7
+		{
+			get
+			{
+				return this._R7;
+			}
+			set
+			{
+				if ((this._R7 != value))
+				{
+					this._R7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A7", DbType="NVarChar(255)")]
+		public string A7
+		{
+			get
+			{
+				return this._A7;
+			}
+			set
+			{
+				if ((this._A7 != value))
+				{
+					this._A7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P8", DbType="NVarChar(255)")]
+		public string P8
+		{
+			get
+			{
+				return this._P8;
+			}
+			set
+			{
+				if ((this._P8 != value))
+				{
+					this._P8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M8", DbType="NVarChar(255)")]
+		public string M8
+		{
+			get
+			{
+				return this._M8;
+			}
+			set
+			{
+				if ((this._M8 != value))
+				{
+					this._M8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S8", DbType="NVarChar(255)")]
+		public string S8
+		{
+			get
+			{
+				return this._S8;
+			}
+			set
+			{
+				if ((this._S8 != value))
+				{
+					this._S8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R8", DbType="NVarChar(255)")]
+		public string R8
+		{
+			get
+			{
+				return this._R8;
+			}
+			set
+			{
+				if ((this._R8 != value))
+				{
+					this._R8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A8", DbType="NVarChar(255)")]
+		public string A8
+		{
+			get
+			{
+				return this._A8;
+			}
+			set
+			{
+				if ((this._A8 != value))
+				{
+					this._A8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P9", DbType="NVarChar(255)")]
+		public string P9
+		{
+			get
+			{
+				return this._P9;
+			}
+			set
+			{
+				if ((this._P9 != value))
+				{
+					this._P9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M9", DbType="NVarChar(255)")]
+		public string M9
+		{
+			get
+			{
+				return this._M9;
+			}
+			set
+			{
+				if ((this._M9 != value))
+				{
+					this._M9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S9", DbType="NVarChar(255)")]
+		public string S9
+		{
+			get
+			{
+				return this._S9;
+			}
+			set
+			{
+				if ((this._S9 != value))
+				{
+					this._S9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R9", DbType="NVarChar(255)")]
+		public string R9
+		{
+			get
+			{
+				return this._R9;
+			}
+			set
+			{
+				if ((this._R9 != value))
+				{
+					this._R9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A9", DbType="NVarChar(255)")]
+		public string A9
+		{
+			get
+			{
+				return this._A9;
+			}
+			set
+			{
+				if ((this._A9 != value))
+				{
+					this._A9 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P10", DbType="NVarChar(255)")]
+		public string P10
+		{
+			get
+			{
+				return this._P10;
+			}
+			set
+			{
+				if ((this._P10 != value))
+				{
+					this._P10 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_M10", DbType="NVarChar(255)")]
+		public string M10
+		{
+			get
+			{
+				return this._M10;
+			}
+			set
+			{
+				if ((this._M10 != value))
+				{
+					this._M10 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S10", DbType="NVarChar(255)")]
+		public string S10
+		{
+			get
+			{
+				return this._S10;
+			}
+			set
+			{
+				if ((this._S10 != value))
+				{
+					this._S10 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R10", DbType="NVarChar(255)")]
+		public string R10
+		{
+			get
+			{
+				return this._R10;
+			}
+			set
+			{
+				if ((this._R10 != value))
+				{
+					this._R10 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A10", DbType="NVarChar(255)")]
+		public string A10
+		{
+			get
+			{
+				return this._A10;
+			}
+			set
+			{
+				if ((this._A10 != value))
+				{
+					this._A10 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RES", DbType="NVarChar(255)")]
+		public string RES
+		{
+			get
+			{
+				return this._RES;
+			}
+			set
+			{
+				if ((this._RES != value))
+				{
+					this._RES = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SGPA", DbType="NVarChar(255)")]
+		public string SGPA
+		{
+			get
+			{
+				return this._SGPA;
+			}
+			set
+			{
+				if ((this._SGPA != value))
+				{
+					this._SGPA = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EXAMMONT", DbType="NVarChar(255)")]
+		public string EXAMMONT
+		{
+			get
+			{
+				return this._EXAMMONT;
+			}
+			set
+			{
+				if ((this._EXAMMONT != value))
+				{
+					this._EXAMMONT = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_GetPresDataforTRVertResult
+	{
+		
+		private string _SEM;
+		
+		private string _FK_CLGCODE;
+		
+		private string _HTNO;
+		
+		private string _FULLNAME;
+		
+		private string _FNAME;
+		
+		private string _FK_YEAR;
+		
+		private string _FK_SEM;
+		
+		private string _ORD;
+		
+		private string _EI;
+		
+		private string _CONVERT_SUBCODE;
+		
+		private string _SUBJECTNAME;
+		
+		private string _CREDITS;
+		
+		private string _VAL_MARKS;
+		
+		private string _INT_MARKS;
+		
+		private string _MOD1_MARKS;
+		
+		private string _MOD2_MARKS;
+		
+		private string _GRACE_MARKS;
+		
+		private string _GRACE_MARKS2;
+		
+		private string _FINAL_VAL_MARKS;
+		
+		private string _GRADEPOINT;
+		
+		private string _LETERGRADE;
+		
+		private string _RESULT;
+		
+		private string _FINALRESULT;
+		
+		private string _SGPA;
+		
+		public SP_GetPresDataforTRVertResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SEM", DbType="VarChar(60)")]
+		public string SEM
+		{
+			get
+			{
+				return this._SEM;
+			}
+			set
+			{
+				if ((this._SEM != value))
+				{
+					this._SEM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_CLGCODE", DbType="NVarChar(255)")]
+		public string FK_CLGCODE
+		{
+			get
+			{
+				return this._FK_CLGCODE;
+			}
+			set
+			{
+				if ((this._FK_CLGCODE != value))
+				{
+					this._FK_CLGCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HTNO", DbType="NVarChar(255)")]
+		public string HTNO
+		{
+			get
+			{
+				return this._HTNO;
+			}
+			set
+			{
+				if ((this._HTNO != value))
+				{
+					this._HTNO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FULLNAME", DbType="NVarChar(255)")]
+		public string FULLNAME
+		{
+			get
+			{
+				return this._FULLNAME;
+			}
+			set
+			{
+				if ((this._FULLNAME != value))
+				{
+					this._FULLNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FNAME", DbType="NVarChar(255)")]
+		public string FNAME
+		{
+			get
+			{
+				return this._FNAME;
+			}
+			set
+			{
+				if ((this._FNAME != value))
+				{
+					this._FNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_YEAR", DbType="NVarChar(255)")]
+		public string FK_YEAR
+		{
+			get
+			{
+				return this._FK_YEAR;
+			}
+			set
+			{
+				if ((this._FK_YEAR != value))
+				{
+					this._FK_YEAR = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FK_SEM", DbType="NVarChar(255)")]
+		public string FK_SEM
+		{
+			get
+			{
+				return this._FK_SEM;
+			}
+			set
+			{
+				if ((this._FK_SEM != value))
+				{
+					this._FK_SEM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ORD", DbType="NVarChar(255)")]
+		public string ORD
+		{
+			get
+			{
+				return this._ORD;
+			}
+			set
+			{
+				if ((this._ORD != value))
+				{
+					this._ORD = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EI", DbType="NVarChar(255)")]
+		public string EI
+		{
+			get
+			{
+				return this._EI;
+			}
+			set
+			{
+				if ((this._EI != value))
+				{
+					this._EI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONVERT_SUBCODE", DbType="NVarChar(255)")]
+		public string CONVERT_SUBCODE
+		{
+			get
+			{
+				return this._CONVERT_SUBCODE;
+			}
+			set
+			{
+				if ((this._CONVERT_SUBCODE != value))
+				{
+					this._CONVERT_SUBCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUBJECTNAME", DbType="NVarChar(255)")]
+		public string SUBJECTNAME
+		{
+			get
+			{
+				return this._SUBJECTNAME;
+			}
+			set
+			{
+				if ((this._SUBJECTNAME != value))
+				{
+					this._SUBJECTNAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREDITS", DbType="NVarChar(255)")]
+		public string CREDITS
+		{
+			get
+			{
+				return this._CREDITS;
+			}
+			set
+			{
+				if ((this._CREDITS != value))
+				{
+					this._CREDITS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VAL_MARKS", DbType="NVarChar(255)")]
+		public string VAL_MARKS
+		{
+			get
+			{
+				return this._VAL_MARKS;
+			}
+			set
+			{
+				if ((this._VAL_MARKS != value))
+				{
+					this._VAL_MARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_INT_MARKS", DbType="NVarChar(255)")]
+		public string INT_MARKS
+		{
+			get
+			{
+				return this._INT_MARKS;
+			}
+			set
+			{
+				if ((this._INT_MARKS != value))
+				{
+					this._INT_MARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MOD1_MARKS", DbType="NVarChar(255)")]
+		public string MOD1_MARKS
+		{
+			get
+			{
+				return this._MOD1_MARKS;
+			}
+			set
+			{
+				if ((this._MOD1_MARKS != value))
+				{
+					this._MOD1_MARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MOD2_MARKS", DbType="NVarChar(255)")]
+		public string MOD2_MARKS
+		{
+			get
+			{
+				return this._MOD2_MARKS;
+			}
+			set
+			{
+				if ((this._MOD2_MARKS != value))
+				{
+					this._MOD2_MARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GRACE_MARKS", DbType="NVarChar(255)")]
+		public string GRACE_MARKS
+		{
+			get
+			{
+				return this._GRACE_MARKS;
+			}
+			set
+			{
+				if ((this._GRACE_MARKS != value))
+				{
+					this._GRACE_MARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GRACE_MARKS2", DbType="NVarChar(255)")]
+		public string GRACE_MARKS2
+		{
+			get
+			{
+				return this._GRACE_MARKS2;
+			}
+			set
+			{
+				if ((this._GRACE_MARKS2 != value))
+				{
+					this._GRACE_MARKS2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FINAL_VAL_MARKS", DbType="NVarChar(255)")]
+		public string FINAL_VAL_MARKS
+		{
+			get
+			{
+				return this._FINAL_VAL_MARKS;
+			}
+			set
+			{
+				if ((this._FINAL_VAL_MARKS != value))
+				{
+					this._FINAL_VAL_MARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GRADEPOINT", DbType="NVarChar(255)")]
+		public string GRADEPOINT
+		{
+			get
+			{
+				return this._GRADEPOINT;
+			}
+			set
+			{
+				if ((this._GRADEPOINT != value))
+				{
+					this._GRADEPOINT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LETERGRADE", DbType="NVarChar(255)")]
+		public string LETERGRADE
+		{
+			get
+			{
+				return this._LETERGRADE;
+			}
+			set
+			{
+				if ((this._LETERGRADE != value))
+				{
+					this._LETERGRADE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RESULT", DbType="NVarChar(255)")]
+		public string RESULT
+		{
+			get
+			{
+				return this._RESULT;
+			}
+			set
+			{
+				if ((this._RESULT != value))
+				{
+					this._RESULT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FINALRESULT", DbType="NVarChar(255)")]
+		public string FINALRESULT
+		{
+			get
+			{
+				return this._FINALRESULT;
+			}
+			set
+			{
+				if ((this._FINALRESULT != value))
+				{
+					this._FINALRESULT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SGPA", DbType="NVarChar(255)")]
+		public string SGPA
+		{
+			get
+			{
+				return this._SGPA;
+			}
+			set
+			{
+				if ((this._SGPA != value))
+				{
+					this._SGPA = value;
 				}
 			}
 		}

@@ -30,6 +30,12 @@ namespace MemoPrintingUtility.DA
         List<BCAPSubjectINformation> GetBCAPSubjectInformation(string CourseName);
 
 
+        // vertical Tr
+        List<StudentInformation> GetStudentDetailVR(string Course);
+
+        List<ConsDataEntity> GetStudentsConsDetailsVR(string Course);
+
+
     }
 }
 

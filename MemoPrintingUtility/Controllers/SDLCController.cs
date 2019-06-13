@@ -77,6 +77,7 @@ namespace MemoPrintingUtility.Controllers
 
                 var lstPREdata = BoMemoService.GetSDLCInstance().GetPRESDataforSDLC(course);
                 var lstConData = BoMemoService.GetSDLCInstance().GetConDataforSDLC(course);
+                var lstSubData = BoMemoService.GetSDLCInstance().GetSUBJECTforSDLC(course);
 
                 var lstColCodes = lstPREdata.OrderBy(x => x.ColCode.Trim()).Select(y => y.ColCode.Trim()).Distinct().ToList<string>();
                 using (StreamWriter sw = fi.CreateText())
@@ -115,24 +116,20 @@ namespace MemoPrintingUtility.Controllers
 
                         var lstPREStuns = lstPREdata.Where(x => x.HTNO == HallTIcket).ToList<SDLCEntityPRES>();
                         var lstCONStuns = lstConData.Where(x => x.HTNO == HallTIcket).ToList<SDLCEntityCON>();
+                        var lstSDLCSUB = lstSubData.Where(x => x.CRS == course).ToList<SDLCEntitySUB>();
 
                         string Part1Marks = lstPREStuns[0].Part1;
                         string Part2Marks = lstPREStuns[0].Part2;
+                        string NewC1 = lstPREStuns[0].NEW_C_PRT1;
+                        string NewC2 = lstPREStuns[0].NEW_C_PRT2;
                         string FResult = string.Empty;
+                        string indRes = string.Empty;
+                        string indTotMarks = string.Empty;
                         string yr1R = Convert.ToString(lstConData[0].YR1);
                         string yr2R = Convert.ToString(lstConData[0].YR2);
                         string yr3R = Convert.ToString(lstConData[0].YR3);
 
-                        if (yr1R == "F" || yr2R == "F" || yr3R == "F")
-                        {
-                            FResult = "FAILED";
-                        }
-
-
-                        if (yr1R == "C" && yr2R == "C" && yr3R == "C")
-                        {
-                            FResult = "COMPLETED";
-                        }
+                     
 
                         #region Formatting CON Data
                         foreach (var con in lstCONStuns)
@@ -211,13 +208,108 @@ namespace MemoPrintingUtility.Controllers
                         }
 
                         #endregion
+                        string[] yrs = new string[] { "I", "II", "III" };
+                        string[] Types = new string[] { "CONS.", "PRES." };
+
+                        //List<SDLCSUB> lstSUBEntity = new List<SDLCSUB>();
+
+                        //foreach (var sub in lstSDLCSUB)
+                        //{
+                        //    if (sub.SCODE != null) { lstSUBEntity = CnrEntitySUB(lstSUBEntity, sub.YR, sub.SCODE, sub.OCODE, sub.MXMR, sub.MNMR, sub.PMXMR, sub.PMNMR, sub.CRS); }
+                        //}
+
+
 
 
 
                         lstEntity = CnrEntityVertical(lstEntity, lstPREStuns);
 
+                        int ry = 0;
+                        foreach (string yr in yrs)
+                        {
 
+                            if (yr == "I")
+                            { ry = 1; }
+
+                            if (yr == "II")
+                            { ry = 2; }
+
+                            if (yr == "III")
+                            { ry = 3; }
+                            string result = string.Empty;
+
+
+
+                            var lstSUB = lstSDLCSUB.Where(x => x.YR == ry.ToString()).ToList();
+
+                            int CONcOUNT = 0;
+                            int PRESCOUNT = 0;
+
+
+                            var CnNR = lstEntity.Where(x => x.Type == "CONS." && x.Year == yr).ToList();
+                            var PNR = lstEntity.Where(x => x.Type == "PRES." && x.Year == yr).ToList();
+
+                            foreach (var cn in CnNR)
+                            {
+                                var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+
+                                if (SUB != null && SUB.MNMR.ChangeINT() > cn.Marks.ChangeINT())
+                                {
+
+                                    CONcOUNT++;
+                                }
+
+                            }
+
+                            foreach (var cn in PNR)
+                            {
+                                var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+
+                                if (SUB != null && SUB.MNMR.ChangeINT() <= cn.Marks.ChangeINT())
+                                {
+
+                                    PRESCOUNT++;
+                                }
+
+                            }
+
+
+                            if (CONcOUNT != PRESCOUNT)
+                            {
+                                if (yr == "I")
+                                { yr1R = "FAILED"; }
+
+                                if (yr == "II")
+                                { yr2R = "FAILED"; }
+
+                                if (yr == "III")
+                                { yr3R = "FAILED"; }
+                            }
+                            if (CONcOUNT == PRESCOUNT)
+                            {
+                                if (yr == "I")
+                                { yr1R = "COMPLETED"; }
+
+                                if (yr == "II")
+                                { yr2R = "COMPLETED"; }
+
+                                if (yr == "III")
+                                { yr3R = "COMPLETED"; }
+                            }
+
+
+                        }
                         string FinalResult = string.Empty;
+                        if (yr1R == "FAILED" || yr2R == "FAILED" || yr3R == "FAILED")
+                        {
+                            FResult = "FAILED";
+                        }
+
+
+                        if (yr1R == "COMPLETED" && yr2R == "COMPLETED" && yr3R == "COMPLETED")
+                        {
+                            FResult = "COMPLETED";
+                        }
 
                         if (lstPREStuns[0].FResult != null)
                         {
@@ -243,8 +335,6 @@ namespace MemoPrintingUtility.Controllers
                         string Part2Div = lstPREStuns[0].Part2Div;
 
 
-                        string[] yrs = new string[] { "I", "II", "III" };
-                        string[] Types = new string[] { "CONS.", "PRES." };
 
                         #region Page break and Col break set up
                         //int allpres = 0;
@@ -386,13 +476,13 @@ namespace MemoPrintingUtility.Controllers
                                         }
                                     }
                                 }
-                                if(lstpopulaateData.Where(x => x.Type == "PRES.").ToList().Count() == 1)
+                                if (lstpopulaateData.Where(x => x.Type == "PRES.").ToList().Count() == 1)
                                 {
                                     subcount1 = true;
                                 }
                                 bool isprac = false;
                                 int PSOrder = 0;
-                                var pracStratOrder = lstpopulaateData.Where(x =>  x.subjectCode.Contains("(P)")).OrderBy(z => z.Order).ToList();
+                                var pracStratOrder = lstpopulaateData.Where(x => x.subjectCode.Contains("(P)")).OrderBy(z => z.Order).ToList();
                                 if (pracStratOrder != null && pracStratOrder.Count > 0)
                                 {
                                     PSOrder = pracStratOrder[0].Order;
@@ -401,13 +491,13 @@ namespace MemoPrintingUtility.Controllers
                                 foreach (var sd in lstpopulaateData.OrderBy(z => z.Order))
                                 {
 
-                                    
+
 
                                     string spaces = "";
                                     string umakspace = "";
                                     string intmarkspae = "";
                                     int ordr = sd.Order;
-                                  
+
 
                                     if (PSOrder > sd.Order && PSOrder != 0)
                                     {
@@ -418,7 +508,7 @@ namespace MemoPrintingUtility.Controllers
                                     if (PSOrder < sd.Order && PSOrder != 0)
                                     {
                                         spaces = GetSpaces((ordr - subord) * 11);
-                                        umakspace = GetSpaces((ordr - subord) *11);
+                                        umakspace = GetSpaces((ordr - subord) * 11);
                                     }
 
                                     if (PSOrder == 0)
@@ -434,10 +524,10 @@ namespace MemoPrintingUtility.Controllers
                                         spaces = spaces + GetSpaces(3);
                                     }
 
-                                    if (flag == true  )
+                                    if (flag == true)
                                     {
                                         spaces = spaces + GetSpaces(4);
-                                        
+
                                         umakspace = umakspace + GetSpaces(4);
                                         umakspace = umakspace + GetSpaces(1);
                                         flag = false;
@@ -521,6 +611,23 @@ namespace MemoPrintingUtility.Controllers
 
 
                                 }
+
+                                if (yr == "I")
+                                {
+                                    indRes = yr1R;
+                                    var INDMX = lstPREStuns.Where(x => x.Year == "1").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
+                                }
+                                if (yr == "II")
+                                {
+                                    indRes = yr2R;
+                                    var INDMX = lstPREStuns.Where(x => x.Year == "2").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
+                                }
+                                if (yr == "III")
+                                {
+                                    indRes = yr3R;
+                                    var INDMX = lstPREStuns.Where(x => x.Year == "3").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
+                                }
+
                                 if (lstpopulaateData.Count() > 0)
                                 {
 
@@ -528,31 +635,49 @@ namespace MemoPrintingUtility.Controllers
 
                                     if (ty == "PRES.")
                                     {
-
                                         sw.WriteLine(subjectstring + GetSpaces(100 - subjectstring.Length) + result + GetSpaces(13 - result.Length));
                                         ////rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
                                         sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length));
                                         // rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
-                                        sw.WriteLine("          ..........................................................................................................................");
+                                        sw.WriteLine("          ....................................................................................................  " + GetSpaces(3-(indTotMarks.Length)) + indTotMarks + "     " + indRes);
                                         rowcount = (rowcount + 3) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 3);
                                     }
                                     else
                                     {
 
+                                        sw.WriteLine("");
                                         sw.WriteLine(subjectstring + GetSpaces(100 - subjectstring.Length) + result + GetSpaces(13 - result.Length));
                                         //rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
                                         sw.WriteLine(subjectsMarksPRE_U + GetSpaces(113 - subjectsMarksPRE_U.Length));
-                                        rowcount = (rowcount + 2) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 2);
+                                        //sw.WriteLine("          ..........................................................................................................................");
+                                        rowcount = (rowcount + 3) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 3);
                                     }
                                 }
                             }
 
-                            //.WriteLine("          ..........................................................................................................................");
+                            //sw.WriteLine("          ..........................................................................................................................");
                         }
-                        sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(5) + Part1Div + GetSpaces(25) + "********* Part 2: " + Part2Marks + GetSpaces(5) + Part1Div + GetSpaces(15));
-                        // rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
+
+                        string StrPartRes1 = string.Empty;
+                        string StrPartRes2 = string.Empty;
+                        string NewCom1 = string.Empty;
+                        string NewCom2 = string.Empty;
+                        if (NewC1 == null) { NewCom1 = string.Empty; }else { NewCom1 = NewC1 + "/"; }
+                        if (NewC2 == null) { NewCom2 = string.Empty; } else { NewCom2 = NewC2 + "/"; }
+                        if (Part1Div != null) { StrPartRes1 = Part1Marks + GetSpaces(5) + NewCom1 + Part1Div + GetSpaces(15); }
+                        else { StrPartRes1 = "- -" + GetSpaces(5) + "- -" + GetSpaces(25); }
+                        if (Part2Div != null) { StrPartRes2 = Part2Marks + GetSpaces(5) + NewCom2 + Part2Div + GetSpaces(15); }
+                        else { StrPartRes2 = "- -" + GetSpaces(5) + "- -" + GetSpaces(15); }
+
+
+                        sw.WriteLine("            *******PART 1: " + StrPartRes1 + "********* Part 2: " + StrPartRes2);
+
+                        //sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(5) + Part1Div + GetSpaces(25) + "********* Part 2: " + Part2Marks + GetSpaces(5) + Part1Div + GetSpaces(15));
+
+                        //rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
+
                         sw.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                        rowcount = (rowcount + 2) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 2);
+                        rowcount = (rowcount + 2) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 1) : (rowcount + 2);
 
 
                     }
@@ -579,6 +704,12 @@ namespace MemoPrintingUtility.Controllers
                 result += " ";
             }
             return result;
+        }
+
+        private List<SDLCSUB> CnrEntitySUB(List<SDLCSUB> lstSUBEntity, string YR, string SCODE, string OCODE, string MXMR, string MNMR, string PMXMR, string PMNMR, string CRS)
+        {
+            lstSUBEntity.Add(new SDLCSUB() { YR = YR, SCODE = SCODE, MXMR = MXMR, MNMR = MNMR, PMXMR = PMXMR, PMNMR = PMNMR, CRS = CRS });
+            return lstSUBEntity;
         }
 
         private List<SDLC> CnrEntityVertical(List<SDLC> lstEntity, string Marks, string Academic, string HTNO, string SubjectCode, string EI, string year, int order)
@@ -674,7 +805,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
-                sw.WriteLine(("                                  TABULATION LIST OF " + course + " EXAMINATIONS HELD IN Oct/Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+                sw.WriteLine(("                               TABULATION LIST OF " + course + "(SDLCE) I, II, III YEAR SUPPLY. 2018 EXAMINATIONS HELD IN JAN., " + (DateTime.Now.Year).ToString()).Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "             ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 
@@ -698,7 +829,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 // sw.WriteLine(("                                  TABULATION LIST OF " + course + " " + year + " YEAR " + sem + " SEM                              ").Truncate(132));
-                sw.WriteLine(("                                  TABULATION LIST OF " + course + " EXAMINATIONS HELD IN Oct/Nov., " + (DateTime.Now.Year - 1).ToString() + "                           ").Truncate(132));
+                sw.WriteLine(("                               TABULATION LIST OF " + course + "(SDLCE) I, II, III YEAR SUPPLY. 2018 EXAMINATIONS HELD IN JAN., " + (DateTime.Now.Year).ToString()).Truncate(132));
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "               ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 

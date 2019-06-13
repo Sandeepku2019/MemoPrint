@@ -1004,6 +1004,22 @@
       <Column Name="YR33" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_GetSDLCSubData_TRReport" Method="sp_GetSDLCSubData_TRReport">
+    <ElementType Name="sp_GetSDLCSubData_TRReportResult">
+      <Column Name="YR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="F" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MXMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MNMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PMXMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PMNMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DEPT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ELEC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="INTM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_GetSDLCResultData_TRReport" Method="sp_GetSDLCResultData_TRReport">
     <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(200)" />
     <ElementType Name="sp_GetSDLCResultData_TRReportResult">
@@ -1035,6 +1051,8 @@
       <Column Name="C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="C_PRT1DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="C_PRT2DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NEW_C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NEW_C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.get_ConsDataforTRVert" Method="get_ConsDataforTRVert">

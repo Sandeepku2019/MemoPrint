@@ -43,8 +43,10 @@ namespace MemoPrintingUtility.Entity
         public string  Part2 { get; set; }
 
         public string Part1Div { get; set; }
-        
+
         public string Part2Div { get; set; }
+        public string NEW_C_PRT1 { get; set; }
+        public string NEW_C_PRT2 { get; set; }
 
 
 

@@ -107,7 +107,7 @@ namespace MemoPrintingUtility.Controllers
 
 
 
-                        if (HallTIcket == "6001135008")
+                        if (HallTIcket == "6186163020")
                         {
 
                         }
@@ -129,11 +129,18 @@ namespace MemoPrintingUtility.Controllers
                         string yr2R = Convert.ToString(lstConData[0].YR2);
                         string yr3R = Convert.ToString(lstConData[0].YR3);
 
-                     
+
+                        string TBCom = string.Empty;
 
                         #region Formatting CON Data
                         foreach (var con in lstCONStuns)
                         {
+
+                            if (con.HTNO == "6186163020")
+                            {
+
+                            }
+
                             //1year
                             int order1 = 1;
                             if (con.P11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M11, con.Y11, con.HTNO, con.P11, "", "I", order1++); }
@@ -321,6 +328,7 @@ namespace MemoPrintingUtility.Controllers
                             if (lstPREStuns[0].FResult.ToLower() == "f")
                             {
                                 FinalResult = "FAILED";
+
                             }
                         }
 
@@ -535,7 +543,7 @@ namespace MemoPrintingUtility.Controllers
                                         if (abflag == true)
                                         {
 
-                                            umakspace = umakspace + GetSpaces(1);
+                                            umakspace = umakspace + GetSpaces(0);
                                             abflag = false;
                                         }
                                         if (subcount1 == true)
@@ -628,6 +636,23 @@ namespace MemoPrintingUtility.Controllers
                                     var INDMX = lstPREStuns.Where(x => x.Year == "3").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
                                 }
 
+
+                                if (yr1R == "FAILED" && yr2R == "COMPLETED" && yr3R == "COMPLETED")
+                                {
+                                    TBCom = "I YEAR TO COMPLETE";
+                                }
+                                else if (yr1R == "COMPLETED" && yr2R == "FAILED" && yr3R == "COMPLETED")
+                                {
+                                    TBCom = "II YEAR TO COMPLETE";
+                                }
+                                else if (yr1R == "FAILED" && yr2R == "FAILED" && yr3R == "COMPLETED")
+                                {
+                                    TBCom = "I & II YEARS TO COMPLETE";
+                                }
+                                else { TBCom = "C"; }
+
+
+
                                 if (lstpopulaateData.Count() > 0)
                                 {
 
@@ -666,7 +691,16 @@ namespace MemoPrintingUtility.Controllers
                         if (NewC2 == null) { NewCom2 = string.Empty; } else { NewCom2 = NewC2 + "/"; }
                         if (Part1Div != null) { StrPartRes1 = Part1Marks + GetSpaces(5) + NewCom1 + Part1Div + GetSpaces(15); }
                         else { StrPartRes1 = "- -" + GetSpaces(5) + "- -" + GetSpaces(25); }
-                        if (Part2Div != null) { StrPartRes2 = Part2Marks + GetSpaces(5) + NewCom2 + Part2Div + GetSpaces(15); }
+                        if (Part2Div != null)
+                        {
+                            if (TBCom != "C")
+                            {
+                                StrPartRes2 = TBCom;
+                            }
+
+
+                            else { StrPartRes2 = Part2Marks + GetSpaces(5) + NewCom2 + Part2Div + GetSpaces(15); }
+                        }
                         else { StrPartRes2 = "- -" + GetSpaces(5) + "- -" + GetSpaces(15); }
 
 
@@ -809,7 +843,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "             ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 
-                PageBraker = PageBraker + 8;
+                PageBraker = PageBraker + 9;
 
             }
             else if (rowcount == 72)
@@ -819,7 +853,7 @@ namespace MemoPrintingUtility.Controllers
                     sw.WriteLine(" ");
                 }
 
-                rowcount = 1;
+                rowcount = 0;
                 PageNumber++;
                 //sw.WriteLine(" ");
                 sw.WriteLine(" ");
@@ -833,7 +867,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "               ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 
-                PageBraker = 8;
+                PageBraker = 9;
                 //addHeaderFooter(sw, rowcount, course, year, sem);
 
 

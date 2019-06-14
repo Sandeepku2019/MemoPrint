@@ -237,7 +237,7 @@ namespace MemoPrintingUtility.Controllers
 
 
 
-                            sw.WriteLine("");
+                            sw.WriteLine("");  //BCA Start Line 
                             sw.WriteLine("");
                             sw.WriteLine("");
 
@@ -474,7 +474,7 @@ namespace MemoPrintingUtility.Controllers
 
                         var student = lstStunsCons[0];
 
-                        sw.WriteLine("");
+                        sw.WriteLine(""); //BAL Start Line
                         sw.WriteLine("");
                         sw.WriteLine("");
 
@@ -491,7 +491,7 @@ namespace MemoPrintingUtility.Controllers
                         sw.WriteLine("");
                         sw.WriteLine("");
                         sw.WriteLine("");
-                        sw.WriteLine("");
+                        //sw.WriteLine("");
                         int[] yrs = new int[] { 1, 2, 3 };
                         //int[] sems = new int[] { 1, 2 };
                         int SubjectRowCount = 0;
@@ -528,14 +528,14 @@ namespace MemoPrintingUtility.Controllers
                             lstMemo = CnrEntityVertical(lstMemo, con.PM26, con.PA26, con.HTNO, con.P26, "", "2", 6, true);
 
                             //3year
-                            lstMemo = CnrEntityVertical(lstMemo, con.M31, con.Y21, con.HTNO, con.P31, "", "3", 1);
-                            lstMemo = CnrEntityVertical(lstMemo, con.M32, con.Y22, con.HTNO, con.P32, "", "3", 2);
-                            lstMemo = CnrEntityVertical(lstMemo, con.M33, con.Y23, con.HTNO, con.P33, "", "3", 3);
-                            lstMemo = CnrEntityVertical(lstMemo, con.M34, con.Y24, con.HTNO, con.P34, "", "3", 4);
-                            lstMemo = CnrEntityVertical(lstMemo, con.M35, con.Y25, con.HTNO, con.P35, "", "3", 5);
-                            lstMemo = CnrEntityVertical(lstMemo, con.M36, con.Y26, con.HTNO, con.P36, "", "3", 6);
-                            lstMemo = CnrEntityVertical(lstMemo, con.PM36, con.PA26, con.HTNO, con.P36, "", "3", 6, true);
-                            lstMemo = CnrEntityVertical(lstMemo, con.M37, con.Y27, con.HTNO, con.P37, "", "3", 7);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M31, con.Y31, con.HTNO, con.P31, "", "3", 1);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M32, con.Y32, con.HTNO, con.P32, "", "3", 2);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M33, con.Y33, con.HTNO, con.P33, "", "3", 3);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M34, con.Y34, con.HTNO, con.P34, "", "3", 4);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M35, con.Y35, con.HTNO, con.P35, "", "3", 5);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M36, con.Y36, con.HTNO, con.P36, "", "3", 6);
+                            lstMemo = CnrEntityVertical(lstMemo, con.PM36, con.PA36, con.HTNO, con.P36, "", "3", 6, true);
+                            lstMemo = CnrEntityVertical(lstMemo, con.M37, con.Y37, con.HTNO, con.P37, "", "3", 7);
 
                         }
                         #endregion
@@ -545,12 +545,21 @@ namespace MemoPrintingUtility.Controllers
 
                         string[] BALyrs = lstMemo.OrderBy(y => y.Year).Select(x => x.Year).Distinct().ToArray();
 
-
+                        if (HallTicket_1 == "01412307") { }
                         foreach (string baly in BALyrs)
                         {
                             var memoEntity = lstMemo.Where(x => x.Year == baly).ToList();
 
-                            sw.WriteLine(baly + " Year:");
+                            string RYr = string.Empty;
+                            if (baly == "1")
+                            { RYr = "I"; }
+                            if (baly == "2")
+                            { RYr = "II"; }
+                            if (baly == "3")
+                            { RYr = "III"; }
+
+                            sw.WriteLine("" + ((char)27) + ((char)71) + RYr + " Year:" + ((char)27) + ((char)72));
+                            //sw.WriteLine(RYr + " Year:");
                             foreach (var merge in memoEntity)
                             {
                                 var subjectinfo = lstBALPDCSubject.Where(x => x.SubjectCode == merge.subjectCode && x.Year == merge.Year).ToList().FirstOrDefault();
@@ -563,17 +572,20 @@ namespace MemoPrintingUtility.Controllers
                                     {
                                         Subject = "";
                                     }
+                                    string totmark = subjectinfo.MaxMark;
                                     int totalMark = subjectinfo.MaxMark.ChangeINT();//merge.SubjectExternalMarks.ChangeINT() + merge.SubjectInternalMarks.ChangeINT();
                                     string MinMark = subjectinfo.MinMark;
 
                                     int OCMark = merge.Marks.ChangeINT();
                                     TotalMark = TotalMark + OCMark;
 
+                                    string SecuredMark = merge.Marks;
+                                    
                                     //Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + Academic != "" ? Academic.ChangeToMonthandYear() : ""
 
 
                                     string Academic = merge.Academic != null ? merge.Academic.ChangeToMonthandYear() : "";
-                                    string subline = Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + Academic;
+                                    string subline = Subject + GetSpaces(42 - Subject.Length) + totmark + GetSpaces(6 - totmark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + SecuredMark + GetSpaces(6 - SecuredMark.Length) + Academic;
                                     sw.WriteLine(subline);
                                     SubjectRowCount++;
                                 }
@@ -599,24 +611,26 @@ namespace MemoPrintingUtility.Controllers
                                         Subject = Subject + " (P)";
                                     }
 
+                                    string PtotMark = subjectinfo.PMaxMark;
                                     int totalMark = subjectinfo.PMaxMark.ChangeINT();//merge.SubjectExternalMarks.ChangeINT() + merge.SubjectInternalMarks.ChangeINT();
                                     string MinMark = subjectinfo.PMinMark;
 
+                                    string SecuredPMark = string.Empty;
                                     int OCMark = merge.PMarks.ChangeINT();
                                     TotalMark = TotalMark + OCMark;
 
-
+                                    SecuredPMark = merge.PMarks;
 
 
                                     if (totalMark > 0)
                                     {
                                         string Academic = merge.PYear != null ? merge.PYear.ChangeToMonthandYear() : "";
-                                        string subline = Subject + GetSpaces(42 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(6 - OCMark.ToString().Length) + Academic;
+                                        string subline = Subject + GetSpaces(42 - Subject.Length) + PtotMark + GetSpaces(6 - PtotMark.Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + SecuredPMark + GetSpaces(6 - SecuredPMark.Length) + Academic;
                                         sw.WriteLine(subline);
+                                        SubjectRowCount++;
 
 
                                     }
-                                    SubjectRowCount++;
                                 }
 
                             }
@@ -625,11 +639,12 @@ namespace MemoPrintingUtility.Controllers
                             sw.WriteLine(""); SubjectRowCount++;
                         }
 
-                        sw.WriteLine(""); SubjectRowCount++;
+                        //sw.WriteLine(""); SubjectRowCount++;
 
-                        if (SubjectRowCount < 47)
+
+                        if (SubjectRowCount < 46)
                         {
-                            int rCoun = 47 - SubjectRowCount;
+                            int rCoun = 46 - SubjectRowCount;
 
                             for (int b = 0; b < rCoun; b++)
                             {
@@ -672,7 +687,14 @@ namespace MemoPrintingUtility.Controllers
 
 
                         sw.WriteLine(GetSpaces(13) + lstStunsCons[0].FinalResult + "/" + Division);
-
+                        sw.WriteLine(" ");//65
+                        sw.WriteLine(" ");//66
+                        sw.WriteLine(" ");//67
+                        sw.WriteLine(" ");//68
+                        sw.WriteLine(GetSpaces(42) + "for");
+                        sw.WriteLine(" ");//70
+                        sw.WriteLine(" ");//71
+                        sw.WriteLine(" ");//72
                     }
 
 

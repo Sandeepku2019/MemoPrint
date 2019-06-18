@@ -105,13 +105,18 @@ namespace MemoPrintingUtility.Controllers
                         int passedSubject = 0;
                         bool detained = false;
 
-
-
-                        if (HallTIcket == "6001135008")
+                        if (i == 357 || i == 1286 )
                         {
+
 
                         }
 
+                        if (HallTIcket == "6274172015")
+                        {
+
+
+
+                        }
 
 
                         var lstPREStuns = lstPREdata.Where(x => x.HTNO == HallTIcket).ToList<SDLCEntityPRES>();
@@ -129,11 +134,18 @@ namespace MemoPrintingUtility.Controllers
                         string yr2R = Convert.ToString(lstConData[0].YR2);
                         string yr3R = Convert.ToString(lstConData[0].YR3);
 
-                     
+
+                        string TBCom = string.Empty;
 
                         #region Formatting CON Data
                         foreach (var con in lstCONStuns)
                         {
+
+                            if (con.HTNO == "6010111140")//"6096161019")
+                            {
+
+                            }
+
                             //1year
                             int order1 = 1;
                             if (con.P11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M11, con.Y11, con.HTNO, con.P11, "", "I", order1++); }
@@ -211,20 +223,12 @@ namespace MemoPrintingUtility.Controllers
                         string[] yrs = new string[] { "I", "II", "III" };
                         string[] Types = new string[] { "CONS.", "PRES." };
 
-                        //List<SDLCSUB> lstSUBEntity = new List<SDLCSUB>();
-
-                        //foreach (var sub in lstSDLCSUB)
-                        //{
-                        //    if (sub.SCODE != null) { lstSUBEntity = CnrEntitySUB(lstSUBEntity, sub.YR, sub.SCODE, sub.OCODE, sub.MXMR, sub.MNMR, sub.PMXMR, sub.PMNMR, sub.CRS); }
-                        //}
-
-
-
-
-
+                        // PRES DATA 
                         lstEntity = CnrEntityVertical(lstEntity, lstPREStuns);
 
                         int ry = 0;
+                        int Part1Total = 0;
+                        int Part2Total = 0;
                         foreach (string yr in yrs)
                         {
 
@@ -249,34 +253,93 @@ namespace MemoPrintingUtility.Controllers
                             var CnNR = lstEntity.Where(x => x.Type == "CONS." && x.Year == yr).ToList();
                             var PNR = lstEntity.Where(x => x.Type == "PRES." && x.Year == yr).ToList();
 
+
+                            //var TESTpRESS = PNR.Where(x => x.HTNO == "6428144001").ToList();
+
                             foreach (var cn in CnNR)
                             {
-                                var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+                                
 
-                                if (SUB != null && SUB.MNMR.ChangeINT() > cn.Marks.ChangeINT())
+                                if (!cn.subjectCode.Contains("(P)"))
+                                {
+                                    var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+                                    if (SUB != null && SUB.MNMR.ChangeINT() > cn.Marks.ChangeINT())
+                                    {
+
+                                        CONcOUNT++;
+                                    }
+                                }
+                                else
                                 {
 
-                                    CONcOUNT++;
+                                    var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+                                    if (SUB != null && SUB.PMNMR.ChangeINT() > cn.Marks.ChangeINT())
+                                    {
+
+                                        CONcOUNT++;
+                                    }
                                 }
 
                             }
 
                             foreach (var cn in PNR)
                             {
-                                var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
-
-                                if (SUB != null && SUB.MNMR.ChangeINT() <= cn.Marks.ChangeINT())
+                                
+                                if (!cn.subjectCode.Contains("(P)"))
                                 {
+                                    var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+                                    if (SUB != null && SUB.MNMR.ChangeINT() <= cn.Marks.ChangeINT())
+                                    {
+                                        PRESCOUNT++;
+                                    }
+                                }
+                                else {
+                                    var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode.Replace("(P)","")).ToList().FirstOrDefault();
+                                    if (SUB != null && SUB.PMNMR.ChangeINT() > cn.Marks.ChangeINT())
+                                    {
 
-                                    PRESCOUNT++;
+                                        CONcOUNT++;
+                                    }
                                 }
 
                             }
 
 
+
+                            List<SDLC> CnNRTotal = new List<SDLC>();
+                            CnNRTotal = lstEntity.Where(x => x.Type == "CONS." && x.Year == yr).ToList();
+                            //var PNRTotal = lstEntity.Where(x => x.Type == "PRES." && x.Year == yr).ToList();
+                            int p1total = 0;
+                            int p2total = 0;
+
+                            foreach(var PTot in PNR)
+                            {
+                                var ob = CnNRTotal.Where(x => x.subjectCode == PTot.subjectCode).ToList();
+                                if (ob!= null && ob.Count > 0) {
+
+                                    if (ob[0].Marks.ChangeINT() <= PTot.Marks.ChangeINT())
+                                    {
+                                        ob[0].Marks = ob[0].Marks;
+                                    }
+                                    else if(ob[0].Marks.ChangeINT() > PTot.Marks.ChangeINT())
+                                    {
+                                        ob[0].Marks = PTot.Marks;
+                                    }
+
+
+                                }
+
+                            }
+                            p1total = CnNRTotal.Where(x => x.subjectCode.ToLower() == "tel" || x.subjectCode.ToLower() == "hin" || x.subjectCode.ToLower() == "urd" || x.subjectCode.ToLower() == "eng" || x.subjectCode.ToLower() == "san").Sum(y => y.Marks.ChangeINT());
+                            p2total = CnNRTotal.Where(x => x.subjectCode.ToLower() != "tel" || x.subjectCode.ToLower() != "hin" || x.subjectCode.ToLower() != "urd" || x.subjectCode.ToLower() != "eng" || x.subjectCode.ToLower() != "san" || x.subjectCode.ToLower() != "ihc" || x.subjectCode.ToLower() != "scn" || x.subjectCode.ToLower() != "est").Sum(y => y.Marks.ChangeINT());
+
+                            Part1Total = Part1Total + p1total;
+                            Part2Total = Part2Total + p2total;
+
+
                             if (CONcOUNT != PRESCOUNT)
                             {
-                                if (yr == "I")
+                                if (yr == "I" )
                                 { yr1R = "FAILED"; }
 
                                 if (yr == "II")
@@ -287,13 +350,13 @@ namespace MemoPrintingUtility.Controllers
                             }
                             if (CONcOUNT == PRESCOUNT)
                             {
-                                if (yr == "I")
+                                if (yr == "I" && CnNR.Count > 0)
                                 { yr1R = "COMPLETED"; }
 
-                                if (yr == "II")
+                                if (yr == "II" && CnNR.Count > 0)
                                 { yr2R = "COMPLETED"; }
 
-                                if (yr == "III")
+                                if (yr == "III" && CnNR.Count > 0)
                                 { yr3R = "COMPLETED"; }
                             }
 
@@ -321,6 +384,7 @@ namespace MemoPrintingUtility.Controllers
                             if (lstPREStuns[0].FResult.ToLower() == "f")
                             {
                                 FinalResult = "FAILED";
+
                             }
                         }
 
@@ -535,7 +599,7 @@ namespace MemoPrintingUtility.Controllers
                                         if (abflag == true)
                                         {
 
-                                            umakspace = umakspace + GetSpaces(1);
+                                            umakspace = umakspace + GetSpaces(0);
                                             abflag = false;
                                         }
                                         if (subcount1 == true)
@@ -615,18 +679,36 @@ namespace MemoPrintingUtility.Controllers
                                 if (yr == "I")
                                 {
                                     indRes = yr1R;
-                                    var INDMX = lstPREStuns.Where(x => x.Year == "1").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
+                                    var INDMX = lstPREStuns.Where(x => x.Year == "1").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ChangeINT().ToString(); }
                                 }
                                 if (yr == "II")
                                 {
                                     indRes = yr2R;
-                                    var INDMX = lstPREStuns.Where(x => x.Year == "2").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
+                                    var INDMX = lstPREStuns.Where(x => x.Year == "2").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ChangeINT().ToString(); }
                                 }
                                 if (yr == "III")
                                 {
                                     indRes = yr3R;
-                                    var INDMX = lstPREStuns.Where(x => x.Year == "3").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ToString(); }
+                                    var INDMX = lstPREStuns.Where(x => x.Year == "3").ToList(); foreach (var indTM in INDMX) { indTotMarks = indTM.TotalMarks.ChangeINT().ToString(); }
                                 }
+
+
+                                if (yr1R == "FAILED" && yr2R == "COMPLETED" && yr3R == "COMPLETED")
+                                {
+                                    TBCom = "I YEAR TO COMPLETE";
+                                }
+
+                                else if (yr1R == "COMPLETED" && yr2R == "FAILED" && yr3R == "COMPLETED")
+                                {
+                                    TBCom = "II YEAR TO COMPLETE";
+                                }
+                                else if (yr1R == "FAILED" && yr2R == "FAILED" && yr3R == "COMPLETED")
+                                {
+                                    TBCom = "I & II YEARS TO COMPLETE";
+                                }
+                                else { TBCom = "C"; }
+
+
 
                                 if (lstpopulaateData.Count() > 0)
                                 {
@@ -664,13 +746,46 @@ namespace MemoPrintingUtility.Controllers
                         string NewCom2 = string.Empty;
                         if (NewC1 == null) { NewCom1 = string.Empty; }else { NewCom1 = NewC1 + "/"; }
                         if (NewC2 == null) { NewCom2 = string.Empty; } else { NewCom2 = NewC2 + "/"; }
-                        if (Part1Div != null) { StrPartRes1 = Part1Marks + GetSpaces(5) + NewCom1 + Part1Div + GetSpaces(15); }
-                        else { StrPartRes1 = "- -" + GetSpaces(5) + "- -" + GetSpaces(25); }
-                        if (Part2Div != null) { StrPartRes2 = Part2Marks + GetSpaces(5) + NewCom2 + Part2Div + GetSpaces(15); }
-                        else { StrPartRes2 = "- -" + GetSpaces(5) + "- -" + GetSpaces(15); }
+                        if (Part1Div != null)
+                        {
+                            if (Part1Div == "PASS")
+                            {
+                                StrPartRes1 = NewCom1 + Part1Div + GetSpaces(15);
+                            }
+                            else
+                            {
+                                StrPartRes1 = Part1Div + GetSpaces(15);
+                            }
+                        }
+                        else { StrPartRes1 = "- -" + GetSpaces(25); }
+                        if (TBCom != "C")
+                        {
+                            StrPartRes2 = TBCom;
+                        }
+                        else
+                        {
+                            if (Part2Div != null)
+                            {
+                                StrPartRes2 = NewCom2 + Part2Div + GetSpaces(15);
+                            }
+                            else { StrPartRes2 = "- -" + GetSpaces(15); }
+
+                        }
+                        //if (Part2Div != null)
+                        //{
+                        //    if (TBCom == "C")
+                        //    {
+                                
+                        //    }
 
 
-                        sw.WriteLine("            *******PART 1: " + StrPartRes1 + "********* Part 2: " + StrPartRes2);
+                        //    else { 
+                        //    }
+                        //}
+                        //else { StrPartRes2 = "- -" + GetSpaces(5) + "- -" + GetSpaces(15); }
+
+
+                        sw.WriteLine("            *******PART 1: " + Part1Total + GetSpaces(5) + StrPartRes1 + "********* Part 2: " + Part2Total + GetSpaces(5) + StrPartRes2);
 
                         //sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(5) + Part1Div + GetSpaces(25) + "********* Part 2: " + Part2Marks + GetSpaces(5) + Part1Div + GetSpaces(15));
 
@@ -809,7 +924,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(43 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(44 - "FATHER'S NAME".Length) + "             ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 
-                PageBraker = PageBraker + 8;
+                PageBraker = PageBraker + 9;
 
             }
             else if (rowcount == 72)
@@ -819,7 +934,7 @@ namespace MemoPrintingUtility.Controllers
                     sw.WriteLine(" ");
                 }
 
-                rowcount = 1;
+                rowcount = 0;
                 PageNumber++;
                 //sw.WriteLine(" ");
                 sw.WriteLine(" ");
@@ -833,7 +948,7 @@ namespace MemoPrintingUtility.Controllers
                 sw.WriteLine("SLNO." + GetSpaces(5) + "HTNO" + GetSpaces(15 - "HTNO".Length) + "NAME" + GetSpaces(45 - "NAME".Length) + "FATHER'S NAME" + GetSpaces(45 - "FATHER'S NAME".Length) + "               ");
                 sw.WriteLine(("PAGE NO:" + PageNumber + "-------------------------------------------------------------------------------------------------------Date:" + DateTime.Now.ToString("dd-MMM-yyyy") + "===").Truncate(132));
 
-                PageBraker = 8;
+                PageBraker = 9;
                 //addHeaderFooter(sw, rowcount, course, year, sem);
 
 

@@ -462,7 +462,7 @@ namespace MemoPrintingUtility.Controllers
 
                         hn = HallticketNumbers[i];
 
-                        if (hn == "086165022")
+                        if (hn == "086155038")
                         {
 
                         }
@@ -528,7 +528,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
 
 
-                                if (lstStunsfirst[j].SubjectName.Length < 39)
+                                if (lstStunsfirst[j].SubjectName.Length <= 39)
                                 {
                                     SingleLingSubjectBCP(sw, j, lstStunsfirst, lstBCASubject);
                                 }

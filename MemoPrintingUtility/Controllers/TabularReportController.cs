@@ -175,7 +175,7 @@ namespace MemoPrintingUtility.Controllers
                             if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
                             {
                                 ColPagebrk = false;
-                                int differ = 73 - PageBraker;
+                                int differ = 72 - PageBraker;
 
                                 for (int h = 0; h < differ; h++)
                                 {
@@ -728,7 +728,7 @@ namespace MemoPrintingUtility.Controllers
                             if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
                             {
                                 ColPagebrk = false;
-                                int differ = 73 - PageBraker;
+                                int differ = 72 - PageBraker;
 
                                 for (int h = 0; h < differ; h++)
                                 {
@@ -1419,7 +1419,7 @@ namespace MemoPrintingUtility.Controllers
                                             if (abflag == true)
                                             {
 
-                                                umakspace = umakspace + GetSpaces(1);
+                                                //umakspace = umakspace + GetSpaces(1);
                                                 abflag = false;
                                             }
                                         }

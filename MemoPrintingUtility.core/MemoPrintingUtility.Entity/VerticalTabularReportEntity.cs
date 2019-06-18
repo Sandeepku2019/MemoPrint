@@ -32,6 +32,7 @@ namespace MemoPrintingUtility.Entity
 
         public string Credits { get; set; }
 
+        public string PresResult { get; set; }
 
         public bool isPress { get; set; }
 
@@ -53,6 +54,17 @@ namespace MemoPrintingUtility.Entity
         public string ConAcademi{ get; set; }
 
 
+        public string year { get; set; }
+        public string Sem { get; set; }
 
+
+    }
+
+
+    public class CollegeDetails
+    {
+        public string  CollCode { get; set; }
+
+        public string CollegeName { get; set; }
     }
 }

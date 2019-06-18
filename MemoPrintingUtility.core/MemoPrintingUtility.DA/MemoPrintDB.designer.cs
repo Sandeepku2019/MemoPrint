@@ -229,6 +229,13 @@ namespace MemoPrintingUtility.DA
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), course);
 			return ((ISingleResult<SP_GetPresDataforTRVertResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_GETALLCOLLEGE_DETAILS")]
+		public ISingleResult<SP_GETALLCOLLEGE_DETAILSResult> SP_GETALLCOLLEGE_DETAILS()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<SP_GETALLCOLLEGE_DETAILSResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class PR_COURSE_SELECTResult
@@ -18886,6 +18893,554 @@ namespace MemoPrintingUtility.DA
 				if ((this._SGPA != value))
 				{
 					this._SGPA = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SP_GETALLCOLLEGE_DETAILSResult
+	{
+		
+		private int _ID;
+		
+		private string _COLLEGE_CODE;
+		
+		private string _COLLEGE_BRFCODE;
+		
+		private System.Nullable<int> _PAGE_ID;
+		
+		private string _CATEGORY;
+		
+		private string _USER_NAME;
+		
+		private string _PASSWORD;
+		
+		private string _OWD;
+		
+		private string _QTN;
+		
+		private string _ANSWERS;
+		
+		private string _CEN;
+		
+		private string _DIST;
+		
+		private string _COLLEGE_NAME;
+		
+		private System.Nullable<int> _REG;
+		
+		private System.Nullable<int> _UTYPE;
+		
+		private string _CENTER_CODE;
+		
+		private string _PRINCIPAL_NAME;
+		
+		private string _CONTACT_NO;
+		
+		private string _EMAIL_ID;
+		
+		private string _EXAMINOR_NAME;
+		
+		private string _EXAM_CONTACT;
+		
+		private string _EXAM_EMAILID;
+		
+		private string _COURSES;
+		
+		private string _ADDRESS;
+		
+		private string _UID;
+		
+		private System.Nullable<int> _STATUS;
+		
+		private System.Nullable<System.DateTime> _CREATED_DATE;
+		
+		private System.Nullable<System.DateTime> _UPDATED_DATE;
+		
+		private System.Nullable<int> _CREATED_BY;
+		
+		private System.Nullable<int> _UPDATED_BY;
+		
+		public SP_GETALLCOLLEGE_DETAILSResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLLEGE_CODE", DbType="VarChar(50)")]
+		public string COLLEGE_CODE
+		{
+			get
+			{
+				return this._COLLEGE_CODE;
+			}
+			set
+			{
+				if ((this._COLLEGE_CODE != value))
+				{
+					this._COLLEGE_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLLEGE_BRFCODE", DbType="VarChar(50)")]
+		public string COLLEGE_BRFCODE
+		{
+			get
+			{
+				return this._COLLEGE_BRFCODE;
+			}
+			set
+			{
+				if ((this._COLLEGE_BRFCODE != value))
+				{
+					this._COLLEGE_BRFCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAGE_ID", DbType="Int")]
+		public System.Nullable<int> PAGE_ID
+		{
+			get
+			{
+				return this._PAGE_ID;
+			}
+			set
+			{
+				if ((this._PAGE_ID != value))
+				{
+					this._PAGE_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CATEGORY", DbType="VarChar(50)")]
+		public string CATEGORY
+		{
+			get
+			{
+				return this._CATEGORY;
+			}
+			set
+			{
+				if ((this._CATEGORY != value))
+				{
+					this._CATEGORY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USER_NAME", DbType="VarChar(50)")]
+		public string USER_NAME
+		{
+			get
+			{
+				return this._USER_NAME;
+			}
+			set
+			{
+				if ((this._USER_NAME != value))
+				{
+					this._USER_NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
+		public string PASSWORD
+		{
+			get
+			{
+				return this._PASSWORD;
+			}
+			set
+			{
+				if ((this._PASSWORD != value))
+				{
+					this._PASSWORD = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OWD", DbType="VarChar(50)")]
+		public string OWD
+		{
+			get
+			{
+				return this._OWD;
+			}
+			set
+			{
+				if ((this._OWD != value))
+				{
+					this._OWD = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QTN", DbType="VarChar(50)")]
+		public string QTN
+		{
+			get
+			{
+				return this._QTN;
+			}
+			set
+			{
+				if ((this._QTN != value))
+				{
+					this._QTN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ANSWERS", DbType="VarChar(100)")]
+		public string ANSWERS
+		{
+			get
+			{
+				return this._ANSWERS;
+			}
+			set
+			{
+				if ((this._ANSWERS != value))
+				{
+					this._ANSWERS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CEN", DbType="VarChar(50)")]
+		public string CEN
+		{
+			get
+			{
+				return this._CEN;
+			}
+			set
+			{
+				if ((this._CEN != value))
+				{
+					this._CEN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIST", DbType="VarChar(50)")]
+		public string DIST
+		{
+			get
+			{
+				return this._DIST;
+			}
+			set
+			{
+				if ((this._DIST != value))
+				{
+					this._DIST = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLLEGE_NAME", DbType="VarChar(200)")]
+		public string COLLEGE_NAME
+		{
+			get
+			{
+				return this._COLLEGE_NAME;
+			}
+			set
+			{
+				if ((this._COLLEGE_NAME != value))
+				{
+					this._COLLEGE_NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REG", DbType="Int")]
+		public System.Nullable<int> REG
+		{
+			get
+			{
+				return this._REG;
+			}
+			set
+			{
+				if ((this._REG != value))
+				{
+					this._REG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UTYPE", DbType="Int")]
+		public System.Nullable<int> UTYPE
+		{
+			get
+			{
+				return this._UTYPE;
+			}
+			set
+			{
+				if ((this._UTYPE != value))
+				{
+					this._UTYPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CENTER_CODE", DbType="VarChar(50)")]
+		public string CENTER_CODE
+		{
+			get
+			{
+				return this._CENTER_CODE;
+			}
+			set
+			{
+				if ((this._CENTER_CODE != value))
+				{
+					this._CENTER_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRINCIPAL_NAME", DbType="VarChar(50)")]
+		public string PRINCIPAL_NAME
+		{
+			get
+			{
+				return this._PRINCIPAL_NAME;
+			}
+			set
+			{
+				if ((this._PRINCIPAL_NAME != value))
+				{
+					this._PRINCIPAL_NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONTACT_NO", DbType="VarChar(50)")]
+		public string CONTACT_NO
+		{
+			get
+			{
+				return this._CONTACT_NO;
+			}
+			set
+			{
+				if ((this._CONTACT_NO != value))
+				{
+					this._CONTACT_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL_ID", DbType="VarChar(100)")]
+		public string EMAIL_ID
+		{
+			get
+			{
+				return this._EMAIL_ID;
+			}
+			set
+			{
+				if ((this._EMAIL_ID != value))
+				{
+					this._EMAIL_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EXAMINOR_NAME", DbType="VarChar(50)")]
+		public string EXAMINOR_NAME
+		{
+			get
+			{
+				return this._EXAMINOR_NAME;
+			}
+			set
+			{
+				if ((this._EXAMINOR_NAME != value))
+				{
+					this._EXAMINOR_NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EXAM_CONTACT", DbType="VarChar(50)")]
+		public string EXAM_CONTACT
+		{
+			get
+			{
+				return this._EXAM_CONTACT;
+			}
+			set
+			{
+				if ((this._EXAM_CONTACT != value))
+				{
+					this._EXAM_CONTACT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EXAM_EMAILID", DbType="VarChar(50)")]
+		public string EXAM_EMAILID
+		{
+			get
+			{
+				return this._EXAM_EMAILID;
+			}
+			set
+			{
+				if ((this._EXAM_EMAILID != value))
+				{
+					this._EXAM_EMAILID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COURSES", DbType="VarChar(50)")]
+		public string COURSES
+		{
+			get
+			{
+				return this._COURSES;
+			}
+			set
+			{
+				if ((this._COURSES != value))
+				{
+					this._COURSES = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ADDRESS", DbType="VarChar(500)")]
+		public string ADDRESS
+		{
+			get
+			{
+				return this._ADDRESS;
+			}
+			set
+			{
+				if ((this._ADDRESS != value))
+				{
+					this._ADDRESS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UID", DbType="VarChar(50)")]
+		public string UID
+		{
+			get
+			{
+				return this._UID;
+			}
+			set
+			{
+				if ((this._UID != value))
+				{
+					this._UID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="Int")]
+		public System.Nullable<int> STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this._STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATED_DATE
+		{
+			get
+			{
+				return this._CREATED_DATE;
+			}
+			set
+			{
+				if ((this._CREATED_DATE != value))
+				{
+					this._CREATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UPDATED_DATE
+		{
+			get
+			{
+				return this._UPDATED_DATE;
+			}
+			set
+			{
+				if ((this._UPDATED_DATE != value))
+				{
+					this._UPDATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="Int")]
+		public System.Nullable<int> CREATED_BY
+		{
+			get
+			{
+				return this._CREATED_BY;
+			}
+			set
+			{
+				if ((this._CREATED_BY != value))
+				{
+					this._CREATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="Int")]
+		public System.Nullable<int> UPDATED_BY
+		{
+			get
+			{
+				return this._UPDATED_BY;
+			}
+			set
+			{
+				if ((this._UPDATED_BY != value))
+				{
+					this._UPDATED_BY = value;
 				}
 			}
 		}

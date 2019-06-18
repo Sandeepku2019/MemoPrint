@@ -35,6 +35,8 @@ namespace MemoPrintingUtility.DA
 
         List<ConsDataEntity> GetStudentsConsDetailsVR(string Course);
 
+        List<CollegeDetails> GetCollegeDetails();
+
 
     }
 }

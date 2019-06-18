@@ -74,6 +74,27 @@ namespace MemoPrintingUtility.BO
             MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
             return DAFactory.GetTabularDAService().GetBCAPSubjectInformation(CourseName);
         }
+
+
+
+        //vertical Tr
+        public List<StudentInformation> GetStudentDetailVR(string Course)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetStudentDetailVR(Course);
+        }
+
+        public List<ConsDataEntity> GetStudentsConsDetailsVR(string Course)
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetStudentsConsDetailsVR(Course);
+        }
+
+        public List<CollegeDetails> GetCollegeDetails()
+        {
+            MemoPrintDAFactory DAFactory = new MemoPrintDAFactory();
+            return DAFactory.GetTabularDAService().GetCollegeDetails();
+        }
     }
 
     public static class StringExtensions
@@ -190,7 +211,7 @@ namespace MemoPrintingUtility.BO
         public static string ChangeToMonthandYear(this string academic)
         {
             string Month = academic[0].ToString();
-            string Yeatr = "'20"+academic.Substring(1, 2);
+            string Yeatr = "'"+ academic.Substring(1, 2);
             switch (Month.ToLower())
             {
 
@@ -231,7 +252,7 @@ namespace MemoPrintingUtility.BO
                 case "o":
                     Month = "Oct";
                     break;
-               
+
                 case "n":
                     Month = "Nov";
                     break;

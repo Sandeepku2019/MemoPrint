@@ -46,6 +46,7 @@
     <Compile Include="SDLC.cs" />
     <Compile Include="SDLCEntityCON.cs" />
     <Compile Include="SDLCEntityPRES.cs" />
+    <Compile Include="SDLCEntitySUB.cs" />
     <Compile Include="SubjectRangeEntity.cs" />
     <Compile Include="TabularReportEntity.cs" />
     <Compile Include="UserAuthenticate.cs" />

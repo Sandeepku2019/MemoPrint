@@ -46,6 +46,13 @@ namespace MemoPrintingUtility.Entity
 
         public string AcadmicYear { get; set; }
 
+        public string MOd1 { get; set; }
+
+        public string MOd2 { get; set; }
+
+
+        public string valMark { get; set; }
+
         public int Psc { get; set; }
 
         public int Tsc { get; set; }

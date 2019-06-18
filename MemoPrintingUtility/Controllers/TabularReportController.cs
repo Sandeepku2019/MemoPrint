@@ -1851,11 +1851,1049 @@ namespace MemoPrintingUtility.Controllers
         /// <param name="course"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult GenerateTabularVerticalReport(string course)
+        public JsonResult GenerateTabularVerticalReport_Line(string course)
         {
 
-            return null;
+            try
+            {
+                string fileNamedirectory = @"D:\TabularReport\";
+                string filename = course + DateTime.Now.ToString("ddMMyyyy") + "_Vertical.txt";
+
+                // check for Directory
+                if (!Directory.Exists(fileNamedirectory))  // if it doesn't exist, create
+                {
+                    Directory.CreateDirectory(fileNamedirectory);
+                }
+
+
+                // file information 
+                FileInfo fi = new FileInfo(fileNamedirectory + filename);
+                // Check if file already exists. If yes, delete it.     
+                if (System.IO.File.Exists(fileNamedirectory + filename))
+                {
+                    System.IO.File.Delete(fileNamedirectory + filename);
+                }
+
+                MemoPrintService BoMemoService = new MemoPrintService();
+
+                int year = 0;
+                int sem = 0;
+
+
+                // Create a new file     
+                using (StreamWriter sw = fi.CreateText())
+                {
+                    //
+                    var lstStudents = BoMemoService.getTabularReportInstance().GetStudentDetailVR(course);
+                    var LstConStudents = BoMemoService.getTabularReportInstance().GetStudentsConsDetailsVR(course);
+                    var lstColleges = BoMemoService.getTabularReportInstance().GetCollegeDetails().OrderBy(x => x.CollCode);
+
+                    //var lsttotalpassed = BoMemoService.getTabularReportInstance().getTotalandPassed(course, year);
+
+
+                    int rowcount = 0;
+
+                    List<string> lstColCodes = lstStudents.OrderBy(x => x.collegecode.Trim()).Select(y => y.collegecode.Trim()).Distinct().Take(1).ToList<string>();
+
+
+                    int series = 0;
+                    foreach (var colcode in lstColCodes)
+                    {
+                        List<string> HallticketNumbers = lstStudents.Where(y => y.collegecode.Trim() == colcode.Trim()).OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().Take(10).ToList<string>();
+                        bool isExstudent = false;
+
+
+
+                        for (int i = 0; i < HallticketNumbers.Count; i++)
+                        {
+
+
+                            series++;
+
+                            var lstStuns = lstStudents.Where(x => x.HallTicketNumber == HallticketNumbers[i]).ToList<StudentInformation>();
+                            var StudentConsInformatio = LstConStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<ConsDataEntity>();
+
+                            string HallTicket = lstStuns[0].HallTicketNumber;
+
+
+                            string FN = lstStuns[0].FatherName == null ? "" : lstStuns[0].FatherName;
+                            string SN = lstStuns[0].StudentName == null ? "" : lstStuns[0].StudentName;
+                            string CC = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
+                            string EI = lstStuns[0].Ei == null ? "" : lstStuns[0].Ei;
+                            string CollegeCode = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
+
+
+
+                            sw.WriteLine(""); rowcount++;
+                            sw.WriteLine(""); rowcount++;
+                            sw.WriteLine(""); rowcount++;
+
+                            sw.WriteLine(GetSpaces(45) + "G K A K A T I Y  A    U N I V E R S I T Y H  " + GetSpaces(35) + "Page " + series);
+                            rowcount++;
+                            sw.WriteLine(GetSpaces(40) + "G TABULATION REGISTRATION FOR " + course.ToUpper() + " MAY " + DateTime.Now.Year.ToString() + ":H  " + GetSpaces(50));
+                            rowcount++;
+                            sw.WriteLine("DATE: " + DateTime.Now.ToString("dd/MMM/yyyy"));
+
+                            var col = lstColleges.Where(x => x.CollCode.Trim() == colcode.Trim()).ToList();
+                            rowcount++;
+                            sw.WriteLine("Course: " + course + GetSpaces(20) + "COLLEGE CODE : " + col[0].CollegeName + "(" + colcode + ")");
+                            rowcount++;
+
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            string htnd = "G H.T.NO :  H  " + HallTicket;
+
+                            sw.WriteLine(htnd + GetSpaces(50 - htnd.Length) + "G CANDIDATE NAME :H  " + SN);
+                            rowcount++;
+                            string gn = "G EI H  " + EI;
+                            sw.WriteLine(gn + GetSpaces(50 - gn.Length) + "G FATHER'S NAME :H  " + FN);
+                            rowcount++;
+
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            string dubHeader = string.Empty;
+                            dubHeader = dubHeader + GetspacewithString("SubCode", 5) + GetspacewithString("MX", 4) + GetspacewithString("MN", 4) + GetspacewithString("MRK", 4) + GetspacewithString("M", 4) + GetspacewithString("MI", 4) + GetspacewithString("TM", 4) + GetspacewithString("AG", 4) + GetspacewithString("RES", 4);
+                            dubHeader = dubHeader + GetspacewithString("CR", 3) + GetspacewithString("GL", 3) + GetspacewithString("GP", 4) + GetspacewithString("CMK", 4) + GetspacewithString("CMRK", 4) + GetspacewithString("CEMK", 4) + GetspacewithString("AY", 7);
+                            dubHeader = GetSpaces(2) + dubHeader + GetspacewithString("SubCode", 5) + GetspacewithString("MX", 4) + GetspacewithString("MN", 4) + GetspacewithString("MRK", 4) + GetspacewithString("M", 4) + GetspacewithString("MI", 4) + GetspacewithString("TM", 4) + GetspacewithString("AG", 4) + GetspacewithString("RES", 4);
+                            dubHeader = dubHeader + GetspacewithString("CR", 3) + GetspacewithString("GL", 3) + GetspacewithString("GP", 4) + GetspacewithString("CMK", 4) + GetspacewithString("CMRK", 4) + GetspacewithString("CEMK", 4) + GetspacewithString("AY", 7);
+
+
+
+
+
+
+
+
+                            List<VerticalTabularReportEntity> lstSem11 = new List<Entity.VerticalTabularReportEntity>();
+                            List<VerticalTabularReportEntity> lstSem12 = new List<Entity.VerticalTabularReportEntity>();
+
+                            List<VerticalTabularReportEntity> lstSem21 = new List<Entity.VerticalTabularReportEntity>();
+                            List<VerticalTabularReportEntity> lstSem22 = new List<Entity.VerticalTabularReportEntity>();
+
+
+                            List<VerticalTabularReportEntity> lstSem31 = new List<Entity.VerticalTabularReportEntity>();
+                            List<VerticalTabularReportEntity> lstSem32 = new List<Entity.VerticalTabularReportEntity>();
+
+
+                            List<VerticalTabularReportEntity> lstEntity = new List<Entity.VerticalTabularReportEntity>();
+                            string Comsem = string.Empty;
+
+                            // Con data
+                            for (int y = 1; y <= 3; y++)
+                            {
+                                for (int s = 1; s <= 2; s++)
+                                {
+                                    Comsem = y.ToString() + s.ToString();
+                                    var lst = StudentConsInformatio.Where(x => x.SEM == Comsem).ToList().FirstOrDefault();
+                                    if (lst != null)
+                                    {
+                                        lstEntity = CondataFormat(lstEntity, lst.P1, lst.M1, lst.S1, lst.R1, lst.A1, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P2, lst.M2, lst.S2, lst.R2, lst.A2, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P3, lst.M3, lst.S3, lst.R3, lst.A3, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P4, lst.M4, lst.S4, lst.R4, lst.A4, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P5, lst.M5, lst.S5, lst.R5, lst.A5, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P6, lst.M6, lst.S6, lst.R6, lst.A6, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P7, lst.M7, lst.S7, lst.R7, lst.A7, y.ToString(), s.ToString());
+
+                                        //lstEntity = CondataFormat(lstEntity, lst.P8, lst.M8, lst.S8, lst.R8, lst.A8, y.ToString(), s.ToString());
+                                        //lstEntity = CondataFormat(lstEntity, lst.P9, lst.M9, lst.S9, lst.R9, lst.A9, y.ToString(), s.ToString());
+                                        //lstEntity = CondataFormat(lstEntity, lst.P10, lst.M10, lst.S10, lst.R10, lst.A10, y.ToString(), s.ToString());
+                                    }
+                                }
+
+                            }
+
+
+
+                            /// Pres Data
+                            for (int y = 1; y <= 3; y++)
+                            {
+                                for (int s = 1; s <= 2; s++)
+                                {
+                                    var PresData = lstStuns.Where(x => x.Year == y.ToString() && x.Sem == s.ToString()).ToList();
+                                    var isconconount = lstEntity.Where(x => x.year == y.ToString() && x.Sem == s.ToString()).ToList();
+                                    bool iconexists = true;
+
+                                    if (isconconount.Count > 0)
+                                    {
+                                        iconexists = true;
+                                    }
+                                    else
+                                    {
+                                        iconexists = false;
+                                    }
+
+
+
+
+                                    foreach (var pd in PresData)
+                                    {
+                                        lstEntity = PResDataMap(lstEntity, pd, y.ToString(), s.ToString(), iconexists);
+                                    }
+
+                                }
+                            }
+
+
+
+                            /////
+                            string doterline = "--------------------------------";
+                            string Sem1122 = "GI YEAR I SEMESTER:H ";
+                            int s1122Rowcount = 0;
+                            sw.WriteLine(Sem1122 + GetSpaces(67 - Sem1122.Length) + GetSpaces(5) + "GII YEAR II SEMESTER:H ");
+                            rowcount++;
+                            var sem11 = lstEntity.Where(x => x.year == "1" && x.Sem == "1").ToList();
+                            var sem22 = lstEntity.Where(x => x.year == "2" && x.Sem == "2").ToList();
+
+                            if (sem11.Count() > sem22.Count())
+                            {
+                                s1122Rowcount = sem11.Count();
+                            }
+                            if (sem11.Count() < sem22.Count())
+                            {
+                                s1122Rowcount = sem22.Count();
+                            }
+
+                            if (sem11.Count() == sem22.Count())
+                            {
+                                s1122Rowcount = sem22.Count();
+                            }
+
+
+                            for (int rows11 = 0; rows11 < s1122Rowcount; rows11++)
+                            {
+                                string buildrow = string.Empty;
+
+                                if (sem11.Count() > 0 && rows11 < sem11.Count())
+                                {
+                                    buildrow = GetspacewithString(sem11[rows11].SubCode, 5) + GetspacewithString(sem11[rows11].MaxMarks, 4) + GetspacewithString(sem11[rows11].MinMarks, 4) + GetspacewithString(sem11[rows11].Marks, 4) + GetspacewithString(sem11[rows11].Moderation, 4) + GetspacewithString(sem11[rows11].InternalMarks, 4) + GetspacewithString(sem11[rows11].FinalMarks, 4) + GetspacewithString(sem11[rows11].AggrigationMarks, 4) + GetspacewithString(sem11[rows11].PresResult, 4);
+                                    buildrow = buildrow + GetspacewithString(sem11[rows11].Credits, 3) + GetspacewithString(sem11[rows11].CONR, 3) + GetspacewithString(sem11[rows11].GP, 4) + GetspacewithString(sem11[rows11].CONMarks, 4) + GetspacewithString(sem11[rows11].ConIntMarks, 4) + GetspacewithString(sem11[rows11].ConExtMarks, 4) + GetspacewithString(sem11[rows11].ConAcademi, 7);
+
+                                }
+                                else
+                                {
+                                    buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                }
+                                buildrow = buildrow + GetSpaces(2);
+                                if (sem22.Count() > 0 && rows11 < sem22.Count())
+                                {
+                                    buildrow = buildrow + GetspacewithString(sem22[rows11].SubCode, 5) + GetspacewithString(sem22[rows11].MaxMarks, 4) + GetspacewithString(sem22[rows11].MinMarks, 4) + GetspacewithString(sem22[rows11].Marks, 4) + GetspacewithString(sem22[rows11].Moderation, 4) + GetspacewithString(sem22[rows11].InternalMarks, 4) + GetspacewithString(sem22[rows11].FinalMarks, 4) + GetspacewithString(sem22[rows11].AggrigationMarks, 4) + GetspacewithString(sem22[rows11].PresResult, 4);
+                                    buildrow = buildrow + GetspacewithString(sem22[rows11].Credits, 3) + GetspacewithString(sem22[rows11].CONR, 3) + GetspacewithString(sem22[rows11].GP, 4) + GetspacewithString(sem22[rows11].CONMarks, 4) + GetspacewithString(sem22[rows11].ConIntMarks, 4) + GetspacewithString(sem22[rows11].ConExtMarks, 4) + GetspacewithString(sem22[rows11].ConAcademi, 7);
+
+
+                                }
+                                else
+                                {
+                                    buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                }
+
+
+                                sw.WriteLine(buildrow);
+                                rowcount++;
+
+                            }
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            sw.WriteLine("           Total:" + GetSpaces(60) + "Total: ");
+                            rowcount++;
+                            sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                            rowcount++;
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+
+
+                            ///1231 semista
+                            string Sem1231 = "GI YEAR II SEMESTER:H ";
+                            int s1231Rowcount = 0;
+                            sw.WriteLine(Sem1231 + GetSpaces(67 - Sem1122.Length) + GetSpaces(5) + "GIII YEAR I SEMESTER:H ");
+
+                            rowcount++;
+                            var sem12 = lstEntity.Where(x => x.year == "1" && x.Sem == "2").ToList();
+                            var sem31 = lstEntity.Where(x => x.year == "3" && x.Sem == "1").ToList();
+
+                            if (sem12.Count() > sem31.Count())
+                            {
+                                s1231Rowcount = sem12.Count();
+                            }
+                            if (sem12.Count() < sem31.Count())
+                            {
+                                s1231Rowcount = sem31.Count();
+                            }
+
+                            if (sem12.Count() == sem31.Count())
+                            {
+                                s1231Rowcount = sem31.Count();
+                            }
+
+
+                            for (int rows11 = 0; rows11 < s1231Rowcount; rows11++)
+                            {
+                                string buildrow = string.Empty;
+
+                                if (sem12.Count() > 0 && rows11 < sem12.Count())
+                                {
+                                    buildrow = GetspacewithString(sem12[rows11].SubCode, 5) + GetspacewithString(sem12[rows11].MaxMarks, 4) + GetspacewithString(sem12[rows11].MinMarks, 4) + GetspacewithString(sem12[rows11].Marks, 4) + GetspacewithString(sem12[rows11].Moderation, 4) + GetspacewithString(sem12[rows11].InternalMarks, 4) + GetspacewithString(sem12[rows11].FinalMarks, 4) + GetspacewithString(sem12[rows11].AggrigationMarks, 4) + GetspacewithString(sem12[rows11].PresResult, 4);
+                                    buildrow = buildrow + GetspacewithString(sem12[rows11].Credits, 3) + GetspacewithString(sem12[rows11].CONR, 3) + GetspacewithString(sem12[rows11].GP, 4) + GetspacewithString(sem12[rows11].CONMarks, 4) + GetspacewithString(sem12[rows11].ConIntMarks, 4) + GetspacewithString(sem12[rows11].ConExtMarks, 4) + GetspacewithString(sem12[rows11].ConAcademi, 7);
+
+                                }
+                                else
+                                {
+                                    buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                }
+                                buildrow = buildrow + GetSpaces(2);
+                                if (sem31.Count() > 0 && rows11 < sem31.Count())
+                                {
+                                    buildrow = buildrow + GetspacewithString(sem31[rows11].SubCode, 5) + GetspacewithString(sem31[rows11].MaxMarks, 4) + GetspacewithString(sem31[rows11].MinMarks, 4) + GetspacewithString(sem31[rows11].Marks, 4) + GetspacewithString(sem31[rows11].Moderation, 4) + GetspacewithString(sem31[rows11].InternalMarks, 4) + GetspacewithString(sem31[rows11].FinalMarks, 4) + GetspacewithString(sem31[rows11].AggrigationMarks, 4) + GetspacewithString(sem31[rows11].PresResult, 4);
+                                    buildrow = buildrow + GetspacewithString(sem31[rows11].Credits, 3) + GetspacewithString(sem31[rows11].CONR, 3) + GetspacewithString(sem31[rows11].GP, 4) + GetspacewithString(sem31[rows11].CONMarks, 4) + GetspacewithString(sem31[rows11].ConIntMarks, 4) + GetspacewithString(sem31[rows11].ConExtMarks, 4) + GetspacewithString(sem31[rows11].ConAcademi, 7);
+
+
+                                }
+                                else
+                                {
+                                    buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                }
+
+
+                                sw.WriteLine(buildrow);
+                                rowcount++;
+
+                            }
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            sw.WriteLine("           Total:" + GetSpaces(60) + "Total: ");
+                            rowcount++;
+                            sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                            rowcount++;
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+
+
+
+
+
+                            ///1231 semista
+                            string Sem2132 = "GII YEAR I SEMESTER:H ";
+                            int Sem2132Rowcount = 0;
+                            sw.WriteLine(Sem2132 + GetSpaces(67 - Sem2132.Length) + GetSpaces(5) + "GIII YEAR II SEMESTER:H ");
+
+                            rowcount++;
+                            var sem21 = lstEntity.Where(x => x.year == "2" && x.Sem == "1").ToList();
+                            var sem32 = lstEntity.Where(x => x.year == "3" && x.Sem == "2").ToList();
+
+                            if (sem21.Count() > sem32.Count())
+                            {
+                                Sem2132Rowcount = sem21.Count();
+                            }
+                            if (sem21.Count() < sem32.Count())
+                            {
+                                Sem2132Rowcount = sem32.Count();
+                            }
+
+                            if (sem21.Count() == sem32.Count())
+                            {
+                                Sem2132Rowcount = sem21.Count();
+                            }
+
+
+                            for (int rows11 = 0; rows11 < Sem2132Rowcount; rows11++)
+                            {
+                                string buildrow = string.Empty;
+
+                                if (sem21.Count() > 0 && rows11 < sem21.Count())
+                                {
+                                    buildrow = GetspacewithString(sem21[rows11].SubCode, 5) + GetspacewithString(sem21[rows11].MaxMarks, 4) + GetspacewithString(sem21[rows11].MinMarks, 4) + GetspacewithString(sem21[rows11].Marks, 4) + GetspacewithString(sem21[rows11].Moderation, 4) + GetspacewithString(sem21[rows11].InternalMarks, 4) + GetspacewithString(sem21[rows11].FinalMarks, 4) + GetspacewithString(sem21[rows11].AggrigationMarks, 4) + GetspacewithString(sem21[rows11].PresResult, 4);
+                                    buildrow = buildrow + GetspacewithString(sem21[rows11].Credits, 3) + GetspacewithString(sem21[rows11].CONR, 3) + GetspacewithString(sem21[rows11].GP, 4) + GetspacewithString(sem21[rows11].CONMarks, 4) + GetspacewithString(sem21[rows11].ConIntMarks, 4) + GetspacewithString(sem21[rows11].ConExtMarks, 4) + GetspacewithString(sem21[rows11].ConAcademi, 7);
+
+                                }
+                                else
+                                {
+                                    buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                }
+                                buildrow = buildrow + GetSpaces(2);
+                                if (sem32.Count() > 0 && rows11 < sem32.Count())
+                                {
+                                    buildrow = buildrow + GetspacewithString(sem32[rows11].SubCode, 5) + GetspacewithString(sem32[rows11].MaxMarks, 4) + GetspacewithString(sem32[rows11].MinMarks, 4) + GetspacewithString(sem32[rows11].Marks, 4) + GetspacewithString(sem32[rows11].Moderation, 4) + GetspacewithString(sem32[rows11].InternalMarks, 4) + GetspacewithString(sem32[rows11].FinalMarks, 4) + GetspacewithString(sem32[rows11].AggrigationMarks, 4) + GetspacewithString(sem32[rows11].PresResult, 4);
+                                    buildrow = buildrow + GetspacewithString(sem32[rows11].Credits, 3) + GetspacewithString(sem32[rows11].CONR, 3) + GetspacewithString(sem32[rows11].GP, 4) + GetspacewithString(sem32[rows11].CONMarks, 4) + GetspacewithString(sem32[rows11].ConIntMarks, 4) + GetspacewithString(sem32[rows11].ConExtMarks, 4) + GetspacewithString(sem32[rows11].ConAcademi, 7);
+
+
+                                }
+                                else
+                                {
+                                    buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                }
+
+
+                                sw.WriteLine(buildrow);
+                                rowcount++;
+
+                            }
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            sw.WriteLine("           Total:" + GetSpaces(60) + "Total: ");
+                            rowcount++;
+                            sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                            rowcount++;
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            // page breakrowcount
+                            for (int pg = 0; pg < (72 - rowcount); pg++)
+                            {
+                                sw.WriteLine("");
+                            }
+
+                            rowcount = 0;
+
+
+                        }
+                    }
+
+                }
+
+                // Write file contents on console.     
+                using (StreamReader sr = System.IO.File.OpenText(fileNamedirectory + filename))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+
+                return Json(fileNamedirectory + filename, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception Ex)
+            {
+                return Json(Ex.Message, JsonRequestBehavior.AllowGet);
+            }
+
+
         }
+
+
+
+        public List<VerticalTabularReportEntity> PResDataMap(List<VerticalTabularReportEntity> lst, StudentInformation presData, string year, string sem, bool iconexists)
+        {
+
+            foreach (var pres in lst)
+            {
+                if (pres.SubCode == presData.SubjectCode && pres.year == year && pres.Sem == sem && iconexists == true)
+                {
+                    pres.Credits = presData.Credits.Truncate(5);
+
+                    pres.Marks = presData.valMark.Truncate(5);
+
+                    pres.Moderation = (presData.MOd1.ChangeINT() + presData.MOd2.ChangeINT()).ToString().Truncate(5);
+
+                    pres.InternalMarks = presData.InternalMarks.Truncate(5);
+
+                    pres.FinalMarks = (pres.Marks.ChangeINT() + pres.Moderation.ChangeINT()).ToString().Truncate(5);
+
+                    pres.AggrigationMarks = (pres.InternalMarks.ChangeINT() + pres.FinalMarks.ChangeINT()).ToString().Truncate(5);
+
+                    pres.isPress = true;
+
+                    pres.PresResult = presData.Status.Truncate(5);
+
+                }
+                else if (iconexists == false)
+
+                {
+
+
+                    lst.Add(new VerticalTabularReportEntity()
+                    {
+                        Credits = presData.Credits,
+
+                        Marks = presData.valMark,
+
+                        Moderation = (presData.MOd1.ChangeINT() + presData.MOd2.ChangeINT()).ToString(),
+
+                        InternalMarks = presData.InternalMarks,
+
+                        FinalMarks = (pres.Marks.ChangeINT() + pres.Moderation.ChangeINT()).ToString(),
+
+                        AggrigationMarks = (pres.InternalMarks.ChangeINT() + pres.FinalMarks.ChangeINT()).ToString(),
+
+                        isPress = true,
+
+                        PresResult = presData.Status,
+
+
+                        year = year,
+                        Sem = sem
+
+
+
+
+
+
+
+
+
+
+
+                    });
+
+
+                }
+            }
+
+
+            return lst;
+        }
+
+        public List<VerticalTabularReportEntity> CondataFormat(List<VerticalTabularReportEntity> lst, string P1, string M1, string S1, string R1, string A1, string year, string sem)
+        {
+
+            lst.Add(new VerticalTabularReportEntity()
+            {
+                SubCode = P1.Truncate(5),
+                CONR = R1.Truncate(5),
+                GP = ((M1.ChangeINT() + S1.ChangeINT()) / 10).ToString().Truncate(5),
+                ConExtMarks = M1.Truncate(5),
+                ConIntMarks = S1.Truncate(5),
+                CONMarks = (M1.ChangeINT() + S1.ChangeINT()).ToString().Truncate(5),
+                ConResult = (R1.ToLower() == "f" ? "F" : "P").Truncate(5),
+                ConAcademi = A1.ChangeToMonthandYear(),
+                year = year,
+                Sem = sem
+
+            });
+
+            return lst;
+        }
+
+
+        public string GetspacewithString(string s, int le)
+        {
+            if (s != null)
+            {
+                return s + GetSpaces(le - s.Length);
+            }
+            else
+            {
+                return GetSpaces(le);
+            }
+
+        }
+        [HttpPost]
+        public JsonResult GenerateTabularVerticalReport_SideBySide(string course)
+        {
+
+            try
+            {
+                string fileNamedirectory = @"D:\TabularReport\";
+                string filename = course + DateTime.Now.ToString("ddMMyyyy") + "_Vertical.txt";
+
+                // check for Directory
+                if (!Directory.Exists(fileNamedirectory))  // if it doesn't exist, create
+                {
+                    Directory.CreateDirectory(fileNamedirectory);
+                }
+
+
+                // file information 
+                FileInfo fi = new FileInfo(fileNamedirectory + filename);
+                // Check if file already exists. If yes, delete it.     
+                if (System.IO.File.Exists(fileNamedirectory + filename))
+                {
+                    System.IO.File.Delete(fileNamedirectory + filename);
+                }
+
+                MemoPrintService BoMemoService = new MemoPrintService();
+
+                int year = 0;
+                int sem = 0;
+
+
+                // Create a new file     
+                using (StreamWriter sw = fi.CreateText())
+                {
+                    //
+                    var lstStudents = BoMemoService.getTabularReportInstance().GetStudentDetailVR(course);
+                    var LstConStudents = BoMemoService.getTabularReportInstance().GetStudentsConsDetailsVR(course);
+                    var lstColleges = BoMemoService.getTabularReportInstance().GetCollegeDetails().OrderBy(x => x.CollCode);
+
+                    //var lsttotalpassed = BoMemoService.getTabularReportInstance().getTotalandPassed(course, year);
+
+
+                    int rowcount = 0;
+
+                    List<string> lstColCodes = lstStudents.OrderBy(x => x.collegecode.Trim()).Select(y => y.collegecode.Trim()).Distinct().Take(1).ToList<string>();
+
+
+                    int series = 0;
+                    foreach (var colcode in lstColCodes)
+                    {
+                        List<string> HallticketNumbers = lstStudents.Where(y => y.collegecode.Trim() == colcode.Trim()).OrderBy(x => x.HallTicketNumber).Select(x => x.HallTicketNumber).Distinct().Take(10).ToList<string>();
+                        bool isExstudent = false;
+
+
+
+                        for (int i = 0; i < HallticketNumbers.Count; i++)
+                        {
+
+
+                            series++;
+
+                            var lstStuns = lstStudents.Where(x => x.HallTicketNumber == HallticketNumbers[i]).ToList<StudentInformation>();
+                            var StudentConsInformatio = LstConStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<ConsDataEntity>();
+
+                            string HallTicket = lstStuns[0].HallTicketNumber;
+
+
+                            string FN = lstStuns[0].FatherName == null ? "" : lstStuns[0].FatherName;
+                            string SN = lstStuns[0].StudentName == null ? "" : lstStuns[0].StudentName;
+                            string CC = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
+                            string EI = lstStuns[0].Ei == null ? "" : lstStuns[0].Ei;
+                            string CollegeCode = lstStuns[0].collegecode == null ? "" : lstStuns[0].collegecode;
+
+
+
+                            sw.WriteLine(""); rowcount++;
+                            sw.WriteLine(""); rowcount++;
+                            sw.WriteLine(""); rowcount++;
+
+                            sw.WriteLine(GetSpaces(45) + "G K A K A T I Y  A    U N I V E R S I T Y H  " + GetSpaces(35) + "Page " + series);
+                            rowcount++;
+                            sw.WriteLine(GetSpaces(40) + "G TABULATION REGISTRATION FOR " + course.ToUpper() + " MAY " + DateTime.Now.Year.ToString() + ":H  " + GetSpaces(50));
+                            rowcount++;
+                            sw.WriteLine("DATE: " + DateTime.Now.ToString("dd/MMM/yyyy"));
+
+                            var col = lstColleges.Where(x => x.CollCode.Trim() == colcode.Trim()).ToList();
+                            rowcount++;
+                            sw.WriteLine("Course: " + course + GetSpaces(20) + "COLLEGE CODE : " + col[0].CollegeName + "(" + colcode + ")");
+                            rowcount++;
+
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            string htnd = "G H.T.NO :  H  " + HallTicket;
+
+                            sw.WriteLine(htnd + GetSpaces(50 - htnd.Length) + "G CANDIDATE NAME :H  " + SN);
+                            rowcount++;
+                            string gn = "G EI H  " + EI;
+                            sw.WriteLine(gn + GetSpaces(50 - gn.Length) + "G FATHER'S NAME :H  " + FN);
+                            rowcount++;
+
+                            sw.WriteLine("=====================================================================================================================================");
+                            rowcount++;
+                            string dubHeader = string.Empty;
+                            dubHeader = dubHeader + GetspacewithString("SubCode", 5) + GetspacewithString("MX", 4) + GetspacewithString("MN", 4) + GetspacewithString("MRK", 4) + GetspacewithString("M", 4) + GetspacewithString("MI", 4) + GetspacewithString("TM", 4) + GetspacewithString("AG", 4) + GetspacewithString("RES", 4);
+                            dubHeader = dubHeader + GetspacewithString("CR", 3) + GetspacewithString("GL", 3) + GetspacewithString("GP", 4) + GetspacewithString("CMK", 4) + GetspacewithString("CMRK", 4) + GetspacewithString("CEMK", 4) + GetspacewithString("AY", 7);
+                            dubHeader = GetSpaces(2) + dubHeader + GetspacewithString("SubCode", 5) + GetspacewithString("MX", 4) + GetspacewithString("MN", 4) + GetspacewithString("MRK", 4) + GetspacewithString("M", 4) + GetspacewithString("MI", 4) + GetspacewithString("TM", 4) + GetspacewithString("AG", 4) + GetspacewithString("RES", 4);
+                            dubHeader = dubHeader + GetspacewithString("CR", 3) + GetspacewithString("GL", 3) + GetspacewithString("GP", 4) + GetspacewithString("CMK", 4) + GetspacewithString("CMRK", 4) + GetspacewithString("CEMK", 4) + GetspacewithString("AY", 7);
+
+
+
+
+
+
+
+
+
+
+                            List<VerticalTabularReportEntity> lstEntity = new List<Entity.VerticalTabularReportEntity>();
+                            string Comsem = string.Empty;
+
+                            // Con data
+                            for (int y = 1; y <= 3; y++)
+                            {
+                                for (int s = 1; s <= 2; s++)
+                                {
+                                    Comsem = y.ToString() + s.ToString();
+                                    var lst = StudentConsInformatio.Where(x => x.SEM == Comsem).ToList().FirstOrDefault();
+                                    if (lst != null)
+                                    {
+                                        lstEntity = CondataFormat(lstEntity, lst.P1, lst.M1, lst.S1, lst.R1, lst.A1, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P2, lst.M2, lst.S2, lst.R2, lst.A2, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P3, lst.M3, lst.S3, lst.R3, lst.A3, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P4, lst.M4, lst.S4, lst.R4, lst.A4, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P5, lst.M5, lst.S5, lst.R5, lst.A5, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P6, lst.M6, lst.S6, lst.R6, lst.A6, y.ToString(), s.ToString());
+                                        lstEntity = CondataFormat(lstEntity, lst.P7, lst.M7, lst.S7, lst.R7, lst.A7, y.ToString(), s.ToString());
+
+                                        //lstEntity = CondataFormat(lstEntity, lst.P8, lst.M8, lst.S8, lst.R8, lst.A8, y.ToString(), s.ToString());
+                                        //lstEntity = CondataFormat(lstEntity, lst.P9, lst.M9, lst.S9, lst.R9, lst.A9, y.ToString(), s.ToString());
+                                        //lstEntity = CondataFormat(lstEntity, lst.P10, lst.M10, lst.S10, lst.R10, lst.A10, y.ToString(), s.ToString());
+                                    }
+                                }
+
+                            }
+
+
+
+                            /// Pres Data
+                            for (int y = 1; y <= 3; y++)
+                            {
+                                for (int s = 1; s <= 2; s++)
+                                {
+                                    var PresData = lstStuns.Where(x => x.Year == y.ToString() && x.Sem == s.ToString()).ToList();
+                                    var isconconount = lstEntity.Where(x => x.year == y.ToString() && x.Sem == s.ToString()).ToList();
+                                    bool iconexists = true;
+
+                                    if (isconconount.Count > 0)
+                                    {
+                                        iconexists = true;
+                                    }
+                                    else
+                                    {
+                                        iconexists = false;
+                                    }
+
+
+
+
+                                    foreach (var pd in PresData)
+                                    {
+                                        lstEntity = PResDataMap(lstEntity, pd, y.ToString(), s.ToString(), iconexists);
+                                    }
+
+                                }
+                            }
+
+
+
+
+
+
+
+
+                            /////
+                            string doterline = "--------------------------------";
+
+                            for (int y = 1; y <= 3; y++)
+                            {
+                                sw.WriteLine(GetSpaces(67) + "G " + y + " YEAR :H ");
+                                rowcount++;
+                                for (int s = 1; s <= 2; s++)
+                                {
+
+
+                                    string Sem1122 = "G " + y + " YEAR " + s + " SEMESTER:H ";
+                                    int s12Rowcount = 0;
+                                    sw.WriteLine(Sem1122 + GetSpaces(67 - Sem1122.Length) + GetSpaces(5) + "G" + y + " YEAR " + s + 1 + " SEMESTER:H ");
+
+                                    var sem1 = lstEntity.Where(x => x.year == y.ToString() && x.Sem == s.ToString()).ToList();
+                                    var sem2 = lstEntity.Where(x => x.year == y.ToString() && x.Sem == (s+1).ToString()).ToList();
+
+                                    if (sem1.Count() > sem2.Count())
+                                    {
+                                        s12Rowcount = sem1.Count();
+                                    }
+                                    if (sem1.Count() < sem2.Count())
+                                    {
+                                        s12Rowcount = sem2.Count();
+                                    }
+
+                                    if (sem1.Count() == sem2.Count())
+                                    {
+                                        s12Rowcount = sem2.Count();
+                                    }
+
+                                    for (int rows11 = 0; rows11 < s12Rowcount; rows11++)
+                                    {
+                                        string buildrow = string.Empty;
+
+                                        if (sem1.Count() > 0 && rows11 < sem1.Count())
+                                        {
+                                            buildrow = GetspacewithString(sem1[rows11].SubCode, 5) + GetspacewithString(sem1[rows11].MaxMarks, 4) + GetspacewithString(sem1[rows11].MinMarks, 4) + GetspacewithString(sem1[rows11].Marks, 4) + GetspacewithString(sem1[rows11].Moderation, 4) + GetspacewithString(sem1[rows11].InternalMarks, 4) + GetspacewithString(sem1[rows11].FinalMarks, 4) + GetspacewithString(sem1[rows11].AggrigationMarks, 4) + GetspacewithString(sem1[rows11].PresResult, 4);
+                                            buildrow = buildrow + GetspacewithString(sem1[rows11].Credits, 3) + GetspacewithString(sem1[rows11].CONR, 3) + GetspacewithString(sem1[rows11].GP, 4) + GetspacewithString(sem1[rows11].CONMarks, 4) + GetspacewithString(sem1[rows11].ConIntMarks, 4) + GetspacewithString(sem1[rows11].ConExtMarks, 4) + GetspacewithString(sem1[rows11].ConAcademi, 7);
+
+                                        }
+                                        else
+                                        {
+                                            buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                        }
+                                        buildrow = buildrow + GetSpaces(2);
+                                        if (sem2.Count() > 0 && rows11 < sem2.Count())
+                                        {
+                                            buildrow = buildrow + GetspacewithString(sem2[rows11].SubCode, 5) + GetspacewithString(sem2[rows11].MaxMarks, 4) + GetspacewithString(sem2[rows11].MinMarks, 4) + GetspacewithString(sem2[rows11].Marks, 4) + GetspacewithString(sem2[rows11].Moderation, 4) + GetspacewithString(sem2[rows11].InternalMarks, 4) + GetspacewithString(sem2[rows11].FinalMarks, 4) + GetspacewithString(sem2[rows11].AggrigationMarks, 4) + GetspacewithString(sem2[rows11].PresResult, 4);
+                                            buildrow = buildrow + GetspacewithString(sem2[rows11].Credits, 3) + GetspacewithString(sem2[rows11].CONR, 3) + GetspacewithString(sem2[rows11].GP, 4) + GetspacewithString(sem2[rows11].CONMarks, 4) + GetspacewithString(sem2[rows11].ConIntMarks, 4) + GetspacewithString(sem2[rows11].ConExtMarks, 4) + GetspacewithString(sem2[rows11].ConAcademi, 7);
+                                        }
+                                        else
+                                        {
+                                            buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                                        }
+
+
+                                        sw.WriteLine(buildrow);
+                                        rowcount++;
+
+                                    }
+                                    sw.WriteLine("=====================================================================================================================================");
+                                    rowcount++;
+                                    sw.WriteLine("Total:" + GetSpaces(60) + "Total: ");
+                                    rowcount++;
+                                    sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                                    rowcount++;
+                                    sw.WriteLine("=====================================================================================================================================");
+                                    rowcount++;
+
+                                }
+                            }
+
+
+
+                            //string Sem1122 = "GI YEAR I SEMESTER:H ";
+                            //int s1122Rowcount = 0;
+                            //sw.WriteLine(Sem1122 + GetSpaces(67 - Sem1122.Length) + GetSpaces(5) + "GII YEAR II SEMESTER:H ");
+                            //rowcount++;
+                            //var sem11 = lstEntity.Where(x => x.year == "1" && x.Sem == "1").ToList();
+                            //var sem22 = lstEntity.Where(x => x.year == "2" && x.Sem == "2").ToList();
+
+                            //if (sem11.Count() > sem22.Count())
+                            //{
+                            //    s1122Rowcount = sem11.Count();
+                            //}
+                            //if (sem11.Count() < sem22.Count())
+                            //{
+                            //    s1122Rowcount = sem22.Count();
+                            //}
+
+                            //if (sem11.Count() == sem22.Count())
+                            //{
+                            //    s1122Rowcount = sem22.Count();
+                            //}
+
+
+                            //for (int rows11 = 0; rows11 < s1122Rowcount; rows11++)
+                            //{
+                            //    string buildrow = string.Empty;
+
+                            //    if (sem11.Count() > 0 && rows11 < sem11.Count())
+                            //    {
+                            //        buildrow = GetspacewithString(sem11[rows11].SubCode, 5) + GetspacewithString(sem11[rows11].MaxMarks, 4) + GetspacewithString(sem11[rows11].MinMarks, 4) + GetspacewithString(sem11[rows11].Marks, 4) + GetspacewithString(sem11[rows11].Moderation, 4) + GetspacewithString(sem11[rows11].InternalMarks, 4) + GetspacewithString(sem11[rows11].FinalMarks, 4) + GetspacewithString(sem11[rows11].AggrigationMarks, 4) + GetspacewithString(sem11[rows11].PresResult, 4);
+                            //        buildrow = buildrow + GetspacewithString(sem11[rows11].Credits, 3) + GetspacewithString(sem11[rows11].CONR, 3) + GetspacewithString(sem11[rows11].GP, 4) + GetspacewithString(sem11[rows11].CONMarks, 4) + GetspacewithString(sem11[rows11].ConIntMarks, 4) + GetspacewithString(sem11[rows11].ConExtMarks, 4) + GetspacewithString(sem11[rows11].ConAcademi, 7);
+
+                            //    }
+                            //    else
+                            //    {
+                            //        buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                            //    }
+                            //    buildrow = buildrow + GetSpaces(2);
+                            //    if (sem22.Count() > 0 && rows11 < sem22.Count())
+                            //    {
+                            //        buildrow = buildrow + GetspacewithString(sem22[rows11].SubCode, 5) + GetspacewithString(sem22[rows11].MaxMarks, 4) + GetspacewithString(sem22[rows11].MinMarks, 4) + GetspacewithString(sem22[rows11].Marks, 4) + GetspacewithString(sem22[rows11].Moderation, 4) + GetspacewithString(sem22[rows11].InternalMarks, 4) + GetspacewithString(sem22[rows11].FinalMarks, 4) + GetspacewithString(sem22[rows11].AggrigationMarks, 4) + GetspacewithString(sem22[rows11].PresResult, 4);
+                            //        buildrow = buildrow + GetspacewithString(sem22[rows11].Credits, 3) + GetspacewithString(sem22[rows11].CONR, 3) + GetspacewithString(sem22[rows11].GP, 4) + GetspacewithString(sem22[rows11].CONMarks, 4) + GetspacewithString(sem22[rows11].ConIntMarks, 4) + GetspacewithString(sem22[rows11].ConExtMarks, 4) + GetspacewithString(sem22[rows11].ConAcademi, 7);
+
+
+                            //    }
+                            //    else
+                            //    {
+                            //        buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                            //    }
+
+
+                            //    sw.WriteLine(buildrow);
+                            //    rowcount++;
+
+                            //}
+                            //sw.WriteLine("=====================================================================================================================================");
+                            //rowcount++;
+                            //sw.WriteLine("Total:" + GetSpaces(60) + "Total: ");
+                            //rowcount++;
+                            //sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                            //rowcount++;
+                            //sw.WriteLine("=====================================================================================================================================");
+                            //rowcount++;
+
+
+                            /////1231 semista
+                            //string Sem1231 = "GI YEAR II SEMESTER:H ";
+                            //int s1231Rowcount = 0;
+                            //sw.WriteLine(Sem1231 + GetSpaces(67 - Sem1122.Length) + GetSpaces(5) + "GIII YEAR I SEMESTER:H ");
+
+                            //rowcount++;
+                            //var sem12 = lstEntity.Where(x => x.year == "1" && x.Sem == "2").ToList();
+                            //var sem31 = lstEntity.Where(x => x.year == "3" && x.Sem == "1").ToList();
+
+                            //if (sem12.Count() > sem31.Count())
+                            //{
+                            //    s1231Rowcount = sem12.Count();
+                            //}
+                            //if (sem12.Count() < sem31.Count())
+                            //{
+                            //    s1231Rowcount = sem31.Count();
+                            //}
+
+                            //if (sem12.Count() == sem31.Count())
+                            //{
+                            //    s1231Rowcount = sem31.Count();
+                            //}
+
+
+                            //for (int rows11 = 0; rows11 < s1231Rowcount; rows11++)
+                            //{
+                            //    string buildrow = string.Empty;
+
+                            //    if (sem12.Count() > 0 && rows11 < sem12.Count())
+                            //    {
+                            //        buildrow = GetspacewithString(sem12[rows11].SubCode, 5) + GetspacewithString(sem12[rows11].MaxMarks, 4) + GetspacewithString(sem12[rows11].MinMarks, 4) + GetspacewithString(sem12[rows11].Marks, 4) + GetspacewithString(sem12[rows11].Moderation, 4) + GetspacewithString(sem12[rows11].InternalMarks, 4) + GetspacewithString(sem12[rows11].FinalMarks, 4) + GetspacewithString(sem12[rows11].AggrigationMarks, 4) + GetspacewithString(sem12[rows11].PresResult, 4);
+                            //        buildrow = buildrow + GetspacewithString(sem12[rows11].Credits, 3) + GetspacewithString(sem12[rows11].CONR, 3) + GetspacewithString(sem12[rows11].GP, 4) + GetspacewithString(sem12[rows11].CONMarks, 4) + GetspacewithString(sem12[rows11].ConIntMarks, 4) + GetspacewithString(sem12[rows11].ConExtMarks, 4) + GetspacewithString(sem12[rows11].ConAcademi, 7);
+
+                            //    }
+                            //    else
+                            //    {
+                            //        buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                            //    }
+                            //    buildrow = buildrow + GetSpaces(2);
+                            //    if (sem31.Count() > 0 && rows11 < sem31.Count())
+                            //    {
+                            //        buildrow = buildrow + GetspacewithString(sem31[rows11].SubCode, 5) + GetspacewithString(sem31[rows11].MaxMarks, 4) + GetspacewithString(sem31[rows11].MinMarks, 4) + GetspacewithString(sem31[rows11].Marks, 4) + GetspacewithString(sem31[rows11].Moderation, 4) + GetspacewithString(sem31[rows11].InternalMarks, 4) + GetspacewithString(sem31[rows11].FinalMarks, 4) + GetspacewithString(sem31[rows11].AggrigationMarks, 4) + GetspacewithString(sem31[rows11].PresResult, 4);
+                            //        buildrow = buildrow + GetspacewithString(sem31[rows11].Credits, 3) + GetspacewithString(sem31[rows11].CONR, 3) + GetspacewithString(sem31[rows11].GP, 4) + GetspacewithString(sem31[rows11].CONMarks, 4) + GetspacewithString(sem31[rows11].ConIntMarks, 4) + GetspacewithString(sem31[rows11].ConExtMarks, 4) + GetspacewithString(sem31[rows11].ConAcademi, 7);
+
+
+                            //    }
+                            //    else
+                            //    {
+                            //        buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                            //    }
+
+
+                            //    sw.WriteLine(buildrow);
+                            //    rowcount++;
+
+                            //}
+                            //sw.WriteLine("=====================================================================================================================================");
+                            //rowcount++;
+                            //sw.WriteLine("Total:" + GetSpaces(60) + "Total: ");
+                            //rowcount++;
+                            //sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                            //rowcount++;
+                            //sw.WriteLine("=====================================================================================================================================");
+                            //rowcount++;
+
+
+
+
+
+                            /////1231 semista
+                            //string Sem2132 = "GII YEAR I SEMESTER:H ";
+                            //int Sem2132Rowcount = 0;
+                            //sw.WriteLine(Sem2132 + GetSpaces(67 - Sem2132.Length) + GetSpaces(5) + "GIII YEAR II SEMESTER:H ");
+
+                            //rowcount++;
+                            //var sem21 = lstEntity.Where(x => x.year == "2" && x.Sem == "1").ToList();
+                            //var sem32 = lstEntity.Where(x => x.year == "3" && x.Sem == "2").ToList();
+
+                            //if (sem21.Count() > sem32.Count())
+                            //{
+                            //    Sem2132Rowcount = sem21.Count();
+                            //}
+                            //if (sem21.Count() < sem32.Count())
+                            //{
+                            //    Sem2132Rowcount = sem32.Count();
+                            //}
+
+                            //if (sem21.Count() == sem32.Count())
+                            //{
+                            //    Sem2132Rowcount = sem21.Count();
+                            //}
+
+
+                            //for (int rows11 = 0; rows11 < Sem2132Rowcount; rows11++)
+                            //{
+                            //    string buildrow = string.Empty;
+
+                            //    if (sem21.Count() > 0 && rows11 < sem21.Count())
+                            //    {
+                            //        buildrow = GetspacewithString(sem21[rows11].SubCode, 5) + GetspacewithString(sem21[rows11].MaxMarks, 4) + GetspacewithString(sem21[rows11].MinMarks, 4) + GetspacewithString(sem21[rows11].Marks, 4) + GetspacewithString(sem21[rows11].Moderation, 4) + GetspacewithString(sem21[rows11].InternalMarks, 4) + GetspacewithString(sem21[rows11].FinalMarks, 4) + GetspacewithString(sem21[rows11].AggrigationMarks, 4) + GetspacewithString(sem21[rows11].PresResult, 4);
+                            //        buildrow = buildrow + GetspacewithString(sem21[rows11].Credits, 3) + GetspacewithString(sem21[rows11].CONR, 3) + GetspacewithString(sem21[rows11].GP, 4) + GetspacewithString(sem21[rows11].CONMarks, 4) + GetspacewithString(sem21[rows11].ConIntMarks, 4) + GetspacewithString(sem21[rows11].ConExtMarks, 4) + GetspacewithString(sem21[rows11].ConAcademi, 7);
+
+                            //    }
+                            //    else
+                            //    {
+                            //        buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                            //    }
+                            //    buildrow = buildrow + GetSpaces(2);
+                            //    if (sem32.Count() > 0 && rows11 < sem32.Count())
+                            //    {
+                            //        buildrow = buildrow + GetspacewithString(sem32[rows11].SubCode, 5) + GetspacewithString(sem32[rows11].MaxMarks, 4) + GetspacewithString(sem32[rows11].MinMarks, 4) + GetspacewithString(sem32[rows11].Marks, 4) + GetspacewithString(sem32[rows11].Moderation, 4) + GetspacewithString(sem32[rows11].InternalMarks, 4) + GetspacewithString(sem32[rows11].FinalMarks, 4) + GetspacewithString(sem32[rows11].AggrigationMarks, 4) + GetspacewithString(sem32[rows11].PresResult, 4);
+                            //        buildrow = buildrow + GetspacewithString(sem32[rows11].Credits, 3) + GetspacewithString(sem32[rows11].CONR, 3) + GetspacewithString(sem32[rows11].GP, 4) + GetspacewithString(sem32[rows11].CONMarks, 4) + GetspacewithString(sem32[rows11].ConIntMarks, 4) + GetspacewithString(sem32[rows11].ConExtMarks, 4) + GetspacewithString(sem32[rows11].ConAcademi, 7);
+
+
+                            //    }
+                            //    else
+                            //    {
+                            //        buildrow = buildrow + doterline + GetSpaces(65 - doterline.Length);
+                            //    }
+
+
+                            //    sw.WriteLine(buildrow);
+                            //    rowcount++;
+
+                            //}
+                            //sw.WriteLine("=====================================================================================================================================");
+                            //rowcount++;
+                            //sw.WriteLine("Total:" + GetSpaces(60) + "Total: ");
+                            //rowcount++;
+                            //sw.WriteLine("SGPA: " + GetSpaces(65) + "SGPA: ");
+                            //rowcount++;
+                            //sw.WriteLine("=====================================================================================================================================");
+                            //rowcount++;
+
+
+
+                            // page breakrowcount
+                            for (int pg = 0; pg < (72 - rowcount); pg++)
+                            {
+                                sw.WriteLine("");
+                            }
+
+                            rowcount = 0;
+
+
+                        }
+                    }
+
+                }
+
+                // Write file contents on console.     
+                using (StreamReader sr = System.IO.File.OpenText(fileNamedirectory + filename))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+
+                return Json(fileNamedirectory + filename, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception Ex)
+            {
+                return Json(Ex.Message, JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+
+
+
+
+
 
     }
 }

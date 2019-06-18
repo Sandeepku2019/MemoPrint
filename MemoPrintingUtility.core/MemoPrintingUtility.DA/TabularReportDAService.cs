@@ -474,9 +474,15 @@ namespace MemoPrintingUtility.DA
                                           HallTicketNumber = stu.HTNO,
                                           StudentName = stu.FULLNAME,
                                           FatherName = stu.FNAME,
+
                                           GRACE_MARKS = Convert.ToString(stu.GRACE_MARKS),
                                           GRACE_MARKS2 = Convert.ToString(stu.GRACE_MARKS2),
                                           Ei = stu.EI,
+                                          MOd1 = stu.MOD1_MARKS,
+                                          MOd2 = stu.MOD2_MARKS,
+                                          valMark = stu.VAL_MARKS,
+                                          Year = stu.FK_YEAR,
+                                          Sem = stu.FK_SEM,
                                           Order = Convert.ToInt16(stu.ORD.Replace("P", "").Replace("PR", "")),
                                           ExernalMarks = stu.FINAL_VAL_MARKS,
                                           InternalMarks = stu.INT_MARKS,
@@ -508,6 +514,7 @@ namespace MemoPrintingUtility.DA
                                       select new ConsDataEntity
                                       {
                                           CODE = stu.CODE,
+                                          
                                           HTNO = stu.HTNO,
                                           SEM = stu.SEM,
                                           P1 = stu.P1,
@@ -568,6 +575,25 @@ namespace MemoPrintingUtility.DA
 
             return studentConsdetails;
             
+        }
+
+
+
+
+        public List<CollegeDetails> GetCollegeDetails()
+        {
+            MemoPrintDBDataContext StudentContext = new MemoPrintDBDataContext();
+
+            var studentConsdetails = (from stu in StudentContext.SP_GETALLCOLLEGE_DETAILS().AsQueryable()
+                                      select new CollegeDetails
+                                      {
+                                          CollCode = stu.COLLEGE_CODE,
+                                          CollegeName  =stu.COLLEGE_NAME
+
+
+                                      }).ToList<CollegeDetails>();
+
+            return studentConsdetails;
         }
     }
 }

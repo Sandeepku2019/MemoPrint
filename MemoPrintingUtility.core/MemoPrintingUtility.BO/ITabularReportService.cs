@@ -26,5 +26,15 @@ namespace MemoPrintingUtility.BO
         List<BALSubjectInformation> GetBALSubjectInformation(string CourseName);
 
         List<BCAPSubjectINformation> GetBCAPSubjectInformation(string CourseName);
+
+
+
+        // vertical Tr
+        List<StudentInformation> GetStudentDetailVR(string Course);
+
+        List<ConsDataEntity> GetStudentsConsDetailsVR(string Course);
+
+        List<CollegeDetails> GetCollegeDetails();
+
     }
 }

@@ -25,6 +25,25 @@ namespace MemoPrintingUtility.Entity
         public int Order { get; set; }
 
     }
+    public class SDLCTOT
+    {
+        public string HTNO { get; set; }
+        public string Type { get; set; }
+        public string Year { get; set; }
+
+        public string subjectCode { get; set; }
+
+        public string Marks { get; set; }
+
+        public string Result { get; set; }
+
+        public string Academic { get; set; }
+
+        public string EI { get; set; }
+
+        public int Order { get; set; }
+
+    }
     public class SDLCSUB
     {
         public string YR { get; set; }

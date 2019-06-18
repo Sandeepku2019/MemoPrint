@@ -195,49 +195,49 @@ namespace MemoPrintingUtility.BO
             {
 
                 case "1":
-                    Month = "Jan";
+                    Month = "JAN";
                     break;
 
                 case "2":
-                    Month = "Feb";
+                    Month = "FEB";
                     break;
 
                 case "3":
-                    Month = "Mar";
+                    Month = "MAR";
                     break;
 
                 case "4":
-                    Month = "Apr";
+                    Month = "APR";
                     break;
                 case "5":
-                    Month = "May";
+                    Month = "MAY";
                     break;
 
                 case "6":
-                    Month = "June";
+                    Month = "JUN";
                     break;
                 case "7":
-                    Month = "July";
+                    Month = "JUL";
                     break;
 
                 case "8":
-                    Month = "Aug";
+                    Month = "AUG";
                     break;
 
                 case "9":
-                    Month = "Sep";
+                    Month = "SEP";
                     break;
 
                 case "o":
-                    Month = "Oct";
+                    Month = "OCT";
                     break;
                
                 case "n":
-                    Month = "Nov";
+                    Month = "NOV";
                     break;
 
                 case "d":
-                    Month = "Dec";
+                    Month = "DEC";
                     break;
 
                 case "a":

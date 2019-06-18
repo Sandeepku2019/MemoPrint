@@ -89,7 +89,7 @@ namespace MemoPrintingUtility.Controllers
                     {
                         hn = HallticketNumbers[i];
 
-                        if (hn == "086155038")
+                        if (hn == "086165013")
                         {
 
                         }
@@ -239,7 +239,7 @@ namespace MemoPrintingUtility.Controllers
 
                             sw.WriteLine("");  //BCA Start Line 
                             sw.WriteLine("");
-                            sw.WriteLine("");
+                            sw.WriteLine("             * * * Draft only.. * * *");
 
                             sw.WriteLine(GetSpaces(66) + CC_1);
                             string Examination = "B.C.A. ,  NOV., 2018";
@@ -302,11 +302,13 @@ namespace MemoPrintingUtility.Controllers
                                         sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR II SEMESTER:" + ((char)27) + ((char)72));
                                     }
 
-
+                                    string strTotMark = string.Empty;
+                                    string strMinMark = string.Empty;
+                                    string strSecuredMark = string.Empty;
 
                                     foreach (var merge in LstMemoSubjects)
                                     {
-                                        if (merge.SubjectName != null)
+                                        if (merge.SubjectName != null && merge.SubjectCode.Length > 0 )
                                         {
 
                                             string Subject = merge.SubjectName.Length == 0 ? Convert.ToString(merge.SubjectCode) : merge.SubjectName;
@@ -316,13 +318,39 @@ namespace MemoPrintingUtility.Controllers
                                                 Subject = "";
                                             }
                                             int totalMark = merge.SubjectExternalMarks.ChangeINT() + merge.SubjectInternalMarks.ChangeINT();
+
+                                            if (totalMark.ToString().Length != 3)
+                                            {
+                                                strTotMark = totalMark.ToString("D" + 3);
+                                            }
+                                            else { strTotMark = totalMark.ToString(); }
+
                                             string MinMark = merge.MinMarks;
+
+                                            if (MinMark.ToString().Length != 3)
+                                            {
+                                                strMinMark = int.Parse(MinMark).ToString("D" + 3);
+                                            }
+                                            bool chars2l = false;
+                                            if (merge.ExernalMarks.Length == 2 && merge.ExernalMarks.Contains("AB") == false)
+                                            {
+                                                chars2l = true;
+                                            }
+                                            else { chars2l = false; }
+
 
                                             int OCMark = merge.ExernalMarks.ChangeINT() + merge.InternalMarks.ChangeINT();
                                             TotalMark = TotalMark + OCMark;
+
+                                            if (chars2l = true)
+                                            {
+                                                strSecuredMark = OCMark.ToString("D" + 3);
+                                            }
+                                            else { strSecuredMark = OCMark.ToString(); }
+
                                             if (totalMark > 0)
                                             {
-                                                sw.WriteLine(Subject + GetSpaces(43 - Subject.Length) + totalMark + GetSpaces(6 - totalMark.ToString().Length) + MinMark + GetSpaces(6 - MinMark.ToString().Length) + OCMark + GetSpaces(5 - OCMark.ToString().Length) + merge.AcadmicYear);
+                                                sw.WriteLine(Subject + GetSpaces(43 - Subject.Length) + strTotMark + GetSpaces(6 - strTotMark.ToString().Length) + strMinMark + GetSpaces(6 - strMinMark.ToString().Length) + strSecuredMark + GetSpaces(5 - strSecuredMark.ToString().Length) + merge.AcadmicYear);
                                                 SubjectRowCount++;
                                             }
                                         }

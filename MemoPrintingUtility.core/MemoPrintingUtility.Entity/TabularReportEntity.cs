@@ -161,6 +161,8 @@ namespace MemoPrintingUtility.Entity
 
         public string MinMarks { get; set; }
 
+        public string EXMinMarks { get; set; }
+
     }
 
 

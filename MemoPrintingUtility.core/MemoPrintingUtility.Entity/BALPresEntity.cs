@@ -69,6 +69,8 @@ namespace MemoPrintingUtility.Entity
 
         public string MaxMark { get; set; }
 
+        public string EXMinMark { get; set; }
+
         public string MinMark { get; set; }
 
         public string InternalMark { get; set; }

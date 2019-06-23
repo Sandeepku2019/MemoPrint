@@ -439,23 +439,6 @@
       <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.GetBCASubjectInformation" Method="GetBCASubjectInformation">
-    <ElementType Name="GetBCASubjectInformationResult">
-      <Column Name="YR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FLD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CR" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="SCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="OCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MXMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MNMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PASSM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PATTERN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CRS" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.GetBALConUpdate_LongMemo" Method="GetBALConUpdate_LongMemo">
     <ElementType Name="GetBALConUpdate_LongMemoResult">
       <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -1020,41 +1003,6 @@
       <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_GetSDLCResultData_TRReport" Method="sp_GetSDLCResultData_TRReport">
-    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(200)" />
-    <ElementType Name="sp_GetSDLCResultData_TRReportResult">
-      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="TP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SUB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CLM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PC" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="mod1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="mod2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="sts" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FINAL_VALMARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="GRACE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FLOTATION" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MALLPRACTICE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="TOTAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="manual" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="C_PRT1DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="C_PRT2DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NEW_C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NEW_C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.get_ConsDataforTRVert" Method="get_ConsDataforTRVert">
     <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(50)" />
     <ElementType Name="get_ConsDataforTRVertResult">
@@ -1177,6 +1125,61 @@
       <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CREATED_BY" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UPDATED_BY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetSDLCResultData_TRReport" Method="sp_GetSDLCResultData_TRReport">
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(200)" />
+    <ElementType Name="sp_GetSDLCResultData_TRReportResult">
+      <Column Name="CRS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_CLGCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HTNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FK_YEAR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CLM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PC" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="mod1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="mod2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="sts" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RESULT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FINAL_VALMARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="GRACE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FLOTATION" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MALLPRACTICE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TOTAL_MARKS" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="manual" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SUBJECTNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FULLNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FNAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT1DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="C_PRT2DIV" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NEW_C_PRT1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NEW_C_PRT2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NEW_R1_PRT1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NEW_R2_PRT2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetBCASubjectInformation" Method="GetBCASubjectInformation">
+    <ElementType Name="GetBCASubjectInformationResult">
+      <Column Name="YR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SEM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FLD" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OCODE" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MXMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EXMNMR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MNMR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="INT" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PASSM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LB" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PATTERN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRS" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

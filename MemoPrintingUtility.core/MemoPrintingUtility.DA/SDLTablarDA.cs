@@ -819,8 +819,9 @@ namespace MemoPrintingUtility.DA
                                           Part1Div = stu.C_PRT1DIV,
                                           Part2Div = stu.C_PRT2DIV,
                                           NEW_C_PRT1 = stu.NEW_C_PRT1,
-                                          NEW_C_PRT2 = stu.NEW_C_PRT2
-
+                                          NEW_C_PRT2 = stu.NEW_C_PRT2,
+                                          NEW_Com_PRT1  = stu.NEW_R1_PRT1,
+                                          NEW_Com_PRT2 = stu.NEW_R2_PRT2
 
                                       }).ToList();
 

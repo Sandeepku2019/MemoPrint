@@ -49,6 +49,11 @@ namespace MemoPrintingUtility.Entity
         public string NEW_C_PRT2 { get; set; }
 
 
+        public string NEW_Com_PRT1 { get; set; }
+
+        public string NEW_Com_PRT2 { get; set; }
+
+
 
 
     }

@@ -111,7 +111,7 @@ namespace MemoPrintingUtility.Controllers
 
                         }
 
-                        if (HallTIcket == "6274172015")
+                        if (HallTIcket == "0600936851")
                         {
 
 
@@ -127,6 +127,14 @@ namespace MemoPrintingUtility.Controllers
                         string Part2Marks = lstPREStuns[0].Part2;
                         string NewC1 = lstPREStuns[0].NEW_C_PRT1;
                         string NewC2 = lstPREStuns[0].NEW_C_PRT2;
+
+                        string NewC1R = lstPREStuns[0].NEW_Com_PRT1;
+                        string NewC2R = lstPREStuns[0].NEW_Com_PRT2;
+
+                        string Part1Div = lstPREStuns[0].Part1Div;
+                        string Part2Div = lstPREStuns[0].Part2Div;
+
+
                         string FResult = string.Empty;
                         string indRes = string.Empty;
                         string indTotMarks = string.Empty;
@@ -141,22 +149,21 @@ namespace MemoPrintingUtility.Controllers
                         foreach (var con in lstCONStuns)
                         {
 
-                            if (con.HTNO == "6010111140")//"6096161019")
-                            {
-
-                            }
 
                             //1year
                             int order1 = 1;
-                            if (con.P11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M11, con.Y11, con.HTNO, con.P11, "", "I", order1++); }
-                            if (con.P12 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M12, con.Y12, con.HTNO, con.P12, "", "I", order1++); }
-                            if (con.P13 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M13, con.Y13, con.HTNO, con.P13, "", "I", order1++); }
-                            if (con.P14 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M14, con.Y14, con.HTNO, con.P14, "", "I", order1++); }
-                            if (con.P15 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M15, con.Y15, con.HTNO, con.P15, "", "I", order1++); }
-                            if (con.P16 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M16, con.Y16, con.HTNO, con.P16, "", "I", order1++); }
-                            if (con.P17 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M17, con.Y17, con.HTNO, con.P17, "", "I", order1++); }
-                            if (con.P18 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M18, con.Y18, con.HTNO, con.P18, "", "I", order1++); }
-                            if (con.P19 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M19, con.Y19, con.HTNO, con.P19, "", "I", order1++); }
+
+
+
+                            if (con.P11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M11, con.Y11, con.HTNO, con.P11, "", "I", 1); order1++; }
+                            if (con.P12 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M12, con.Y12, con.HTNO, con.P12, "", "I", 2); order1++; }
+                            if (con.P13 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M13, con.Y13, con.HTNO, con.P13, "", "I", 3); order1++; }
+                            if (con.P14 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M14, con.Y14, con.HTNO, con.P14, "", "I", 4); order1++; }
+                            if (con.P15 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M15, con.Y15, con.HTNO, con.P15, "", "I", 5); order1++; }
+                            if (con.P16 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M16, con.Y16, con.HTNO, con.P16, "", "I", 6); order1++; }
+                            if (con.P17 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M17, con.Y17, con.HTNO, con.P17, "", "I", 7); order1++; }
+                            if (con.P18 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M18, con.Y18, con.HTNO, con.P18, "", "I", 8); order1++; }
+                            if (con.P19 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M19, con.Y19, con.HTNO, con.P19, "", "I", 9); order1++; }
 
                             if (con.PM11 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM11, con.PA11, con.HTNO, con.P11 + "(P)", "", "I", order1++); }
                             if (con.PM12 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM12, con.PA12, con.HTNO, con.P12 + "(P)", "", "I", order1++); }
@@ -171,15 +178,20 @@ namespace MemoPrintingUtility.Controllers
                             //2year
 
                             int order2 = 1;
-                            if (con.P21 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M21, con.Y21, con.HTNO, con.P21, "", "II", order2++); }
-                            if (con.P22 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M22, con.Y22, con.HTNO, con.P22, "", "II", order2++); }
-                            if (con.P23 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M23, con.Y23, con.HTNO, con.P23, "", "II", order2++); }
-                            if (con.P24 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M24, con.Y24, con.HTNO, con.P24, "", "II", order2++); }
-                            if (con.P25 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M25, con.Y25, con.HTNO, con.P25, "", "II", order2++); }
-                            if (con.P26 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M26, con.Y26, con.HTNO, con.P26, "", "II", order2++); }
-                            if (con.P27 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M27, con.Y27, con.HTNO, con.P27, "", "II", order2++); }
-                            if (con.P28 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M28, con.Y28, con.HTNO, con.P28, "", "II", order2++); }
-                            if (con.P29 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M29, con.Y29, con.HTNO, con.P29, "", "II", order2++); }
+
+                            if (con.P21 == null)
+                            {
+
+                            }
+                            if (con.P21 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M21, con.Y21, con.HTNO, con.P21, "", "II", 1); order2++; }
+                            if (con.P22 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M22, con.Y22, con.HTNO, con.P22, "", "II", 2); order2++; }
+                            if (con.P23 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M23, con.Y23, con.HTNO, con.P23, "", "II", 3); order2++; }
+                            if (con.P24 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M24, con.Y24, con.HTNO, con.P24, "", "II", 4); order2++; }
+                            if (con.P25 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M25, con.Y25, con.HTNO, con.P25, "", "II", 5); order2++; }
+                            if (con.P26 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M26, con.Y26, con.HTNO, con.P26, "", "II", 6); order2++; }
+                            if (con.P27 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M27, con.Y27, con.HTNO, con.P27, "", "II", 7); order2++; }
+                            if (con.P28 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M28, con.Y28, con.HTNO, con.P28, "", "II", 8); order2++; }
+                            if (con.P29 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M29, con.Y29, con.HTNO, con.P29, "", "II", 9); order2++; }
 
                             if (con.PM21 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM21, con.PA21, con.HTNO, con.P21 + "(P)", "", "II", order2++); }
                             if (con.PM22 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM22, con.PA22, con.HTNO, con.P22 + "(P)", "", "II", order2++); }
@@ -193,17 +205,22 @@ namespace MemoPrintingUtility.Controllers
                             //3year
                             int order3 = 1;
 
-                            if (con.P31 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M31, con.Y31, con.HTNO, con.P31, "", "III", order3++); }
-                            if (con.P32 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M32, con.Y32, con.HTNO, con.P32, "", "III", order3++); }
-                            if (con.P33 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M33, con.Y33, con.HTNO, con.P33, "", "III", order3++); }
-                            if (con.P34 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M34, con.Y34, con.HTNO, con.P34, "", "III", order3++); }
-                            if (con.P35 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M35, con.Y35, con.HTNO, con.P35, "", "III", order3++); }
-                            if (con.P36 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M36, con.Y36, con.HTNO, con.P36, "", "III", order3++); }
-                            if (con.P37 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M37, con.Y37, con.HTNO, con.P37, "", "III", order3++); }
-                            if (con.P38 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M38, con.Y38, con.HTNO, con.P38, "", "III", order3++); }
-                            if (con.P39 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M39, con.Y39, con.HTNO, con.P39, "", "III", order3++); }
-                            if (con.P310 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M310, con.Y310, con.HTNO, con.P310, "", "III", order3++); }
-                            if (con.P311 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M311, con.Y311, con.HTNO, con.P311, "", "III", order3++); }
+                            if (con.P31 == null)
+                            {
+
+                            }
+
+                            if (con.P31 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M31, con.Y31, con.HTNO, con.P31, "", "III", 1); order3++; }
+                            if (con.P32 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M32, con.Y32, con.HTNO, con.P32, "", "III", 2); order3++; }
+                            if (con.P33 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M33, con.Y33, con.HTNO, con.P33, "", "III", 3); order3++; }
+                            if (con.P34 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M34, con.Y34, con.HTNO, con.P34, "", "III", 4); order3++; }
+                            if (con.P35 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M35, con.Y35, con.HTNO, con.P35, "", "III", 5); order3++; }
+                            if (con.P36 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M36, con.Y36, con.HTNO, con.P36, "", "III", 6); order3++; }
+                            if (con.P37 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M37, con.Y37, con.HTNO, con.P37, "", "III", 7); order3++; }
+                            if (con.P38 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M38, con.Y38, con.HTNO, con.P38, "", "III", 8); order3++; }
+                            if (con.P39 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M39, con.Y39, con.HTNO, con.P39, "", "III", 9); order3++; }
+                            if (con.P310 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M310, con.Y310, con.HTNO, con.P310, "", "III", 10); order3++; }
+                            if (con.P311 != null) { lstEntity = CnrEntityVertical(lstEntity, con.M311, con.Y311, con.HTNO, con.P311, "", "III", 11); order3++; }
 
                             if (con.PM31 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM31, con.PA31, con.HTNO, con.P31 + "(P)", "", "III", order3++); }
                             if (con.PM32 != null) { lstEntity = CnrEntityVertical(lstEntity, con.PM32, con.PA32, con.HTNO, con.P32 + "(P)", "", "III", order3++); }
@@ -219,12 +236,20 @@ namespace MemoPrintingUtility.Controllers
 
                         }
 
+
+                        if (lstEntity.Where(x => x.Year == "III" && x.Type == "CONS.").ToList().Count < 6)
+                        {
+                            var test = lstEntity.Where(x => x.Year == "III" && x.Type == "CONS.").ToList();
+                        }
                         #endregion
                         string[] yrs = new string[] { "I", "II", "III" };
                         string[] Types = new string[] { "CONS.", "PRES." };
 
                         // PRES DATA 
                         lstEntity = CnrEntityVertical(lstEntity, lstPREStuns);
+
+
+
 
                         int ry = 0;
                         int Part1Total = 0;
@@ -277,7 +302,7 @@ namespace MemoPrintingUtility.Controllers
                                 else
                                 {
 
-                                    var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode).ToList().FirstOrDefault();
+                                    var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode.Replace("(P)", "")).ToList().FirstOrDefault();
                                     if (SUB != null && SUB.PMNMR.ChangeINT() > cn.Marks.ChangeINT())
                                     {
 
@@ -286,6 +311,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
 
                             }
+
 
                             foreach (var cn in PNR)
                             {
@@ -301,21 +327,22 @@ namespace MemoPrintingUtility.Controllers
                                 else
                                 {
                                     var SUB = lstSUB.Where(x => x.SCODE == cn.subjectCode.Replace("(P)", "")).ToList().FirstOrDefault();
-                                    if (SUB != null && SUB.PMNMR.ChangeINT() > cn.Marks.ChangeINT())
+                                    if (SUB != null && SUB.PMNMR.ChangeINT() <= cn.Marks.ChangeINT())
                                     {
 
-                                        CONcOUNT++;
+                                        PRESCOUNT++;
                                     }
                                 }
 
                             }
 
-
-
-
-
-                            
-
+                            if (PNR.Where(x => x.subjectCode.ToLower() == "tel" || x.subjectCode.ToLower() == "hin" || x.subjectCode.ToLower() == "urd" || x.subjectCode.ToLower() == "eng" || x.subjectCode.ToLower() == "san").ToList().Count() > 1)
+                            {
+                                if (Part1Div != "PASS")
+                                {
+                                    NewC1 = "COMP";
+                                }
+                            }
 
                             if (CONcOUNT != PRESCOUNT)
                             {
@@ -354,6 +381,9 @@ namespace MemoPrintingUtility.Controllers
                             FResult = "COMPLETED";
                         }
 
+
+                     
+
                         if (lstPREStuns[0].FResult != null)
                         {
                             if (lstPREStuns[0].FResult.ToLower() == "c")
@@ -375,90 +405,10 @@ namespace MemoPrintingUtility.Controllers
                         string EI = lstPREStuns[0].EI == null ? "" : lstPREStuns[0].EI;
                         string nameformat = series + GetSpaces(5 - series.ToString().Length) + GetSpaces(1) + CC + GetSpaces(5 - CC.Length) + HallTIcket + GetSpaces(12 - HallTIcket.Length) + SN + GetSpaces(45 - SN.Length) + FN + GetSpaces(45 - FN.Length) + EI + GetSpaces(7 - EI.Length) + HallTIcket + GetSpaces(10 - HallTIcket.Length);
 
-                        string Part1Div = lstPREStuns[0].Part1Div;
-                        string Part2Div = lstPREStuns[0].Part2Div;
-
-
-
-                        #region Page break and Col break set up
-                        //int allpres = 0;
-                        //foreach (string y in yrs)
-                        //{
-
-                        //    foreach (string ty in Types)
-                        //    {
-                        //        if (lstEntity.Where(x => x.Year == y && x.Type == ty && x.subjectCode != null).ToList().Count > 0)
-                        //        {
-                        //            rowcount = rowcount + 2;
-
-
-                        //        }
-                        //        if (ty == "PRES.")
-                        //        {
-                        //            if (lstEntity.Where(x => x.Year == y && x.Type == "PRES." && x.subjectCode != null).ToList().Count > 0)
-                        //            {
-                        //                allpres++;
-                        //            }
-                        //        }
-                        //    }
-
-                        //    if (lstEntity.Where(x => x.Year == y && x.Type == "CONS.").ToList().Count > 0 || lstEntity.Where(x => x.Year == y && x.Type == "PRES.").ToList().Count > 0)
-                        //    {
-                        //        rowcount = rowcount + 1;
-                        //    }
-                        //}
-                        //if (allpres == 3)
-                        //{
-                        //    rowcount = rowcount + 1;
-                        //}
-                        //if (lstEntity.Where(x => x.Type == "CONS." && x.subjectCode != null).ToList().Count == 0)
-                        //{
-                        //    rowcount = rowcount + 1;
-                        //}
-                        //rowcount = rowcount + 2;
-
-                        //if (allpres == 1 && lstEntity.Where(x => x.Type == "PRES." && x.Year == "III" && x.subjectCode != null).ToList().Count > 0)
-                        //{
-                        // rowcount = rowcount - 1;
-                        //}
 
 
 
 
-                        //if ((PageBraker + rowcount) > 72)
-                        //{
-                        //    int differ = 72 - PageBraker;
-
-                        //    for (int h = 0; h < differ; h++)
-                        //    {
-                        //        sw.WriteLine(" ");
-                        //    }
-                        //    //rowcount = 1;
-
-                        //    PageBraker = addHeaderFooter(sw, 72, course);
-                        //}
-
-                        ////if (PrevColcode != "" && PrevColcode.Trim() != colcode.Trim() && ColPagebrk == true)
-                        ////{
-                        ////    ColPagebrk = false;
-                        ////    int differ = 73 - PageBraker;
-
-                        ////    for (int h = 0; h < differ; h++)
-                        ////    {
-                        ////        sw.WriteLine(" ");
-                        ////    }
-
-
-                        ////    PageBraker = addHeaderFooter(sw, 72, course);
-
-                        ////}
-
-
-                        ////if (PrevColcode == "")
-                        ////{
-                        ////    PrevColcode = colcode;
-                        ////}
-                        #endregion
 
                         if (i == 0)
                         {
@@ -476,11 +426,25 @@ namespace MemoPrintingUtility.Controllers
                             rowcount = (rowcount + 1) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 2) : (rowcount + 1);
                         }
 
-
-
+                        
+                        
                         foreach (string yr in yrs)
                         {
 
+                            var WallChecCon = lstEntity.Where(x => x.Year == yr && x.Type == "CONS." && x.Marks == null).ToList();
+                            var WallChecPres = lstEntity.Where(x => x.Year == yr && x.Type == "PRES." && x.Marks == null ).ToList();
+                            if (WallChecCon.Count > WallChecPres.Count)
+                            {
+                                if (yr == "I")
+                                { yr1R = "WALL"; }
+
+                                if (yr == "II")
+                                { yr2R = "WALL"; }
+
+                                if (yr == "III")
+                                { yr3R = "WALL"; }
+                            }
+                            #region Printing 
                             string result = string.Empty;
                             foreach (string ty in Types)
                             {
@@ -505,6 +469,7 @@ namespace MemoPrintingUtility.Controllers
                                 }
 
                                 bool flag = false;
+                                bool flag1 = false;
                                 bool abflag = false;
                                 bool subcount1 = false;
                                 if (lstpopulaateData.Count() > 0)
@@ -518,6 +483,11 @@ namespace MemoPrintingUtility.Controllers
                                         {
                                             abflag = true;
                                         }
+                                    }
+
+                                    if (lstpopulaateData.OrderBy(z => z.Order).ToList()[0].Order > 1 && lstpopulaateData.ToList()[0].Type == "PRES." && lstpopulaateData.OrderBy(z => z.Order).ToList().Count > 1)
+                                    {
+                                        flag1 = true;
                                     }
                                 }
                                 if (lstpopulaateData.Where(x => x.Type == "PRES.").ToList().Count() == 1)
@@ -574,6 +544,11 @@ namespace MemoPrintingUtility.Controllers
 
                                         umakspace = umakspace + GetSpaces(4);
                                         umakspace = umakspace + GetSpaces(1);
+                                        if (flag1 == true)
+                                        {
+                                            umakspace = umakspace + GetSpaces(1);
+                                            flag1 = false;
+                                        }
                                         flag = false;
 
                                         if (abflag == true)
@@ -717,20 +692,14 @@ namespace MemoPrintingUtility.Controllers
                                 }
                             }
 
+                            #endregion
                             //sw.WriteLine("          ..........................................................................................................................");
                         }
 
 
-
-
-
-
-
-
-
-
-
-
+                        #region Calc. part1 and Part2 calc
+                        int p1subjectcout = 0;
+                        int countP1f = 0;
                         foreach (string yr in yrs)
                         {
 
@@ -742,30 +711,80 @@ namespace MemoPrintingUtility.Controllers
                             int p1total = 0;
                             int p2total = 0;
 
+
                             foreach (var PTot in PNR)
                             {
                                 var ob = CnNRTotal.Where(x => x.subjectCode == PTot.subjectCode).ToList();
                                 if (ob != null && ob.Count > 0)
                                 {
-                                       if (ob[0].Marks.ChangeINT() <= PTot.Marks.ChangeINT())
-                                        {
-                                            ob[0].Marks = PTot.Marks;
-                                        }
+                                    if (ob[0].Marks.ChangeINT() <= PTot.Marks.ChangeINT())
+                                    {
+                                        ob[0].Marks = PTot.Marks;
+                                    }
                                 }
 
                             }
-                            p1total = CnNRTotal.Where(x => x.subjectCode.ToLower() == "tel" || x.subjectCode.ToLower() == "hin" || x.subjectCode.ToLower() == "urd" || x.subjectCode.ToLower() == "eng" || x.subjectCode.ToLower() == "san").Sum(y => y.Marks.ChangeINT());
+
+                            var p1set = CnNRTotal.Where(x => x.subjectCode.ToLower() == "tel" || x.subjectCode.ToLower() == "hin" || x.subjectCode.ToLower() == "urd" || x.subjectCode.ToLower() == "eng" || x.subjectCode.ToLower() == "san").ToList();
+                            p1total = p1set.Sum(y => y.Marks.ChangeINT());
+                            p1subjectcout = p1subjectcout+ p1set.Count();
+                            countP1f = countP1f + p1set.Where(x => x.Marks.ChangeINT() < 35).ToList().Count;
+
+
                             p2total = CnNRTotal.Where(x => x.subjectCode.ToLower() != "tel" && x.subjectCode.ToLower() != "hin" && x.subjectCode.ToLower() != "urd" && x.subjectCode.ToLower() != "eng" && x.subjectCode.ToLower() != "san" && x.subjectCode.ToLower() != "ihc" && x.subjectCode.ToLower() != "scn" && x.subjectCode.ToLower() != "est").Sum(y => y.Marks.ChangeINT());
 
+
                             Part1Total = Part1Total + p1total;
-                                Part2Total = Part2Total + p2total;
+                            Part2Total = Part2Total + p2total;
                         }
+
+                        #endregion
+
+
+
                         string StrPartRes1 = string.Empty;
                         string StrPartRes2 = string.Empty;
                         string NewCom1 = string.Empty;
                         string NewCom2 = string.Empty;
-                        if (NewC1 == null) { NewCom1 = string.Empty; } else { NewCom1 = NewC1 + "/"; }
+                        //if (NewC1 == null) { NewCom1 = string.Empty; } else { NewCom1 = NewC1 + "/"; }
                         if (NewC2 == null) { NewCom2 = string.Empty; } else { NewCom2 = NewC2 + "/"; }
+
+                        if (yr1R == "FAILED" || yr2R == "FAILED" || yr3R == "FAILED")
+                        {
+                            Part1Div = null;
+                            Part2Div = null;
+                        }
+
+                        if (yr1R == "WALL" || yr2R == "WALL" || yr3R == "WALL")
+                        {
+                            FResult = "WALL";
+                        }
+
+                        if (countP1f == 0  && p1subjectcout ==4 )
+                        {
+                            if (Part1Total >= 140 && Part1Total < 191)
+                            {
+                                Part1Div ="PASS";
+                            }
+
+                            if (Part1Total >= 192 && Part1Total <= 239)
+                            {
+                                Part1Div = "SECOND";
+                            }
+
+                            if (Part1Total >= 240 && Part1Total <= 279)
+                            {
+                                Part1Div = "FIRST";
+                            }
+
+                            if (Part1Total >= 280 && Part1Total <= 400)
+                            {
+                                Part1Div = "DISTN.";
+                            }
+                        }
+
+
+
                         if (Part1Div != null)
                         {
                             if (Part1Div == "PASS")
@@ -774,7 +793,11 @@ namespace MemoPrintingUtility.Controllers
                             }
                             else
                             {
-                                StrPartRes1 = Part1Div + GetSpaces(15);
+                                if (NewC1 == "COMP" || NewC1R == "C" || NewC2R == "C")
+                                {
+                                    NewCom1 = "COMPLETED  /  ";
+                                }
+                                StrPartRes1 = NewCom1 + Part1Div + GetSpaces(15);
                             }
                         }
                         else { StrPartRes1 = "- -" + GetSpaces(25); }
@@ -791,26 +814,15 @@ namespace MemoPrintingUtility.Controllers
                             else { StrPartRes2 = "- -" + GetSpaces(15); }
 
                         }
-                        //if (Part2Div != null)
-                        //{
-                        //    if (TBCom == "C")
-                        //    {
 
-                        //    }
-
-
-                        //    else { 
-                        //    }
-                        //}
-                        //else { StrPartRes2 = "- -" + GetSpaces(5) + "- -" + GetSpaces(15); }
-
+                        if (yr1R == "WALL" || yr2R == "WALL" || yr3R == "WALL")
+                        {
+                            FResult = "WALL";
+                            StrPartRes1 = "---";
+                            StrPartRes2 = "---";
+                        }
 
                         sw.WriteLine("            *******PART 1: " + Part1Total + GetSpaces(5) + StrPartRes1 + "********* Part 2: " + Part2Total + GetSpaces(5) + StrPartRes2);
-
-                        //sw.WriteLine("            *******PART 1: " + Part1Marks + GetSpaces(5) + Part1Div + GetSpaces(25) + "********* Part 2: " + Part2Marks + GetSpaces(5) + Part1Div + GetSpaces(15));
-
-                        //rowcount = (rowcount + 1) >= 72 ? addHeaderFooter(sw, 72, course, false, rowcount) : (rowcount + 1);
-
                         sw.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
                         rowcount = (rowcount + 2) >= 68 ? addHeaderFooter(sw, 72, course, false, rowcount + 1) : (rowcount + 2);
 
@@ -899,7 +911,14 @@ namespace MemoPrintingUtility.Controllers
                     }
                     else
                     {
-                        orse = lstEntity.Where(x => x.Year == YS && x.Type == "CONS.").ToList().Count;
+                        if (lstEntity.Where(x => x.Year == YS && x.Type == "PRES.").ToList().Count > 0)
+                        {
+                            orse = lstEntity.Where(x => x.Year == YS && x.Type == "PRES.").Max(s => s.Order) + 1;
+                        }
+                        else
+                        {
+                            orse = lstEntity.Where(x => x.Year == YS && x.Type == "CONS.").ToList().Count + 1;
+                        }
                     }
 
                     subcode = pre.SubjectCode + "(P)";
@@ -955,7 +974,7 @@ namespace MemoPrintingUtility.Controllers
                 }
 
                 rowcount = 0;
-               
+
                 //sw.WriteLine(" ");
                 sw.WriteLine(" ");
                 sw.WriteLine(" ");

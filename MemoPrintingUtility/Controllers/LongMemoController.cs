@@ -89,7 +89,7 @@ namespace MemoPrintingUtility.Controllers
                     {
                         hn = HallticketNumbers[i];
 
-                        if (hn == "086165013")
+                        if (hn == "193165040")
                         {
 
                         }
@@ -148,11 +148,11 @@ namespace MemoPrintingUtility.Controllers
                         foreach (var merge in lstMemo)
                         {
                             int OCMark = merge.ExernalMarks.ChangeINT() + merge.InternalMarks.ChangeINT();
-                            if (merge.MinMarks.ChangeINT() > OCMark)
+                            if (merge.MinMarks.ChangeINT() > OCMark || merge.EXMinMarks.ChangeINT() > merge.ExernalMarks.ChangeINT())
                             {
                                 merge.Status = "FAILED";
                             }
-                            else if (OCMark > merge.MinMarks.ChangeINT())
+                            else if (OCMark > merge.MinMarks.ChangeINT() && merge.ExernalMarks.ChangeINT() > merge.EXMinMarks.ChangeINT())
                             {
                                 merge.Status = "COMPLETED";
                             }
@@ -225,7 +225,14 @@ namespace MemoPrintingUtility.Controllers
                             }
                             #endregion
 
+
+                            
                             string HallTicket_1 = lstStunsfirst[0].HallTicketNumber == null ? "" : lstStunsfirst[0].HallTicketNumber;
+
+                            if (HallTicket_1 == "086155038")
+                            {
+
+                            }
                             string FN_1 = lstStunsfirst[0].FatherName == null ? "" : lstStunsfirst[0].FatherName;
                             string SN_1 = lstStunsfirst[0].StudentName == null ? "" : lstStunsfirst[0].StudentName;
                             string CC_1 = lstStunsfirst[0].collegecode == null ? "" : lstStunsfirst[0].collegecode;
@@ -239,7 +246,7 @@ namespace MemoPrintingUtility.Controllers
 
                             sw.WriteLine("");  //BCA Start Line 
                             sw.WriteLine("");
-                            sw.WriteLine("             * * * Draft only.. * * *");
+                            //sw.WriteLine("             * * * Draft only.. * * *");
 
                             sw.WriteLine(GetSpaces(66) + CC_1);
                             string Examination = "B.C.A. ,  NOV., 2018";
@@ -276,30 +283,30 @@ namespace MemoPrintingUtility.Controllers
                                     if (j == 0 & z == 0)
                                     {
                                         StringBuilder builder = new StringBuilder();
-                                        builder.Append("" + ((char)27) + ((char)71) + "I YEAR:" + ((char)27) + ((char)72));
+                                        builder.Append("" + ((char)27) + ((char)71) + "I YEAR" + ((char)27) + ((char)72));
                                         sw.WriteLine(builder.ToString());
                                     }
 
                                     if (j == 1 & z == 0)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR I SEMESTER:" + ((char)27) + ((char)72));
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR I SEMESTER" + ((char)27) + ((char)72));
                                     }
 
                                     if (j == 1 & z == 1)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR II SEMESTER:" + ((char)27) + ((char)72));
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR II SEMESTER" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 0)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR I SEMESTER:" + ((char)27) + ((char)72));
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR I SEMESTER" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 1)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR II SEMESTER:" + ((char)27) + ((char)72));
+                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR II SEMESTER" + ((char)27) + ((char)72));
                                     }
 
                                     string strTotMark = string.Empty;
@@ -762,35 +769,41 @@ namespace MemoPrintingUtility.Controllers
 
         private List<StudentInformation> GetCondataFormat(string SubCode, string MarksScored, string internals, string Academic, List<StudentInformation> lst, List<BCAPSubjectINformation> lstSubjectInfo, string yr, string sem)
         {
-            var sub = lstSubjectInfo.Where(x => x.SubjectCode == SubCode && x.Year == yr && x.Sem == sem).ToList();
-            string SbName = string.Empty;
-            string MaxMarks = string.Empty;
-            string MinMarks = string.Empty;
-            string Occupined = string.Empty;
-            string internalMarks = string.Empty;
-            if (sub != null && sub.Count() > 0)
+            if (SubCode != null)
             {
-                SbName = sub[0].SubjectName;
-                MaxMarks = sub[0].MaxMark;
-                MinMarks = sub[0].MinMark;
-                internalMarks = sub[0].InternalMark;
+                var sub = lstSubjectInfo.Where(x => x.SubjectCode == SubCode && x.Year == yr && x.Sem == sem).ToList();
+                string SbName = string.Empty;
+                string MaxMarks = string.Empty;
+                string MinMarks = string.Empty;
+                string ExMinMarks = string.Empty;
+                string Occupined = string.Empty;
+                string internalMarks = string.Empty;
+                if (sub != null && sub.Count() > 0)
+                {
+                    SbName = sub[0].SubjectName;
+                    MaxMarks = sub[0].MaxMark;
+                    MinMarks = sub[0].MinMark;
+                    ExMinMarks = sub[0].EXMinMark;
+                    internalMarks = sub[0].InternalMark;
 
+                }
+
+                lst.Add(new StudentInformation()
+                {
+                    SubjectCode = SubCode,
+                    SubjectName = SbName,
+                    MinMarks = MinMarks,
+                    EXMinMarks = ExMinMarks,
+                    SubjectExternalMarks = MaxMarks,
+                    SubjectInternalMarks = internalMarks,
+                    ExernalMarks = MarksScored,
+                    InternalMarks = internals,
+                    AcadmicYear = Academic.ChangeToMonthandYear(),
+                    Year = yr,
+                    Sem = sem
+
+                });
             }
-
-            lst.Add(new StudentInformation()
-            {
-                SubjectCode = SubCode,
-                SubjectName = SbName,
-                MinMarks = MinMarks,
-                SubjectExternalMarks = MaxMarks,
-                SubjectInternalMarks = internalMarks,
-                ExernalMarks = MarksScored,
-                InternalMarks = internals,
-                AcadmicYear = Academic.ChangeToMonthandYear(),
-                Year = yr,
-                Sem = sem
-
-            });
 
             return lst;
         }

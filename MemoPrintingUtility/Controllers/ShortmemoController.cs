@@ -462,7 +462,7 @@ namespace MemoPrintingUtility.Controllers
 
                         hn = HallticketNumbers[i];
 
-                        if (hn == "086155038")
+                        if (hn == "090155030")
                         {
 
                         }
@@ -486,7 +486,7 @@ namespace MemoPrintingUtility.Controllers
                         string CC_1 = lstStunsfirst[0].collegecode == null ? "" : lstStunsfirst[0].collegecode;
 
                         string CourseDetails = GetSpaces(12) + course + " " + Syear + " YR " + Ssem + " SEM   NOV/DEC ." + (DateTime.Now.Year - 1).ToString();
-                        CourseDetails = CourseDetails + GetSpaces(73 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy");
+                        CourseDetails = CourseDetails + GetSpaces(73 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy") + "(" + i + ")";
 
 
 
@@ -540,6 +540,10 @@ namespace MemoPrintingUtility.Controllers
                         int tM = Convert.ToInt32(lstStunsfirst[0].TotalMarks);
                         string totalMarks = GetSpaces(12) + tM.ToString() + "(" + tM.NumberToWords().ToUpper() + ")";
                         sw.WriteLine(totalMarks);
+                        if (lstStunsfirst[0].FinalResult == "PROMOTED")
+                        {
+                            lstStunsfirst[0].FinalResult = "FAILED";
+                        }
                         sw.WriteLine(GetSpaces(12) + lstStunsfirst[0].FinalResult);
 
 
@@ -621,7 +625,7 @@ namespace MemoPrintingUtility.Controllers
                     {
                         External = lstStunsfirst[i].ExernalMarks;
                     }
-                    SubjectAndGrades = SubjectAndGrades + SubExternal.ChangeINT().ToString("D"+3) + GetSpaces(4 - SubExternal.Length);
+                    SubjectAndGrades = SubjectAndGrades + SubExternal.ChangeINT().ToString("D" + 3) + GetSpaces(4 - SubExternal.Length);
                     SubjectAndGrades = SubjectAndGrades + External + GetSpaces(4 - External.Length);
 
 
@@ -660,19 +664,31 @@ namespace MemoPrintingUtility.Controllers
                     { TM = SubExternal; }
                     else
                     {
-                        totalMarks.ToString("D" + 3);
+                        TM = totalMarks.ToString("D" + 3);
                     }
                     //}
 
 
                     SubjectAndGrades = SubjectAndGrades + TM + GetSpaces(5 - TM.Length);
-                    SubjectAndGrades = SubjectAndGrades + OccupiedMarks.ToString("D" + 3).Truncate(3) + GetSpaces(6 - OccupiedMarks.ToString("D" + 3).Truncate(3).Length);
 
+                    if (External == "AB." && inernal == "AB.")
+                    {
+
+                        SubjectAndGrades = SubjectAndGrades + "AB." + GetSpaces(6 - 3);
+                    }
+                    else if (External == "AB." && inernal == "- -")
+                    {
+                        SubjectAndGrades = SubjectAndGrades + "AB." + GetSpaces(6 - 3);
+                    }
+                    else
+                    {
+                        SubjectAndGrades = SubjectAndGrades + OccupiedMarks.ToString("D" + 3).Truncate(3) + GetSpaces(6 - OccupiedMarks.ToString("D" + 3).Truncate(3).Length);
+                    }
                     string SubjectResult = string.Empty;
 
-                    if (External.ChangeINT() > 0)
+                    if (OccupiedMarks > 0)
                     {
-                        if (Convert.ToInt32(External.ChangeINT()) > Convert.ToInt32(MinMarksToPass))
+                        if (OccupiedMarks > Convert.ToInt32(MinMarksToPass) && inernal.Contains("AB") == false && External.Contains("AB") == false && External.ChangeINT() >= subinfo[0].MinMark.ChangeINT())
                         {
                             SubjectResult = "PASS";
 
@@ -1618,7 +1634,7 @@ namespace MemoPrintingUtility.Controllers
                     break;
             }
             return name;
-        }   
+        }
     }
 }
 

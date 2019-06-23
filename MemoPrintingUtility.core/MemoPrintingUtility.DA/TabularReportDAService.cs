@@ -434,6 +434,7 @@ namespace MemoPrintingUtility.DA
                                       SubjectName = stu.OCODE,
                                       SubjectCode = stu.SCODE,
                                       MaxMark = stu.MXMR,
+                                      EXMinMark =stu.EXMNMR,
                                       MinMark = stu.MNMR,
                                       InternalMark = stu.INT,
                                       CourseName = stu.CRS,

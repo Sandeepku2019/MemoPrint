@@ -462,7 +462,7 @@ namespace MemoPrintingUtility.Controllers
 
                         hn = HallticketNumbers[i];
 
-                        if (hn == "090155030")
+                        if (hn == "090155022")
                         {
 
                         }
@@ -486,7 +486,7 @@ namespace MemoPrintingUtility.Controllers
                         string CC_1 = lstStunsfirst[0].collegecode == null ? "" : lstStunsfirst[0].collegecode;
 
                         string CourseDetails = GetSpaces(12) + course + " " + Syear + " YR " + Ssem + " SEM   NOV/DEC ." + (DateTime.Now.Year - 1).ToString();
-                        CourseDetails = CourseDetails + GetSpaces(73 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy") + "(" + i + ")";
+                        CourseDetails = CourseDetails + GetSpaces(73 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy") ;
 
 
 
@@ -688,12 +688,12 @@ namespace MemoPrintingUtility.Controllers
 
                     if (OccupiedMarks > 0)
                     {
-                        if (OccupiedMarks > Convert.ToInt32(MinMarksToPass) && inernal.Contains("AB") == false && External.Contains("AB") == false && External.ChangeINT() >= subinfo[0].MinMark.ChangeINT())
+                        if (OccupiedMarks > Convert.ToInt32(MinMarksToPass) && External.Contains("AB") == false)
                         {
                             SubjectResult = "PASS";
 
                         }
-                        else
+                        else if (OccupiedMarks < Convert.ToInt32(MinMarksToPass) || External.Contains("AB") == true)
                         {
                             SubjectResult = "FAIL";
                         }

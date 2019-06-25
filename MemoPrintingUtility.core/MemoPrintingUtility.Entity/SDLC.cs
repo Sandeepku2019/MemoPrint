@@ -14,6 +14,10 @@ namespace MemoPrintingUtility.Entity
 
         public string subjectCode { get; set; }
 
+        public string subjectName { get; set; }
+
+        
+
         public string Marks { get; set; }
 
         public string Result { get; set; }

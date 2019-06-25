@@ -289,24 +289,24 @@ namespace MemoPrintingUtility.Controllers
 
                                     if (j == 1 & z == 0)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR I SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine("G II YEAR I SEMESTER" + ((char)27) + ((char)72));
                                     }
 
                                     if (j == 1 & z == 1)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "II YEAR II SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine ("G II YEAR II SEMESTER" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 0)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR I SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine("G III YEAR I SEMESTER" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 1)
                                     {
-                                        sw.WriteLine("" + ((char)27) + ((char)71) + "III YEAR II SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine("G III YEAR II SEMESTER" + ((char)27) + ((char)72));
                                     }
 
                                     string strTotMark = string.Empty;

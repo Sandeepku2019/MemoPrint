@@ -298,8 +298,8 @@ namespace MemoPrintingUtility.Controllers
                   
 
 
-                    s.RangeStart = Convert.ToInt32(yrCode.ToString("D" + 1) + s.RangeStart.ToString("D" + 7));
-                    s.RangeEnd = Convert.ToInt32(yrCode.ToString("D" + 1) + (s.RangeEnd - 1).ToString("D" + 7));
+                    s.RangeStart = Convert.ToInt32( s.RangeStart.ToString("D" + 6));
+                    s.RangeEnd = Convert.ToInt32( (s.RangeEnd - 1).ToString("D" + 6));
                 }
 
                 var data = new { lstSubjectDetails = lstSubjectDetails, count = lstSubjectDetails.Sum(x => x.Count) };
@@ -373,8 +373,8 @@ namespace MemoPrintingUtility.Controllers
 
 
 
-                s.RangeStart = Convert.ToInt32(yrCode.ToString("D" + 1) + s.RangeStart.ToString("D" + 7));
-                s.RangeEnd = Convert.ToInt32(yrCode.ToString("D" + 1) + (s.RangeEnd - 1).ToString("D" + 7));
+                s.RangeStart = Convert.ToInt32(s.RangeStart.ToString("D" + 6));
+                s.RangeEnd = Convert.ToInt32((s.RangeEnd - 1).ToString("D" + 6));
 
                 BoMemoService.getSubjectRangeInstance().InsertSubjectCodeYear(s);
             }

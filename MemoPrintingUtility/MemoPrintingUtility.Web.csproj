@@ -198,6 +198,7 @@
     <Compile Include="Controllers\BALangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LongMemoController.cs" />
+    <Compile Include="Controllers\ProvisionalController.cs" />
     <Compile Include="Controllers\SDLCController.cs" />
     <Compile Include="Controllers\ShortmemoController.cs" />
     <Compile Include="Controllers\SubjectRangeCodeController.cs" />
@@ -1061,6 +1062,7 @@
     <Folder Include="Content\App_Data\" />
     <Folder Include="obj\" />
     <Folder Include="TabularReport\" />
+    <Folder Include="Views\Provisional\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

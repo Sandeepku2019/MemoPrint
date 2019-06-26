@@ -289,24 +289,35 @@ namespace MemoPrintingUtility.Controllers
 
                                     if (j == 1 & z == 0)
                                     {
-                                        sw.WriteLine("G II YEAR I SEMESTER" + ((char)27) + ((char)72));
+                                        StringBuilder builder1 = new StringBuilder();
+                                        builder1.Append("" + ((char)27) + ((char)71) + "II YEAR I SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine(builder1);
                                     }
 
                                     if (j == 1 & z == 1)
                                     {
-                                        sw.WriteLine ("G II YEAR II SEMESTER" + ((char)27) + ((char)72));
+                                        StringBuilder builder22 = new StringBuilder();
+                                        builder22.Append("" + ((char)27) + ((char)71) + "II YEAR II SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine(builder22);
+                                       
                                     }
 
 
                                     if (j == 2 & z == 0)
                                     {
-                                        sw.WriteLine("G III YEAR I SEMESTER" + ((char)27) + ((char)72));
+                                        StringBuilder builder31 = new StringBuilder();
+                                        builder31.Append("" + ((char)27) + ((char)71) + "III YEAR I SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine(builder31);
+                                        //sw.WriteLine("G III YEAR I SEMESTER" + ((char)27) + ((char)72));
                                     }
 
 
                                     if (j == 2 & z == 1)
                                     {
-                                        sw.WriteLine("G III YEAR II SEMESTER" + ((char)27) + ((char)72));
+                                        StringBuilder builder32 = new StringBuilder();
+                                        builder32.Append("" + ((char)27) + ((char)71) + "III YEAR II SEMESTER" + ((char)27) + ((char)72));
+                                        sw.WriteLine(builder32);
+                                        //sw.WriteLine("G III YEAR II SEMESTER" + ((char)27) + ((char)72));
                                     }
 
                                     string strTotMark = string.Empty;

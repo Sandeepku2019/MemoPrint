@@ -22,6 +22,7 @@ namespace MemoPrintingUtility.DA
                                   select new SDLCEntitySUB
                                   {
                                       SCODE = sub.SCODE,
+                                      OCODE = sub.OCODE,
                                       CRS = sub.CRS,
                                       YR = sub.YR,
                                       MXMR = sub.MXMR,

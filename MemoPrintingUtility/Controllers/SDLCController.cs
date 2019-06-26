@@ -1025,7 +1025,8 @@ namespace MemoPrintingUtility.Controllers
                         {
 
                             hn = HallticketNumbers[i];
-                            var lstStudents = lstYrStudent.Where(x => x.HTNO == hn).ToList();
+                            // var lstStudents = lstYrStudent.Where(x => x.HTNO == hn).ToList();
+
 
 
 
@@ -1035,16 +1036,16 @@ namespace MemoPrintingUtility.Controllers
                                 sw.WriteLine("");
                                 sw.WriteLine("");
                             }
-                            var lstStunsfirst = lstStudents.Where(x => x.HTNO == HallticketNumbers[i]).ToList<SDLCEntityPRES>();
-                            var lstStubScon = lstStudents.Where(x => x.HTNO == HallticketNumbers[i + 1]).ToList<SDLCEntityPRES>();
+                            var lstStunsfirst = lstYrStudent.Where(x => x.HTNO == HallticketNumbers[i]).OrderBy(c => c.CLM).ToList<SDLCEntityPRES>();
+                            var lstStubScon = lstYrStudent.Where(x => x.HTNO == HallticketNumbers[i + 1]).OrderBy(c => c.CLM).ToList<SDLCEntityPRES>();
 
 
                             if (lstStunsfirst == null || lstStunsfirst.Count == 0)
-                            { lstStunsfirst = new List<SDLCEntityPRES>(); lstStunsfirst.Add(new SDLCEntityPRES() { SubjectName = "", Marks = "", Result = "" }); }
+                            { lstStunsfirst = new List<SDLCEntityPRES>(); lstStunsfirst.Add(new SDLCEntityPRES() { SubjectName = "", Marks = "", Result = "", SubjectCode = "" }); }
                             if (lstStubScon == null || lstStubScon.Count == 0)
                             {
                                 lstStubScon = new List<SDLCEntityPRES>();
-                                lstStubScon.Add(new SDLCEntityPRES() { SubjectName = "", Marks = "", Result = "" });
+                                lstStubScon.Add(new SDLCEntityPRES() { SubjectName = "", Marks = "", Result = "", SubjectCode = "" });
                             }
 
 
@@ -1054,7 +1055,7 @@ namespace MemoPrintingUtility.Controllers
                             string SN_1 = lstStunsfirst[0].FullName == null ? "" : lstStunsfirst[0].FullName;
                             string CC_1 = lstStunsfirst[0].ColCode == null ? "" : lstStunsfirst[0].ColCode;
 
-                            string CourseDetails = GetSpaces(10) + course + " " + Syear + "YR SUPPLY." + (DateTime.Now.Year - 1).ToString();
+                            string CourseDetails = GetSpaces(10) + course + " " + Syear + " YR. SUPPLY." + (DateTime.Now.Year - 1).ToString();
                             CourseDetails = CourseDetails + GetSpaces(55 - CourseDetails.Length) + DateTime.Now.ToString("dd-MM-yyyy");
 
 
@@ -1069,7 +1070,10 @@ namespace MemoPrintingUtility.Controllers
 
                             string ColCodeRow = CC_1 + GetSpaces(65 - CC_1.Length) + gap + CC_2 + GetSpaces(65 - CC_2.Length);
 
+                            if (HallTicket_1 == "060006585" || HallTicket_2 == "060006585")
+                            {
 
+                            }
 
 
                             sw.WriteLine(ColCodeRow);
@@ -1099,16 +1103,62 @@ namespace MemoPrintingUtility.Controllers
                                 {
                                     if (lstStunsfirst.Count - 1 < j)
                                     {
-                                        lstStunsfirst.Add(new SDLCEntityPRES() { SubjectName = "", Marks = "", Result = "" });
+                                        lstStunsfirst.Add(new SDLCEntityPRES() { SubjectCode = "", SubjectName = "", Marks = "", Result = "", CLM = "" });
                                     }
                                     if (lstStubScon.Count - 1 < j)
                                     {
-                                        lstStubScon.Add(new SDLCEntityPRES() { SubjectName = "", Marks = "", Result = "" }); memorows++;
+                                        lstStubScon.Add(new SDLCEntityPRES() { SubjectCode = "", SubjectName = "", Marks = "", Result = "", CLM = "" }); memorows++;
                                     }
 
-                                    if (lstStunsfirst[j].SubjectName.Length < 55 && lstStubScon[j].SubjectName.Length < 55)
+
+
+
+                                    var sub1 = lstSubData.Where(x => x.SCODE == lstStunsfirst[j].SubjectCode && x.YR == lstStunsfirst[j].Year && x.CRS == course).ToList();
+                                    var sub2 = lstSubData.Where(x => x.SCODE == lstStubScon[j].SubjectCode && x.YR == lstStubScon[j].Year && x.CRS == course).ToList();
+
+                                    if (sub1 != null && sub1.Count > 0)
                                     {
-                                        SingleLingSubject(sw, j, lstStunsfirst, lstStubScon,lstSubData);
+                                        lstStunsfirst[j].SubjectName = sub1[0].OCODE;
+                                    }
+                                    else if (sub1.Count == 0 && course == "BCM")
+                                    {
+                                        sub1 = lstSubData.Where(x => x.SCODE == lstStunsfirst[j].SubjectCode && x.YR == lstStunsfirst[j].Year && x.CRS == "COM").ToList();
+                                        if (sub1 != null && sub1.Count > 0)
+                                        {
+                                            lstStunsfirst[j].SubjectName = sub1[0].OCODE;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        lstStunsfirst[j].SubjectName = "";
+                                    }
+
+
+
+
+
+
+
+                                    if (sub2 != null && sub2.Count > 0)
+                                    {
+                                        lstStubScon[j].SubjectName = sub2[0].OCODE;  
+                                    }
+                                    else if (sub2.Count == 0 && course == "BCM")
+                                    {
+                                        sub2 = lstSubData.Where(x => x.SCODE == lstStubScon[j].SubjectCode && x.YR == lstStubScon[j].Year && x.CRS == "COM").ToList();
+                                        if (sub2 != null && sub2.Count > 0)
+                                        {
+                                            lstStubScon[j].SubjectName = sub2[0].OCODE;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        lstStubScon[j].SubjectName = "";
+                                    }
+
+                                    if (lstStunsfirst[j].SubjectCode.Length < 55 && lstStubScon[j].SubjectCode.Length < 55)
+                                    {
+                                        SingleLingSubject(sw, j, lstStunsfirst, lstStubScon, lstSubData, yr.ToString(), course);
                                     }
                                     else
                                     {
@@ -1124,47 +1174,50 @@ namespace MemoPrintingUtility.Controllers
                             string SGPARow = string.Empty;
                             //first record
                             string FirstFinalResult = string.Empty;
-                            if (lstStunsfirst[0].FResult == "PROMOTED")
+                            if (lstStunsfirst.Where(x => x.Result == "FAIL" || x.Result == "AB").ToList().Count > 0)
                             {
                                 FirstFinalResult = "FAILED";
                             }
                             else
                             {
-                                FirstFinalResult = lstStunsfirst[0].FResult;
+                                FirstFinalResult = "PASSED";
                             }
 
 
                             if (FirstFinalResult == "PASSED" || FirstFinalResult == "COMPLETED" || FirstFinalResult == "PROMOTED")
                             {
-                                string sg = lstStunsfirst[0].TotalMarks == null ? "***" : lstStunsfirst[0].TotalMarks;
+                                string sg = lstStunsfirst.Sum(z => z.Marks.ChangeINT()).ToString();
                                 SGPARow = GetSpaces(10) + sg + GetSpaces(55 - sg.Length);
                             }
                             else
                             {
-                                SGPARow = GetSpaces(10) + "***" + GetSpaces(65 - "***".Length);
+                                string sg = lstStunsfirst.Sum(z => z.Marks.ChangeINT()).ToString();
+                                SGPARow = GetSpaces(10) + sg + GetSpaces(55 - sg.Length);
                             }
                             SGPARow = SGPARow + gap;
 
 
                             //Second recod
                             string SecondFinalResult = string.Empty;
-                            if (lstStubScon[0].FResult == "PROMOTED")
+                            if (lstStubScon.Where(x => x.Result == "FAIL" || x.Result == "AB").ToList().Count > 0)
                             {
                                 SecondFinalResult = "FAILED";
                             }
                             else
                             {
-                                SecondFinalResult = lstStubScon[0].FResult;
+                                SecondFinalResult = "PASSED";
                             }
 
                             if (SecondFinalResult == "PASSED" || SecondFinalResult == "COMPLETED" || SecondFinalResult == "PROMOTED")
                             {
-                                string sg1 = lstStubScon[0].TotalMarks == null ? "***" : lstStubScon[0].TotalMarks;
+                                string sg1 = lstStubScon.Sum(y => y.Marks.ChangeINT()).ToString();
                                 SGPARow = SGPARow + GetSpaces(10) + sg1 + GetSpaces(55 - sg1.Length);
                             }
                             else
                             {
-                                SGPARow = SGPARow + GetSpaces(10) + "***" + GetSpaces(65 - "***".Length);
+                                //SGPARow = SGPARow + GetSpaces(10) + "***" + GetSpaces(55 - "***".Length);
+                                string sg1 = lstStubScon.Sum(y => y.Marks.ChangeINT()).ToString();
+                                SGPARow = SGPARow + GetSpaces(10) + sg1 + GetSpaces(55 - sg1.Length);
                             }
 
                             sw.WriteLine(SGPARow);
@@ -1213,7 +1266,7 @@ namespace MemoPrintingUtility.Controllers
         }
 
 
-        private void SingleLingSubject(StreamWriter sw, int i, List<SDLCEntityPRES> lstStunsfirst, List<SDLCEntityPRES> lstStubScon, List<SDLCEntitySUB> lstSubs)
+        private void SingleLingSubject(StreamWriter sw, int i, List<SDLCEntityPRES> lstStunsfirst, List<SDLCEntityPRES> lstStubScon, List<SDLCEntitySUB> lstSubs, string yr, string CRS)
         {
             bool flag1 = false;
             bool flag2 = false;
@@ -1226,48 +1279,77 @@ namespace MemoPrintingUtility.Controllers
                 string SubjectAndGrades = string.Empty;
                 if (i < lstStunsfirst.Count)
                 {
-                    var lstSub = lstSubs.Where(x => x.OCODE == lstStunsfirst[i].SubjectCode).ToList();
+                    var lstSub = lstSubs.Where(x => x.SCODE == lstStunsfirst[i].SubjectCode && x.YR == yr && x.CRS == CRS).ToList();
+
+                    if (lstSub.Count == 0 && CRS == "BCM")
+                    {
+                        lstSub = lstSubs.Where(x => x.SCODE == lstStunsfirst[i].SubjectCode && x.YR == yr && x.CRS == "COM").ToList();
+                    }
+
 
                     string SubjectName = string.Empty;
                     bool isPractical = false;
-                    int SubjectTotal = 0;
-                    if (lstStunsfirst[i].CLM.Substring(0, 1).ToLower() == "P")
+                    string SubjectTotal = "";
+                    string subMinMr = "";
+                    if (lstSub.Count > 0)
                     {
-                        SubjectName = lstSub[0].SCODE + "-LAB";
-                        isPractical = true;
+                        if (lstStunsfirst[i].CLM.Length > 2 && lstStunsfirst[i].CLM.Substring(0, 1).ToLower() == "p")
+                        {
+                            SubjectName = lstSub[0].OCODE + "-LAB";
+                            isPractical = true;
 
-                        SubjectTotal = lstSub[0].PMXMR.ChangeINT();
+                            SubjectTotal = lstSub[0].PMXMR;
+                            subMinMr = lstSub[0].PMNMR;
+                        }
+                        else
+                        {
+                            SubjectName = lstSub[0].OCODE;
+                            isPractical = false;
+                            subMinMr = lstSub[0].MNMR;
+                            SubjectTotal = lstSub[0].MXMR;
+                        }
                     }
-                    else
-                    {
-                        SubjectName = lstSub[0].SCODE;
-                        isPractical = false;
-                        SubjectTotal = lstSub[0].MXMR.ChangeINT();
-                    }
 
 
-
-                    SubjectAndGrades = SubjectAndGrades + SubjectName + GetSpaces(55 - SubjectName.Length);
-
+                    SubjectAndGrades = SubjectAndGrades + SubjectName + GetSpaces(43 - SubjectName.Length);
                     SubjectAndGrades = SubjectAndGrades + SubjectTotal + GetSpaces(6 - SubjectTotal.ToString().Length);
-                    SubjectAndGrades = SubjectAndGrades + lstStunsfirst[i].Marks + GetSpaces(4 - lstStunsfirst[i].Marks.Length);
+                    SubjectAndGrades = SubjectAndGrades + subMinMr + GetSpaces(6 - subMinMr.ToString().Length);
+                    SubjectAndGrades = SubjectAndGrades + lstStunsfirst[i].Marks + GetSpaces(6 - lstStunsfirst[i].Marks.Length);
 
-                    if (isPractical == false)
+                    if (lstSub.Count > 0)
                     {
-                        if (lstSub[0].MNMR.ChangeINT() > lstStunsfirst[i].Marks.ChangeINT())
+                        if (lstStunsfirst[i].Marks.Contains("AB") == false)
                         {
-                            lstStunsfirst[i].Result = "FAILED";
+                            if (isPractical == false)
+                            {
+                                if (lstSub[0].MNMR.ChangeINT() > lstStunsfirst[i].Marks.ChangeINT())
+                                {
+                                    lstStunsfirst[i].Result = "FAIL";
+                                }
+                                else
+                                {
+                                    lstStunsfirst[i].Result = "PASS";
+                                }
+                            }
+                            else
+                            {
+
+                                if (lstSub[0].PMNMR.ChangeINT() > lstStunsfirst[i].Marks.ChangeINT())
+                                {
+                                    lstStunsfirst[i].Result = "FAIL";
+                                }
+                                else
+                                {
+                                    lstStunsfirst[i].Result = "PASS";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            lstStunsfirst[i].Result = "FAIL";
                         }
                     }
-                    else
-                    {
-
-                        if (lstSub[0].PMNMR.ChangeINT() > lstStunsfirst[i].Marks.ChangeINT())
-                        {
-                            lstStunsfirst[i].Result = "FAILED";
-                        }
-                    }
-
+                    SubjectAndGrades = SubjectAndGrades + lstStunsfirst[i].Result + GetSpaces(4 - lstStunsfirst[i].Result.Length);
                 }
                 else
                 {
@@ -1286,42 +1368,74 @@ namespace MemoPrintingUtility.Controllers
                 SubjectAndGrades = SubjectAndGrades + GetSpaces(5);
                 if (i < lstStubScon.Count)
                 {
-                   var lstSub2 = lstSubs.Where(x => x.OCODE == lstStunsfirst[i].SubjectCode).ToList();
+                    var lstSub2 = lstSubs.Where(x => x.SCODE == lstStubScon[i].SubjectCode && x.YR == yr && x.CRS == CRS).ToList();
+                    if (lstSub2.Count == 0 && CRS == "BCM")
+                    {
+                        lstSub2 = lstSubs.Where(x => x.SCODE == lstStubScon[i].SubjectCode && x.YR == yr && x.CRS == "COM").ToList();
+                    }
                     string SubjectName2 = string.Empty;
                     bool isPractical2 = false;
-                    int SubjectTotal2 = 0;
-                    if (lstStubScon[i].CLM.Substring(0, 1).ToLower() == "P")
+                    string SubjectTotal2 = "";
+                    string SUBMNMR2 = "";
+                    if (lstSub2.Count > 0)
                     {
-                        SubjectName2 = lstSub2[0].SCODE + "-LAB";
-                        isPractical2 = true;
-
-                        SubjectTotal2 = lstSub2[0].PMXMR.ChangeINT();
+                        if (lstStubScon[i].CLM.Length > 2 && lstStubScon[i].CLM.Substring(0, 1).ToLower() == "p")
+                        {
+                            SubjectName2 = lstSub2[0].OCODE + " - LAB";
+                            isPractical2 = true;
+                            SubjectTotal2 = lstSub2[0].PMXMR;
+                            SUBMNMR2 = lstSub2[0].PMNMR;
+                        }
+                        else
+                        {
+                            SubjectName2 = lstSub2[0].OCODE;
+                            isPractical2 = false;
+                            SubjectTotal2 = lstSub2[0].MXMR;
+                            SUBMNMR2 = lstSub2[0].MNMR;
+                        }
                     }
-                    else
-                    {
-                        SubjectName2 = lstSub2[0].SCODE;
-                        isPractical2 = false;
-                        SubjectTotal2 = lstSub2[0].MXMR.ChangeINT();
-                    }
-
-                    SubjectAndGrades = SubjectAndGrades + SubjectName2 + GetSpaces(55 - SubjectName2.Length);
+                    SubjectAndGrades = SubjectAndGrades + SubjectName2 + GetSpaces(43 - SubjectName2.Length);
                     SubjectAndGrades = SubjectAndGrades + SubjectTotal2 + GetSpaces(6 - SubjectTotal2.ToString().Length);
+                    SubjectAndGrades = SubjectAndGrades + SUBMNMR2 + GetSpaces(6 - SUBMNMR2.ToString().Length);
                     SubjectAndGrades = SubjectAndGrades + lstStubScon[i].Marks + GetSpaces(4 - lstStubScon[i].Marks.Length);
 
-                    if (isPractical2 == false)
+
+
+                    if (lstSub2.Count > 0)
                     {
-                        if (lstSub2[0].MNMR.ChangeINT() > lstStubScon[i].Marks.ChangeINT())
+                        if (lstStubScon[i].Marks.Contains("AB") == false)
                         {
-                            lstStubScon[i].Result = "FAILED";
+                            if (isPractical2 == false)
+                            {
+                                if (lstSub2[0].MNMR.ChangeINT() > lstStubScon[i].Marks.ChangeINT())
+                                {
+                                    lstStubScon[i].Result = "FAIL";
+                                }
+                                else
+                                {
+                                    lstStubScon[i].Result = "PASS";
+                                }
+                            }
+                            else
+                            {
+                                if (lstSub2[0].PMNMR.ChangeINT() > lstStubScon[i].Marks.ChangeINT())
+                                {
+                                    lstStubScon[i].Result = "FAIL";
+                                }
+                                else
+                                {
+                                    lstStubScon[i].Result = "PASS";
+                                }
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (lstSub2[0].PMNMR.ChangeINT() > lstStubScon[i].Marks.ChangeINT())
+                        else
                         {
-                            lstStubScon[i].Result = "FAILED";
+                            lstStubScon[i].Result = "FAIL";
                         }
+
+
                     }
+                    SubjectAndGrades = SubjectAndGrades + lstStubScon[i].Result + GetSpaces(4 - lstStubScon[i].Result.Length);
                 }
                 else
                 {
